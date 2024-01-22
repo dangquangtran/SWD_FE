@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './LoginPage.scss'
 import { handleLoginAdmin } from "../../services/userService";
 import _ from "lodash";
@@ -27,9 +27,8 @@ function LoginPage() {
             let data = await handleLoginAdmin(userName, passWord)
             if(data && !_.isEmpty(data.token)) {
                 localStorage.setItem('token', data.token)
-                localStorage.setItem('userInfo', data.username)
-                console.log('navigate');
-                navigate('/admin')
+                localStorage.setItem('userInfo', data.user.username)
+                window.location.href = '/admin';
             }
         } catch (error) {
             //chưa xử lí validate

@@ -2,7 +2,7 @@ import './MemberManage.scss';
 import { getAllMembers } from '../../services/userService';
 import { useEffect, useState } from 'react';
 
-function MemberManage() {
+function ClubManage() {
     const [memBers, setMemBers] = useState([])
 
     useEffect(() => {
@@ -30,7 +30,7 @@ function MemberManage() {
                         // onClick={() => this.handleAddNewUser()}
                     >
                         <i className='fa fa-plus'></i>
-                        Add new user
+                        Add new club
                     </button>
                 </div>
                 <div className='users-table mt-3 mx-2'>
@@ -68,4 +68,4 @@ function MemberManage() {
      );
 }
 
-export default MemberManage;
+export default ClubManage;
