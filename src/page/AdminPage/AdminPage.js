@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import MemberManage from "./MemberManage";
 import StaffManage from "./StaffManage";
 import ClubManage from "./ClubManage";
+import { handleLogOut } from "../../services/userService";
 
 function AdminPage() {
     const [selectedTab, setSelectedTab] = useState("member");
@@ -9,6 +10,17 @@ function AdminPage() {
     const handleTabChange = (tab) => {
         setSelectedTab(tab);
     };
+
+    const LogoutHandle = async () => {
+        try {
+            await handleLogOut();
+            localStorage.removeItem('token');
+            localStorage.removeItem('userInfo');
+            window.location.href = '/login';
+        } catch (error) {
+            console.error('Đăng xuất thất bại', error);
+        }
+    }
 
     return (
         <div>
@@ -21,7 +33,7 @@ function AdminPage() {
                     </ul>
                 </nav>
             </header>
-
+        <button onClick={LogoutHandle}>Logout</button>
             {selectedTab === "member" && <MemberManage />}
             {selectedTab === "staff" && <StaffManage />}
             {selectedTab === "club" && <ClubManage />}

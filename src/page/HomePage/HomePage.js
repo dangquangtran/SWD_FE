@@ -6,7 +6,7 @@ function HomePage() {
         <div>
             <Button to={"/login"}>
                 Login
-              </Button>
+            </Button>
         </div>
     );
 }
