@@ -16,9 +16,19 @@ const createMember = (data) => {
     return axios.post('api/members', data)
 }
 
+const editMember = (memberId, data) => {
+    return axios.put(`api/members/${memberId}`, data)
+}
+
+const deleteMember = (memberId) => {
+    return axios.delete(`api/members/${memberId}`);
+}
+
 export { 
     handleLoginAdmin,
     getAllMembers, 
     handleLogOut,
-    createMember
+    createMember,
+    editMember,
+    deleteMember
 }

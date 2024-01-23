@@ -1,98 +1,80 @@
-import React, { useEffect, useState } from "react";
+// ModalEditMember.js
+import React, { useState, useEffect } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import { emitter } from '../../utils/emitter'
+import _ from "lodash";
 import { showSuccessToast, showErrorToast } from "../toast/toast";
 
-function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        password: '',
-        image: '',
-        gender: '',
-        buildingId: '',
-        buildingName: '',
-        phoneNumber: ''
+function ModalEditMember({ isOpen, toggleFromParent, currentUser, editUser }) {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    image: '',
+    gender: '',
+    buildingId: '',
+    buildingName: '',
+    phoneNumber: '',
+  });
+
+  useEffect(() => {
+    let user = currentUser;
+    if (user && !_.isEmpty(user)) {
+      setFormData({
+        name: user.name,
+        email: user.email,
+        password: user.password,
+        image: user.image,
+        gender: user.gender,
+        buildingId: user.buildingId,
+        buildingName: user.buildingName,
+        phoneNumber: user.phoneNumber,
+      });
+    }
+  }, [currentUser]);
+
+  const toggle = () => {
+    toggleFromParent();
+  };
+  
+  const handleOnChangeInput = (event, id) => {
+    setFormData({
+      ...formData,
+      [id]: event.target.value,
     });
+  };
 
-    useEffect(() => {
-        const eventListener = () => {
-            setFormData({
-                name: '',
-                email: '',
-                password: '',
-                image: '',
-                gender: '',
-                buildingId: '',
-                buildingName: '',
-                phoneNumber: '',
-            });
-        };
+  const checkValidateInput = () => {
+    for (const key in formData) {
+      if (!formData[key]) {
+        showErrorToast(`Missing parameter! ${key}`);
+        return false;
+      }
+    }
+    return true;
+  };
 
-        emitter.on('EVENT_CREATE_MODAL_DATA', eventListener);
+  const handleEditUser = async () => {
+    if (checkValidateInput()) {
+      await editUser(currentUser.id, formData);
+      toggle();
+      showSuccessToast('User updated successfully!')
+    }
+  };
 
-        return () => {
-            emitter.off('EVENT_CREATE_MODAL_DATA', eventListener);
-        };
-    }, []);
+  
 
-    const toggle = () => {
-        toggleFromParent();
-    };
-
-    const handleOnChangeInput = (event, id) => {
-        setFormData({
-            ...formData,
-            [id]: event.target.value,
-        });
-    };
-
-    const checkValidateInput = () => {
-        let isValid = true;
-        let arrInput = ['name','email', 'password', 'image', 'gender', 'buildingId', 'buildingName', 'phoneNumber'];
-        for (let i = 0; i < arrInput.length; i++) {
-            if (!formData[arrInput[i]]) {
-                isValid = false;
-                showErrorToast(`Missing parameter: ${arrInput[i]}`);
-                break;
-            }
-        }
-        return isValid;
-    };
-
-    const handleAddNewUser = () => {
-        let isValid = checkValidateInput();
-        if (isValid) {
-            //call api create modal
-            createNewUser(formData);
-
-            setFormData({
-                name: '',
-                email: '',
-                password: '',
-                image: '',
-                gender: '',
-                buildingId: '',
-                buildingName: '',
-                phoneNumber: '',
-            });
-
-            toggle();
-        }
-    };
-
-    return ( 
-        <Modal
-            isOpen={isOpen}
-            toggle={toggle}
-            className={"modal-user-container"}
-            size="lg"
-        >
-            <ModalHeader toggle={toggle}>
-                Create a new user
-            </ModalHeader>
-            <ModalBody>
-                <div className="modal-user-body">
+  return (
+    <Modal
+      isOpen={isOpen}
+      toggle={() => toggle()}
+      className={"modal-user-container"}
+      size="lg"
+    >
+      <ModalHeader toggle={() => toggle()}>
+        Edit user
+      </ModalHeader>
+      <ModalBody>
+      <div className="modal-user-body">
                 <div className="input-container">
                         <label>Name</label>
                         <input
@@ -158,25 +140,26 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
                         />
                     </div>
                 </div>
-            </ModalBody>
-            <ModalFooter>
-                <Button
-                    color="primary"
-                    className="px-3"
-                    onClick={handleAddNewUser}
-                >
-                    Add new
-                </Button>{" "}
-                <Button
-                    color="secondary"
-                    className="px-3"
-                    onClick={toggle}
-                >
-                    Close
-                </Button>
-            </ModalFooter>
-        </Modal>
-     );
+      </ModalBody>
+      <ModalFooter>
+        <Button
+          color="primary"
+          className="px-3"
+          onClick={handleEditUser}
+
+        >
+          Save change
+        </Button>{" "}
+        <Button
+          color="secondary"
+          className="px-3"
+          onClick={toggle}
+        >
+          Close
+        </Button>
+      </ModalFooter>
+    </Modal>
+  );
 }
 
-export default ModalMember;
+export default ModalEditMember;

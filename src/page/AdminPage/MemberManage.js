@@ -1,12 +1,15 @@
 import './MemberManage.scss';
-import { getAllMembers, createMember } from '../../services/userService';
+import { getAllMembers, createMember, editMember, deleteMember } from '../../services/userService';
 import { useEffect, useState } from 'react';
 import ModalMember from '../../component/modal/ModalMember';
-import { ToastContainer, toast } from 'react-toastify';
+import { showSuccessToast, showErrorToast } from "../../component/toast/toast";
+import ModalEditMember from '../../component/modal/ModalEditMember';
 
 function MemberManage() {
     const [memBers, setMemBers] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isModalEdit, setIsModalEdit] = useState(false)
+    const [memberEdit, setMemberEdit] = useState("")
 
     useEffect(() => {
         fetchApiMembers()
@@ -27,18 +30,15 @@ function MemberManage() {
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen);
     };
+    
+    const toggleModalEdit = () => {
+        setIsModalEdit(!isModalEdit)
+    }
 
     const doCreateNewUser = async (data) => {
         try {
             await createMember(data)
-            toast.success('User added successfully!', {
-                position: 'top-right',
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-            });
+            showSuccessToast('User added successfully!');
             setIsModalOpen(false)
             fetchApiMembers();
         } catch (error) {
@@ -46,7 +46,33 @@ function MemberManage() {
         }
     }
 
-    return ( 
+
+    const doEditUser = async (editMemberId, data) => {
+        try {
+            await editMember(editMemberId, data);
+            await fetchApiMembers()
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleEdit = (user) => {
+        setMemberEdit(user);
+        setIsModalEdit(true);
+    };
+
+    const handleDeleteUser = async (user) => {
+        try {
+            if(user && user.id) {
+                await deleteMember(user.id);
+                await fetchApiMembers();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    return (
         <div className='users-container'>
                 <div className='title text-center'>Manage members with {userInfo}</div>
                 <div className='mx-1'>
@@ -62,6 +88,12 @@ function MemberManage() {
                     isOpen={isModalOpen}
                     toggleFromParent={toggleModal}
                     createNewUser={doCreateNewUser}
+                />
+                <ModalEditMember 
+                    isOpen={isModalEdit}
+                    currentUser={memberEdit}
+                    toggleFromParent={toggleModalEdit}
+                    editUser={doEditUser}
                 />
                 <div className='users-table mt-3 mx-2'>
                     <table id="customers">
@@ -84,8 +116,8 @@ function MemberManage() {
                                             <td>{item.buildingName}</td>
                                             <td>{item.phoneNumber}</td>
                                             <td>
-                                                <button className='btn-edit' onClick={() => this.handleEitUser(item)}><i className='fa fa-pencil'></i></button>
-                                                <button className='btn-delete' onClick={() => this.handleDeleteUser(item)}><i className='fa fa-trash'></i></button>
+                                                <button className='btn-edit' onClick={() => handleEdit(item)}><i className='fa fa-pencil'></i></button>
+                                                <button className='btn-delete' onClick={() => handleDeleteUser(item)}><i className='fa fa-trash'></i></button>
                                             </td>
                                         </tr>
                                     )
