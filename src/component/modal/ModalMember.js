@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { emitter } from '../../utils/emitter'
 import { showSuccessToast, showErrorToast } from "../toast/toast";
+import { getAllBuildingId } from "../../services/userService";
 
 function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
     const [formData, setFormData] = useState({
@@ -14,6 +15,20 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
         buildingName: '',
         phoneNumber: ''
     });
+    const [buildingIds, setBuildingIds] = useState([]);
+
+    useEffect(() => {
+        const fetchBuildingIds = async () => {
+            try {
+                const response = await getAllBuildingId();
+                setBuildingIds(response.result); 
+            } catch (error) {
+                console.error('Error fetching buildingIds', error);
+            }
+        };
+    
+        fetchBuildingIds();
+    }, []);
 
     useEffect(() => {
         const eventListener = () => {
@@ -134,20 +149,26 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
                         />
                     </div>
                     <div className="input-container">
-                        <label>Building Id</label>
-                        <input
-                            type="text"
-                            onChange={(event) => handleOnChangeInput(event, 'buildingId')}
-                            value={formData.buildingId}
-                        />
-                    </div>
-                    <div className="input-container">
                         <label>Building Name</label>
                         <input
                             type="text"
                             onChange={(event) => handleOnChangeInput(event, 'buildingName')}
                             value={formData.buildingName}
                         />
+                    </div>
+                    <div className="input-container">
+                        <label>Building Id</label>
+                        <select
+                            onChange={(event) => handleOnChangeInput(event, 'buildingId')}
+                            value={formData.buildingId}
+                        >
+                            <option value="" disabled>Select Building Id</option>
+                            {buildingIds.map((buildingId) => (
+                                <option key={buildingId.id} value={buildingId.id}>
+                                    {buildingId.id}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                     <div className="input-container">
                         <label>Phone number</label>

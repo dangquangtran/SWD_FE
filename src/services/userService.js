@@ -24,11 +24,16 @@ const deleteMember = (memberId) => {
     return axios.delete(`api/members/${memberId}`);
 }
 
+const getAllBuildingId = () => {
+    return axios.get('api/buildings')
+}
+
 export { 
     handleLoginAdmin,
     getAllMembers, 
     handleLogOut,
     createMember,
     editMember,
-    deleteMember
+    deleteMember,
+    getAllBuildingId
 }
