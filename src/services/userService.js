@@ -12,8 +12,13 @@ const getAllMembers = () => {
     return axios.get('/api/members');
 }
 
+const createMember = (data) => {
+    return axios.post('api/members', data)
+}
+
 export { 
     handleLoginAdmin,
     getAllMembers, 
-    handleLogOut
+    handleLogOut,
+    createMember
 }

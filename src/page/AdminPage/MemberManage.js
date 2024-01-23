@@ -1,9 +1,12 @@
 import './MemberManage.scss';
-import { getAllMembers } from '../../services/userService';
+import { getAllMembers, createMember } from '../../services/userService';
 import { useEffect, useState } from 'react';
+import ModalMember from '../../component/modal/ModalMember';
+import { ToastContainer, toast } from 'react-toastify';
 
 function MemberManage() {
     const [memBers, setMemBers] = useState([])
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     useEffect(() => {
         fetchApiMembers()
@@ -21,18 +24,45 @@ function MemberManage() {
 
     const userInfo = localStorage.getItem('userInfo');
 
+    const toggleModal = () => {
+        setIsModalOpen(!isModalOpen);
+    };
+
+    const doCreateNewUser = async (data) => {
+        try {
+            await createMember(data)
+            toast.success('User added successfully!', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
+            setIsModalOpen(false)
+            fetchApiMembers();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return ( 
         <div className='users-container'>
                 <div className='title text-center'>Manage members with {userInfo}</div>
                 <div className='mx-1'>
                     <button
                         className='btn btn-primary px-3'
-                        // onClick={() => this.handleAddNewUser()}
+                        onClick={toggleModal}
                     >
                         <i className='fa fa-plus'></i>
                         Add new user
                     </button>
                 </div>
+                <ModalMember 
+                    isOpen={isModalOpen}
+                    toggleFromParent={toggleModal}
+                    createNewUser={doCreateNewUser}
+                />
                 <div className='users-table mt-3 mx-2'>
                     <table id="customers">
                         <tbody>
