@@ -1,13 +1,13 @@
 // SportManage.js
 import './SportManage.scss';
-import { getAllClub } from '../../services/userService';
+import { getAllSports } from '../../services/userService';
 import { useEffect, useState } from 'react';
 // import ModalSport from '../../component/modal/ModalSport';
 import { showSuccessToast, showErrorToast } from "../../component/toast/toast";
 // import ModalEditSport from '../../component/modal/ModalEditSport';
 
 
-function ClubManage() {
+function SportManage() {
     const [sports, setSports] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalEdit, setIsModalEdit] = useState(false);
@@ -19,7 +19,7 @@ function ClubManage() {
 
     const fetchApiSports = async () => {
         try {
-            let data = await getAllClub();
+            let data = await getAllSports();
             console.log(data);
             setSports(data.result);
         } catch (error) {
@@ -106,19 +106,19 @@ function ClubManage() {
                     <tbody>
                         <tr>
                             <th>Sport Name</th>
-                            <th>Name Club</th>
+                            {/* <th>Name Club</th> */}
                             <th>Description</th>
-                            <th>Count Member</th>
+                            {/* <th>Count Member</th> */}
                             <th>Action</th>
                         </tr>
                         {
                             sports && sports.map((item, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td>{item.sportName}</td>
                                         <td>{item.name}</td>
+                                        {/* <td>{item.clubName}</td> */}
                                         <td>{item.description}</td>
-                                        <td>{item.countMember}</td>
+                                        {/* <td>{item.memberCount}</td> */}
                                         <td>
                                             <button className='btn-edit' onClick={() => handleEdit(item)}><i className='fa fa-pencil'></i></button>
                                             <button className='btn-delete' onClick={() => handleDeleteSport(item)}><i className='fa fa-trash'></i></button>
@@ -135,4 +135,4 @@ function ClubManage() {
     );
 }
 
-export default ClubManage;
+export default SportManage;

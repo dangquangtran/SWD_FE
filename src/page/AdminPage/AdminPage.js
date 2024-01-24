@@ -5,12 +5,13 @@ import ClubManage from "./ClubManage";
 import { handleLogOut } from "../../services/userService";
 import "./AdminPage.scss";
 import HeaderAdmin from "../../component/Header/HeaderAdmin";
+import SportManage from "./SportManage";
 
 const menuItems = [
   {
     name: "ADMIN",
     // icon: "settings",
-    items: ["Member", "Staff", "Club"],
+    items: ["MEMBERS", "STAFF", "CLUB", "SPORTS"],
   },
   {
     name: "LOGOUT",
@@ -19,9 +20,10 @@ const menuItems = [
 ];
 
 const componentsMap = {
-    Member: <MemberManage />,
-    Staff: <StaffManage />,
-    Club: <ClubManage />,
+    MEMBERS: <MemberManage />,
+    STAFF: <StaffManage />,
+    CLUB: <ClubManage />,
+    SPORTS: <SportManage />,
   };
 
 const Icon = ({ icon }) => (

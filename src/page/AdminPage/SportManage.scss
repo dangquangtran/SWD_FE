@@ -1,24 +1,24 @@
-#customers {
+#sportsTable {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
 
-#customers td,
-#customers th {
+#sportsTable td,
+#sportsTable th {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-#customers tr:nth-child(even) {
+#sportsTable tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-#customers tr:hover {
+#sportsTable tr:hover {
     background-color: #ddd;
 }
 
-#customers th {
+#sportsTable th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
@@ -26,21 +26,21 @@
     color: white;
 }
 
-.btn-edit {
+.btn-edit-sport {
     width: 50px;
     border: none;
     outline: none;
     background: transparent;
     color: orange;
     font-size: 18px;
-    
+
     &:hover {
         background-color: transparent !important;
         color: orange !important;
     }
 }
 
-.btn-delete {
+.btn-delete-sport {
     width: 50px;
     border: none;
     outline: none;
@@ -54,7 +54,7 @@
     }
 }
 
-.btn-detail {
+.btn-detail-sport {
     width: 50px;
     border: none;
     outline: none;
@@ -63,8 +63,9 @@
     font-size: 18px;
 }
 
-.modal-user-container {
-    // margin: 0 !important;
+.modal-sport-container {
+    // Add your modal styles here
+    // Example: margin: 0 !important;
     .modal-header {
         button {
             background-color: transparent !important;
@@ -74,7 +75,7 @@
         }
     }
 
-    .modal-user-body {
+    .modal-sport-body {
         display: flex;
         gap: 15px;
         flex-wrap: wrap;
@@ -97,5 +98,4 @@
             }
         }
     }
-
 }

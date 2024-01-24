@@ -8,6 +8,7 @@ const handleLogOut = () => {
     return axios.get('api/logout');
 }
 
+//members
 const getAllMembers = () => {
     return axios.get('/api/members');
 }
@@ -28,6 +29,16 @@ const getAllBuildingId = () => {
     return axios.get('api/buildings')
 }
 
+//sport
+const getAllSports = () => {
+    return axios.get('api/sports')
+}
+
+//club
+const getAllClub = () => {
+    return axios.get('api/clubs')
+}
+
 export { 
     handleLoginAdmin,
     getAllMembers, 
@@ -35,5 +46,7 @@ export {
     createMember,
     editMember,
     deleteMember,
-    getAllBuildingId
+    getAllBuildingId,
+    getAllSports,
+    getAllClub
 }

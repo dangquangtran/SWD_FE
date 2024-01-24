@@ -25,8 +25,6 @@ function MemberManage() {
         }
     }
 
-    const userInfo = localStorage.getItem('userInfo');
-
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen);
     };
@@ -72,9 +70,12 @@ function MemberManage() {
         }
     }
 
+    const handleGetDetail = async (user) => {
+        console.log(user);
+    }
+
     return (
         <div className='users-container' style={{ marginTop: '70px' }}>
-                <div className='title text-center'>Manage members with {userInfo}</div>
                 <div className='mx-1'>
                     <button
                         className='btn btn-primary px-3'
@@ -118,6 +119,7 @@ function MemberManage() {
                                             <td>
                                                 <button className='btn-edit' onClick={() => handleEdit(item)}><i className='fa fa-pencil'></i></button>
                                                 <button className='btn-delete' onClick={() => handleDeleteUser(item)}><i className='fa fa-trash'></i></button>
+                                                <button className='btn-detail' onClick={() => handleGetDetail(item)}><i className="fa fa-user-o"></i></button>
                                             </td>
                                         </tr>
                                     )
