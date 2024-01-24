@@ -24,7 +24,7 @@ const LoginPage = () => {
                 if (data && !_.isEmpty(data.token)) {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('userInfo', data.user.username);
-                    navigate('/admin');
+                    window.location.href = '/admin';
                 }
             } catch (error) {
                 console.error(error);

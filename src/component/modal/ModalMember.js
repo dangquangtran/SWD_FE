@@ -150,11 +150,17 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
                     </div>
                     <div className="input-container">
                         <label>Building Name</label>
-                        <input
-                            type="text"
+                        <select
                             onChange={(event) => handleOnChangeInput(event, 'buildingName')}
                             value={formData.buildingName}
-                        />
+                        >
+                            <option value="" disabled>Select Building Name</option>
+                            {buildingIds.map((buildingId) => (
+                                <option key={buildingId.id} value={buildingId.name}>
+                                    {buildingId.name}
+                                </option>
+                            ))} 
+                        </select>
                     </div>
                     <div className="input-container">
                         <label>Building Id</label>

@@ -1,44 +1,127 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import MemberManage from "./MemberManage";
 import StaffManage from "./StaffManage";
 import ClubManage from "./ClubManage";
 import { handleLogOut } from "../../services/userService";
+import "./AdminPage.scss";
+
+const menuItems = [
+  {
+    name: "ADMIN",
+    // icon: "settings",
+    items: ["Member", "Staff", "Club"],
+  },
+  {
+    name: "LOGOUT",
+    // icon: "favorite",
+  },
+];
+
+const componentsMap = {
+    Member: <MemberManage />,
+    Staff: <StaffManage />,
+    Club: <ClubManage />,
+  };
+
+const Icon = ({ icon }) => (
+  <span className="material-symbols-outlined">{icon}</span>
+);
+
+const NavButton = ({ onClick, name, icon, isActive, hasSubNav }) => (
+  <button
+    type="button"
+    onClick={() => onClick(name)}
+    className={isActive ? "active" : ""}
+  >
+    {icon && <Icon icon={icon} />}
+    <span>{name}</span>
+    {hasSubNav }
+  </button>
+);
+
+const SubMenu = ({ item, activeItem, handleClick }) => {
+  const navRef = useRef(null);
+
+  const isSubNavOpen = (item, items) =>
+    items.some((i) => i === activeItem) || item === activeItem;
+
+  return (
+    <div
+      className={`sub-nav ${isSubNavOpen(item.name, item.items) ? "open" : ""}`}
+      style={{
+        height: !isSubNavOpen(item.name, item.items)
+          ? 0
+          : navRef.current?.clientHeight,
+      }}
+    >
+      <div ref={navRef} className="sub-nav-inner">
+        {item?.items.map((subItem) => (
+          <NavButton
+            onClick={handleClick}
+            name={subItem}
+            isActive={activeItem === subItem}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 function AdminPage() {
-    const [selectedTab, setSelectedTab] = useState("member");
+  const [activeItem, setActiveItem] = useState("");
 
-    const handleTabChange = (tab) => {
-        setSelectedTab(tab);
-    };
-
-    const LogoutHandle = async () => {
-        try {
+  const handleClick = async (item) => {
+    console.log(item);
+    try {
+        if(item && item === 'LOGOUT') {
             await handleLogOut();
             localStorage.removeItem('token');
             localStorage.removeItem('userInfo');
-            window.location.href = '/login';
-        } catch (error) {
-            console.error('Đăng xuất thất bại', error);
+            window.location.href = '/';
+        } else {
+            setActiveItem(item !== activeItem ? item : "");
         }
+    } catch (error) {
+        console.error('Đăng xuất thất bại', error);
     }
+  };
 
-    return (
-        <div>
-            <header>
-                <nav>
-                    <ul>
-                        <li style={{ cursor: 'pointer' }} onClick={() => handleTabChange("member")}>Quản lý member</li>
-                        <li style={{ cursor: 'pointer' }} onClick={() => handleTabChange("staff")}>Quản lý staff</li>
-                        <li style={{ cursor: 'pointer' }} onClick={() => handleTabChange("club")}>Quản lý club</li>
-                    </ul>
-                </nav>
-            </header>
-        <button onClick={LogoutHandle}>Logout</button>
-            {selectedTab === "member" && <MemberManage />}
-            {selectedTab === "staff" && <StaffManage />}
-            {selectedTab === "club" && <ClubManage />}
-        </div>
-    );
-}
+  return (
+    <div>
+        <aside className="sidebar col-2" style={{ float: 'left' ,width: '200px', padding: '20px' }}>
+          {menuItems.map((item) => (
+            <div key={item.name}>
+              {!item.items && (
+                <NavButton
+                  onClick={handleClick}
+                  name={item.name}
+                  icon={item.icon}
+                  isActive={activeItem === item.name}
+                  hasSubNav={!!item.items}
+                />
+              )}
+              {item.items && (
+                <>
+                  <NavButton
+                    onClick={handleClick}
+                    name={item.name}
+                    icon={item.icon}
+                    isActive={activeItem === item.name}
+                    hasSubNav={!!item.items}
+                  />
+                  <SubMenu
+                    activeItem={activeItem}
+                    handleClick={handleClick}
+                    item={item}
+                  />
+                </>
+              )}
+            </div>
+          ))}
+        </aside>
+         <div className="content col-12" style={{ marginLeft: '180px', padding: '20px' }}>{componentsMap[activeItem]}</div>
+    </div>
+  );
+};
 
 export default AdminPage;
