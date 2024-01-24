@@ -4,6 +4,7 @@ import StaffManage from "./StaffManage";
 import ClubManage from "./ClubManage";
 import { handleLogOut } from "../../services/userService";
 import "./AdminPage.scss";
+import HeaderAdmin from "../../component/Header/HeaderAdmin";
 
 const menuItems = [
   {
@@ -88,7 +89,8 @@ function AdminPage() {
 
   return (
     <div>
-        <aside className="sidebar col-2" style={{ float: 'left' ,width: '200px', padding: '20px' }}>
+      <HeaderAdmin />
+        <aside className="sidebar col-2" style={{ float: 'left' ,width: '300px', padding: '20px', marginTop: '70px' }}>
           {menuItems.map((item) => (
             <div key={item.name}>
               {!item.items && (
@@ -119,7 +121,7 @@ function AdminPage() {
             </div>
           ))}
         </aside>
-         <div className="content col-12" style={{ marginLeft: '180px', padding: '20px' }}>{componentsMap[activeItem]}</div>
+         <div className="content" style={{ marginLeft: '300px', padding: '20px' }}>{componentsMap[activeItem]}</div>
     </div>
   );
 };

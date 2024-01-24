@@ -73,7 +73,7 @@ function MemberManage() {
     }
 
     return (
-        <div className='users-container'>
+        <div className='users-container' style={{ marginTop: '70px' }}>
                 <div className='title text-center'>Manage members with {userInfo}</div>
                 <div className='mx-1'>
                     <button

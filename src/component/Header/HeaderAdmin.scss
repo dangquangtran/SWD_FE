@@ -1,0 +1,80 @@
+.containerr {
+    width: 2048px;
+    display: flex;
+    height: 70px;
+    border-bottom: 1px solid;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    background: #D6E6D4;
+
+    .header-logo {
+        background: url('../../assets/logoHeader/logo.svg') center center no-repeat;
+        height: 80%;
+        width: 280px;
+        margin-right: 100px;
+        cursor: pointer;
+    }
+    
+    .middle {
+        border-right: 1px solid;
+
+        .content-middle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+    
+            .header-search {
+                margin-top: 11px;
+                width: 60%;
+                padding: 10px 20px;
+                border-radius: 10px;
+                background: #efeeee;
+                border: none;
+            }
+    
+            .header-icon {
+                margin-top: 12px;
+                margin-right: 28px;
+                display: flex;
+                gap: 50px;
+    
+                i {
+                    font-size: 32px;
+                }
+            }
+        }
+    }
+
+
+    .content-right {
+        margin-left: 30px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        .header-image {
+            background: url('../../assets/avatar/adminLogo.webp') center center no-repeat;
+            background-size: cover; 
+            width: 50px;
+            height: 50px; 
+            border-radius: 50%; 
+            overflow: hidden; 
+            border: 1px solid black;
+        }
+
+        .header-userInfo {
+            font-size: 26px;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+
+        i {
+            font-size: 32px;
+            cursor: pointer;
+        }
+    }
+}
