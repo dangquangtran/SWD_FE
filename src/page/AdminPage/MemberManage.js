@@ -63,6 +63,7 @@ function MemberManage() {
         try {
             if(user && user.id) {
                 await deleteMember(user.id);
+                showSuccessToast('Member deleted successfully!');
                 await fetchApiMembers();
             }
         } catch (error) {

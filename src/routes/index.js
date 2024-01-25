@@ -6,7 +6,8 @@ import MemberPage from "../page/MemberPage/MemberPage";
 export const routes = [
     {
         path: '/',
-        page: HomePage
+        page: HomePage,
+        requiresMember: true,
     },
     {
         path: '/login',

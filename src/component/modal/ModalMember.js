@@ -21,6 +21,7 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
         const fetchBuildingIds = async () => {
             try {
                 const response = await getAllBuildingId();
+                console.log(response);
                 setBuildingIds(response.result); 
             } catch (error) {
                 console.error('Error fetching buildingIds', error);

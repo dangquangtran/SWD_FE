@@ -1,11 +1,10 @@
 // SportManage.js
 import './SportManage.scss';
-import { getAllSports } from '../../services/userService';
+import { getAllSports, createSport, editSport,deleteSport } from '../../services/userService';
 import { useEffect, useState } from 'react';
-// import ModalSport from '../../component/modal/ModalSport';
+import ModalSport from '../../component/modal/ModalSport'; 
 import { showSuccessToast, showErrorToast } from "../../component/toast/toast";
-// import ModalEditSport from '../../component/modal/ModalEditSport';
-
+import ModalEditSport from '../../component/modal/ModalEditSport'; 
 
 function SportManage() {
     const [sports, setSports] = useState([]);
@@ -38,22 +37,22 @@ function SportManage() {
 
     const doCreateNewSport = async (data) => {
         try {
-            // Implement create sport API call
-            // await createSport(data)
+            await createSport(data)
             showSuccessToast('Sport added successfully!');
             setIsModalOpen(false);
             fetchApiSports();
         } catch (error) {
+            showErrorToast('Sport added error!')
             console.log(error);
         }
     }
 
     const doEditSport = async (editSportId, data) => {
         try {
-            // Implement edit sport API call
-            // await editSport(editSportId, data);
+            await editSport(editSportId, data);
             await fetchApiSports();
         } catch (error) {
+            showErrorToast('Sport edit error!')
             console.log(error);
         }
     };
@@ -65,12 +64,13 @@ function SportManage() {
 
     const handleDeleteSport = async (sport) => {
         try {
-            // Implement delete sport API call
-            // if (sport && sport.id) {
-            //     await deleteSport(sport.id);
-            //     await fetchApiSports();
-            // }
+            if (sport && sport.id) {
+                await deleteSport(sport.id);
+                showSuccessToast('Sport delete successfully!');
+                await fetchApiSports();
+            }
         } catch (error) {
+            showSuccessToast('Sport delete error!');
             console.log(error);
         }
     }
@@ -90,7 +90,7 @@ function SportManage() {
                     Add new sport
                 </button>
             </div>
-            {/* <ModalSport
+            <ModalSport
                 isOpen={isModalOpen}
                 toggleFromParent={toggleModal}
                 createNewSport={doCreateNewSport}
@@ -100,15 +100,13 @@ function SportManage() {
                 currentSport={sportEdit}
                 toggleFromParent={toggleModalEdit}
                 editSport={doEditSport}
-            /> */}
+            />
             <div className='sports-table mt-3 mx-2'>
                 <table id="sportsTable">
                     <tbody>
                         <tr>
                             <th>Sport Name</th>
-                            {/* <th>Name Club</th> */}
                             <th>Description</th>
-                            {/* <th>Count Member</th> */}
                             <th>Action</th>
                         </tr>
                         {
@@ -116,9 +114,7 @@ function SportManage() {
                                 return (
                                     <tr key={index}>
                                         <td>{item.name}</td>
-                                        {/* <td>{item.clubName}</td> */}
                                         <td>{item.description}</td>
-                                        {/* <td>{item.memberCount}</td> */}
                                         <td>
                                             <button className='btn-edit' onClick={() => handleEdit(item)}><i className='fa fa-pencil'></i></button>
                                             <button className='btn-delete' onClick={() => handleDeleteSport(item)}><i className='fa fa-trash'></i></button>

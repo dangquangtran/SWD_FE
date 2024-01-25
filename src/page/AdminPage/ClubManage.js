@@ -1,29 +1,29 @@
-// SportManage.js
-import './SportManage.scss';
-import { getAllClub } from '../../services/userService';
-import { useEffect, useState } from 'react';
-// import ModalSport from '../../component/modal/ModalSport';
+// ClubManage.js
+import React, { useEffect, useState } from 'react';
+import './ClubManage.scss';
+import { getAllClub, createClub, editClub, deleteClub } from '../../services/userService';
 import { showSuccessToast, showErrorToast } from "../../component/toast/toast";
-// import ModalEditSport from '../../component/modal/ModalEditSport';
-
+import ModalClub from '../../component/modal/ModalClub';
+import ModalEditClub from '../../component/modal/ModalEditClub';
 
 function ClubManage() {
-    const [sports, setSports] = useState([]);
+    const [clubs, setClubs] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalEdit, setIsModalEdit] = useState(false);
-    const [sportEdit, setSportEdit] = useState("");
+    const [clubEdit, setClubEdit] = useState("");
 
     useEffect(() => {
-        fetchApiSports();
+        fetchApiClubs();
     }, []);
 
-    const fetchApiSports = async () => {
+    const fetchApiClubs = async () => {
         try {
             let data = await getAllClub();
+            // console.log(data.result[2].status.data);
             console.log(data);
-            setSports(data.result);
+            setClubs(data.result);
         } catch (error) {
-            setSports([]);
+            setClubs([]);
             console.log(error);
         }
     }
@@ -36,93 +36,88 @@ function ClubManage() {
         setIsModalEdit(!isModalEdit);
     }
 
-    const doCreateNewSport = async (data) => {
+    const doCreateNewClub = async (data) => {
         try {
-            // Implement create sport API call
-            // await createSport(data)
-            showSuccessToast('Sport added successfully!');
+            await createClub(data);
+            showSuccessToast('Club added successfully!');
             setIsModalOpen(false);
-            fetchApiSports();
+            fetchApiClubs();
         } catch (error) {
+            showErrorToast('Club added error!');
             console.log(error);
         }
     }
+    
 
-    const doEditSport = async (editSportId, data) => {
+    const doEditClub = async (editClubId, data) => {
         try {
-            // Implement edit sport API call
-            // await editSport(editSportId, data);
-            await fetchApiSports();
+            await editClub(editClubId, data);
+            await fetchApiClubs();
         } catch (error) {
+            showErrorToast('Club edit error!')
             console.log(error);
         }
     };
 
-    const handleEdit = (sport) => {
-        setSportEdit(sport);
+    const handleEdit = (club) => {
+        setClubEdit(club);
         setIsModalEdit(true);
     };
 
-    const handleDeleteSport = async (sport) => {
+    const handleDeleteClub = async (club) => {
         try {
-            // Implement delete sport API call
-            // if (sport && sport.id) {
-            //     await deleteSport(sport.id);
-            //     await fetchApiSports();
-            // }
+            if (club && club.id) {
+                await deleteClub(club.id);
+                showSuccessToast('Club deleted successfully!');
+                await fetchApiClubs();
+            }
         } catch (error) {
+            showErrorToast('Club delete error!');
             console.log(error);
         }
     }
 
-    const handleGetDetail = async (sport) => {
-        console.log(sport);
-    }
-
     return (
-        <div className='sports-container' style={{ marginTop: '70px' }}>
+        <div className='clubs-container' style={{ marginTop: '70px' }}>
             <div className='mx-1'>
                 <button
                     className='btn btn-primary px-3'
                     onClick={toggleModal}
                 >
                     <i className='fa fa-plus'></i>
-                    Add new sport
+                    Add new club
                 </button>
             </div>
-            {/* <ModalSport
+            <ModalClub
                 isOpen={isModalOpen}
                 toggleFromParent={toggleModal}
-                createNewSport={doCreateNewSport}
+                createNewClub={doCreateNewClub}
             />
-            <ModalEditSport
+            <ModalEditClub
                 isOpen={isModalEdit}
-                currentSport={sportEdit}
+                currentClub={clubEdit}
                 toggleFromParent={toggleModalEdit}
-                editSport={doEditSport}
-            /> */}
-            <div className='sports-table mt-3 mx-2'>
-                <table id="sportsTable">
+                editClub={doEditClub}
+            />
+            <div className='clubs-table mt-3 mx-2'>
+                <table id="clubsTable">
                     <tbody>
                         <tr>
-                            <th>Sport Name</th>
-                            <th>Name Club</th>
+                            <th>Club Name</th>
                             <th>Description</th>
-                            <th>Count Member</th>
+                            <th>Member Count</th>
                             <th>Action</th>
                         </tr>
                         {
-                            sports && sports.map((item, index) => {
+                            clubs && clubs.map((item, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td>{item.sportName}</td>
                                         <td>{item.name}</td>
                                         <td>{item.description}</td>
                                         <td>{item.countMember}</td>
                                         <td>
                                             <button className='btn-edit' onClick={() => handleEdit(item)}><i className='fa fa-pencil'></i></button>
-                                            <button className='btn-delete' onClick={() => handleDeleteSport(item)}><i className='fa fa-trash'></i></button>
-                                            <button className='btn-detail' onClick={() => handleGetDetail(item)}><i className="fa fa-info-circle"></i></button>
+                                            <button className='btn-delete' onClick={() => handleDeleteClub(item)}><i className='fa fa-trash'></i></button>
                                         </td>
                                     </tr>
                                 )
