@@ -1,11 +1,11 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { handleLoginAdmin } from "../../services/userService";
-import './LoginPage.scss';
+import { handleLoginMember } from "../../services/memberService";
+import './LoginPage.scss'; // Import your styling if needed
 import _ from "lodash";
 
-const LoginPage = () => {
+const LoginMember = () => {
 
     const formik = useFormik({
         initialValues: {
@@ -18,11 +18,12 @@ const LoginPage = () => {
         }),
         onSubmit: async (values, { setSubmitting, setErrors }) => {
             try {
-                let data = await handleLoginAdmin(values.userName, values.passWord);
+                let data = await handleLoginMember(values.userName, values.passWord);
+                console.log(data);
                 if (data && !_.isEmpty(data.token)) {
                     localStorage.setItem('token', data.token);
-                    localStorage.setItem('userInfo', data.user.username);
-                    window.location.href = '/admin';
+                    localStorage.setItem('userInfo', data.user.name);
+                    window.location.href = '/members';
                 }
             } catch (error) {
                 console.error(error);
@@ -37,7 +38,7 @@ const LoginPage = () => {
         <div className='login-background'>
             <div className='login-container'>
                 <div className='login-content row'>
-                    <div className='col-12 text-login'>Login</div>
+                    <div className='col-12 text-login'>Member Login</div>
                     <form onSubmit={formik.handleSubmit} className='col-12'>
                         <div className='form-group login-input'>
                             <label>Username:</label>
@@ -89,4 +90,4 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage;
+export default LoginMember;

@@ -1,5 +1,6 @@
 import AdminPage from "../page/AdminPage/AdminPage";
 import HomePage from "../page/HomePage/HomePage";
+import LoginMember from "../page/LoginPage/LoginMember";
 import LoginPage from "../page/LoginPage/LoginPage"; 
 import MemberPage from "../page/MemberPage/MemberPage";
 
@@ -7,11 +8,14 @@ export const routes = [
     {
         path: '/',
         page: HomePage,
-        requiresMember: true,
     },
     {
-        path: '/login',
+        path: '/login-admin',
         page: LoginPage
+    },
+    {
+        path: '/login-member',
+        page: LoginMember
     },
     {
         path: '/admin',
@@ -20,6 +24,7 @@ export const routes = [
     },
     {
         path: '/members',
-        page: MemberPage
+        page: MemberPage,
+        requiresAuth: true
     }
 ]

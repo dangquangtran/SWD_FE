@@ -6,9 +6,12 @@ import Logo from '../../assets/logoHeader/logo.svg'
 function HomePage() {
     return ( 
         <div>
-            <Button to={"/login"}>
-                Login
-              </Button>
+            <Button to={"/login-admin"}>
+                Login Admin
+            </Button>
+            <Button to={"/login-member"}>
+                Login Member
+            </Button>
         </div>
     );
 }

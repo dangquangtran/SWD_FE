@@ -21,7 +21,7 @@ function App() {
                                         localStorage.getItem('token') ? (
                                             <Page />
                                         ) : (
-                                            <Navigate to="/login" />
+                                            <Navigate to="/" />
                                         )
                                     ) : (
                                         <Page />
