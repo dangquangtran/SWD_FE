@@ -1,0 +1,100 @@
+ //custom slick slider
+ .slick-prev {
+    // border: 1px solid red !important;
+    // position: relative !important;
+    right: 98% !important;
+    z-index: 10 !important;
+    height: 50px !important;
+    width: 50px !important;
+    border-radius: 8px !important;
+    border: 1px solid !important;
+    border-color: rgb(181, 231, 237) !important;
+    background-color: rgb(255, 255, 255) !important;
+    box-shadow: rgb(201, 236, 240) 2px 2px 5px !important;
+}
+
+.slick-prev::before {
+    color: rgb(19, 206, 226) !important;
+    margin-left: 12px !important;
+}
+
+.slick-next {
+    margin-left: 11px !important;
+    left: 93% !important;
+    z-index: 10 !important;
+    height: 50px !important;
+    width: 50px !important;
+    border-radius: 8px !important;
+    border: 1px solid !important;
+    border-color: rgb(181, 231, 237) !important;
+    background-color: rgb(255, 255, 255) !important;
+    box-shadow: rgb(201, 236, 240) 2px 2px 5px !important;
+}
+
+.slick-next::before {
+    color: rgb(19, 206, 226) !important;
+    margin-left: 12px !important;
+}
+
+.section-share {
+
+    .section-body {
+            .section-customize {
+                .bg-image {
+                    margin-left: 135px;
+                    cursor: pointer;
+                    width: 300px;
+                    height: 200px;
+                    border: 1px solid rgb(241, 241, 241);
+                    border-radius: 16px;
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-color: #eee;
+
+                    &.section-hand-book {
+                        background-image: url('../../../assets/Sport/Sport.jpg');
+                    }
+                }
+            }
+        }
+}
+
+.section-share {
+    height: 400px;
+    margin-top: 20px;
+    background: #D6E6D4;
+
+    
+    .section-container {
+        margin: 0 350px 0 450px; 
+        
+        .section-header {
+            height: 60px;
+            margin-bottom: 32px;
+            padding-top: 26px;
+
+            .title-section {
+                font-size: 22px;
+                font-weight: 600;
+            }
+
+            .btn-section {
+                background-color: rgb(218, 243, 246);
+                padding: 12px 10px;
+                border-radius: 16px;
+                border: transparent;
+                float: right;
+                display: block;
+
+                .btn-section-item {
+                    font-size: 20px;
+                    color: rgb(52, 146, 158);
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}
+
+

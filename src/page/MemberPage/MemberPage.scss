@@ -1,0 +1,41 @@
+.home-header-banner {
+    .content-up {
+        display: flex;
+        justify-content: center;
+        margin-top: 70px;
+        background: #D6E6D4;
+
+        img {
+            width: 58%;
+        }
+    }
+
+    .content-down {
+        padding: 50px 0;
+        .content-1 {
+            display: flex;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .content-2 {
+            display: flex;
+            justify-self: center;
+            margin: 10px 200px 10px 200px;
+            font-size: 28px;
+        }
+    }
+}
+
+.content-middle {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin-top: 20px;
+
+    img {
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+    }
+}

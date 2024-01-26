@@ -2,7 +2,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { handleLoginMember } from "../../services/memberService";
-import './LoginPage.scss'; // Import your styling if needed
+import './LoginPage.scss'; 
 import _ from "lodash";
 
 const LoginMember = () => {
