@@ -1,35 +1,43 @@
-.body {
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%; 
-  
-      .header-logo {
-        flex: 1; 
-        text-align: center; 
-  
-        .logo {
-          height: 44px;
-          width: 72%;
-          margin: 0 auto; 
-        }
-      }
-  
-      .col-6 {
-        flex: 1; 
-        text-align: center; 
-      }
-  
-      .col-3 {
-        flex: 1; 
-        text-align: center; 
-      }
-    }
-  }
-  
+.container {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #9DBC98;
+  border-radius: 10px;
+  border: 1px dashed #000;
+  flex-direction: column;
+  box-shadow: 10px 10px 10px #34883b;
+}
+
+.App {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+  background-color: #caeec5;
+}
+
+h1 {
+  display: block;
+  color: #F9EFDB;
+}
+
+.login-btn {
+  margin-top: 20px;
+}
+
+.wc-img {
+  margin-top: 30px;
+  background-image: url('../../assets/others/welcome.jpg');
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  border-radius: 50px;
+  border: 2px solid rgb(251, 95, 95);
+
+}

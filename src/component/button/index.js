@@ -4,7 +4,7 @@ import styles from './Button.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Button({ to, href, children, onClick, primary, active, small, publish, notActive, edit, remove, list }) {
+function Button({ loginbtn, to, href, children, onClick, primary, active, small, publish, notActive, edit, remove, list }) {
     let Comp = 'button';
     const props = {
         onClick,
@@ -19,7 +19,7 @@ function Button({ to, href, children, onClick, primary, active, small, publish, 
     }
 
     return (
-        <Comp className={cx('wrapper', { primary, active, small, publish, notActive, edit, remove, list })} {...props}>
+        <Comp className={cx('wrapper', { loginbtn, primary, active, small, publish, notActive, edit, remove, list })} {...props}>
             <span className={cx('title')}>{children}</span>
         </Comp>
     );

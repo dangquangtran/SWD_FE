@@ -2,19 +2,24 @@ import HeaderMember from "../../component/Header/HeaderMember";
 import React from "react";
 import './MemberPage.scss'
 import image from '../../assets/LogoHeaderMember/logo.jpg'
+
+import image1 from '../../assets/Sport/badminton.jpg'
+import image2 from '../../assets/Sport/football.jpg'
+import image3 from '../../assets/Sport/ball.jpg'
+
 import SportSlide from "./Section/Sport";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 function MemberPage() {
     const userInfo = localStorage.getItem('userInfo');
-    return ( 
+    return (
         <div>
             <HeaderMember />
-            
+
             <div className='home-header-banner'>
                 <div className='content-up'>
-                    <img src={image}/>
+                    <img src={image} />
                 </div>
                 <div className='content-down'>
                     <div className="content-1"><b>What is this website used for?</b></div>
@@ -23,19 +28,19 @@ function MemberPage() {
                     <div className="content-2">Với nền tảng này những người đặt được sân có thể vào mời gọi mọi người tham gia chơi cùng......</div>
                 </div>
             </div>
-                <SportSlide />
-                
+            <SportSlide />
+
             <div className="content-middle">
-                <img src={image}/>
-                <img src={image}/>
-                <img src={image}/>
+                <img src={image1} />
+                <img src={image2} />
+                <img src={image3} />
             </div>
 
             <div className="footer">
 
             </div>
         </div>
-     );
+    );
 }
 
 export default MemberPage;

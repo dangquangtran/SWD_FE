@@ -12,27 +12,27 @@ function SportSlide() {
         slidesToShow: 2,
         slidesToScroll: 1,
     };
-    
-    return ( 
+
+    return (
         <div className='section-share section-hand-book'>
             <div className='section-container'>
                 <div className='section-header'>
                     <span className='title-section'>Sport</span>
                     {/* <button className='btn-section'><span className='btn-section-item'>Xem thêm</span></button> */}
                 </div>
-                <div className='section-body'>  
+                <div className='section-body'>
                     <Slider {...settings}>
                         <div className='section-customize'>
-                            <div className='bg-image section-hand-book'></div>
-                            <div>Thể thao 1</div>
+                            <div className='bg-image basket-img'></div>
+                            <div>Basketball Yard</div>
                         </div>
                         <div className='section-customize'>
                             <div className='bg-image section-hand-book'></div>
                             <div>Thể thao 2</div>
                         </div>
                         <div className='section-customize'>
-                            <div className='bg-image section-hand-book'></div>
-                            <div>Thể thao 3</div>
+                            <div className='bg-image badminton-img'></div>
+                            <div>Badminton Yard</div>
                         </div>
                     </Slider>
                 </div>

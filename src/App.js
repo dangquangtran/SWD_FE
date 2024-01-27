@@ -5,7 +5,7 @@ import { routes } from './routes';
 
 function App() {
     return (
-        <div className="App">
+        <div className="App" >
             <ToastContainer position="top-right" autoClose={2000} />
             <Router>
                 <Routes>

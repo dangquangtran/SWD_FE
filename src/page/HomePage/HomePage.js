@@ -4,15 +4,20 @@ import './HomePage.scss'
 import Logo from '../../assets/logoHeader/logo.svg'
 
 function HomePage() {
-    return ( 
-        <div>
-            <Button to={"/login-admin"}>
-                Login Admin
-            </Button>
-            <Button to={"/login-member"}>
-                Login Member
-            </Button>
-        </div>
+    return (
+
+        <div className='container'>
+            <h1>Welcome to Sports Club</h1>
+            <div className='login-btn'>
+                <Button loginbtn to={"/login-admin"}>
+                    Login Admin
+                </Button>
+                <Button loginbtn to={"/login-member"}>
+                    Login Member
+                </Button>
+            </div>
+            <div className='wc-img'></div>
+        </div >
     );
 }
 

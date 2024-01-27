@@ -88,3 +88,23 @@
 //         background-color: #f04242;
 //     }
 // }
+
+.loginbtn {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 10px 30px;
+    border-radius: 5px;
+    margin: 0 5px;
+    background-color: #caeec5;
+    color: #736a6a;
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid rgb(251, 95, 95);
+    text-decoration: none;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.9);
+
+    &:hover {
+        color: #000;
+        transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg) scale(1.1);
+
+    }
+}
