@@ -110,17 +110,19 @@ function ClubManage() {
                         </tr>
                         {
                             clubs && clubs.map((item, index) => {
-                                return (
-                                    <tr key={index}>
-                                        <td>{item.name}</td>
-                                        <td>{item.description}</td>
-                                        <td>{item.countMember}</td>
-                                        <td>
-                                            <button className='btn-edit' onClick={() => handleEdit(item)}><i className='fa fa-pencil'></i></button>
-                                            <button className='btn-delete' onClick={() => handleDeleteClub(item)}><i className='fa fa-trash'></i></button>
-                                        </td>
-                                    </tr>
-                                )
+                                if (item.status && item.status.data && item.status.data[0] === 1) {
+                                    return (
+                                        <tr key={index}>
+                                            <td>{item.name}</td>
+                                            <td>{item.description}</td>
+                                            <td>{item.countMember}</td>
+                                            <td>
+                                                <button className='btn-edit' onClick={() => handleEdit(item)}><i className='fa fa-pencil'></i></button>
+                                                <button className='btn-delete' onClick={() => handleDeleteClub(item)}><i className='fa fa-trash'></i></button>
+                                            </td>
+                                        </tr>
+                                    )
+                                }
                             })
                         }
                     </tbody>

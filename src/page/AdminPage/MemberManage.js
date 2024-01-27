@@ -110,20 +110,22 @@ function MemberManage() {
                             </tr>
                             {
                                 memBers && memBers.map((item, index) => {
-                                    return (
-                                        <tr key={index}>
-                                            <td>{item.email}</td>
-                                            <td>{item.name}</td>
-                                            <td>{item.gender}</td>
-                                            <td>{item.buildingName}</td>
-                                            <td>{item.phoneNumber}</td>
-                                            <td>
-                                                <button className='btn-edit' onClick={() => handleEdit(item)}><i className='fa fa-pencil'></i></button>
-                                                <button className='btn-delete' onClick={() => handleDeleteUser(item)}><i className='fa fa-trash'></i></button>
-                                                <button className='btn-detail' onClick={() => handleGetDetail(item)}><i className="fa fa-user-o"></i></button>
-                                            </td>
-                                        </tr>
-                                    )
+                                    if (item.status && item.status.data && item.status.data[0] === 1) {
+                                        return (
+                                            <tr key={index}>
+                                                <td>{item.email}</td>
+                                                <td>{item.name}</td>
+                                                <td>{item.gender}</td>
+                                                <td>{item.buildingName}</td>
+                                                <td>{item.phoneNumber}</td>
+                                                <td>
+                                                    <button className='btn-edit' onClick={() => handleEdit(item)}><i className='fa fa-pencil'></i></button>
+                                                    <button className='btn-delete' onClick={() => handleDeleteUser(item)}><i className='fa fa-trash'></i></button>
+                                                    <button className='btn-detail' onClick={() => handleGetDetail(item)}><i className="fa fa-user-o"></i></button>
+                                                </td>
+                                            </tr>
+                                        )
+                                    }
                                 })
                             } 
                         </tbody>
