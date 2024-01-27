@@ -12,8 +12,9 @@
 
     .header-logo {
         background: url('../../assets/logoHeader/logo.png') center center no-repeat;
-        height: 80%;
-        width: 280px;
+        background-size: cover;
+        height: 100%;
+        width: 300px;
         margin-right: 100px;
         cursor: pointer;
     }

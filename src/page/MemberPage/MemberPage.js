@@ -10,6 +10,7 @@ import image3 from '../../assets/Sport/ball.jpg'
 import SportSlide from "./Section/Sport";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Footer from "../../component/Footer/Footer";
 
 function MemberPage() {
     const userInfo = localStorage.getItem('userInfo');
@@ -35,10 +36,7 @@ function MemberPage() {
                 <img src={image2} />
                 <img src={image3} />
             </div>
-
-            <div className="footer">
-
-            </div>
+            <Footer />
         </div>
     );
 }
