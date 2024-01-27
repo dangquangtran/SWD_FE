@@ -1,4 +1,3 @@
-// toastHelper.js
 import { toast } from 'react-toastify';
 
 export const showSuccessToast = (message) => {

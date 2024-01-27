@@ -19,8 +19,8 @@ function HeaderMember() {
     const userInfo = localStorage.getItem('userInfo');
     return ( 
         <div className='body'>
-            <div className="col-4 header-logo"></div>
-            <div className="col-5 middle">
+            <div className="col-6 header-logo"></div>
+            <div className="col-8 middle">
                 <div className='content-middle'>
                     <div className='child-content'>
                         <div><b>Home</b></div>
@@ -34,7 +34,7 @@ function HeaderMember() {
                     <i className="fa fa-bell-o" aria-hidden="true"></i>
                 </div>
             </div>
-            <div className="col-2 content-right">
+            <div className="col-5 content-right">
                 <div className='header-image'></div>
                 <div className='header-userInfo'>
                     {userInfo}
