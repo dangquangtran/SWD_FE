@@ -22,12 +22,12 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
             try {
                 const response = await getAllBuildingId();
                 console.log(response);
-                setBuildingIds(response.result); 
+                setBuildingIds(response.result);
             } catch (error) {
                 console.error('Error fetching buildingIds', error);
             }
         };
-    
+
         fetchBuildingIds();
     }, []);
 
@@ -65,7 +65,7 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
 
     const checkValidateInput = () => {
         let isValid = true;
-        let arrInput = ['name','email', 'password', 'image', 'gender', 'buildingId', 'buildingName', 'phoneNumber'];
+        let arrInput = ['name', 'email', 'password', 'image', 'gender', 'buildingId', 'buildingName', 'phoneNumber'];
         for (let i = 0; i < arrInput.length; i++) {
             if (!formData[arrInput[i]]) {
                 isValid = false;
@@ -97,7 +97,7 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
         }
     };
 
-    return ( 
+    return (
         <Modal
             isOpen={isOpen}
             toggle={toggle}
@@ -105,12 +105,12 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
             size="lg"
         >
             <ModalHeader toggle={toggle}>
-                Create a new user
+                CREATE A NEW USER
             </ModalHeader>
             <ModalBody>
                 <div className="modal-user-body">
-                <div className="input-container">
-                        <label>Name</label>
+                    <div className="input-container">
+                        <label>User Name</label>
                         <input
                             type="text"
                             onChange={(event) => handleOnChangeInput(event, 'name')}
@@ -151,7 +151,7 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
                     </div>
                     <div className="input-container">
                         <label>Building Name</label>
-                        <select
+                        <select className="select"
                             onChange={(event) => handleOnChangeInput(event, 'buildingName')}
                             value={formData.buildingName}
                         >
@@ -160,12 +160,13 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
                                 <option key={buildingId.id} value={buildingId.name}>
                                     {buildingId.name}
                                 </option>
-                            ))} 
+                            ))}
                         </select>
                     </div>
                     <div className="input-container">
                         <label>Building Id</label>
                         <select
+                            className="select"
                             onChange={(event) => handleOnChangeInput(event, 'buildingId')}
                             value={formData.buildingId}
                         >
@@ -189,22 +190,20 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
             </ModalBody>
             <ModalFooter>
                 <Button
-                    color="primary"
-                    className="px-3"
+                    className="add-btn"
                     onClick={handleAddNewUser}
                 >
                     Add new
                 </Button>{" "}
                 <Button
-                    color="secondary"
-                    className="px-3"
+                    className="close-btn"
                     onClick={toggle}
                 >
                     Close
                 </Button>
             </ModalFooter>
         </Modal>
-     );
+    );
 }
 
 export default ModalMember;
