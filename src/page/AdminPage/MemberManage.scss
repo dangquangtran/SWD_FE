@@ -33,7 +33,7 @@
     background: transparent;
     color: orange;
     font-size: 18px;
-    
+
     &:hover {
         background-color: transparent !important;
         color: orange !important;
@@ -64,13 +64,21 @@
 }
 
 .modal-user-container {
+
     // margin: 0 !important;
     .modal-header {
+        background-color: #f1e9e9;
+
         button {
             background-color: transparent !important;
             border: none;
-            font-size: 30px;
-            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            color: #000;
+
+            &:hover {
+                color: #ff0c0c;
+            }
         }
     }
 
@@ -78,24 +86,76 @@
         display: flex;
         gap: 15px;
         flex-wrap: wrap;
+        padding: 10px 30px !important;
+        justify-content: center;
 
         .input-container {
             display: flex;
             flex-direction: column;
-            width: 49%;
+            width: 60%;
 
             &.max-width-input {
                 width: 100%;
             }
-    
+
             input {
-                border-radius: 3px;
+                border-radius: 5px;
                 border: 1px solid grey;
-                height: 30px;
+                height: 50px;
                 outline: none;
                 padding: 0 10px;
+            }
+
+            .select {
+                height: 50px !important;
+            }
+
+            label {
+                font-weight: bold;
+                font-size: 1.2rem;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             }
         }
     }
 
+}
+
+.modal-content {
+    border-radius: 30px !important;
+    width: 50%;
+    height: fit-content;
+    overflow: hidden;
+
+}
+
+.modal.show .modal-dialog {
+    transform: none;
+    height: 100%;
+    align-items: center;
+    display: flex;
+}
+
+.modal-footer {
+    background-color: #f1e9e9;
+
+    .add-btn {
+        height: 50px;
+        width: 150px;
+        font-weight: bold;
+        background-color: rgba(91, 138, 90, 0.826) !important;
+        font-size: 1.3rem;
+
+        &:hover {
+            background-color: rgba(120, 230, 118, 0.826) !important;
+            color: #000;
+        }
+    }
+
+    .close-btn {
+        font-size: 1.3rem;
+        width: 120px;
+        height: 50px;
+        font-weight: bold;
+
+    }
 }
