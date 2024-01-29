@@ -31,10 +31,13 @@ function MemberPage() {
             </div>
             <SportSlide />
 
-            <div className="content-middle">
-                <img src={image1} />
-                <img src={image2} />
-                <img src={image3} />
+            <div className="img-club">
+                <h2 className="join-title">Join with us?</h2>
+                <div className="content-middle">
+                    <img src={image1} />
+                    <img src={image2} />
+                    <img src={image3} />
+                </div>
             </div>
             <Footer />
         </div>

@@ -40,4 +40,7 @@ h1 {
   border-radius: 50px;
   border: 2px solid rgb(251, 95, 95);
 
+  &:hover {
+    box-shadow: 5px 5px 10px #243D25;
+  }
 }
