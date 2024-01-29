@@ -10,22 +10,22 @@ function ModalSport({ isOpen, toggleFromParent, createNewSport }) {
     description: '',
   });
 
-    useEffect(() => {
-        const eventListener = () => {
-        setFormData({
-            name: '',
-            description: '',
-        });
-        };
-    
-        emitter.on('EVENT_CREATE_MODAL_DATA', eventListener);
-    
-        return () => {
-        emitter.off('EVENT_CREATE_MODAL_DATA', eventListener);
-        };
+  useEffect(() => {
+    const eventListener = () => {
+      setFormData({
+        name: '',
+        description: '',
+      });
+    };
+
+    emitter.on('EVENT_CREATE_MODAL_DATA', eventListener);
+
+    return () => {
+      emitter.off('EVENT_CREATE_MODAL_DATA', eventListener);
+    };
   }, []);
-  
-  
+
+
 
   const toggle = () => {
     toggleFromParent();
@@ -51,12 +51,12 @@ function ModalSport({ isOpen, toggleFromParent, createNewSport }) {
   const handleAddNewSport = () => {
     let isValid = checkValidateInput()
     if (isValid) {
-        createNewSport(formData);
-        setFormData({  
-          name: '',
-          description: '',
-        });
-        toggle();
+      createNewSport(formData);
+      setFormData({
+        name: '',
+        description: '',
+      });
+      toggle();
     }
   };
 
@@ -68,7 +68,7 @@ function ModalSport({ isOpen, toggleFromParent, createNewSport }) {
       size="lg"
     >
       <ModalHeader toggle={toggle}>
-        Create a new sport
+        CREATE A NEW SPORT
       </ModalHeader>
       <ModalBody>
         <div className="modal-user-body">
@@ -92,15 +92,13 @@ function ModalSport({ isOpen, toggleFromParent, createNewSport }) {
       </ModalBody>
       <ModalFooter>
         <Button
-          color="primary"
-          className="px-3"
+          className="add-btn"
           onClick={handleAddNewSport}
         >
           Add new
         </Button>{" "}
         <Button
-          color="secondary"
-          className="px-3"
+          className="close-btn"
           onClick={toggle}
         >
           Close
