@@ -55,6 +55,10 @@ const createClub = (data) => {
     return axios.post('api/clubs', data);
 }
 
+const getDetailClub = (clubId) => {
+    return axios.get(`api/clubs/${clubId}`);
+}
+
 const editClub = (clubId, data) => {
     return axios.put(`api/clubs/${clubId}`, data);
 }
@@ -78,5 +82,6 @@ export {
     getAllClub,
     createClub,
     editClub,
-    deleteClub
+    deleteClub,
+    getDetailClub
 }

@@ -17,7 +17,6 @@ function App() {
                                 path={route.path}
                                 element={
                                     route.requiresAuth ? (
-                                        // Kiểm tra xác thực trước khi render trang admin
                                         localStorage.getItem('token') ? (
                                             <Page />
                                         ) : (

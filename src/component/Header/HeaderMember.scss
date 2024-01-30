@@ -34,10 +34,14 @@
                 b {
                     font-size: 25px;
                     cursor: pointer;
-
-                    &:hover {
-                        color: #5cbb50;
-                    }
+                }
+                
+                &:hover {
+                    color: #5cbb50;
+                }
+    
+                &.active {
+                    color: #5cbb50;
                 }
             }
 
