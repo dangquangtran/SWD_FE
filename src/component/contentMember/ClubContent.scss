@@ -1,6 +1,8 @@
-.container-club {
+.container-club1 {
     background-color: #fff;
     height: 100%;
+    display: flex;
+    flex-direction: column !important;
 
     .line {
         height: 1px;

@@ -31,7 +31,7 @@ function ClubContent() {
 
 
     return (
-        <div className="container-club">
+        <div className="container-club1">
             <div className="line"></div>
             <h1 className="club-title">Sport clubs</h1>
             {/* <div className="content-middle">
@@ -52,15 +52,15 @@ function ClubContent() {
                 }
             </div> */}
             <div className="content-middle">
-                <div className="club">
+                <div className="club" onClick={() => navigate(`/member-sport/2`)}>
                     <img className="image-club" src={image1} />
                     <a className="club-name">Badminton club</a>
                 </div>
-                <div className="club">
+                <div className="club" onClick={() => navigate(`/member-sport/2`)}>
                     <img className="image-club" src={image1} />
                     <a className="club-name">Basketball club</a>
                 </div>
-                <div className="club">
+                <div className="club" onClick={() => navigate(`/member-sport/2`)}>
                     <img className="image-club" src={image1} />
                     <a className="club-name">Football club</a>
                 </div>
