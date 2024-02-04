@@ -14,7 +14,7 @@ import Footer from "../../component/Footer/Footer";
 
 function MemberPage() {
     return (
-        <div>
+        <div className="main">
             <HeaderMember />
             <Footer />
         </div>

@@ -1,4 +1,6 @@
 .home-header-banner {
+    height: fit-content;
+
     .content-up {
         display: flex;
         justify-content: center;
@@ -57,4 +59,9 @@
     &:hover {
         transition: ease-in-out 0.5s;
     }
+}
+
+.main {
+    position: relative;
+    height: 2500px;
 }

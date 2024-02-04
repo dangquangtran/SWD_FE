@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import image1 from '../../assets/Sport/badminton.jpg'
 import { getAllClub } from "../../services/userService";
+import "./ClubContent.scss"
 
 function ClubContent() {
     const navigate = useNavigate();
@@ -27,25 +28,42 @@ function ClubContent() {
     const handleClick = (clubId) => {
         navigate(`/member-sport/${clubId}`);
     };
-    
 
-    return ( 
-        <div className="img-club">
-            <h2 className="join-title">Sport clubs</h2>
+
+    return (
+        <div className="container-club">
+            <div className="line"></div>
+            <h1 className="club-title">Sport clubs</h1>
+            {/* <div className="content-middle">
+                {
+                    clubs && clubs.map((item, index) => {
+                        if (item.status && item.status.data && item.status.data[0] === 1) {
+                            return (
+                                //đang hard code hình ảnh đợi xử lí
+                                <div className="clubs" key={index}>
+
+                                    <img onClick={() => handleClick(item.id)} src={image1} style={{ cursor: 'pointer' }} />
+                                    <a className="club-name" onClick={() => handleClick(item.id)}>Club Name: {item.name}</a>
+
+                                </div>
+                            )
+                        }
+                    })
+                }
+            </div> */}
             <div className="content-middle">
-            {
-    clubs && clubs.map((item, index) => {
-        if (item.status && item.status.data && item.status.data[0] === 1) {
-            return (
-                //đang hard code hình ảnh đợi xử lí
-                <div key={index}>
-                    <a onClick={() => handleClick(item.id)}>Club Name: {item.name}</a>
-                    <img onClick={() => handleClick(item.id)} src={image1} style={{ cursor: 'pointer' }} /> 
+                <div className="club">
+                    <img className="image-club" src={image1} />
+                    <a className="club-name">Badminton club</a>
                 </div>
-            )
-        }
-    })
-}
+                <div className="club">
+                    <img className="image-club" src={image1} />
+                    <a className="club-name">Basketball club</a>
+                </div>
+                <div className="club">
+                    <img className="image-club" src={image1} />
+                    <a className="club-name">Football club</a>
+                </div>
             </div>
         </div>
     );

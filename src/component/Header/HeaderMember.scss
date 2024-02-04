@@ -23,7 +23,7 @@
             display: flex;
             align-items: center;
             gap: 200px;
-            margin-bottom: 20px;
+            margin-bottom: 50px;
 
             i {
                 font-size: 32px;
@@ -35,11 +35,11 @@
                     font-size: 25px;
                     cursor: pointer;
                 }
-                
+
                 &:hover {
                     color: #5cbb50;
                 }
-    
+
                 &.active {
                     color: #5cbb50;
                 }
