@@ -30,7 +30,7 @@ function ClubPage() {
             <div className="side-bar">
                 <h2>Câu lạc bộ <br />Cầu Lông</h2>
             </div>
-            <div className="main">
+            <div className="main-club">
                 <div className="club-header">
                     <img className="img-background" src={image1} alt="club-background"></img>
                     <h2>Câu Lạc Bộ Cầu Lông</h2>
