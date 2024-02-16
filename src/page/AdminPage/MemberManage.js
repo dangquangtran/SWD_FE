@@ -18,6 +18,7 @@ function MemberManage() {
     const fetchApiMembers = async () => {
         try {
             let data = await getAllMembers()
+            console.log(data);
             setMemBers(data.result)
         } catch (error) {
             setMemBers([])
@@ -104,6 +105,7 @@ function MemberManage() {
                                 <th>Email</th>
                                 <th>Name</th>
                                 <th>Gender</th>
+                                <th>Image</th>
                                 <th>Building name</th>
                                 <th>Phone number</th>
                                 <th>Action</th>
@@ -116,6 +118,7 @@ function MemberManage() {
                                                 <td>{item.email}</td>
                                                 <td>{item.name}</td>
                                                 <td>{item.gender}</td>
+                                                <td><img width={50} height={50} src={item.image}/></td>
                                                 <td>{item.buildingName}</td>
                                                 <td>{item.phoneNumber}</td>
                                                 <td>

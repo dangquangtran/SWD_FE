@@ -8,7 +8,7 @@ import ClubContent from '../contentMember/ClubContent';
 function HeaderMember() {
     const navigate = useNavigate();
 
-    const [activeTab, setActiveTab] = useState('home'); // Mặc định là 'home'
+    const [activeTab, setActiveTab] = useState('home');
 
     const handleLogout = async () => {
         try {
@@ -25,7 +25,7 @@ function HeaderMember() {
         setActiveTab(tab);
     }
 
-    const userInfo = localStorage.getItem('userInfo');
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
     return (
         <>
             <div className='body'>
@@ -51,9 +51,11 @@ function HeaderMember() {
                     </div>
                 </div>
                 <div className="col-5 content-right">
-                    <div className='header-image'></div>
+                    <div className='header-image'>
+                        <img alt='image-avatar' src={userInfo.image} width={50} height={50}/>
+                    </div>
                     <div className='header-userInfo'>
-                        {userInfo}
+                        {userInfo.name}
                     </div>
                     <button onClick={handleLogout}><i className="fa fa-sign-out" aria-hidden="true"></i></button>
                 </div>

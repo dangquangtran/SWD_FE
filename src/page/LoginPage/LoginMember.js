@@ -22,7 +22,7 @@ const LoginMember = () => {
                 console.log(data);
                 if (data && !_.isEmpty(data.token)) {
                     localStorage.setItem('token', data.token);
-                    localStorage.setItem('userInfo', data.user.name);
+                    localStorage.setItem('userInfo', JSON.stringify(data.user));
                     window.location.href = '/members';
                 }
             } catch (error) {
