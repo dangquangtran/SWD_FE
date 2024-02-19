@@ -6,7 +6,7 @@
         margin-left: 60px;
         height: 44px;
         position: fixed;
-        background-color: #d086ee;
+        background-color: #a4ce9f;
         padding: 5px 40px;
         border-radius: 0 0 5px 5px;
         width: 70%;
@@ -17,10 +17,11 @@
         margin: 50px auto 20px;
         height: 200px;
         width: 80%;
-        background-color: #8688ee;
+        background-color: #9e9ff4;
         border-radius: 10px;
         text-align: center;
         padding: 30px 0;
+
 
         .post-input {
             border-radius: 20px;
@@ -42,14 +43,16 @@
             height: 2px;
             background-color: #d0cdcd;
             margin: 0 auto;
+
         }
 
         .write-btn {
             padding: 10px 30px;
-            background-color: #fc7a7a;
+            background-color: #3b6d36;
             margin-top: 20px;
             border: 1px solid #000;
             border-radius: 20px;
+            color: #fff;
         }
 
     }
@@ -62,15 +65,60 @@
         height: fit-content;
         padding: 20px;
         width: 90%;
-        background-color: #8688ee;
+        background-color: #a4ce9f;
         margin: 10px auto;
         border-radius: 10px;
 
         .poster-name {
-            font-weight: bold;
-            color: #fff;
-            font-size: 1.2rem;
+            background-color: #fff;
+            border-radius: 10px;
+            width: 30%;
+            padding: 10px;
+            margin-bottom: 10px;
+
+
+            p {
+                margin: 0;
+                font-weight: bold;
+                font-size: 1.5rem;
+            }
+
+            div {
+                color: #000;
+            }
         }
+
+        .caption {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .post-content-container {
+            display: flex;
+        }
+
+        .post-img {
+            width: 45%;
+        }
+
+        .post-infor {
+            width: 55%;
+            text-align: center;
+            background-color: #e4dff2;
+            margin-left: 20px;
+
+            h3 {
+                margin-top: 20px;
+            }
+
+            .btn-join {
+                padding: 10px 50px;
+                background-color: #3b6d36;
+                color: #fff;
+            }
+        }
+
+
     }
 
 }
