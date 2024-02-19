@@ -1,0 +1,76 @@
+.new-feed-container {
+    width: 80%;
+    background-color: #e4dff2;
+
+    .club-title-new-feed {
+        margin-left: 60px;
+        height: 44px;
+        position: fixed;
+        background-color: #d086ee;
+        padding: 5px 40px;
+        border-radius: 0 0 5px 5px;
+        width: 70%;
+        color: #fff;
+    }
+
+    .post-container {
+        margin: 50px auto 20px;
+        height: 200px;
+        width: 80%;
+        background-color: #8688ee;
+        border-radius: 10px;
+        text-align: center;
+        padding: 30px 0;
+
+        .post-input {
+            border-radius: 20px;
+            width: 80%;
+            height: 50px;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #d0cdcd;
+
+            &:hover {
+                background-color: #e6e6e6;
+                cursor: pointer;
+            }
+
+        }
+
+        .post-line {
+            width: 90%;
+            height: 2px;
+            background-color: #d0cdcd;
+            margin: 0 auto;
+        }
+
+        .write-btn {
+            padding: 10px 30px;
+            background-color: #fc7a7a;
+            margin-top: 20px;
+            border: 1px solid #000;
+            border-radius: 20px;
+        }
+
+    }
+
+    h5 {
+        margin-left: 60px;
+    }
+
+    .main-post-container {
+        height: fit-content;
+        padding: 20px;
+        width: 90%;
+        background-color: #8688ee;
+        margin: 10px auto;
+        border-radius: 10px;
+
+        .poster-name {
+            font-weight: bold;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+    }
+
+}

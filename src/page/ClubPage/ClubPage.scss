@@ -38,12 +38,28 @@
         font-weight: bold;
     }
 
-    .status {
-        background-color: #fff;
-        padding: 20px;
+    .btn {
+        padding: 10px 20px;
         border-radius: 10px;
         border: 1px solid #000;
         font-weight: bold;
+
+        &.view-btn {
+            margin-right: 10px;
+            background-color: #96dad1;
+
+            &:hover {
+                background-color: #00d2b6;
+            }
+        }
+
+        &.leave-btn {
+            background-color: #dbdbdb;
+
+            &:hover {
+                background-color: #f7f3f3;
+            }
+        }
     }
 }
 
@@ -105,4 +121,14 @@
             font-size: 2rem;
         }
     }
+}
+
+.btn-back {
+    background-color: #a4ce9f;
+    width: 100%;
+    padding: 10px 20px;
+    border-bottom: 1px solid #000;
+    font-weight: bold;
+    text-align: center;
+
 }
