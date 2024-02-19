@@ -36,7 +36,7 @@ export const routes = [
         requiresAuth: true
     },
     {
-        path: '/main-club',
+        path: '/main-club/:id',
         page: MainClubPage
     }
 ]

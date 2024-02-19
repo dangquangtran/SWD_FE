@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-    checkMeberJoinClub,
+    checkMemberJoinClub,
     getDetailClub,
     MemberJoinClub,
     MemberLeavingClub,
+    ClubMember
 } from "../../services/userService";
 import "./ClubPage.scss";
 import image1 from "../../assets/Sport/badminton.jpg";
@@ -23,20 +24,26 @@ function ClubPage() {
         try {
             const response = await getDetailClub(id);
             setClubDetail(response.result);
-            // setIsJoined(response.result.status); // Cập nhật trạng thái tham gia từ API
-
-            const response2 = await checkMeberJoinClub(user.id, id);
+    
+            const response2 = await checkMemberJoinClub(user.id, id);
             setIsJoined(response2.result == 1 ? true : false);
+    
+            const clubMembers = await ClubMember();
+    
+            const filteredMembers = clubMembers.result.filter(member => member.status.data[0] === 1 && member.clubId === parseInt(id));
+    
+            setClubDetail(prevClubDetail => ({
+                ...prevClubDetail,
+                countMember: filteredMembers.length
+            }));
         } catch (error) {
             console.error("Error fetching club detail:", error);
         }
     };
+    
 
     const handleJoinClub = async () => {
-        // Tạo yêu cầu tới API để tham gia câu lạc bộ
-        // Nếu thành công, cập nhật state isJoined thành true
-
-        const response = await MemberJoinClub({
+        await MemberJoinClub({
             memberId: user.id,
             memberName: user.name,
             clubId: clubDetail.id,
@@ -44,22 +51,27 @@ function ClubPage() {
         });
 
         setIsJoined(true);
+
+        setClubDetail(prevClubDetail => ({
+            ...prevClubDetail,
+            countMember: prevClubDetail.countMember + 1
+        }));
     };
 
     const handleLeaveClub = async () => {
-        // Hiển thị hộp thoại xác nhận khi muốn rời club
         const confirmLeave = window.confirm("Bạn có chắc chắn muốn rời club?");
         if (confirmLeave) {
-            // Gửi yêu cầu tới API để rời club và cập nhật trạng thái isJoined
-            const respone = await MemberLeavingClub({
+            await MemberLeavingClub({
                 memberId: user.id,
                 clubId: id,
             });
             setIsJoined(false);
             setIsLeaving(true);
-            console.log(respone);
-            // Gọi API để rời club và xử lý kết quả
-            // Sau đó, setIsLeaving(false);
+
+            setClubDetail(prevClubDetail => ({
+                ...prevClubDetail,
+                countMember: prevClubDetail.countMember - 1
+            }));
         }
     };
 
@@ -93,7 +105,7 @@ function ClubPage() {
                     <div>
                         {isJoined ? (
                             <div>
-                                <button className="btn view-btn" onClick={() => navigate("/main-club")}>Tham quan</button>
+                                <button className="btn view-btn" onClick={() => navigate(`/main-club/${clubDetail.id}`)}>Tham quan</button>
                                 <button className="btn leave-btn" onClick={handleLeaveClub}>
                                     Muốn rời nhóm
                                 </button>
