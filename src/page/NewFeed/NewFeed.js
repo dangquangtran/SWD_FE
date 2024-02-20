@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./NewFeed.scss";
 import image1 from "../../assets/Sport/badminton.jpg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { } from '@fortawesome/free-regular-svg-icons';
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 
 import {
   getDetailClub,
@@ -149,7 +152,7 @@ function NewFeed() {
             <div className="post-content-container">
               <img className="post-img" src={image1} alt="avatar" />
               <div className="post-infor">
-                <h3>Thông tin trận đấu</h3>
+                <h3><FontAwesomeIcon icon={faCircleInfo} /> Thông tin trận đấu</h3>
                 <div>
                   <div>
                     <b>Sân: {item.yardName}</b>

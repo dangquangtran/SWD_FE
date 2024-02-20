@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./MainClubPage.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleRight, faHouseUser, faEnvelopesBulk, faBasketball } from '@fortawesome/free-solid-svg-icons';
+import { faNewspaper } from '@fortawesome/free-regular-svg-icons';
+
 import NewFeed from "../NewFeed/NewFeed";
 
 
@@ -23,15 +25,15 @@ function MainClubPage() {
     return (
         <>
             <div className="main-club-container">
-                <div className="side-bar">
-                    <button className="  btn-back" onClick={() => navigate("/members")}> Home</button>
+                <div className="side-bar-main">
+                    <button className="  btn-back" onClick={() => navigate("/members")}><FontAwesomeIcon icon={faHouseUser} />  Home</button>
                     <button className={`tab-btn ${activeTab === "home" ? "active" : ""
-                        }`} onClick={() => handleTabClick("newFeed")}> New feed</button>
+                        }`} onClick={() => handleTabClick("newFeed")}><FontAwesomeIcon icon={faNewspaper} />  New feed</button>
 
-                    <button className="tab-btn" onClick={toggleTabs}> Your posted {showTabs ? (<FontAwesomeIcon icon={faAngleDown} />) : (<FontAwesomeIcon icon={faAngleRight} />)}</button>
+                    <button className="tab-btn" onClick={toggleTabs}><FontAwesomeIcon icon={faEnvelopesBulk} /> Your posted {showTabs ? (<FontAwesomeIcon icon={faAngleDown} />) : (<FontAwesomeIcon icon={faAngleRight} />)}</button>
                     {showTabs && (
                         <div className="sub-tabs">
-                            <button className="sub-tab">Badminton post</button>
+                            <button className="sub-tab"><FontAwesomeIcon icon={faBasketball} /> Badminton post</button>
                             <button className="sub-tab">Tennis post</button>
                             <button className="sub-tab">Basketball post</button>
                         </div>
