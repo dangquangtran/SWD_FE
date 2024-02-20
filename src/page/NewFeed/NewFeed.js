@@ -3,6 +3,9 @@ import "./NewFeed.scss";
 import image1 from "../../assets/Sport/badminton.jpg";
 
 import { getDetailClub, getPostInClub, createPostInSlot, getIdMemberCreatePost } from "../../services/userService";
+import {
+  getNumberOfSlot,
+} from "../../services/userService";
 import { useParams } from "react-router-dom";
 import ModalCreatePost from "../../component/modal/ModalCreatePost";
 import { showErrorToast, showSuccessToast } from "../../component/toast/toast";
@@ -15,6 +18,7 @@ function NewFeed() {
   const [slotsInClub, setSlotsInClub] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMemberCreatePostId, setMemberCreatePostId] = useState('')
+
 
   useEffect(() => {
     fetchClubDetail();
@@ -29,6 +33,7 @@ function NewFeed() {
       console.error("Error fetching member create post id:", error);
     }
   };
+  const [numberOfSlot, setNumberOfSlot] = useState(0);
 
   const fetchClubDetail = async () => {
     try {
@@ -37,8 +42,6 @@ function NewFeed() {
 
       const response1 = await getPostInClub(id);
       setSlotsInClub(response1.result);
-
-      console.log(response1);
     } catch (error) {
       console.error("Error fetching club detail:", error);
     }
@@ -80,6 +83,20 @@ function NewFeed() {
         if (item.memberPostId === userInfo.id) {
           return null;
         }
+
+        async function fetchData() {
+          try {
+            const response = await getNumberOfSlot(item.id);
+            setNumberOfSlot(response.result); // Kết quả của hàm getNumberOfSlot
+            // Xử lý kết quả ở đây
+          } catch (error) {
+            console.error("Lỗi khi gọi hàm getNumberOfSlot:", error);
+            // Xử lý lỗi nếu cần
+          }
+        }
+
+        fetchData();
+
         return (
           <div key={item.id} className="main-post-container">
             <div className="poster-name">
@@ -104,10 +121,20 @@ function NewFeed() {
                     <b>Date: {item.date}</b>
                   </div>
                   <div>
-                    <b>Số lượng: {item.requiredMember}</b>
+                    <b>
+                      Tổng số người chơi:{" "}
+                      {parseInt(item.requiredMember) +
+                        parseInt(item.currentMember)}
+                    </b>
                   </div>
                   <div>
-                    <b>Còn: </b>
+                    <b>Số lượng người cần: {item.requiredMember}</b>
+                  </div>
+                  <div>
+                    <b>
+                      Còn:{" "}
+                      {parseInt(item.requiredMember) - parseInt(numberOfSlot)}
+                    </b>
                   </div>
                 </div>
                 <button className="btn-join">Join</button>

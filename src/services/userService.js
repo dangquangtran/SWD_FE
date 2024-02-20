@@ -103,6 +103,9 @@ const getAllYards = () => {
 const getIdMemberCreatePost = (idMember, idClub) => {
   return axios.get(`api/clubMembers/getByIdMemberClub/${idMember}/${idClub}`)
 }
+const getNumberOfSlot = (idSlot) => {
+  return axios.get(`api//clubMemSlots/getNumberOfSlot/${idSlot}`);
+};
 
 export {
   handleLoginAdmin,
@@ -128,5 +131,6 @@ export {
   getPostInClub,
   createPostInSlot,
   getAllYards,
-  getIdMemberCreatePost
+  getIdMemberCreatePost,
+  getNumberOfSlot
 };
