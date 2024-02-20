@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { handleLoginMember } from "../../services/memberService";
+import { handleLoginMember, registerMember } from "../../services/memberService";
 import './LoginPage.scss'; 
 import _ from "lodash";
+import ModalRegisterMember from "../../component/modal/ModalRegisterMember";
+import { showSuccessToast } from "../../component/toast/toast";
 
 const LoginMember = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     const formik = useFormik({
         initialValues: {
@@ -33,6 +36,20 @@ const LoginMember = () => {
             }
         },
     });
+
+    const toggleModal = () => {
+        setIsModalOpen(!isModalOpen);
+    };
+
+    const doCreateNewUser = async (data) => {
+        try {
+            await registerMember(data)
+            showSuccessToast('User added successfully!');
+            setIsModalOpen(false)
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <div className='login-background'>
@@ -82,8 +99,16 @@ const LoginMember = () => {
                             <button type='submit' className='btn-login' disabled={formik.isSubmitting}>
                                 Login
                             </button>
+                            <button className='btn-login' onClick={toggleModal}>
+                                Create new account 
+                            </button>
                         </div>
                     </form>
+                    <ModalRegisterMember 
+                        isOpen={isModalOpen}
+                        toggleFromParent={toggleModal}
+                        createNewUser={doCreateNewUser}
+                    />
                 </div>
             </div>
         </div>

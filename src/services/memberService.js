@@ -5,10 +5,15 @@ const handleLoginMember = (userName, userPassword) => {
 }
 
 const handleLogoutMember = () => {
-    return axios.get('api/logout')
+    return axios.get('api/logout');
+}
+
+const registerMember = (data) => {
+    return axios.post('api/register', data);
 }
 
 export {
     handleLoginMember,
-    handleLogoutMember
+    handleLogoutMember,
+    registerMember
 }
