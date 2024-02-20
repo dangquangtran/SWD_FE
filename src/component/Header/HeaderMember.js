@@ -63,7 +63,7 @@ function HeaderMember() {
         <div className="col-5 content-right">
           <div className="header-image">
             <img
-              alt="image-avatar"
+              alt="avatar"
               src={userInfo.image}
               width={50}
               height={50}

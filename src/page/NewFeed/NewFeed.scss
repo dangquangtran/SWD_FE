@@ -15,12 +15,21 @@
 
     .post-container {
         margin: 50px auto 20px;
-        height: 200px;
+        height: 126px;
         width: 80%;
-        background-color: #9e9ff4;
+        background-color: white;
         border-radius: 10px;
         text-align: center;
         padding: 30px 0;
+
+        img {
+            background-size: cover;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 20px;
+        }
 
 
         .post-input {
@@ -47,13 +56,20 @@
         }
 
         .write-btn {
-            padding: 10px 30px;
-            background-color: #3b6d36;
-            margin-top: 20px;
-            border: 1px solid #000;
-            border-radius: 20px;
-            color: #fff;
+            background-color: #eae7e7; 
+            color: gray; 
+            border: none; 
+            padding: 10px 500px; 
+            border-radius: 20px; 
+            font-size: 16px; 
+            cursor: pointer; 
+            transition: background-color 0.3s ease; 
+            
+            &:hover {
+                background-color: rgb(224, 228, 232); 
+            }
         }
+  
 
     }
 
@@ -65,7 +81,7 @@
         height: fit-content;
         padding: 20px;
         width: 90%;
-        background-color: #a4ce9f;
+        background-color: white;
         margin: 10px auto;
         border-radius: 10px;
 
@@ -99,6 +115,7 @@
 
         .post-img {
             width: 45%;
+            border: 1px solid ;
         }
 
         .post-infor {

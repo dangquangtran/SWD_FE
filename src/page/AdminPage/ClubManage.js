@@ -1,4 +1,3 @@
-// ClubManage.js
 import React, { useEffect, useState } from 'react';
 import './ClubManage.scss';
 import { getAllClub, createClub, editClub, deleteClub } from '../../services/userService';

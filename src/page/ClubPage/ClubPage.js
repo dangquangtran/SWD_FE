@@ -16,7 +16,7 @@ function ClubPage() {
   const { id } = useParams();
   const [clubDetail, setClubDetail] = useState(null);
   const [isJoined, setIsJoined] = useState(false);
-  const [isLeaving, setIsLeaving] = useState(false); // Thêm state để theo dõi trạng thái rời club
+  const [isLeaving, setIsLeaving] = useState(false); 
 
   const user = JSON.parse(window.localStorage.getItem("userInfo"));
 
@@ -30,10 +30,7 @@ function ClubPage() {
 
       const clubMembers = await ClubMember();
 
-      const filteredMembers = clubMembers.result.filter(
-        (member) =>
-          member.status.data[0] === 1 && member.clubId === parseInt(id)
-      );
+      console.log(clubMembers);
     } catch (error) {
       console.error("Error fetching club detail:", error);
     }

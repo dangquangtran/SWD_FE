@@ -90,6 +90,20 @@ const getPostInClub = (idClub) => {
   return axios.get(`api/slots/${idClub}}/id_club`);
 };
 
+const createPostInSlot = (data) => {
+  return axios.post("api/slots", data);
+}
+
+//yard
+
+const getAllYards = () => {
+  return axios.get("api/yards");
+}
+
+const getIdMemberCreatePost = (idMember, idClub) => {
+  return axios.get(`api/clubMembers/getByIdMemberClub/${idMember}/${idClub}`)
+}
+
 export {
   handleLoginAdmin,
   getAllMembers,
@@ -112,4 +126,7 @@ export {
   MemberJoinClub,
   MemberLeavingClub,
   getPostInClub,
+  createPostInSlot,
+  getAllYards,
+  getIdMemberCreatePost
 };
