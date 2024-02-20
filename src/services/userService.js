@@ -90,6 +90,10 @@ const getPostInClub = (idClub) => {
   return axios.get(`api/slots/${idClub}}/id_club`);
 };
 
+const getNumberOfSlot = (idSlot) => {
+  return axios.get(`api//clubMemSlots/getNumberOfSlot/${idSlot}`);
+};
+
 export {
   handleLoginAdmin,
   getAllMembers,
@@ -112,4 +116,5 @@ export {
   MemberJoinClub,
   MemberLeavingClub,
   getPostInClub,
+  getNumberOfSlot,
 };
