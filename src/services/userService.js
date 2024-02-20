@@ -71,8 +71,8 @@ const deleteClub = (clubId) => {
 };
 
 const ClubMember = () => {
-  return axios.get('api/clubMembers')
-}
+  return axios.get("api/clubMembers");
+};
 
 const checkMemberJoinClub = (memberId, clubId) => {
   return axios.get(`api/clubMembers/check_join/${memberId}/${clubId}`);
@@ -84,6 +84,10 @@ const MemberJoinClub = (data) => {
 
 const MemberLeavingClub = (data) => {
   return axios.put(`api/clubMembers/leaving_club`, data);
+};
+
+const getPostInClub = (idClub) => {
+  return axios.get(`api/slots/${idClub}}/id_club`);
 };
 
 export {
@@ -107,4 +111,5 @@ export {
   checkMemberJoinClub,
   MemberJoinClub,
   MemberLeavingClub,
+  getPostInClub,
 };
