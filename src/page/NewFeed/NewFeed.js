@@ -2,8 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./NewFeed.scss";
 import image1 from "../../assets/Sport/badminton.jpg";
 
-import { getDetailClub, getPostInClub, createPostInSlot, getIdMemberCreatePost } from "../../services/userService";
 import {
+  getDetailClub,
+  getPostInClub,
+  createPostInSlot,
+  getIdMemberCreatePost,
+  UserJoitSlot,
+  getTranPoit,
+  getSlotJoined,
   getNumberOfSlot,
 } from "../../services/userService";
 import { useParams } from "react-router-dom";
@@ -17,23 +23,46 @@ function NewFeed() {
   const [clubDetail, setClubDetail] = useState({});
   const [slotsInClub, setSlotsInClub] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isMemberCreatePostId, setMemberCreatePostId] = useState('')
-
+  const [isMemberCreatePostId, setMemberCreatePostId] = useState(null);
+  const [tranPoint, setTranPoint] = useState(null);
+  const [numberOfSlot, setNumberOfSlot] = useState({});
+  const [slotJoined, setSetSlotJoined] = useState([]);
 
   useEffect(() => {
     fetchClubDetail();
-    fetchMemberCreatePostId();
   }, []);
+
+  async function fetchData() {
+    try {
+      const promises = slotsInClub.map(async (item) => {
+        const response = await getNumberOfSlot(item.id);
+        return { itemId: item.id, numberOfSlot: response.result };
+      });
+      const results = await Promise.all(promises);
+      const numberOfSlotMap = {};
+      results.forEach((result) => {
+        numberOfSlotMap[result.itemId] = result.numberOfSlot;
+      });
+      setNumberOfSlot(numberOfSlotMap);
+
+      const response2 = await getSlotJoined(isMemberCreatePostId);
+      setSetSlotJoined(response2.result);
+    } catch (error) {
+      console.error("Error fetching number of slots:", error);
+    }
+  }
+  useEffect(() => {
+    fetchData();
+  }, [slotsInClub]);
 
   const fetchMemberCreatePostId = async () => {
     try {
       const response = await getIdMemberCreatePost(userInfo.id, id);
-      setMemberCreatePostId(response.result.id); 
+      setMemberCreatePostId(response.result.id);
     } catch (error) {
       console.error("Error fetching member create post id:", error);
     }
   };
-  const [numberOfSlot, setNumberOfSlot] = useState(0);
 
   const fetchClubDetail = async () => {
     try {
@@ -42,6 +71,8 @@ function NewFeed() {
 
       const response1 = await getPostInClub(id);
       setSlotsInClub(response1.result);
+
+      await fetchMemberCreatePostId();
     } catch (error) {
       console.error("Error fetching club detail:", error);
     }
@@ -57,14 +88,38 @@ function NewFeed() {
     postData.memberPostId = isMemberCreatePostId;
     try {
       await createPostInSlot(postData);
-      showSuccessToast('Create post successfully!');
+      showSuccessToast("Create post successfully!");
       setIsModalOpen(false);
       fetchClubDetail();
     } catch (error) {
-      showErrorToast('Create post error!');
+      showErrorToast("Create post error!");
       console.error("Error creating post:", error);
     }
   };
+
+  async function handleJoinSlot(slotId) {
+    const transactionPoint = await getTranPoit();
+    setTranPoint(transactionPoint.result.point);
+    const response = await UserJoitSlot({
+      clubMemberId: isMemberCreatePostId,
+      slotId: slotId,
+      transactionPoint: tranPoint,
+    });
+
+    // Sau khi thực hiện join, gọi lại fetchData để cập nhật số lượng slot
+    fetchData();
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, [slotsInClub]);
+
+  useEffect(() => {
+    const objectWithSlotId = slotJoined.filter((item) => item.slotId === 5);
+    console.log(objectWithSlotId);
+  }, [slotJoined]);
+
+  console.log(slotJoined);
 
   return (
     <div className="new-feed-container">
@@ -72,30 +127,17 @@ function NewFeed() {
       <div className="post-container">
         <img alt="avatar" src={userInfo.image} />
         <button className="write-btn" onClick={toggleModal}>
-          <span>{userInfo.name} ơi</span> 
-          <span style={{ marginLeft: '5px' }}>Bạn đang muốn gì thế?</span>
+          <span>{userInfo.name} ơi</span>
+          <span style={{ marginLeft: "5px" }}>Bạn đang muốn gì thế?</span>
         </button>
       </div>
 
       <h5>Bài viết mới nhất</h5>
 
       {slotsInClub.map((item) => {
-        if (item.memberPostId === userInfo.id) {
+        if (item.memberPostId === isMemberCreatePostId) {
           return null;
         }
-
-        async function fetchData() {
-          try {
-            const response = await getNumberOfSlot(item.id);
-            setNumberOfSlot(response.result); // Kết quả của hàm getNumberOfSlot
-            // Xử lý kết quả ở đây
-          } catch (error) {
-            console.error("Lỗi khi gọi hàm getNumberOfSlot:", error);
-            // Xử lý lỗi nếu cần
-          }
-        }
-
-        fetchData();
 
         return (
           <div key={item.id} className="main-post-container">
@@ -128,22 +170,31 @@ function NewFeed() {
                     </b>
                   </div>
                   <div>
-                    <b>Số lượng người cần: {item.requiredMember}</b>
-                  </div>
-                  <div>
                     <b>
                       Còn:{" "}
-                      {parseInt(item.requiredMember) - parseInt(numberOfSlot)}
+                      {parseInt(item.requiredMember) -
+                        parseInt(numberOfSlot[item.id] || 0)}
                     </b>
                   </div>
                 </div>
-                <button className="btn-join">Join</button>
+                <button
+                  className="btn-join"
+                  onClick={() => {
+                    handleJoinSlot(item.id);
+                  }}
+                >
+                  Join
+                </button>
               </div>
             </div>
           </div>
         );
       })}
-      <ModalCreatePost isOpen={isModalOpen} toggle={toggleModal} createPost={handleCreatePost} />
+      <ModalCreatePost
+        isOpen={isModalOpen}
+        toggle={toggleModal}
+        createPost={handleCreatePost}
+      />
     </div>
   );
 }
