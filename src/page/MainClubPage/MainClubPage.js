@@ -3,23 +3,16 @@ import { useNavigate } from "react-router-dom";
 import "./MainClubPage.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faAngleDown,
-  faAngleRight,
   faHouseUser,
   faEnvelopesBulk,
-  faBasketball,
 } from "@fortawesome/free-solid-svg-icons";
 import { faNewspaper } from "@fortawesome/free-regular-svg-icons";
 
 import NewFeed from "../NewFeed/NewFeed";
+import MyPost from "../MyPost/MyPost";
 
 function MainClubPage() {
-  const [showTabs, setShowTabs] = useState(false);
   const [activeTab, setActiveTab] = useState("newFeed");
-
-  const toggleTabs = () => {
-    setShowTabs(!showTabs);
-  };
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -30,7 +23,7 @@ function MainClubPage() {
     <>
       <div className="main-club-container">
         <div className="side-bar-main">
-          <button className="  btn-back" onClick={() => navigate("/members")}>
+          <button className="btn-backHome" onClick={() => navigate("/members")}>
             <FontAwesomeIcon icon={faHouseUser} /> Home
           </button>
           <button
@@ -40,11 +33,12 @@ function MainClubPage() {
             <FontAwesomeIcon icon={faNewspaper} /> New feed
           </button>
 
-          <button className="tab-btn" onClick={toggleTabs}>
+          <button className="tab-btn" onClick={() => handleTabClick("myPost")}>
             <FontAwesomeIcon icon={faEnvelopesBulk} /> My posted{" "}
           </button>
         </div>
         {activeTab === "newFeed" && <NewFeed />}
+        {activeTab === "myPost" && <MyPost />}
       </div>
     </>
   );

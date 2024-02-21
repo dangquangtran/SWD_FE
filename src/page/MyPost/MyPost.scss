@@ -1,0 +1,158 @@
+.new-feed-container {
+    width: 80%;
+    background-color: #e4dff2;
+
+    .club-title-new-feed {
+        margin-left: 60px;
+        height: 44px;
+        position: fixed;
+        background-color: #a4ce9f;
+        padding: 5px 40px;
+        border-radius: 0 0 5px 5px;
+        width: 70%;
+        color: #fff;
+    }
+
+    .post-container {
+        margin: 50px auto 20px;
+        height: 126px;
+        width: 80%;
+        background-color: white;
+        border-radius: 10px;
+        text-align: center;
+        padding: 30px 0;
+
+        img {
+            background-size: cover;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 20px;
+        }
+
+
+        .post-input {
+            border-radius: 20px;
+            width: 80%;
+            height: 50px;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #d0cdcd;
+
+            &:hover {
+                background-color: #e6e6e6;
+                cursor: pointer;
+            }
+
+        }
+
+        .post-line {
+            width: 90%;
+            height: 2px;
+            background-color: #d0cdcd;
+            margin: 0 auto;
+
+        }
+
+        .write-btn {
+            background-color: #eae7e7;
+            color: gray;
+            border: none;
+            padding: 10px 500px;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: rgb(224, 228, 232);
+            }
+        }
+
+
+    }
+
+    h5 {
+        margin-left: 60px;
+    }
+
+    .main-post-container {
+        height: fit-content;
+        padding: 20px;
+        width: 90%;
+        background-color: white;
+        margin: 10px auto;
+        border-radius: 10px;
+
+        .poster-name {
+            background-color: #fff;
+            border-radius: 10px;
+            width: 30%;
+            padding: 10px;
+            margin-bottom: 10px;
+
+
+            p {
+                margin: 0;
+                font-weight: bold;
+                font-size: 1.5rem;
+            }
+
+            div {
+                color: #000;
+            }
+        }
+
+        .caption {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .post-content-container {
+            display: flex;
+        }
+
+        .post-img {
+            width: 45%;
+            border: 1px solid;
+        }
+
+        .post-infor {
+            width: 55%;
+            text-align: center;
+            background-color: #e4dff2;
+            margin-left: 20px;
+
+            h3 {
+                margin-top: 20px;
+            }
+
+            .btn-join {
+                padding: 10px 50px;
+                background-color: #3b6d36;
+                color: #fff;
+            }
+        }
+
+
+    }
+
+}
+
+.form-group {
+    margin-bottom: 10px;
+
+    label {
+        font-weight: bold;
+    }
+
+    span {
+        margin-left: 20px;
+    }
+
+    input,
+    select {
+        height: 50px;
+    }
+}
