@@ -1,10 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input } from "reactstrap";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  FormGroup,
+  Label,
+  Input,
+} from "reactstrap";
 import { getAllYards } from "../../services/userService";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faImages, faCalendarDays } from '@fortawesome/free-regular-svg-icons';
-import { faPenToSquare, faClock, faPerson, faPersonShelter, faSignsPost } from '@fortawesome/free-solid-svg-icons';
-
+import { faImages, faCalendarDays } from "@fortawesome/free-regular-svg-icons";
+import {
+  faPenToSquare,
+  faClock,
+  faPerson,
+  faPersonShelter,
+  faSignsPost,
+} from "@fortawesome/free-solid-svg-icons";
 
 function ModalCreatePost({ isOpen, toggle, createPost }) {
   const [formData, setFormData] = useState({
@@ -37,7 +51,9 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
 
   const handleOnChangeInput = (event, id) => {
     if (id === "yardName") {
-      const selectedYard = yards.find(yard => yard.name === event.target.value);
+      const selectedYard = yards.find(
+        (yard) => yard.name === event.target.value
+      );
       setYardId(selectedYard.id);
     }
     setFormData({
@@ -57,16 +73,20 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
 
   const hours = [];
   for (let i = 5; i <= 21; i++) {
-    const hour = `${i < 10 ? '0' : ''}${i}:00`;
+    const hour = `${i < 10 ? "0" : ""}${i}:00`;
     hours.push(hour);
   }
 
   return (
     <Modal isOpen={isOpen} toggle={toggle}>
-      <ModalHeader toggle={toggle}><FontAwesomeIcon icon={faSignsPost} /> Create a New Post</ModalHeader>
+      <ModalHeader toggle={toggle}>
+        <FontAwesomeIcon icon={faSignsPost} /> Create a New Post
+      </ModalHeader>
       <ModalBody>
         <FormGroup>
-          <Label for="description"><FontAwesomeIcon icon={faPenToSquare} /> Description</Label>
+          <Label for="description">
+            <FontAwesomeIcon icon={faPenToSquare} /> Description
+          </Label>
           <Input
             type="textarea"
             id="description"
@@ -76,7 +96,9 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
           />
         </FormGroup>
         <FormGroup>
-          <Label for="date"><FontAwesomeIcon icon={faCalendarDays} /> Date</Label>
+          <Label for="date">
+            <FontAwesomeIcon icon={faCalendarDays} /> Date
+          </Label>
           <Input
             type="date"
             id="date"
@@ -85,7 +107,9 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
           />
         </FormGroup>
         <FormGroup>
-          <Label for="startTime"><FontAwesomeIcon icon={faClock} /> Start Time</Label>
+          <Label for="startTime">
+            <FontAwesomeIcon icon={faClock} /> Start Time
+          </Label>
           <Input
             type="select"
             id="startTime"
@@ -101,7 +125,10 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
           </Input>
         </FormGroup>
         <FormGroup>
-          <Label for="endTime"> <FontAwesomeIcon icon={faClock} /> End Time</Label>
+          <Label for="endTime">
+            {" "}
+            <FontAwesomeIcon icon={faClock} /> End Time
+          </Label>
           <Input
             type="select"
             id="endTime"
@@ -117,7 +144,9 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
           </Input>
         </FormGroup>
         <FormGroup>
-          <Label for="currentMember"><FontAwesomeIcon icon={faPerson} /> Current Member</Label>
+          <Label for="currentMember">
+            <FontAwesomeIcon icon={faPerson} /> Current Member
+          </Label>
           <Input
             type="number"
             id="currentMember"
@@ -126,7 +155,9 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
           />
         </FormGroup>
         <FormGroup>
-          <Label for="requiredMember"><FontAwesomeIcon icon={faPerson} /> Required Member</Label>
+          <Label for="requiredMember">
+            <FontAwesomeIcon icon={faPerson} /> Required Member
+          </Label>
           <Input
             type="number"
             id="requiredMember"
@@ -135,7 +166,9 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
           />
         </FormGroup>
         <FormGroup>
-          <Label for="yardName"><FontAwesomeIcon icon={faPersonShelter} /> Yard Name</Label>
+          <Label for="yardName">
+            <FontAwesomeIcon icon={faPersonShelter} /> Yard Name
+          </Label>
           <Input
             type="select"
             id="yardName"
@@ -145,14 +178,17 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
             <option value="">Select Yard Name</option>
             {yards.map((yard) => (
               <option key={yard.id} value={yard.name}>
-                {yard.name}
+                {yard.name} - {yard.areaName} - {yard.sportName}
               </option>
             ))}
           </Input>
         </FormGroup>
 
         <FormGroup>
-          <button><FontAwesomeIcon icon={faImages} style={{ fontSize: '30px' }} /><span>Hình ảnh đặt sân</span></button>
+          <button>
+            <FontAwesomeIcon icon={faImages} style={{ fontSize: "30px" }} />
+            <span>Hình ảnh đặt sân</span>
+          </button>
         </FormGroup>
       </ModalBody>
       <ModalFooter>

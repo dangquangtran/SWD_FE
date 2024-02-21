@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./NewFeed.scss";
 import image1 from "../../assets/Sport/badminton.jpg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { } from '@fortawesome/free-regular-svg-icons';
-import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 
 import {
   getDetailClub,
@@ -50,13 +47,17 @@ function NewFeed() {
 
       const response2 = await getSlotJoined(isMemberCreatePostId);
       setSetSlotJoined(response2.result);
+      console.log(response2.result);
     } catch (error) {
       console.error("Error fetching number of slots:", error);
     }
   }
+
   useEffect(() => {
-    fetchData();
-  }, [slotsInClub]);
+    if (isMemberCreatePostId) {
+      fetchData();
+    }
+  }, [isMemberCreatePostId, slotsInClub]);
 
   const fetchMemberCreatePostId = async () => {
     try {
@@ -76,6 +77,9 @@ function NewFeed() {
       setSlotsInClub(response1.result);
 
       await fetchMemberCreatePostId();
+
+      const transactionPoint = await getTranPoit();
+      setTranPoint(transactionPoint.result.point);
     } catch (error) {
       console.error("Error fetching club detail:", error);
     }
@@ -101,8 +105,6 @@ function NewFeed() {
   };
 
   async function handleJoinSlot(slotId) {
-    const transactionPoint = await getTranPoit();
-    setTranPoint(transactionPoint.result.point);
     const response = await UserJoitSlot({
       clubMemberId: isMemberCreatePostId,
       slotId: slotId,
@@ -116,11 +118,6 @@ function NewFeed() {
   useEffect(() => {
     fetchData();
   }, [slotsInClub]);
-
-  useEffect(() => {
-    const objectWithSlotId = slotJoined.filter((item) => item.slotId === 5);
-    console.log(objectWithSlotId);
-  }, [slotJoined]);
 
   console.log(slotJoined);
 
@@ -142,6 +139,11 @@ function NewFeed() {
           return null;
         }
 
+        // Kiểm tra xem slot có trong mảng slotJoined không
+        const isJoined = slotJoined.some(
+          (joinedSlot) => joinedSlot.slotId === item.id
+        );
+
         return (
           <div key={item.id} className="main-post-container">
             <div className="poster-name">
@@ -152,7 +154,7 @@ function NewFeed() {
             <div className="post-content-container">
               <img className="post-img" src={image1} alt="avatar" />
               <div className="post-infor">
-                <h3><FontAwesomeIcon icon={faCircleInfo} /> Thông tin trận đấu</h3>
+                <h3>Thông tin trận đấu</h3>
                 <div>
                   <div>
                     <b>Sân: {item.yardName}</b>
@@ -180,14 +182,18 @@ function NewFeed() {
                     </b>
                   </div>
                 </div>
-                <button
-                  className="btn-join"
-                  onClick={() => {
-                    handleJoinSlot(item.id);
-                  }}
-                >
-                  Join
-                </button>
+                {isJoined ? (
+                  <button className="btn-join">Joined</button>
+                ) : (
+                  <button
+                    className="btn-join"
+                    onClick={() => {
+                      handleJoinSlot(item.id);
+                    }}
+                  >
+                    Join
+                  </button>
+                )}
               </div>
             </div>
           </div>
