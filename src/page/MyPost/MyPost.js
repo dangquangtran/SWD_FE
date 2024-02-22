@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getIdMemberCreatePost, getMyPostInClub } from "../../services/userService";
 import { useParams } from "react-router-dom";
-import image1 from "../../assets/Sport/badminton.jpg";
 import "./MyPost.scss";
 
 function MyPost() {
@@ -15,9 +14,10 @@ function MyPost() {
     async function fetchData() {
         try {
             const response1 = await getIdMemberCreatePost(userInfo.id, id);
-            setMemberCreatePostId(response1.result.id);
-
-            const response2 = await getMyPostInClub(isMemberCreatePostId);
+            const memberCreatePostId = response1.result.id;
+            setMemberCreatePostId(memberCreatePostId);
+    
+            const response2 = await getMyPostInClub(memberCreatePostId);
             setMyPost(response2.result);
         } catch (error) {
             console.log(error);
@@ -26,7 +26,7 @@ function MyPost() {
 
     useEffect(() => {
         fetchData()
-    })
+    }, [])
 
     return ( 
         <div className="new-feed-container">
@@ -42,7 +42,7 @@ function MyPost() {
             </div>
             <div className="caption">{item.description}</div>
             <div className="post-content-container">
-              <img className="post-img" src={image1} alt="avatar" />
+              <img className="post-img" src={item.image} alt="avatar" />
               <div className="post-infor">
                 <h3>Thông tin trận đấu</h3>
                 <div>

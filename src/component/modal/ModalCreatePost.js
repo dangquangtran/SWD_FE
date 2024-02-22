@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Button,
   Modal,
@@ -19,8 +19,10 @@ import {
   faPersonShelter,
   faSignsPost,
 } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 function ModalCreatePost({ isOpen, toggle, createPost }) {
+  const imageFile = useRef(null)
   const [formData, setFormData] = useState({
     date: "",
     startTime: "",
@@ -31,6 +33,7 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
     yardName: "",
     clubId: "",
     description: "",
+    image: '',
   });
 
   const [yards, setYards] = useState([]);
@@ -50,16 +53,38 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
   }, []);
 
   const handleOnChangeInput = (event, id) => {
+    if(id === 'image' && imageFile){
+      uploadCloudinary(imageFile.current?.files[0])
+    }
+    setFormData({
+      ...formData,
+      [id]: event.target.value,
+    });
     if (id === "yardName") {
       const selectedYard = yards.find(
         (yard) => yard.name === event.target.value
       );
       setYardId(selectedYard.id);
     }
-    setFormData({
-      ...formData,
-      [id]: event.target.value,
-    });
+  };
+
+  const uploadCloudinary = async (image) => {
+    const formDataImage = new FormData();
+    formDataImage.append('api_key', '665652388645534');
+    formDataImage.append('upload_preset','upload-image');
+    formDataImage.append('file', image);
+    try {
+      const response = await axios.post('https://api.cloudinary.com/v1_1/upload-image/image/upload',formDataImage);
+      setTimeout(()=> {
+        setFormData({
+            ...formData,
+            image: response.data.url
+        })
+      },500)
+      console.log('Upload cloudinary successfully', response);
+    } catch (error) {
+      console.log('Error upload cloudinary:', error);
+    }
   };
 
   const handleAddNewPost = () => {
@@ -185,10 +210,14 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
         </FormGroup>
 
         <FormGroup>
-          <button>
+          <div>
             <FontAwesomeIcon icon={faImages} style={{ fontSize: "30px" }} />
-            <span>Hình ảnh đặt sân</span>
-          </button>
+            <input
+              type="file"
+              ref={imageFile}
+              onChange={(event) => handleOnChangeInput(event, 'image')}
+            />
+          </div>
         </FormGroup>
       </ModalBody>
       <ModalFooter>

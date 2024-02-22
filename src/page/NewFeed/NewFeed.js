@@ -152,7 +152,7 @@ function NewFeed() {
             </div>
             <div className="caption">{item.description}</div>
             <div className="post-content-container">
-              <img className="post-img" src={image1} alt="avatar" />
+              <img className="post-img" src={item.image} alt="avatar" />
               <div className="post-infor">
                 <h3>Thông tin trận đấu</h3>
                 <div>

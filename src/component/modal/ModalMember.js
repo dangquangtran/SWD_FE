@@ -167,7 +167,6 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
                             type="file"
                             ref={imageFile}
                             onChange={(event) => handleOnChangeInput(event, 'image')}
-                           
                         />
                     </div>
                     <div className="input-container">
