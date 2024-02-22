@@ -103,20 +103,26 @@ const getAllYards = () => {
 const getIdMemberCreatePost = (idMember, idClub) => {
   return axios.get(`api/clubMembers/getByIdMemberClub/${idMember}/${idClub}`);
 };
+
+
 const getNumberOfSlot = (idSlot) => {
   return axios.get(`api/clubMemSlots/getNumberOfSlot/${idSlot}`);
 };
 
-const UserJoitSlot = (data) => {
+const UserJointSlot = (data) => {
   return axios.post(`api/clubMemSlots`, data);
-};
-
-const getTranPoit = () => {
-  return axios.get(`api/tranpoints/new`);
 };
 
 const getSlotJoined = (clubMember) => {
   return axios.get(`api/clubMemSlots/${clubMember}/getSlotJoined`);
+};
+
+const getSlotPostJoined = (idSlot) => {
+  return axios.get(`api/slots/${idSlot}`)
+}
+
+const getTranPoint = () => {
+  return axios.get(`api/tranpoints/new`);
 };
 
 const getMyPostInClub = (clubMember) => {
@@ -153,9 +159,10 @@ export {
   getAllYards,
   getIdMemberCreatePost,
   getNumberOfSlot,
-  UserJoitSlot,
-  getTranPoit,
+  UserJointSlot,
+  getTranPoint,
   getSlotJoined,
   getMyPostInClub,
   getWalletByMemberId,
+  getSlotPostJoined
 };

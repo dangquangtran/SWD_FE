@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./NewFeed.scss";
-import image1 from "../../assets/Sport/badminton.jpg";
 
 import {
   getDetailClub,
   getPostInClub,
   createPostInSlot,
   getIdMemberCreatePost,
-  UserJoitSlot,
-  getTranPoit,
+  UserJointSlot,
+  getTranPoint,
   getSlotJoined,
   getNumberOfSlot,
   getWalletByMemberId,
@@ -35,7 +34,7 @@ function NewFeed() {
       const [clubDetailRes, slotsInClubRes, tranPointRes] = await Promise.all([
         getDetailClub(id),
         getPostInClub(id),
-        getTranPoit(),
+        getTranPoint(),
       ]);
 
       setClubDetail(clubDetailRes.result);
@@ -92,7 +91,7 @@ function NewFeed() {
 
   async function handleJoinSlot(slotId) {
     try {
-      await UserJoitSlot({
+      await UserJointSlot({
         tranPoint: tranPoint,
         inforWallet: inforWallet,
         newClubMemSlot: {
@@ -101,7 +100,7 @@ function NewFeed() {
           transactionPoint: tranPoint.point,
         },
       });
-
+      showSuccessToast('Join slot successfully!');
       fetchData();
     } catch (error) {
       console.error("Error joining slot:", error);
