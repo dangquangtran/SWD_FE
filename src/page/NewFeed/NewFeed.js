@@ -30,16 +30,29 @@ function NewFeed() {
   const [slotJoined, setSetSlotJoined] = useState([]);
   const [inforWallet, setInforWallet] = useState({});
 
-  useEffect(() => {
-    fetchClubDetail();
-  }, []);
-
   async function fetchData() {
     try {
-      const promises = slotsInClub.map(async (item) => {
+      const [clubDetailRes, slotsInClubRes, tranPointRes] = await Promise.all([
+        getDetailClub(id),
+        getPostInClub(id),
+        getTranPoit(),
+      ]);
+
+      setClubDetail(clubDetailRes.result);
+      setSlotsInClub(slotsInClubRes.result);
+      setTranPoint(tranPointRes.result);
+
+      const memberCreatePostRes = await getIdMemberCreatePost(userInfo.id, id);
+      setMemberCreatePostId(memberCreatePostRes.result.id);
+
+      const slotJoinedRes = await getSlotJoined(memberCreatePostRes.result.id);
+      setSetSlotJoined(slotJoinedRes.result);
+
+      const promises = slotsInClubRes.result.map(async (item) => {
         const response = await getNumberOfSlot(item.id);
         return { itemId: item.id, numberOfSlot: response.result };
       });
+
       const results = await Promise.all(promises);
       const numberOfSlotMap = {};
       results.forEach((result) => {
@@ -47,48 +60,16 @@ function NewFeed() {
       });
       setNumberOfSlot(numberOfSlotMap);
 
-      const response2 = await getSlotJoined(isMemberCreatePostId);
-      setSetSlotJoined(response2.result);
-      console.log(response2.result);
-
-      const response3 = await getWalletByMemberId(userInfo.id);
-      setInforWallet(response3.result);
+      const walletRes = await getWalletByMemberId(userInfo.id);
+      setInforWallet(walletRes.result);
     } catch (error) {
-      console.error("Error fetching number of slots:", error);
+      console.error("Error fetching data:", error);
     }
   }
 
   useEffect(() => {
-    if (isMemberCreatePostId) {
-      fetchData();
-    }
-  }, [isMemberCreatePostId, slotsInClub]);
-
-  const fetchMemberCreatePostId = async () => {
-    try {
-      const response = await getIdMemberCreatePost(userInfo.id, id);
-      setMemberCreatePostId(response.result.id);
-    } catch (error) {
-      console.error("Error fetching member create post id:", error);
-    }
-  };
-
-  const fetchClubDetail = async () => {
-    try {
-      const response = await getDetailClub(id);
-      setClubDetail(response.result);
-
-      const response1 = await getPostInClub(id);
-      setSlotsInClub(response1.result);
-
-      await fetchMemberCreatePostId();
-
-      const transactionPoint = await getTranPoit();
-      setTranPoint(transactionPoint.result);
-    } catch (error) {
-      console.error("Error fetching club detail:", error);
-    }
-  };
+    fetchData();
+  }, [id, userInfo.id]);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -102,7 +83,7 @@ function NewFeed() {
       await createPostInSlot(postData);
       showSuccessToast("Create post successfully!");
       setIsModalOpen(false);
-      fetchClubDetail();
+      fetchData();
     } catch (error) {
       showErrorToast("Create post error!");
       console.error("Error creating post:", error);
@@ -110,30 +91,22 @@ function NewFeed() {
   };
 
   async function handleJoinSlot(slotId) {
-    // const response = await UserJoitSlot({
-    //   clubMemberId: isMemberCreatePostId,
-    //   slotId: slotId,
-    //   transactionPoint: tranPoint.point,
-    // });
+    try {
+      await UserJoitSlot({
+        tranPoint: tranPoint,
+        inforWallet: inforWallet,
+        newClubMemSlot: {
+          clubMemberId: isMemberCreatePostId,
+          slotId: slotId,
+          transactionPoint: tranPoint.point,
+        },
+      });
 
-    const response1 = await UserJoitSlot({
-      tranPoint: tranPoint,
-      inforWallet: inforWallet,
-      //get wallet tu id user
-      newClubMemSlot: {
-        clubMemberId: isMemberCreatePostId,
-        slotId: slotId,
-        transactionPoint: tranPoint.point,
-      },
-    });
-
-    // Sau khi thực hiện join, gọi lại fetchData để cập nhật số lượng slot
-    fetchData();
+      fetchData();
+    } catch (error) {
+      console.error("Error joining slot:", error);
+    }
   }
-
-  useEffect(() => {
-    fetchData();
-  }, [slotsInClub]);
 
   return (
     <div className="new-feed-container">
