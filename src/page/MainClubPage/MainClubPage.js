@@ -36,6 +36,10 @@ function MainClubPage() {
           <button className="tab-btn" onClick={() => handleTabClick("myPost")}>
             <FontAwesomeIcon icon={faEnvelopesBulk} /> My posted{" "}
           </button>
+
+          <button className="tab-btn" onClick={() => handleTabClick("myPost")}>
+            <FontAwesomeIcon icon={faEnvelopesBulk} /> Posts joined{" "}
+          </button>
         </div>
         {activeTab === "newFeed" && <NewFeed />}
         {activeTab === "myPost" && <MyPost />}
