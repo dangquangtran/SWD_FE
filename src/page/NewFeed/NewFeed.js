@@ -11,6 +11,7 @@ import {
   getTranPoit,
   getSlotJoined,
   getNumberOfSlot,
+  getWalletByMemberId,
 } from "../../services/userService";
 import { useParams } from "react-router-dom";
 import ModalCreatePost from "../../component/modal/ModalCreatePost";
@@ -27,6 +28,7 @@ function NewFeed() {
   const [tranPoint, setTranPoint] = useState(null);
   const [numberOfSlot, setNumberOfSlot] = useState({});
   const [slotJoined, setSetSlotJoined] = useState([]);
+  const [inforWallet, setInforWallet] = useState({});
 
   useEffect(() => {
     fetchClubDetail();
@@ -48,6 +50,9 @@ function NewFeed() {
       const response2 = await getSlotJoined(isMemberCreatePostId);
       setSetSlotJoined(response2.result);
       console.log(response2.result);
+
+      const response3 = await getWalletByMemberId(userInfo.id);
+      setInforWallet(response3.result);
     } catch (error) {
       console.error("Error fetching number of slots:", error);
     }
@@ -79,7 +84,7 @@ function NewFeed() {
       await fetchMemberCreatePostId();
 
       const transactionPoint = await getTranPoit();
-      setTranPoint(transactionPoint.result.point);
+      setTranPoint(transactionPoint.result);
     } catch (error) {
       console.error("Error fetching club detail:", error);
     }
@@ -105,10 +110,21 @@ function NewFeed() {
   };
 
   async function handleJoinSlot(slotId) {
-    const response = await UserJoitSlot({
-      clubMemberId: isMemberCreatePostId,
-      slotId: slotId,
-      transactionPoint: tranPoint,
+    // const response = await UserJoitSlot({
+    //   clubMemberId: isMemberCreatePostId,
+    //   slotId: slotId,
+    //   transactionPoint: tranPoint.point,
+    // });
+
+    const response1 = await UserJoitSlot({
+      tranPoint: tranPoint,
+      inforWallet: inforWallet,
+      //get wallet tu id user
+      newClubMemSlot: {
+        clubMemberId: isMemberCreatePostId,
+        slotId: slotId,
+        transactionPoint: tranPoint.point,
+      },
     });
 
     // Sau khi thực hiện join, gọi lại fetchData để cập nhật số lượng slot
@@ -118,8 +134,6 @@ function NewFeed() {
   useEffect(() => {
     fetchData();
   }, [slotsInClub]);
-
-  console.log(slotJoined);
 
   return (
     <div className="new-feed-container">

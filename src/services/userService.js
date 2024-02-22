@@ -123,6 +123,10 @@ const getMyPostInClub = (clubMember) => {
   return axios.get(`api/slots/${clubMember}/id_clubmember`);
 };
 
+const getWalletByMemberId = (memberId) => {
+  return axios.get(`api/wallets/${memberId}/getByMember`);
+};
+
 export {
   handleLoginAdmin,
   getAllMembers,
@@ -153,4 +157,5 @@ export {
   getTranPoit,
   getSlotJoined,
   getMyPostInClub,
+  getWalletByMemberId,
 };
