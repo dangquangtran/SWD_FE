@@ -97,25 +97,28 @@ function NewFeed() {
           transactionPoint: tranPoint.point,
         },
       });
-      showSuccessToast("Join slot successfully!");
-      const slotJoinedRes = await getSlotJoined(idclubmem);
-      setSlotJoined(slotJoinedRes.result);
-      console.log(slotJoinedRes.result);
 
-      const promises = slotsInClub.map(async (item) => {
-        const response = await getNumberOfSlot(item.id);
-        return { itemId: item.id, numberOfSlot: response.result };
-      });
+      window.location.reload();
 
-      const results = await Promise.all(promises);
-      const numberOfSlotMap = {};
-      results.forEach((result) => {
-        numberOfSlotMap[result.itemId] = result.numberOfSlot;
-      });
-      setNumberOfSlot(numberOfSlotMap);
+      // const slotJoinedRes = await getSlotJoined(idclubmem);
+      // setSlotJoined(slotJoinedRes.result);
 
-      console.log(slotJoinedRes.result);
+      // const promises = slotsInClub.map(async (item) => {
+      //   const response = await getNumberOfSlot(item.id);
+      //   return { itemId: item.id, numberOfSlot: response.result };
+      // });
 
+      // const results = await Promise.all(promises);
+      // const numberOfSlotMap = {};
+      // results.forEach((result) => {
+      //   numberOfSlotMap[result.itemId] = result.numberOfSlot;
+      // });
+      // setNumberOfSlot(numberOfSlotMap);
+
+      // console.log(slotJoinedRes.result);
+
+      // fetchData();
+      // showSuccessToast('Join slot successfully!');
       // fetchData();
     } catch (error) {
       showErrorToast("Error joining slot!")
@@ -146,7 +149,7 @@ function NewFeed() {
           (joinedSlot) => joinedSlot.slotId === item.id
         );
         {
-          /* if (isJoined) return null; */
+          if (isJoined) return null;
         }
 
         return (

@@ -10,6 +10,7 @@ import {
 } from "../../services/userService";
 import "./ClubPage.scss";
 import image1 from "../../assets/Sport/badminton.jpg";
+import { showSuccessToast } from "../../component/toast/toast";
 
 function ClubPage() {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ function ClubPage() {
     });
 
     setIsJoined(true);
-
+    showSuccessToast("Join Club Success")
     setClubDetail((prevClubDetail) => ({
       ...prevClubDetail,
       countMember: prevClubDetail.countMember + 1,

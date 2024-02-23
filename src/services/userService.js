@@ -104,7 +104,6 @@ const getIdMemberCreatePost = (idMember, idClub) => {
   return axios.get(`api/clubMembers/getByIdMemberClub/${idMember}/${idClub}`);
 };
 
-
 const getNumberOfSlot = (idSlot) => {
   return axios.get(`api/clubMemSlots/getNumberOfSlot/${idSlot}`);
 };
@@ -118,8 +117,8 @@ const getSlotJoined = (clubMember) => {
 };
 
 const getSlotPostJoined = (idSlot) => {
-  return axios.get(`api/slots/${idSlot}`)
-}
+  return axios.get(`api/slots/${idSlot}`);
+};
 
 const getTranPoint = () => {
   return axios.get(`api/tranpoints/new`);
@@ -169,5 +168,5 @@ export {
   getMyPostInClub,
   getWalletByMemberId,
   getSlotJoinedByPostJoined,
-  getSlotPostJoined
+  getSlotPostJoined,
 };
