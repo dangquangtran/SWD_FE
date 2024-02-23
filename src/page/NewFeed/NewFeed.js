@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./NewFeed.scss";
-import image1 from "../../assets/Sport/badminton.jpg";
 
 import {
   getDetailClub,
   getPostInClub,
   createPostInSlot,
   getIdMemberCreatePost,
-  UserJoitSlot,
-  getTranPoit,
+  UserJointSlot,
+  getTranPoint,
   getSlotJoined,
   getNumberOfSlot,
   getWalletByMemberId,
@@ -37,7 +36,7 @@ function NewFeed() {
           getDetailClub(id),
           getPostInClub(id),
           getSlotJoined(idclubmem),
-          getTranPoit(),
+          getTranPoint(),
         ]);
 
       setTranPoint(tranPointRes.result);
@@ -89,7 +88,7 @@ function NewFeed() {
 
   async function handleJoinSlot(slotId) {
     try {
-      await UserJoitSlot({
+      await UserJointSlot({
         tranPoint: tranPoint,
         inforWallet: inforWallet,
         newClubMemSlot: {
@@ -118,6 +117,8 @@ function NewFeed() {
 
       // console.log(slotJoinedRes.result);
 
+      // fetchData();
+      // showSuccessToast('Join slot successfully!');
       // fetchData();
     } catch (error) {
       console.error("Error joining slot:", error);
@@ -158,7 +159,7 @@ function NewFeed() {
             </div>
             <div className="caption">{item.description}</div>
             <div className="post-content-container">
-              <img className="post-img" src={image1} alt="avatar" />
+              <img className="post-img" src={item.image} alt="avatar" />
               <div className="post-infor">
                 <h3>Thông tin trận đấu</h3>
                 <div>

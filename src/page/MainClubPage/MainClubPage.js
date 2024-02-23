@@ -10,6 +10,7 @@ import { faNewspaper } from "@fortawesome/free-regular-svg-icons";
 
 import NewFeed from "../NewFeed/NewFeed";
 import MyPost from "../MyPost/MyPost";
+import MyJoinPost from "../MyJoinPost/MyJoinPost";
 
 function MainClubPage() {
   const [activeTab, setActiveTab] = useState("newFeed");
@@ -27,22 +28,29 @@ function MainClubPage() {
             <FontAwesomeIcon icon={faHouseUser} /> Home
           </button>
           <button
-            className={`tab-btn ${activeTab === "home" ? "active" : ""}`}
+            className={`tab-btn ${activeTab === "newFeed" ? "active" : ""}`}
             onClick={() => handleTabClick("newFeed")}
           >
             <FontAwesomeIcon icon={faNewspaper} /> New feed
           </button>
 
-          <button className="tab-btn" onClick={() => handleTabClick("myPost")}>
-            <FontAwesomeIcon icon={faEnvelopesBulk} /> My posted{" "}
+          <button
+            className={`tab-btn ${activeTab === "myPost" ? "active" : ""}`}
+            onClick={() => handleTabClick("myPost")}
+          >
+            <FontAwesomeIcon icon={faEnvelopesBulk} /> My posted
           </button>
 
-          <button className="tab-btn" onClick={() => handleTabClick("myPost")}>
-            <FontAwesomeIcon icon={faEnvelopesBulk} /> Posts joined{" "}
+          <button
+            className={`tab-btn ${activeTab === "myJoinPost" ? "active" : ""}`}
+            onClick={() => handleTabClick("myJoinPost")}
+          >
+            <FontAwesomeIcon icon={faEnvelopesBulk} /> Posts joined
           </button>
         </div>
         {activeTab === "newFeed" && <NewFeed />}
         {activeTab === "myPost" && <MyPost />}
+        {activeTab === "myJoinPost" && <MyJoinPost />}
       </div>
     </>
   );

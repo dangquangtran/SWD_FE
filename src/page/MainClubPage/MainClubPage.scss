@@ -8,6 +8,10 @@
     background-color: #fff;
     text-align: center;
     height: 1000px;
+
+    .tab-btn.active {
+        background-color: #cad4c9;
+    }
 }
 
 .btn-backHome {
