@@ -30,8 +30,13 @@ function ClubPage() {
       const response2 = await checkMemberJoinClub(user.id, id);
       setIsJoined(response2.result == 1 ? true : false);
 
-      const memberCreatePostRes = await getIdMemberCreatePost(userInfo.id, id);
-      setMemberCreatePostId(memberCreatePostRes.result.id);
+      if (isJoined) {
+        const memberCreatePostRes = await getIdMemberCreatePost(
+          userInfo.id,
+          id
+        );
+        setMemberCreatePostId(memberCreatePostRes.result.id);
+      }
     } catch (error) {
       console.error("Error fetching club detail:", error);
     }
@@ -51,6 +56,8 @@ function ClubPage() {
       ...prevClubDetail,
       countMember: prevClubDetail.countMember + 1,
     }));
+
+    window.location.reload();
   };
 
   const handleLeaveClub = async () => {
