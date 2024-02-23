@@ -19,12 +19,12 @@ import { showErrorToast, showSuccessToast } from "../../component/toast/toast";
 
 function NewFeed() {
   const { id } = useParams();
+  const { idclubmem } = useParams();
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   const [clubDetail, setClubDetail] = useState({});
   const [slotsInClub, setSlotsInClub] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isMemberCreatePostId, setMemberCreatePostId] = useState(null);
   const [tranPoint, setTranPoint] = useState(null);
   const [numberOfSlot, setNumberOfSlot] = useState({});
   const [slotJoined, setSetSlotJoined] = useState([]);
@@ -32,20 +32,17 @@ function NewFeed() {
 
   async function fetchData() {
     try {
-      const [clubDetailRes, slotsInClubRes, tranPointRes] = await Promise.all([
-        getDetailClub(id),
-        getPostInClub(id),
-        getTranPoit(),
-      ]);
+      const [clubDetailRes, slotsInClubRes, slotJoinedRes, tranPointRes] =
+        await Promise.all([
+          getDetailClub(id),
+          getPostInClub(id),
+          getSlotJoined(idclubmem),
+          getTranPoit(),
+        ]);
 
+      setTranPoint(tranPointRes.result);
       setClubDetail(clubDetailRes.result);
       setSlotsInClub(slotsInClubRes.result);
-      setTranPoint(tranPointRes.result);
-
-      const memberCreatePostRes = await getIdMemberCreatePost(userInfo.id, id);
-      setMemberCreatePostId(memberCreatePostRes.result.id);
-
-      const slotJoinedRes = await getSlotJoined(memberCreatePostRes.result.id);
       setSetSlotJoined(slotJoinedRes.result);
 
       const promises = slotsInClubRes.result.map(async (item) => {
@@ -69,7 +66,7 @@ function NewFeed() {
 
   useEffect(() => {
     fetchData();
-  }, [id, userInfo.id]);
+  }, []);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -78,7 +75,7 @@ function NewFeed() {
   const handleCreatePost = async (postData) => {
     postData.memberPostName = userInfo.name;
     postData.clubId = id;
-    postData.memberPostId = isMemberCreatePostId;
+    postData.memberPostId = idclubmem;
     try {
       await createPostInSlot(postData);
       showSuccessToast("Create post successfully!");
@@ -96,13 +93,30 @@ function NewFeed() {
         tranPoint: tranPoint,
         inforWallet: inforWallet,
         newClubMemSlot: {
-          clubMemberId: isMemberCreatePostId,
+          clubMemberId: idclubmem,
           slotId: slotId,
           transactionPoint: tranPoint.point,
         },
       });
 
-      fetchData();
+      const slotJoinedRes = await getSlotJoined(idclubmem);
+      setSetSlotJoined(slotJoinedRes.result);
+
+      const promises = slotsInClub.map(async (item) => {
+        const response = await getNumberOfSlot(item.id);
+        return { itemId: item.id, numberOfSlot: response.result };
+      });
+
+      const results = await Promise.all(promises);
+      const numberOfSlotMap = {};
+      results.forEach((result) => {
+        numberOfSlotMap[result.itemId] = result.numberOfSlot;
+      });
+      setNumberOfSlot(numberOfSlotMap);
+
+      console.log(slotJoinedRes.result);
+
+      // fetchData();
     } catch (error) {
       console.error("Error joining slot:", error);
     }
@@ -122,7 +136,7 @@ function NewFeed() {
       <h5>Bài viết mới nhất</h5>
 
       {slotsInClub.map((item) => {
-        if (item.memberPostId === isMemberCreatePostId) {
+        if (item.memberPostId === idclubmem) {
           return null;
         }
 
