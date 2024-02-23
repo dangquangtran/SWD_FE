@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import "./MainClubPage.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,8 +11,10 @@ import { faNewspaper } from "@fortawesome/free-regular-svg-icons";
 import NewFeed from "../NewFeed/NewFeed";
 import MyPost from "../MyPost/MyPost";
 import MyJoinPost from "../MyJoinPost/MyJoinPost";
+import { getIdMemberCreatePost } from "../../services/userService";
 
 function MainClubPage() {
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const [activeTab, setActiveTab] = useState("newFeed");
 
   const handleTabClick = (tab) => {

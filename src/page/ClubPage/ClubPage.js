@@ -31,12 +31,13 @@ function ClubPage() {
       const response2 = await checkMemberJoinClub(user.id, id);
       setIsJoined(response2.result == 1 ? true : false);
 
-      if (isJoined) {
+      if (response2.result == 1) {
         const memberCreatePostRes = await getIdMemberCreatePost(
           userInfo.id,
           id
         );
         setMemberCreatePostId(memberCreatePostRes.result.id);
+        console.log(memberCreatePostRes);
       }
     } catch (error) {
       console.error("Error fetching club detail:", error);
@@ -52,7 +53,7 @@ function ClubPage() {
     });
 
     setIsJoined(true);
-    showSuccessToast("Join Club Success")
+    showSuccessToast("Join Club Success");
     setClubDetail((prevClubDetail) => ({
       ...prevClubDetail,
       countMember: prevClubDetail.countMember + 1,
