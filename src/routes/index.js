@@ -6,37 +6,36 @@ import LoginPage from "../page/LoginPage/LoginPage";
 import MemberPage from "../page/MemberPage/MemberPage";
 import MainClubPage from "../page/MainClubPage/MainClubPage";
 
-
 export const routes = [
-    {
-        path: '/',
-        page: HomePage,
-    },
-    {
-        path: '/login-admin',
-        page: LoginPage
-    },
-    {
-        path: '/login-member',
-        page: LoginMember
-    },
-    {
-        path: '/admin',
-        page: AdminPage,
-        requiresAuth: true
-    },
-    {
-        path: '/members',
-        page: MemberPage,
-        requiresAuth: true
-    },
-    {
-        path: '/member-sport/:id',
-        page: ClubPage,
-        requiresAuth: true
-    },
-    {
-        path: '/main-club/:id',
-        page: MainClubPage
-    }
-]
+  {
+    path: "/",
+    page: HomePage,
+  },
+  {
+    path: "/login-admin",
+    page: LoginPage,
+  },
+  {
+    path: "/login-member",
+    page: LoginMember,
+  },
+  {
+    path: "/admin",
+    page: AdminPage,
+    requiresAuth: true,
+  },
+  {
+    path: "/members",
+    page: MemberPage,
+    requiresAuth: true,
+  },
+  {
+    path: "/member-sport/:id",
+    page: ClubPage,
+    requiresAuth: true,
+  },
+  {
+    path: "/main-club/:id/:idclubmem",
+    page: MainClubPage,
+  },
+];

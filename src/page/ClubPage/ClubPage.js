@@ -6,17 +6,19 @@ import {
   MemberJoinClub,
   MemberLeavingClub,
   ClubMember,
+  getIdMemberCreatePost,
 } from "../../services/userService";
 import "./ClubPage.scss";
 import image1 from "../../assets/Sport/badminton.jpg";
 
 function ClubPage() {
   const navigate = useNavigate();
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   const { id } = useParams();
   const [clubDetail, setClubDetail] = useState(null);
   const [isJoined, setIsJoined] = useState(false);
-  const [isLeaving, setIsLeaving] = useState(false); 
+  const [memberCreatePostId, setMemberCreatePostId] = useState(null);
 
   const user = JSON.parse(window.localStorage.getItem("userInfo"));
 
@@ -28,9 +30,8 @@ function ClubPage() {
       const response2 = await checkMemberJoinClub(user.id, id);
       setIsJoined(response2.result == 1 ? true : false);
 
-      const clubMembers = await ClubMember();
-
-      console.log(clubMembers);
+      const memberCreatePostRes = await getIdMemberCreatePost(userInfo.id, id);
+      setMemberCreatePostId(memberCreatePostRes.result.id);
     } catch (error) {
       console.error("Error fetching club detail:", error);
     }
@@ -60,7 +61,6 @@ function ClubPage() {
         clubId: id,
       });
       setIsJoined(false);
-      setIsLeaving(true);
 
       setClubDetail((prevClubDetail) => ({
         ...prevClubDetail,
@@ -76,8 +76,6 @@ function ClubPage() {
   if (!clubDetail) {
     return <div>Loading...</div>;
   }
-
-  console.log(clubDetail);
 
   return (
     <div className="container-club">
@@ -106,7 +104,11 @@ function ClubPage() {
               <div>
                 <button
                   className="btn view-btn"
-                  onClick={() => navigate(`/main-club/${clubDetail.id}`)}
+                  onClick={() =>
+                    navigate(
+                      `/main-club/${clubDetail.id}/${memberCreatePostId}`
+                    )
+                  }
                 >
                   Tham quan
                 </button>
