@@ -99,23 +99,24 @@ function NewFeed() {
         },
       });
 
-      const slotJoinedRes = await getSlotJoined(idclubmem);
-      setSlotJoined(slotJoinedRes.result);
-      console.log(slotJoinedRes.result);
+      window.location.reload();
 
-      const promises = slotsInClub.map(async (item) => {
-        const response = await getNumberOfSlot(item.id);
-        return { itemId: item.id, numberOfSlot: response.result };
-      });
+      // const slotJoinedRes = await getSlotJoined(idclubmem);
+      // setSlotJoined(slotJoinedRes.result);
 
-      const results = await Promise.all(promises);
-      const numberOfSlotMap = {};
-      results.forEach((result) => {
-        numberOfSlotMap[result.itemId] = result.numberOfSlot;
-      });
-      setNumberOfSlot(numberOfSlotMap);
+      // const promises = slotsInClub.map(async (item) => {
+      //   const response = await getNumberOfSlot(item.id);
+      //   return { itemId: item.id, numberOfSlot: response.result };
+      // });
 
-      console.log(slotJoinedRes.result);
+      // const results = await Promise.all(promises);
+      // const numberOfSlotMap = {};
+      // results.forEach((result) => {
+      //   numberOfSlotMap[result.itemId] = result.numberOfSlot;
+      // });
+      // setNumberOfSlot(numberOfSlotMap);
+
+      // console.log(slotJoinedRes.result);
 
       // fetchData();
     } catch (error) {
@@ -146,7 +147,7 @@ function NewFeed() {
           (joinedSlot) => joinedSlot.slotId === item.id
         );
         {
-          /* if (isJoined) return null; */
+          if (isJoined) return null;
         }
 
         return (
