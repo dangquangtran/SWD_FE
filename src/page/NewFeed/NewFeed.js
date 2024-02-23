@@ -5,7 +5,6 @@ import {
   getDetailClub,
   getPostInClub,
   createPostInSlot,
-  getIdMemberCreatePost,
   UserJointSlot,
   getTranPoint,
   getSlotJoined,
@@ -130,7 +129,7 @@ function NewFeed() {
       // showSuccessToast('Join slot successfully!');
       // fetchData();
     } catch (error) {
-      showErrorToast("Error joining slot!")
+      showErrorToast("Error joining slot!");
       console.error("Error joining slot:", error);
     }
   }
