@@ -97,7 +97,7 @@ function NewFeed() {
           transactionPoint: tranPoint.point,
         },
       });
-
+      showSuccessToast("Join slot successfully!");
       const slotJoinedRes = await getSlotJoined(idclubmem);
       setSlotJoined(slotJoinedRes.result);
       console.log(slotJoinedRes.result);
@@ -118,6 +118,7 @@ function NewFeed() {
 
       // fetchData();
     } catch (error) {
+      showErrorToast("Error joining slot!")
       console.error("Error joining slot:", error);
     }
   }
