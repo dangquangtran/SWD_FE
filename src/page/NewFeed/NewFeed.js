@@ -27,7 +27,7 @@ function NewFeed() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tranPoint, setTranPoint] = useState(null);
   const [numberOfSlot, setNumberOfSlot] = useState({});
-  const [slotJoined, setSetSlotJoined] = useState([]);
+  const [slotJoined, setSlotJoined] = useState([]);
   const [inforWallet, setInforWallet] = useState({});
 
   async function fetchData() {
@@ -43,7 +43,7 @@ function NewFeed() {
       setTranPoint(tranPointRes.result);
       setClubDetail(clubDetailRes.result);
       setSlotsInClub(slotsInClubRes.result);
-      setSetSlotJoined(slotJoinedRes.result);
+      setSlotJoined(slotJoinedRes.result);
 
       const promises = slotsInClubRes.result.map(async (item) => {
         const response = await getNumberOfSlot(item.id);
@@ -100,7 +100,8 @@ function NewFeed() {
       });
 
       const slotJoinedRes = await getSlotJoined(idclubmem);
-      setSetSlotJoined(slotJoinedRes.result);
+      setSlotJoined(slotJoinedRes.result);
+      console.log(slotJoinedRes.result);
 
       const promises = slotsInClub.map(async (item) => {
         const response = await getNumberOfSlot(item.id);
@@ -144,6 +145,9 @@ function NewFeed() {
         const isJoined = slotJoined.some(
           (joinedSlot) => joinedSlot.slotId === item.id
         );
+        {
+          /* if (isJoined) return null; */
+        }
 
         return (
           <div key={item.id} className="main-post-container">
