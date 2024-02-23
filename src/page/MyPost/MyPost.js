@@ -27,42 +27,50 @@ function MyPost() {
 
     return ( 
         <div className="new-feed-container">
-            <h5>Bài viết của bạn</h5>
-            {myPost.map((item) => (
-                <div key={item.id} className="main-post-container">
-                    <div className="poster-name">
-                        <p>{item.memberPostName}</p>
-                        <div>{item.dateTime}</div>
-                    </div>
-                    <div className="caption">{item.description}</div>
-                    <div className="post-content-container">
-                        <img className="post-img" src={item.image} alt="avatar" />
-                        <div className="post-infor">
-                            <h3>Thông tin trận đấu</h3>
-                            <div>
-                                <div>
-                                    <b>Sân: {item.yardName}</b>
-                                </div>
-                                <div>
-                                    <b>Thời gian: {item.startTime} - {item.endTime}</b>
-                                </div>
-                                <div>
-                                    <b>Date: {item.date}</b>
-                                </div>
+        <h5>Bài viết của bạn</h5>
+        {myPost.length === 0 ? (
+            <div className="no-posts-message">
+                Bạn chưa đăng bài, hãy cùng kiếm đồng đội nhé
+            </div>
+        ) : (
+            <>
+                {myPost.map((item) => (
+                    <div key={item.id} className="main-post-container">
+                        <div className="poster-name">
+                            <p>{item.memberPostName}</p>
+                            <div>{item.dateTime}</div>
+                        </div>
+                        <div className="caption">{item.description}</div>
+                        <div className="post-content-container">
+                            <img className="post-img" src={item.image} alt="avatar" />
+                            <div className="post-infor">
+                                <h3>Thông tin trận đấu</h3>
                                 <div>
                                     <div>
-                                        <b>Người chơi đang có: {item.currentMember}</b>  
+                                        <b>Sân: {item.yardName}</b>
                                     </div>
                                     <div>
-                                        <b>Còn: {item.requiredMember}</b>
+                                        <b>Thời gian: {item.startTime} - {item.endTime}</b>
+                                    </div>
+                                    <div>
+                                        <b>Date: {item.date}</b>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <b>Người chơi đang có: {item.currentMember}</b>  
+                                        </div>
+                                        <div>
+                                            <b>Còn: {item.requiredMember}</b>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            ))}
-        </div>
+                ))}
+            </>
+        )}
+    </div>
     );
 }
 

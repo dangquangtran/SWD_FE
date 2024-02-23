@@ -11,6 +11,7 @@ import { faNewspaper } from "@fortawesome/free-regular-svg-icons";
 import NewFeed from "../NewFeed/NewFeed";
 import MyPost from "../MyPost/MyPost";
 import MyJoinPost from "../MyJoinPost/MyJoinPost";
+import WalletPage from "../WalletPage/WalletPage";
 
 function MainClubPage() {
   const [activeTab, setActiveTab] = useState("newFeed");
@@ -47,10 +48,17 @@ function MainClubPage() {
           >
             <FontAwesomeIcon icon={faEnvelopesBulk} /> Posts joined
           </button>
+          <button
+            className={`tab-btn ${activeTab === "myWallet" ? "active" : ""}`}
+            onClick={() => handleTabClick("myWallet")}
+          >
+            <FontAwesomeIcon icon={faEnvelopesBulk} /> My wallet
+          </button>
         </div>
         {activeTab === "newFeed" && <NewFeed />}
         {activeTab === "myPost" && <MyPost />}
         {activeTab === "myJoinPost" && <MyJoinPost />}
+        {activeTab === "myWallet" && <WalletPage />}
       </div>
     </>
   );

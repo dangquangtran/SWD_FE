@@ -2,6 +2,16 @@
     width: 80%;
     background-color: #e4dff2;
 
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+    .loading-icon {
+        animation: spin 1s linear infinite;
+        font-size: 50px;
+    }
+
     .club-title-new-feed {
         margin-left: 60px;
         height: 44px;

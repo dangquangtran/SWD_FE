@@ -48,8 +48,13 @@ function MyJoinPost() {
 
     return ( 
         <div className="new-feed-container">
-            <h5>Bài viết của bạn đã tham gia</h5>
-            {postJoined.map((resultItem, index) => (
+        <h5>Bài viết của bạn đã tham gia</h5>
+        {postJoined.length === 0 ? (
+            <div className="no-posts-message">
+                Bạn chưa hoạt động tham gia, hãy tích cực tham gia nào
+            </div>
+        ) : (
+            postJoined.map((resultItem, index) => (
                 <div key={index} className="main-post-container">
                     <div className="poster-name">
                         <p>{resultItem.memberPostName}</p>
@@ -82,8 +87,9 @@ function MyJoinPost() {
                         </div>
                     </div>
                 </div>
-            ))}
-        </div>
+            ))
+        )}
+    </div>
     );
 }
 

@@ -16,6 +16,11 @@ import { useParams } from "react-router-dom";
 import ModalCreatePost from "../../component/modal/ModalCreatePost";
 import { showErrorToast, showSuccessToast } from "../../component/toast/toast";
 
+import {
+  faSpinner
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 function NewFeed() {
   const { id } = useParams();
   const { idclubmem } = useParams();
@@ -28,6 +33,7 @@ function NewFeed() {
   const [numberOfSlot, setNumberOfSlot] = useState({});
   const [slotJoined, setSlotJoined] = useState([]);
   const [inforWallet, setInforWallet] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   async function fetchData() {
     try {
@@ -58,6 +64,8 @@ function NewFeed() {
 
       const walletRes = await getWalletByMemberId(userInfo.id);
       setInforWallet(walletRes.result);
+
+      setIsLoading(false)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -79,6 +87,7 @@ function NewFeed() {
       await createPostInSlot(postData);
       showSuccessToast("Create post successfully!");
       setIsModalOpen(false);
+      setIsLoading(true)
       fetchData();
     } catch (error) {
       showErrorToast("Create post error!");
@@ -139,6 +148,8 @@ function NewFeed() {
 
       <h5>Bài viết mới nhất</h5>
 
+      {isLoading && <FontAwesomeIcon icon={faSpinner} className="loading-icon" />}
+
       {slotsInClub.map((item) => {
         if (item.memberPostId === idclubmem) {
           return null;
@@ -151,6 +162,9 @@ function NewFeed() {
         {
           if (isJoined) return null;
         }
+
+        const remainingSlots = parseInt(item.requiredMember) - parseInt(numberOfSlot[item.id] || 0);
+        const isFull = remainingSlots <= 0;
 
         return (
           <div key={item.id} className="main-post-container">
@@ -190,8 +204,14 @@ function NewFeed() {
                     </b>
                   </div>
                 </div>
-                {isJoined ? (
-                  <button className="btn-join">Joined</button>
+                {isFull ? (
+                  <button className="btn-join" disabled style={{backgroundColor: 'gray'}}>
+                    Full
+                  </button>
+                ) : isJoined ? (
+                  <button className="btn-join" disabled>
+                    Joined
+                  </button>
                 ) : (
                   <button
                     className="btn-join"
@@ -201,7 +221,7 @@ function NewFeed() {
                   >
                     Join
                   </button>
-                )}
+              )}
               </div>
             </div>
           </div>

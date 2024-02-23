@@ -12,8 +12,15 @@ const registerMember = (data) => {
     return axios.post('api/register', data);
 }
 
+//wallet
+
+const getUserWallet = (memberId) => {
+    return axios.get(`api/wallets/${memberId}/getByMember`);
+}
+
 export {
     handleLoginMember,
     handleLogoutMember,
-    registerMember
+    registerMember,
+    getUserWallet
 }
