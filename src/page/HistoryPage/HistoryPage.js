@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { getUserWallet } from "../../services/memberService"; 
+import { getUserWallet, getTransactionHistoryPoints } from "../../services/memberService"; 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import './WalletPage.scss';
+import './HistoryPage.scss';
 
-function WalletPage() {
+function HistoryPage() {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
-    const [walletInfo, setWalletInfo] = useState(null);
+    const [transactionHistoryPoints, setTransactionHistoryPoints] = useState([])
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function fetchWalletInfo() {
             try {
                 const response = await getUserWallet(userInfo.id);
-                setWalletInfo(response.result);
+                const walletId = response.result.id
+                const response2 = await getTransactionHistoryPoints(walletId);
+                setTransactionHistoryPoints(response2.result);
                 setLoading(false);
             } catch (error) {
                 console.error("Error fetching wallet info:", error);
@@ -27,13 +29,14 @@ function WalletPage() {
 
     return ( 
         <div>
-            <h2>Wallet Page</h2>
+            <h2>History Page</h2>
             {loading ? (
                 <FontAwesomeIcon icon={faSpinner} className="loading-icon" />
-            ) : walletInfo ? (
+            ) : transactionHistoryPoints ? (
                 <div>
-                    <p>Name: {walletInfo.memberName}</p>
-                    <p>Point: {walletInfo.point}</p>
+                    <p>Date: {transactionHistoryPoints.dateTime}</p>
+                    <p>Initial Point: {transactionHistoryPoints.initialPoint}</p>
+                    <p>Transaction Point: {transactionHistoryPoints.transactionPoint}</p>
                 </div>
             ) : (
                 <p>No wallet information available.</p>
@@ -42,4 +45,4 @@ function WalletPage() {
     );
 }
 
-export default WalletPage;
+export default HistoryPage;

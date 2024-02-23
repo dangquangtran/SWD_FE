@@ -18,9 +18,14 @@ const getUserWallet = (memberId) => {
     return axios.get(`api/wallets/${memberId}/getByMember`);
 }
 
+const getTransactionHistoryPoints = (walletId) => {
+    return axios.get(`api/transactionHistoryPoints/${walletId}/wallet`)
+}
+
 export {
     handleLoginMember,
     handleLogoutMember,
     registerMember,
-    getUserWallet
+    getUserWallet,
+    getTransactionHistoryPoints
 }

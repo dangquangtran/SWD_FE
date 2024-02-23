@@ -12,7 +12,7 @@ import NewFeed from "../NewFeed/NewFeed";
 import MyPost from "../MyPost/MyPost";
 import MyJoinPost from "../MyJoinPost/MyJoinPost";
 import { getIdMemberCreatePost } from "../../services/userService";
-import WalletPage from "../WalletPage/WalletPage";
+import HistoryPage from "../HistoryPage/HistoryPage";
 
 function MainClubPage() {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -51,16 +51,16 @@ function MainClubPage() {
             <FontAwesomeIcon icon={faEnvelopesBulk} /> Posts joined
           </button>
           <button
-            className={`tab-btn ${activeTab === "myWallet" ? "active" : ""}`}
-            onClick={() => handleTabClick("myWallet")}
+            className={`tab-btn ${activeTab === "myHistory" ? "active" : ""}`}
+            onClick={() => handleTabClick("myHistory")}
           >
-            <FontAwesomeIcon icon={faEnvelopesBulk} /> My wallet
+            <FontAwesomeIcon icon={faEnvelopesBulk} /> History
           </button>
         </div>
         {activeTab === "newFeed" && <NewFeed />}
         {activeTab === "myPost" && <MyPost />}
         {activeTab === "myJoinPost" && <MyJoinPost />}
-        {activeTab === "myWallet" && <WalletPage />}
+        {activeTab === "myHistory" && <HistoryPage />}
       </div>
     </>
   );
