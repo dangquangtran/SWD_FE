@@ -5,8 +5,15 @@ import {
   getNumberOfSlot,
   getYardDetail,
 } from "../../services/userService";
+import { 
+  getListMemberJoinPost,
+  confirmNoJoining,
+  confirmJoining
+} from "../../services/memberService";
 import { useParams } from "react-router-dom";
 import "./MyPost.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 function MyPost() {
   const { id } = useParams();
@@ -14,8 +21,9 @@ function MyPost() {
 
   const [myPost, setMyPost] = useState([]);
   const [numberOfSlot, setNumberOfSlot] = useState({});
-
   const [yardDetails, setYardDetails] = useState([]);
+  const [memberJoinList, setMemberJoinList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,7 +43,15 @@ function MyPost() {
         const memberCreatePostId = response1.result.id;
 
         const response2 = await getMyPostInClub(memberCreatePostId);
+        console.log(response2);
         setMyPost(response2.result);
+
+        const response3Promises = response2.result.map(async (post) => {
+          const response = await getListMemberJoinPost(post.id);
+          return { postId: post.id, members: response.result };
+        });
+        const response3Results = await Promise.all(response3Promises);
+        setMemberJoinList(response3Results);
 
         const promises = response2.result.map(async (item) => {
           const response = await getNumberOfSlot(item.id);
@@ -48,19 +64,31 @@ function MyPost() {
           numberOfSlotMap[result.itemId] = result.numberOfSlot;
         });
         setNumberOfSlot(numberOfSlotMap);
+
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
     }
 
     fetchData();
+    setIsLoading(true);
   }, [id, userInfo.id]);
 
-  console.log(yardDetails);
+  const handleConfirmJoin = async () => {
+    await confirmJoining()
+  };
+
+  const handleCancelJoin = async () => {
+    await confirmNoJoining()
+  };
 
   return (
     <div className="new-feed-container">
       <h5>Bài viết của bạn</h5>
+      {isLoading && (
+        <FontAwesomeIcon icon={faSpinner} className="loading-icon" />
+      )}
       {myPost.length === 0 ? (
         <div className="no-posts-message">
           Bạn chưa đăng bài, hãy cùng kiếm đồng đội nhé
@@ -115,6 +143,38 @@ function MyPost() {
                       </div>
                     </div>
                   </div>
+                </div>
+                <div>
+                  {isLoading ? (
+                    <FontAwesomeIcon icon={faSpinner} className="loading-icon" />
+                  ) : (
+                    <>
+                      {memberJoinList && memberJoinList.length > 0 && memberJoinList[0].members.length > 0 ? (
+                        <div className="member-join-list">
+                          <h4>Danh sách người chơi đã tham gia:</h4>
+                          {memberJoinList[0].members.map((member) => (
+                            <div key={member.id} className="member-item">
+                              <span>{member.memberName}</span> {" "}
+                              <button 
+                                className="confirm-button"
+                                onClick={() => handleConfirmJoin(item.id, member.id)}
+                              >
+                                Xác nhận
+                              </button>
+                              <button
+                                className="cancel-button"
+                                onClick={() => handleCancelJoin(item.id, member.id)}
+                              >
+                                Hủy
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div>Chưa có người chơi nào tham gia.</div>
+                      )}
+                    </>
+                  )}
                 </div>
               </div>
             );

@@ -114,7 +114,7 @@
         }
 
         .post-img {
-            width: 45%;
+            width: 25%;
             border: 1px solid;
         }
 
@@ -155,4 +155,52 @@
     select {
         height: 50px;
     }
+}
+
+.confirm {
+    width: 50px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: orange;
+    font-size: 18px;
+
+    &:hover {
+        background-color: transparent !important;
+        color: orange !important;
+    }
+}
+
+.confirm-button,
+.cancel-button {
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.confirm-button {
+  background-color: #4caf50; 
+  color: white;
+}
+
+.cancel-button {
+  background-color: #f44336; 
+  color: white;
+}
+
+.confirm-button:hover,
+.cancel-button:hover {
+  opacity: 0.8;
+}
+
+.confirm-button:focus,
+.cancel-button:focus {
+  box-shadow: 0 0 0 2px #4caf50; 
+  outline: none;
+}
+
+.cancel-button:focus {
+  box-shadow: 0 0 0 2px #f44336; 
 }

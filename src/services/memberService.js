@@ -22,10 +22,25 @@ const getTransactionHistoryPoints = (walletId) => {
     return axios.get(`api/transactionHistoryPoints/${walletId}/wallet`)
 }
 
+const getListMemberJoinPost = (idSlot) => {
+    return axios.get(`api/clubMembers/${idSlot}/getbyslotid`);
+}
+
+const confirmNoJoining = (clubMemSlotId, data) => {
+    return axios.put(`api/clubMemSlots/${clubMemSlotId}/confirmNoJoining`, data);
+}
+
+const confirmJoining = (clubMemberId, slotId, data) => {
+    return axios.put(`api/clubMemSlots/${clubMemberId}/${slotId}/confirmJoining`, data);
+}   
+
 export {
     handleLoginMember,
     handleLogoutMember,
     registerMember,
     getUserWallet,
-    getTransactionHistoryPoints
+    getTransactionHistoryPoints,
+    getListMemberJoinPost,
+    confirmNoJoining,
+    confirmJoining
 }
