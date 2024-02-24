@@ -15,9 +15,7 @@ import { useParams } from "react-router-dom";
 import ModalCreatePost from "../../component/modal/ModalCreatePost";
 import { showErrorToast, showSuccessToast } from "../../component/toast/toast";
 
-import {
-  faSpinner
-} from "@fortawesome/free-solid-svg-icons";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function NewFeed() {
@@ -64,7 +62,7 @@ function NewFeed() {
       const walletRes = await getWalletByMemberId(userInfo.id);
       setInforWallet(walletRes.result);
 
-      setIsLoading(false)
+      setIsLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -86,7 +84,7 @@ function NewFeed() {
       await createPostInSlot(postData);
       showSuccessToast("Create post successfully!");
       setIsModalOpen(false);
-      setIsLoading(true)
+      setIsLoading(true);
       fetchData();
     } catch (error) {
       showErrorToast("Create post error!");
@@ -147,12 +145,16 @@ function NewFeed() {
 
       <h5>Bài viết mới nhất</h5>
 
-      {isLoading && <FontAwesomeIcon icon={faSpinner} className="loading-icon" />}
+      {isLoading && (
+        <FontAwesomeIcon icon={faSpinner} className="loading-icon" />
+      )}
 
       {slotsInClub.map((item) => {
-        if (item.memberPostId === idclubmem) {
+        if (item.memberPostId == idclubmem) {
           return null;
         }
+
+        console.log(item.memberPostId, idclubmem);
 
         // Kiểm tra xem slot có trong mảng slotJoined không
         const isJoined = slotJoined.some(
@@ -162,7 +164,8 @@ function NewFeed() {
           if (isJoined) return null;
         }
 
-        const remainingSlots = parseInt(item.requiredMember) - parseInt(numberOfSlot[item.id] || 0);
+        const remainingSlots =
+          parseInt(item.requiredMember) - parseInt(numberOfSlot[item.id] || 0);
         const isFull = remainingSlots <= 0;
 
         return (
@@ -178,7 +181,7 @@ function NewFeed() {
                 <h3>Thông tin trận đấu</h3>
                 <div>
                   <div>
-                    <b>Sân: {item.yardName}</b>
+                    <b>Sân: {item.yardName} </b>
                   </div>
                   <div>
                     <b>
@@ -204,7 +207,11 @@ function NewFeed() {
                   </div>
                 </div>
                 {isFull ? (
-                  <button className="btn-join" disabled style={{backgroundColor: 'gray'}}>
+                  <button
+                    className="btn-join"
+                    disabled
+                    style={{ backgroundColor: "gray" }}
+                  >
                     Full
                   </button>
                 ) : isJoined ? (
@@ -220,7 +227,7 @@ function NewFeed() {
                   >
                     Join
                   </button>
-              )}
+                )}
               </div>
             </div>
           </div>
