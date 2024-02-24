@@ -154,7 +154,7 @@ function MyPost() {
                           <h4>Danh sách người chơi đã tham gia:</h4>
                           {memberJoinList[0].members.map((member) => (
                             <div key={member.id} className="member-item">
-                              <span>{member.memberName}</span> {" "}
+                              <span>Người chơi muốn tham gia: {member.memberName}</span> {" "}
                               <button 
                                 className="confirm-button"
                                 onClick={() => handleConfirmJoin(item.id, member.id)}
