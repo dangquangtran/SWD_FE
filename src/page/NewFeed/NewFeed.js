@@ -10,6 +10,7 @@ import {
   getSlotJoined,
   getNumberOfSlot,
   getWalletByMemberId,
+  getYardDetail,
 } from "../../services/userService";
 import { useParams } from "react-router-dom";
 import ModalCreatePost from "../../component/modal/ModalCreatePost";
@@ -31,6 +32,7 @@ function NewFeed() {
   const [slotJoined, setSlotJoined] = useState([]);
   const [inforWallet, setInforWallet] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [yardDetails, setYardDetails] = useState([]);
 
   async function fetchData() {
     try {
@@ -71,6 +73,17 @@ function NewFeed() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const details = await Promise.all(
+        slotsInClub.map((item) => getYardDetail(item.yardId))
+      );
+      setYardDetails(details);
+    };
+
+    fetchData();
+  }, [slotsInClub]);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -149,12 +162,14 @@ function NewFeed() {
         <FontAwesomeIcon icon={faSpinner} className="loading-icon" />
       )}
 
-      {slotsInClub.map((item) => {
+      {slotsInClub.map((item, index) => {
         if (item.memberPostId == idclubmem) {
           return null;
         }
 
-        console.log(item.memberPostId, idclubmem);
+        {
+          /* console.log(item.memberPostId, idclubmem); */
+        }
 
         // Kiểm tra xem slot có trong mảng slotJoined không
         const isJoined = slotJoined.some(
@@ -181,7 +196,13 @@ function NewFeed() {
                 <h3>Thông tin trận đấu</h3>
                 <div>
                   <div>
-                    <b>Sân: {item.yardName} </b>
+                    <b>Khu: {yardDetails[index]?.result.areaName} </b>
+                  </div>
+                  <div>
+                    <b>
+                      Sân: {yardDetails[index]?.result.sportName} -{" "}
+                      {item.yardName}
+                    </b>
                   </div>
                   <div>
                     <b>

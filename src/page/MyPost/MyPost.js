@@ -3,6 +3,7 @@ import {
   getIdMemberCreatePost,
   getMyPostInClub,
   getNumberOfSlot,
+  getYardDetail,
 } from "../../services/userService";
 import { useParams } from "react-router-dom";
 import "./MyPost.scss";
@@ -13,6 +14,19 @@ function MyPost() {
 
   const [myPost, setMyPost] = useState([]);
   const [numberOfSlot, setNumberOfSlot] = useState({});
+
+  const [yardDetails, setYardDetails] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const details = await Promise.all(
+        myPost.map((item) => getYardDetail(item.yardId))
+      );
+      setYardDetails(details);
+    };
+
+    fetchData();
+  }, [myPost]);
 
   useEffect(() => {
     async function fetchData() {
@@ -42,6 +56,8 @@ function MyPost() {
     fetchData();
   }, [id, userInfo.id]);
 
+  console.log(yardDetails);
+
   return (
     <div className="new-feed-container">
       <h5>Bài viết của bạn</h5>
@@ -51,50 +67,58 @@ function MyPost() {
         </div>
       ) : (
         <>
-          {myPost.map((item) => (
-            <div key={item.id} className="main-post-container">
-              <div className="poster-name">
-                <p>{item.memberPostName}</p>
-                <div>{item.dateTime}</div>
-              </div>
-              <div className="caption">{item.description}</div>
-              <div className="post-content-container">
-                <img className="post-img" src={item.image} alt="avatar" />
-                <div className="post-infor">
-                  <h3>Thông tin trận đấu</h3>
-                  <div>
-                    <div>
-                      <b>Sân: {item.yardName}</b>
-                    </div>
-                    <div>
-                      <b>
-                        Thời gian: {item.startTime} - {item.endTime}
-                      </b>
-                    </div>
-                    <div>
-                      <b>Date: {item.date}</b>
-                    </div>
+          {myPost.map((item, index) => {
+            return (
+              <div key={item.id} className="main-post-container">
+                <div className="poster-name">
+                  <p>{item.memberPostName}</p>
+                  <div>{item.dateTime}</div>
+                </div>
+                <div className="caption">{item.description}</div>
+                <div className="post-content-container">
+                  <img className="post-img" src={item.image} alt="avatar" />
+                  <div className="post-infor">
+                    <h3>Thông tin trận đấu</h3>
                     <div>
                       <div>
+                        <b>Khu: {yardDetails[index]?.result.areaName} </b>
+                      </div>
+                      <div>
                         <b>
-                          Tổng số người chơi:{" "}
-                          {parseInt(item.requiredMember) +
-                            parseInt(item.currentMember)}
+                          Sân: {yardDetails[index]?.result.sportName} -{" "}
+                          {item.yardName}
                         </b>
                       </div>
                       <div>
                         <b>
-                          Còn:{" "}
-                          {parseInt(item.requiredMember) -
-                            parseInt(numberOfSlot[item.id] || 0)}
+                          Thời gian: {item.startTime} - {item.endTime}
                         </b>
+                      </div>
+                      <div>
+                        <b>Date: {item.date}</b>
+                      </div>
+                      <div>
+                        <div>
+                          <b>
+                            Tổng số người chơi:{" "}
+                            {parseInt(item.requiredMember) +
+                              parseInt(item.currentMember)}
+                          </b>
+                        </div>
+                        <div>
+                          <b>
+                            Còn:{" "}
+                            {parseInt(item.requiredMember) -
+                              parseInt(numberOfSlot[item.id] || 0)}
+                          </b>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </>
       )}
     </div>

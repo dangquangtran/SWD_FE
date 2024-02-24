@@ -136,6 +136,10 @@ const getSlotJoinedByPostJoined = (clubMem) => {
   return axios.get(`api/slots/${clubMem}/getSlotJoined`);
 };
 
+const getYardDetail = (yard) => {
+  return axios.get(`api/yards/${yard}`);
+};
+
 export {
   handleLoginAdmin,
   getAllMembers,
@@ -169,4 +173,5 @@ export {
   getWalletByMemberId,
   getSlotJoinedByPostJoined,
   getSlotPostJoined,
+  getYardDetail,
 };

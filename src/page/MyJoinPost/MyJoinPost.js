@@ -5,6 +5,7 @@ import {
   getNumberOfSlot,
   getSlotJoined,
   getSlotPostJoined,
+  getYardDetail,
 } from "../../services/userService";
 import { useParams } from "react-router-dom";
 
@@ -15,6 +16,7 @@ function MyJoinPost() {
   const [postIdJoined, setPostIdJoined] = useState([]);
   const [postJoined, setPostJoined] = useState([]);
   const [numberOfSlot, setNumberOfSlot] = useState({});
+  const [yardDetails, setYardDetails] = useState([]);
 
   async function fetchData() {
     try {
@@ -48,6 +50,17 @@ function MyJoinPost() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const details = await Promise.all(
+        postJoined.map((item) => getYardDetail(item.yardId))
+      );
+      setYardDetails(details);
+    };
+
+    fetchData();
+  }, [postJoined]);
 
   useEffect(() => {
     async function fetchPosts() {
@@ -87,7 +100,13 @@ function MyJoinPost() {
                 <h3>Thông tin trận đấu bạn tham gia</h3>
                 <div>
                   <div>
-                    <b>Sân: {resultItem.yardName}</b>
+                    <b>Khu: {yardDetails[index]?.result.areaName} </b>
+                  </div>
+                  <div>
+                    <b>
+                      Sân: {yardDetails[index]?.result.sportName} -{" "}
+                      {resultItem.yardName}
+                    </b>
                   </div>
                   <div>
                     <b>
