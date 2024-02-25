@@ -1,22 +1,28 @@
+// MyPost.jsx
+
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { showErrorToast, showSuccessToast } from "../../component/toast/toast";
 import {
   getIdMemberCreatePost,
   getMyPostInClub,
   getNumberOfSlot,
+  getTranPoint,
+  getWalletByMemberId,
   getYardDetail,
 } from "../../services/userService";
 import { 
   getListMemberJoinPost,
   confirmNoJoining,
-  confirmJoining
+  confirmJoining,
 } from "../../services/memberService";
-import { useParams } from "react-router-dom";
 import "./MyPost.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 function MyPost() {
   const { id } = useParams();
+  const { idclubmem } = useParams();
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   const [myPost, setMyPost] = useState([]);
@@ -24,6 +30,9 @@ function MyPost() {
   const [yardDetails, setYardDetails] = useState([]);
   const [memberJoinList, setMemberJoinList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [tranPoint, setTranPoint] = useState(null);
+  const [inforWallet, setInforWallet] = useState({});
+  const [isJoined, setIsJoined] = useState(false); // Trạng thái xác nhận tham gia
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,7 +52,6 @@ function MyPost() {
         const memberCreatePostId = response1.result.id;
 
         const response2 = await getMyPostInClub(memberCreatePostId);
-        console.log(response2);
         setMyPost(response2.result);
 
         const response3Promises = response2.result.map(async (post) => {
@@ -65,6 +73,12 @@ function MyPost() {
         });
         setNumberOfSlot(numberOfSlotMap);
 
+        const walletRes = await getWalletByMemberId(userInfo.id);
+        setInforWallet(walletRes.result);
+
+        const tranPointRes = await getTranPoint();
+        setTranPoint(tranPointRes.result);
+
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -76,11 +90,26 @@ function MyPost() {
   }, [id, userInfo.id]);
 
   const handleConfirmJoin = async () => {
-    await confirmJoining()
+    try {
+      await confirmJoining(idclubmem, id, {
+        tranPoint: tranPoint,
+        inforWallet: inforWallet
+      });
+      setIsJoined(true); 
+      showSuccessToast('Confirm successful!');
+    } catch (error) {
+      console.log(error);
+      showErrorToast('Confirm failed!');
+    }
   };
 
   const handleCancelJoin = async () => {
-    await confirmNoJoining()
+    try {
+      await confirmNoJoining(idclubmem);
+      showSuccessToast('Cancel successful!');
+    } catch (error) {
+      showErrorToast('Error occurred');
+    }
   };
 
   return (
@@ -148,32 +177,35 @@ function MyPost() {
                   {isLoading ? (
                     <FontAwesomeIcon icon={faSpinner} className="loading-icon" />
                   ) : (
-                    <>
+                    <div className="member-join">
                       {memberJoinList && memberJoinList.length > 0 && memberJoinList[0].members.length > 0 ? (
                         <div className="member-join-list">
                           <h4>Danh sách người chơi đã tham gia:</h4>
                           {memberJoinList[0].members.map((member) => (
                             <div key={member.id} className="member-item">
-                              <span>Người chơi muốn tham gia: {member.memberName}</span> {" "}
-                              <button 
-                                className="confirm-button"
-                                onClick={() => handleConfirmJoin(item.id, member.id)}
-                              >
-                                Xác nhận
-                              </button>
-                              <button
-                                className="cancel-button"
-                                onClick={() => handleCancelJoin(item.id, member.id)}
-                              >
-                                Hủy
-                              </button>
+                              <span>Người chơi muốn tham gia: {member.memberName}</span>{" "}
+                              <div>
+                                <button 
+                                  className={`confirm-button ${isJoined ? "joined" : ""}`}
+                                  onClick={() => handleConfirmJoin()}
+                                  disabled={isJoined}
+                                >
+                                  {isJoined ? "Đã tham gia" : "Xác nhận"}
+                                </button>
+                                <button
+                                  className="cancel-button"
+                                  onClick={() => handleCancelJoin()}
+                                >
+                                  Không tham gia
+                                </button>
+                              </div>
                             </div>
                           ))}
                         </div>
                       ) : (
                         <div>Chưa có người chơi nào tham gia.</div>
                       )}
-                    </>
+                    </div>
                   )}
                 </div>
               </div>

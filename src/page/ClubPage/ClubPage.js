@@ -5,7 +5,6 @@ import {
   getDetailClub,
   MemberJoinClub,
   MemberLeavingClub,
-  ClubMember,
   getIdMemberCreatePost,
 } from "../../services/userService";
 import "./ClubPage.scss";
