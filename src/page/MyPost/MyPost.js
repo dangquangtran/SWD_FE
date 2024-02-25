@@ -32,7 +32,7 @@ function MyPost() {
   const [isLoading, setIsLoading] = useState(true);
   const [tranPoint, setTranPoint] = useState(null);
   const [inforWallet, setInforWallet] = useState({});
-  const [isJoined, setIsJoined] = useState(false); // Trạng thái xác nhận tham gia
+  const [isJoined, setIsJoined] = useState(false); 
 
   useEffect(() => {
     const fetchData = async () => {

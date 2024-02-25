@@ -8,6 +8,8 @@ import {
   getYardDetail,
 } from "../../services/userService";
 import { useParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 function MyJoinPost() {
   const { id } = useParams();
@@ -17,6 +19,7 @@ function MyJoinPost() {
   const [postJoined, setPostJoined] = useState([]);
   const [numberOfSlot, setNumberOfSlot] = useState({});
   const [yardDetails, setYardDetails] = useState([]);
+  const [isLoadingData, setIsLoadingData] = useState(true);
 
   async function fetchData() {
     try {
@@ -41,6 +44,8 @@ function MyJoinPost() {
         numberOfSlotMap[result.slotId] = result.numberOfSlot;
       });
       setNumberOfSlot(numberOfSlotMap);
+
+      setIsLoadingData(false);
     } catch (error) {
       console.log(error);
       return;
@@ -82,6 +87,9 @@ function MyJoinPost() {
   return (
     <div className="new-feed-container">
       <h5>Bài viết của bạn đã tham gia</h5>
+      {isLoadingData && (
+        <FontAwesomeIcon icon={faSpinner} className="loading-icon" />
+      )}
       {postJoined.length === 0 ? (
         <div className="no-posts-message">
           Bạn chưa hoạt động tham gia, hãy tích cực tham gia nào
