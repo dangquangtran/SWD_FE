@@ -22,7 +22,6 @@ import "./MyPost.scss";
 
 function MyPost() {
   const { id } = useParams();
-  const { idclubmem } = useParams();
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   const [myPost, setMyPost] = useState([]);
@@ -33,6 +32,7 @@ function MyPost() {
   const [tranPoint, setTranPoint] = useState(null);
   const [inforWallet, setInforWallet] = useState({});
   const [isJoined, setIsJoined] = useState(false); 
+  const [memberList, setMemberList] = useState([]); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,6 +56,7 @@ function MyPost() {
 
         const response3Promises = response2.result.map(async (post) => {
           const response = await getListMemberJoinPost(post.id);
+          setMemberList(response.IdClubMemberSlots);
           return { postId: post.id, members: response.result };
         });
         const response3Results = await Promise.all(response3Promises);
@@ -88,10 +89,10 @@ function MyPost() {
     fetchData();
     setIsLoading(true);
   }, [id, userInfo.id]);
-
-  const handleConfirmJoin = async () => {
+  
+  const handleConfirmJoin = async (idClubMember, idSlot) => {
     try {
-      await confirmJoining(idclubmem, id, {
+      await confirmJoining(idClubMember, idSlot, {
         tranPoint: tranPoint,
         inforWallet: inforWallet
       });
@@ -102,13 +103,12 @@ function MyPost() {
       showErrorToast('Confirm failed!');
     }
   };
-
-  const handleCancelJoin = async () => {
+  const handleCancelJoin = async (idClubMember, idSlot) => {
     try {
-      await confirmNoJoining(idclubmem);
+      await confirmNoJoining(idClubMember, idSlot)
       showSuccessToast('Cancel successful!');
     } catch (error) {
-      showErrorToast('Error occurred');
+      showErrorToast('Cancel failed!');
     }
   };
 
@@ -187,14 +187,14 @@ function MyPost() {
                               <div>
                                 <button 
                                   className={`confirm-button ${isJoined ? "joined" : ""}`}
-                                  onClick={() => handleConfirmJoin()}
+                                  onClick={() => handleConfirmJoin(member.id, item.id)}
                                   disabled={isJoined}
                                 >
                                   {isJoined ? "Đã tham gia" : "Xác nhận"}
                                 </button>
                                 <button
                                   className="cancel-button"
-                                  onClick={() => handleCancelJoin()}
+                                  onClick={() => handleCancelJoin(member.id, item.id)}
                                 >
                                   Không tham gia
                                 </button>

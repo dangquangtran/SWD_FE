@@ -38,12 +38,12 @@ function ClubContent() {
           clubs.map((item, index) => {
             if (item.status && item.status.data && item.status.data[0] === 1) {
               return (
-                //đang hard code hình ảnh đợi xử lí
                 <div className="club" key={index}>
                   <img
+                    alt="sport"
                     className="image-club"
                     onClick={() => handleClick(item.id)}
-                    src={image1}
+                    src={item.image}
                   />
                   <a className="club-name" onClick={() => handleClick(item.id)}>
                     Club Name: {item.name}
