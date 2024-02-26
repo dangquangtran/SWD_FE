@@ -31,7 +31,6 @@ function MyPost() {
   const [isLoading, setIsLoading] = useState(true);
   const [tranPoint, setTranPoint] = useState(null);
   const [inforWallet, setInforWallet] = useState({});
-  const [isJoined, setIsJoined] = useState(false); 
   const [memberList, setMemberList] = useState([]); 
 
   useEffect(() => {
@@ -56,8 +55,9 @@ function MyPost() {
 
         const response3Promises = response2.result.map(async (post) => {
           const response = await getListMemberJoinPost(post.id);
-          setMemberList(response.IdClubMemberSlots);
-          return { postId: post.id, members: response.result };
+          // console.log(response);
+          // setMemberList(response.IdClubMemberSlots);
+          return { postId: post.id, members: response.result, status: response.IdClubMemberSlots };
         });
         const response3Results = await Promise.all(response3Promises);
         setMemberJoinList(response3Results);
@@ -96,7 +96,6 @@ function MyPost() {
         tranPoint: tranPoint,
         inforWallet: inforWallet
       });
-      setIsJoined(true); 
       showSuccessToast('Confirm successful!');
     } catch (error) {
       console.log(error);
@@ -111,6 +110,8 @@ function MyPost() {
       showErrorToast('Cancel failed!');
     }
   };
+
+  
 
   return (
     <div className="new-feed-container">
@@ -185,19 +186,44 @@ function MyPost() {
                             <div key={member.id} className="member-item">
                               <span>Người chơi muốn tham gia: {member.memberName}</span>{" "}
                               <div>
-                                <button 
-                                  className={`confirm-button ${isJoined ? "joined" : ""}`}
-                                  onClick={() => handleConfirmJoin(member.id, item.id)}
-                                  disabled={isJoined}
-                                >
-                                  {isJoined ? "Đã tham gia" : "Xác nhận"}
-                                </button>
-                                <button
-                                  className="cancel-button"
-                                  onClick={() => handleCancelJoin(member.id, item.id)}
-                                >
-                                  Không tham gia
-                                </button>
+                                {memberJoinList[0].status.map((status) => {
+                                  if (status.clubMemberId === member.id) {
+                                    if (status.joinStatus === "joined") {
+                                      return (
+                                        <div>
+                                          <button 
+                                            className='confirm-button' 
+                                            onClick={() => handleConfirmJoin(member.id, item.id)}
+                                          >
+                                            Đồng ý
+                                          </button>
+                                          <button
+                                            className="cancel-button"
+                                            onClick={() => handleCancelJoin(member.id, item.id)}
+                                          >
+                                            Không đồng ý
+                                          </button>
+                                        </div> 
+                                      )
+                                    } else if (status.joinStatus === "confirm_joined") {
+                                      return (
+                                        <button 
+                                          className='confirm-button' 
+                                        >
+                                          Đã tham gia
+                                        </button>
+                                      )
+                                    } else if (status.joinStatus === "confirm_no_joined") {
+                                      return (
+                                        <button 
+                                          className='confirm-button' 
+                                        >
+                                          Không tham gia
+                                        </button>
+                                      )
+                                    }
+                                  }
+                                })}
                               </div>
                             </div>
                           ))}
@@ -205,6 +231,7 @@ function MyPost() {
                       ) : (
                         <div>Chưa có người chơi nào tham gia.</div>
                       )}
+
                     </div>
                   )}
                 </div>
