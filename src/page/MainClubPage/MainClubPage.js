@@ -54,7 +54,7 @@ function MainClubPage() {
             className={`tab-btn ${activeTab === "myHistory" ? "active" : ""}`}
             onClick={() => handleTabClick("myHistory")}
           >
-            <FontAwesomeIcon icon={faEnvelopesBulk} /> History
+            <FontAwesomeIcon icon={faEnvelopesBulk} /> Wallet
           </button>
         </div>
         {activeTab === "newFeed" && <NewFeed />}
