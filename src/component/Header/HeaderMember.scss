@@ -18,12 +18,13 @@
     }
 
     .middle {
+        border-right: 1px solid;
 
-        .content-middle {
+        .content-middle-mem {
             display: flex;
             align-items: center;
             gap: 200px;
-            margin-bottom: 50px;
+            justify-content: center;
 
             i {
                 font-size: 32px;

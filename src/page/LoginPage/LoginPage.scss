@@ -2,6 +2,7 @@
     height: 100vh;
     background-image: url('../../assets/Sport/login-background.jpg');
     background-size: contain;
+    opacity: 0.8;
 
     .login-container {
         width: 40%;
@@ -43,7 +44,7 @@
                     background-color: transparent;
                     border: none;
                     border-radius: 0%;
-                    border-bottom: 1px solid #000;
+                    border-bottom: 2px solid #000;
                     caret-color: #000;
                     color: #000;
 
@@ -67,6 +68,7 @@
 
                 label {
                     font-weight: bold;
+                    font-size: 1.5rem;
                 }
             }
 
@@ -123,7 +125,8 @@
 }
 
 .error-message {
-    color: red;
+    color: rgb(255, 0, 0);
+    font-weight: 500;
 }
 
 .fomr-control:focus {

@@ -31,11 +31,10 @@ function HeaderMember() {
       <div className="body">
         <div className="col-6 header-logo"></div>
         <div className="col-8 middle">
-          <div className="content-middle">
+          <div className="content-middle-mem">
             <div
-              className={`child-content ${
-                activeTab === "home" ? "active" : ""
-              }`}
+              className={`child-content ${activeTab === "home" ? "active" : ""
+                }`}
               onClick={() => handleTabClick("home")}
             >
               <div>
@@ -43,9 +42,8 @@ function HeaderMember() {
               </div>
             </div>
             <div
-              className={`child-content ${
-                activeTab === "club" ? "active" : ""
-              }`}
+              className={`child-content ${activeTab === "club" ? "active" : ""
+                }`}
               onClick={() => handleTabClick("club")}
             >
               <div>

@@ -1,4 +1,6 @@
 import AdminPage from "../page/AdminPage/AdminPage";
+import StaffPage from "../page/StaffPage/StaffPage";
+
 import ClubPage from "../page/ClubPage/ClubPage";
 import HomePage from "../page/HomePage/HomePage";
 import LoginMember from "../page/LoginPage/LoginMember";
@@ -27,6 +29,11 @@ export const routes = [
   {
     path: "/admin",
     page: AdminPage,
+    requiresAuth: true,
+  },
+  {
+    path: "/staff",
+    page: StaffPage,
     requiresAuth: true,
   },
   {

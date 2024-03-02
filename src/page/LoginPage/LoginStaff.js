@@ -22,9 +22,10 @@ const LoginPage = () => {
         onSubmit: async (values, { setSubmitting, setErrors }) => {
             try {
                 let data = await handleLoginStaff(values.userName, values.passWord);
+                console.log(data);
                 if (data && !_.isEmpty(data.token)) {
                     localStorage.setItem('token', data.token);
-                    localStorage.setItem('userInfo', data.user.username);
+                    localStorage.setItem('userInfo', JSON.stringify(data.user));
                     window.location.href = '/staff';
                 }
             } catch (error) {

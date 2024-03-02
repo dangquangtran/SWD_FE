@@ -7,16 +7,15 @@ import "./Approval.scss"
 
 function ApprovalManage() {
     const [clubs, setClubs] = useState([]);
-    const [sports, setSports] = useState([]);
 
     useEffect(() => {
         fetchApiClubs();
-        fetchApiSports()
     }, []);
 
     const fetchApiClubs = async () => {
         try {
             let data = await getAllClub();
+            console.log(data.result[0]);
             setClubs(data.result);
         } catch (error) {
             setClubs([]);
@@ -24,16 +23,6 @@ function ApprovalManage() {
         }
     }
 
-    const fetchApiSports = async () => {
-        try {
-            let data = await getAllSports();
-            console.log(data);
-            setSports(data.result);
-        } catch (error) {
-            setSports([]);
-            console.log(error);
-        }
-    }
 
     const handleApprove = () => {
 
@@ -55,39 +44,7 @@ function ApprovalManage() {
 
                             {
                                 clubs && clubs.map((item, index) => {
-                                    if (item.status && item.status.data && item.status.data[0] === 1) {
-                                        return (
-                                            <tr key={index}>
-                                                <td>{item.name}</td>
-                                                <td><button className="btn-approve" onClick={() => handleApprove(item)}>Approve</button></td>
-                                                <td><button className="btn-reject">Reject</button></td>
-                                                <td>{item.description}</td>
-                                            </tr>
-                                        )
-                                    }
-                                })
-                            }
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div className="sport-approve">
-                <h2>Sport approval table</h2>
-                <div className='sports-table mt-3 mx-2'>
-                    <table id="sportsTable">
-                        <tbody>
-                            <tr>
-                                <th>Sport Name</th>
-                                <th>Approve</th>
-                                <th>Reject</th>
-                                <th>Description</th>
-                            </tr>
-
-                            {
-                                sports && sports.map((item, index) => {
-                                    if (item.status && item.status.data && item.status.data[0] === 1) {
+                                    if (item.status && item.status.data && item.status.data[0] === 1 && item.approveStatus === 0) {
                                         return (
                                             <tr key={index}>
                                                 <td>{item.name}</td>

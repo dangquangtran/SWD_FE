@@ -1,7 +1,7 @@
 import axios from "../axios"
 
 const handleLoginMember = (userName, userPassword) => {
-    return axios.post('api/login-member', { email: userName, password : userPassword });
+    return axios.post('api/login-member', { email: userName, password: userPassword });
 }
 
 const handleLogoutMember = () => {
@@ -32,7 +32,7 @@ const confirmNoJoining = (clubMemberId, slotId) => {
 
 const confirmJoining = (clubMemberId, slotId, data) => {
     return axios.put(`api/clubMemSlots/${clubMemberId}/${slotId}/confirmJoining`, data);
-}   
+}
 
 export {
     handleLoginMember,

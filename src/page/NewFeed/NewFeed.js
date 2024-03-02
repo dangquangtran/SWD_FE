@@ -152,8 +152,7 @@ function NewFeed() {
       <div className="post-container">
         <img alt="avatar" src={userInfo.image} />
         <button className="write-btn" onClick={toggleModal}>
-          <span>{userInfo.name} ơi</span>
-          <span style={{ marginLeft: "5px" }}>Bạn đang muốn gì thế?</span>
+          <span className="btn-post-title">{userInfo.name} ơi! Hãy rủ thêm đồng đội chơi thể thao cùng nhé!</span>
         </button>
       </div>
 

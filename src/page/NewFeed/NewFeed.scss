@@ -1,12 +1,17 @@
 .new-feed-container {
     width: 80%;
-    background-color: #e4dff2;
+    background-color: #fff;
 
     @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-      
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
     .loading-icon {
         animation: spin 1s linear infinite;
         font-size: 50px;
@@ -66,14 +71,19 @@
         }
 
         .write-btn {
-            background-color: #eae7e7;
-            color: gray;
+            background-color: #f2eaea;
+            color: #000;
             border: none;
             padding: 10px 500px;
-            border-radius: 20px;
+            border-radius: 10px;
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            display: flex;
+            width: 70%;
+            white-space: nowrap;
+            justify-content: left !important;
+
 
             &:hover {
                 background-color: rgb(224, 228, 232);
@@ -92,7 +102,7 @@
         padding: 20px;
         width: 90%;
         background-color: white;
-        margin: 10px auto;
+        margin: 50px auto;
         border-radius: 10px;
 
         .poster-name {
@@ -165,4 +175,8 @@
     select {
         height: 50px;
     }
+}
+
+.btn-post-title {
+    width: 100%;
 }

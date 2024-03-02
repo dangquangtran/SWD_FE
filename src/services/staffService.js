@@ -6,6 +6,11 @@ const handleLoginStaff = (userName, userPassword) => {
         password: userPassword,
     });
 };
+
+
+const handleLogoutStaff = () => {
+    return axios.get('api/logout');
+}
 export {
     handleLoginStaff
 }
