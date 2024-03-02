@@ -12,6 +12,9 @@ function HomePage() {
                 <Button loginbtn to={"/login-admin"}>
                     Login Admin
                 </Button>
+                <Button loginbtn to={"/login-staff"}>
+                    Login Staff
+                </Button>
                 <Button loginbtn to={"/login-member"}>
                     Login Member
                 </Button>

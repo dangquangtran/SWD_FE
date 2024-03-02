@@ -5,6 +5,7 @@ import LoginMember from "../page/LoginPage/LoginMember";
 import LoginPage from "../page/LoginPage/LoginPage";
 import MemberPage from "../page/MemberPage/MemberPage";
 import MainClubPage from "../page/MainClubPage/MainClubPage";
+import LoginStaff from "../page/LoginPage/LoginStaff";
 
 export const routes = [
   {
@@ -14,6 +15,10 @@ export const routes = [
   {
     path: "/login-admin",
     page: LoginPage,
+  },
+  {
+    path: "/login-staff",
+    page: LoginStaff,
   },
   {
     path: "/login-member",

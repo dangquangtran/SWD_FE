@@ -140,6 +140,12 @@ const getYardDetail = (yard) => {
   return axios.get(`api/yards/${yard}`);
 };
 
+
+//approval
+const getAllClubAdded = () => {
+  return axios.get("/api/members");
+};
+
 export {
   handleLoginAdmin,
   getAllMembers,

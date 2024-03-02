@@ -13,7 +13,7 @@ import {
   getWalletByMemberId,
   getYardDetail,
 } from "../../services/userService";
-import { 
+import {
   getListMemberJoinPost,
   confirmNoJoining,
   confirmJoining,
@@ -86,7 +86,7 @@ function MyPost() {
     fetchData();
     setIsLoading(true);
   }, [id, userInfo.id]);
-  
+
   const handleConfirmJoin = async (idClubMember, idSlot) => {
     try {
       await confirmJoining(idClubMember, idSlot, {
@@ -178,62 +178,62 @@ function MyPost() {
                       {memberJoinList
                         .filter((postItem) => postItem.postId === item.id)
                         .map((postItem) => (
-                      <div key={postItem.postId} className="member-join-list">
-                        <h4>Danh sách người chơi đã tham gia:</h4>
-                        {postItem.members.length > 0 ? (
-                          postItem.members.map((member) => (
-                            <div key={member.id} className="member-item">
-                              <span>Người chơi muốn tham gia: {member.memberName}</span>{" "}
-                              <div>
-                                {postItem.status.map((status) => {
-                                  if (status.clubMemberId === member.id) {
-                                    if (status.joinStatus === "joined") {
-                                      return (
-                                        <div key={`${member.id}-joined`}>
-                                          <button
-                                            className='confirm-button'
-                                            onClick={() => handleConfirmJoin(member.id, postItem.postId)}
-                                          >
-                                            Xác nhận đã tham gia
-                                          </button>
-                                          <button
-                                            className="cancel-button"
-                                            onClick={() => handleCancelJoin(member.id, postItem.postId)}
-                                          >
-                                            Xác nhận không tham gia
-                                          </button>
-                                        </div>
-                                      )
-                                    } else if (status.joinStatus === "confirm_joined") {
-                                      return (
-                                        <button
-                                          key={`${member.id}-confirm-joined`}
-                                          className='confirm-button'
-                                        >
-                                          Đã tham gia
-                                        </button>
-                                      )
-                                    } else if (status.joinStatus === "confirm_no_joined") {
-                                      return (
-                                        <button
-                                          key={`${member.id}-confirm-no-joined`}
-                                          className='confirm-button'
-                                        >
-                                          Không tham gia
-                                        </button>
-                                      )
-                                    }
-                                  }
-                                  return null;
-                                })}
-                              </div>
-                            </div>
-                          ))
-                        ) : (
-                          <div>Chưa có người chơi nào tham gia.</div>
-                        )}
-                      </div>
-                    ))}
+                          <div key={postItem.postId} className="member-join-list">
+                            <h4>Danh sách người chơi đã tham gia:</h4>
+                            {postItem.members.length > 0 ? (
+                              postItem.members.map((member) => (
+                                <div key={member.id} className="member-item">
+                                  <span>Người chơi muốn tham gia: {member.memberName}</span>{" "}
+                                  <div>
+                                    {postItem.status.map((status) => {
+                                      if (status.clubMemberId === member.id) {
+                                        if (status.joinStatus === "joined") {
+                                          return (
+                                            <div key={`${member.id}-joined`}>
+                                              <button
+                                                className='confirm-button'
+                                                onClick={() => handleConfirmJoin(member.id, postItem.postId)}
+                                              >
+                                                Xác nhận đã tham gia
+                                              </button>
+                                              <button
+                                                className="cancel-button"
+                                                onClick={() => handleCancelJoin(member.id, postItem.postId)}
+                                              >
+                                                Xác nhận không tham gia
+                                              </button>
+                                            </div>
+                                          )
+                                        } else if (status.joinStatus === "confirm_joined") {
+                                          return (
+                                            <button
+                                              key={`${member.id}-confirm-joined`}
+                                              className='confirm-button'
+                                            >
+                                              Đã tham gia
+                                            </button>
+                                          )
+                                        } else if (status.joinStatus === "confirm_no_joined") {
+                                          return (
+                                            <button
+                                              key={`${member.id}-confirm-no-joined`}
+                                              className='confirm-button'
+                                            >
+                                              Không tham gia
+                                            </button>
+                                          )
+                                        }
+                                      }
+                                      return null;
+                                    })}
+                                  </div>
+                                </div>
+                              ))
+                            ) : (
+                              <div>Chưa có người chơi nào tham gia.</div>
+                            )}
+                          </div>
+                        ))}
 
 
                     </div>

@@ -1,17 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { handleLoginMember, registerMember } from "../../services/memberService";
+import { handleLoginStaff } from "../../services/staffService";
 import './LoginPage.scss';
 import _ from "lodash";
-import ModalRegisterMember from "../../component/modal/ModalRegisterMember";
-import { showSuccessToast } from "../../component/toast/toast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 
-const LoginMember = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false)
+const LoginPage = () => {
 
     const formik = useFormik({
         initialValues: {
@@ -24,12 +21,11 @@ const LoginMember = () => {
         }),
         onSubmit: async (values, { setSubmitting, setErrors }) => {
             try {
-                let data = await handleLoginMember(values.userName, values.passWord);
-                console.log(data);
+                let data = await handleLoginStaff(values.userName, values.passWord);
                 if (data && !_.isEmpty(data.token)) {
                     localStorage.setItem('token', data.token);
-                    localStorage.setItem('userInfo', JSON.stringify(data.user));
-                    window.location.href = '/members';
+                    localStorage.setItem('userInfo', data.user.username);
+                    window.location.href = '/staff';
                 }
             } catch (error) {
                 console.error(error);
@@ -40,25 +36,11 @@ const LoginMember = () => {
         },
     });
 
-    const toggleModal = () => {
-        setIsModalOpen(!isModalOpen);
-    };
-
-    const doCreateNewUser = async (data) => {
-        try {
-            await registerMember(data)
-            showSuccessToast('User added successfully!');
-            setIsModalOpen(false)
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
     return (
         <div className='login-background'>
             <div className='login-container'>
                 <div className='login-content row'>
-                    <div className='col-12 text-login'>Member Login</div>
+                    <div className='col-12 text-login'>Staff Login</div>
                     <form onSubmit={formik.handleSubmit} className='col-12'>
                         <div className='form-group login-input'>
                             <label>Username:</label>
@@ -82,7 +64,6 @@ const LoginMember = () => {
                             <label>Password:</label>
                             <div className='custom-input-password'>
                                 <FontAwesomeIcon icon={faLock} />
-
                                 <input
                                     type={formik.values.showPassword ? 'text' : 'password'}
                                     className='form-control'
@@ -107,20 +88,12 @@ const LoginMember = () => {
                             <button type='submit' className='btn-login' disabled={formik.isSubmitting}>
                                 Login
                             </button>
-                            <button className='btn-login' onClick={toggleModal}>
-                                Create new account
-                            </button>
                         </div>
                     </form>
-                    <ModalRegisterMember
-                        isOpen={isModalOpen}
-                        toggleFromParent={toggleModal}
-                        createNewUser={doCreateNewUser}
-                    />
                 </div>
             </div>
         </div>
     );
 };
 
-export default LoginMember;
+export default LoginPage;

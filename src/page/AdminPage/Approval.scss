@@ -1,0 +1,75 @@
+.approval-container {
+    background-color: #0000;
+    height: 100%;
+    width: 100%;
+    margin-top: 100px;
+
+}
+
+
+
+.btn-reject {
+    background-color: #ca223c !important;
+
+}
+
+
+td {
+    text-align: center;
+    padding: 8px;
+}
+
+th {
+    text-align: center !important;
+    padding: 8px;
+}
+
+.sport-approve {
+    margin-top: 50px;
+    border-top: 2px dashed #000;
+    padding-top: 30px;
+}
+
+h2 {
+    padding: 5px 20px;
+    border: 2px solid #15788a;
+    width: fit-content;
+    border-radius: 10px;
+    margin-left: 30px;
+}
+
+.btn-approve,
+.btn-reject {
+    display: inline-block;
+    padding: 6px 30px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.btn-approve::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: perspective(30px) rotateX(15deg) rotateY(5deg);
+    transition: transform 0.3s ease-out;
+}
+
+table {
+    border: 1px solid #000 !important;
+}

@@ -6,12 +6,13 @@ import { handleLogOut } from "../../services/userService";
 import "./AdminPage.scss";
 import HeaderAdmin from "../../component/Header/HeaderAdmin";
 import SportManage from "./SportManage";
+import ApprovalManage from "./Approval";
 
 const menuItems = [
   {
     name: "ADMIN",
     // icon: "settings",
-    items: ["MEMBERS", "STAFF", "CLUB", "SPORTS"],
+    items: ["MEMBERS", "STAFF", "CLUB", "SPORTS", "APPROVAL"],
   },
   {
     name: "LOGOUT",
@@ -20,11 +21,12 @@ const menuItems = [
 ];
 
 const componentsMap = {
-    MEMBERS: <MemberManage />,
-    STAFF: <StaffManage />,
-    CLUB: <ClubManage />,
-    SPORTS: <SportManage />,
-  };
+  MEMBERS: <MemberManage />,
+  STAFF: <StaffManage />,
+  CLUB: <ClubManage />,
+  SPORTS: <SportManage />,
+  APPROVAL: <ApprovalManage />
+};
 
 const Icon = ({ icon }) => (
   <span className="material-symbols-outlined">{icon}</span>
@@ -38,7 +40,7 @@ const NavButton = ({ onClick, name, icon, isActive, hasSubNav }) => (
   >
     {icon && <Icon icon={icon} />}
     <span>{name}</span>
-    {hasSubNav }
+    {hasSubNav}
   </button>
 );
 
@@ -76,26 +78,36 @@ function AdminPage() {
   const handleClick = async (item) => {
     console.log(item);
     try {
-        if(item && item === 'LOGOUT') {
-            await handleLogOut();
-            localStorage.removeItem('token');
-            localStorage.removeItem('userInfo');
-            window.location.href = '/';
-        } else {
-            setActiveItem(item !== activeItem ? item : "");
-        }
+      if (item && item === 'LOGOUT') {
+        await handleLogOut();
+        localStorage.removeItem('token');
+        localStorage.removeItem('userInfo');
+        window.location.href = '/';
+      } else {
+        setActiveItem(item !== activeItem ? item : "");
+      }
     } catch (error) {
-        console.error('Đăng xuất thất bại', error);
+      console.error('Đăng xuất thất bại', error);
     }
   };
 
   return (
     <div>
       <HeaderAdmin />
-        <aside className="sidebar col-2" style={{ float: 'left' ,width: '300px', padding: '20px', marginTop: '70px' }}>
-          {menuItems.map((item) => (
-            <div key={item.name}>
-              {!item.items && (
+      <aside className="sidebar col-2" style={{ float: 'left', width: '300px', padding: '20px', marginTop: '70px' }}>
+        {menuItems.map((item) => (
+          <div key={item.name}>
+            {!item.items && (
+              <NavButton
+                onClick={handleClick}
+                name={item.name}
+                icon={item.icon}
+                isActive={activeItem === item.name}
+                hasSubNav={!!item.items}
+              />
+            )}
+            {item.items && (
+              <>
                 <NavButton
                   onClick={handleClick}
                   name={item.name}
@@ -103,27 +115,17 @@ function AdminPage() {
                   isActive={activeItem === item.name}
                   hasSubNav={!!item.items}
                 />
-              )}
-              {item.items && (
-                <>
-                  <NavButton
-                    onClick={handleClick}
-                    name={item.name}
-                    icon={item.icon}
-                    isActive={activeItem === item.name}
-                    hasSubNav={!!item.items}
-                  />
-                  <SubMenu
-                    activeItem={activeItem}
-                    handleClick={handleClick}
-                    item={item}
-                  />
-                </>
-              )}
-            </div>
-          ))}
-        </aside>
-         <div className="content" style={{ marginLeft: '300px', padding: '20px' }}>{componentsMap[activeItem]}</div>
+                <SubMenu
+                  activeItem={activeItem}
+                  handleClick={handleClick}
+                  item={item}
+                />
+              </>
+            )}
+          </div>
+        ))}
+      </aside>
+      <div className="content" style={{ marginLeft: '300px', padding: '20px' }}>{componentsMap[activeItem]}</div>
     </div>
   );
 };
