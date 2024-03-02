@@ -47,6 +47,7 @@ function NewFeed() {
       setTranPoint(tranPointRes.result);
       setClubDetail(clubDetailRes.result);
       setSlotsInClub(slotsInClubRes.result);
+      console.log(slotsInClubRes.result);
       setSlotJoined(slotJoinedRes.result);
 
       const promises = slotsInClubRes.result.map(async (item) => {
