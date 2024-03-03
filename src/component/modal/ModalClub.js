@@ -1,48 +1,48 @@
 // ModalClub.js
 import React, { useState, useEffect } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import { emitter } from '../../utils/emitter';
+import { emitter } from "../../utils/emitter";
 import { showSuccessToast, showErrorToast } from "../toast/toast";
 import { getAllSports } from "../../services/userService";
 
 function ModalClub({ isOpen, toggleFromParent, createNewClub }) {
   const [formData, setFormData] = useState({
-    name: '',
-    description: '',
+    name: "",
+    description: "",
     countMember: 0,
-    sportName: '',
-    sportId: '',
+    sportName: "",
+    sportId: "",
   });
-  const [sport, setSport] = useState([])
+  const [sport, setSport] = useState([]);
 
   useEffect(() => {
     const fetchSports = async () => {
       try {
-        const response = await getAllSports()
-        setSport(response.result)
+        const response = await getAllSports();
+        setSport(response.result);
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchSports();
-  }, [])
+  }, []);
 
   useEffect(() => {
     const eventListener = () => {
       setFormData({
-        name: '',
-        description: '',
+        name: "",
+        description: "",
         countMember: 0,
-        sportName: '',
-        sportId: '',
+        sportName: "",
+        sportId: "",
       });
     };
 
-    emitter.on('EVENT_CREATE_MODAL_DATA', eventListener);
+    emitter.on("EVENT_CREATE_MODAL_DATA", eventListener);
 
     return () => {
-      emitter.off('EVENT_CREATE_MODAL_DATA', eventListener);
+      emitter.off("EVENT_CREATE_MODAL_DATA", eventListener);
     };
   }, []);
 
@@ -72,15 +72,15 @@ function ModalClub({ isOpen, toggleFromParent, createNewClub }) {
       try {
         createNewClub(formData);
         setFormData({
-          name: '',
-          description: '',
+          name: "",
+          description: "",
           countMember: 0,
-          sportName: '',
-          sportId: '',
+          sportName: "",
+          sportId: "",
         });
         toggle();
       } catch (error) {
-        showErrorToast('Club added error!');
+        showErrorToast("Club added error!");
         console.log(error);
       }
     }
@@ -93,16 +93,14 @@ function ModalClub({ isOpen, toggleFromParent, createNewClub }) {
       className={"modal-user-container"}
       size="lg"
     >
-      <ModalHeader toggle={toggle}>
-        CREATE A NEW CLUB
-      </ModalHeader>
+      <ModalHeader toggle={toggle}>CREATE A NEW CLUB</ModalHeader>
       <ModalBody>
         <div className="modal-user-body">
           <div className="input-container">
             <label>Club Name</label>
             <input
               type="text"
-              onChange={(event) => handleOnChangeInput(event, 'name')}
+              onChange={(event) => handleOnChangeInput(event, "name")}
               value={formData.name}
             />
           </div>
@@ -110,7 +108,7 @@ function ModalClub({ isOpen, toggleFromParent, createNewClub }) {
             <label>Description</label>
             <input
               type="text"
-              onChange={(event) => handleOnChangeInput(event, 'description')}
+              onChange={(event) => handleOnChangeInput(event, "description")}
               value={formData.description}
             />
           </div>
@@ -118,17 +116,20 @@ function ModalClub({ isOpen, toggleFromParent, createNewClub }) {
             <label>Member Count</label>
             <input
               type="number"
-              onChange={(event) => handleOnChangeInput(event, 'countMember')}
+              onChange={(event) => handleOnChangeInput(event, "countMember")}
               value={formData.countMember}
             />
           </div>
           <div className="input-container">
             <label>Sport Name</label>
-            <select className="select"
-              onChange={(event) => handleOnChangeInput(event, 'sportName')}
+            <select
+              className="select"
+              onChange={(event) => handleOnChangeInput(event, "sportName")}
               value={formData.sportName}
             >
-              <option value="" disabled>Select Sport Name</option>
+              <option value="" disabled>
+                Select Sport Name
+              </option>
               {sport.map((sport) => (
                 <option key={sport.id} value={sport.name}>
                   {sport.name}
@@ -138,11 +139,14 @@ function ModalClub({ isOpen, toggleFromParent, createNewClub }) {
           </div>
           <div className="input-container">
             <label>Sport Id</label>
-            <select className="select"
-              onChange={(event) => handleOnChangeInput(event, 'sportId')}
+            <select
+              className="select"
+              onChange={(event) => handleOnChangeInput(event, "sportId")}
               value={formData.sportId}
             >
-              <option value="" disabled>Select Sport Id</option>
+              <option value="" disabled>
+                Select Sport Id
+              </option>
               {sport.map((sport) => (
                 <option key={sport.id} value={sport.id}>
                   {sport.id}
@@ -153,16 +157,10 @@ function ModalClub({ isOpen, toggleFromParent, createNewClub }) {
         </div>
       </ModalBody>
       <ModalFooter>
-        <Button
-          className="add-btn"
-          onClick={handleAddNewClub}
-        >
+        <Button className="add-btn" onClick={handleAddNewClub}>
           Add new
         </Button>{" "}
-        <Button
-          className="close-btn"
-          onClick={toggle}
-        >
+        <Button className="close-btn" onClick={toggle}>
           Close
         </Button>
       </ModalFooter>

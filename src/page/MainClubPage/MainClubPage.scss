@@ -1,0 +1,50 @@
+.main-club-container {
+    min-height: 800px !important;
+    display: flex;
+}
+
+.side-bar-main {
+    width: 20%;
+    background-color: #fff;
+    text-align: center;
+    height: inherit;
+    border-right: 1px solid #ccc;
+
+    .tab-btn.active {
+        background-color: #cad4c9;
+    }
+}
+
+.btn-backHome {
+    width: 100%;
+    padding: 10px 20px;
+    border-bottom: 1px solid #000;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.tab-btn {
+    background-color: transparent;
+    width: 100%;
+    padding: 30px 20px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #e9e1e1;
+
+    &:hover {
+        background-color: #cad4c9;
+    }
+}
+
+.sub-tab {
+    background-color: transparent;
+    width: 90%;
+    padding: 30px 20px;
+
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #e9e1e1;
+    font-size: 12px;
+    color: #766a6a;
+}

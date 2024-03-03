@@ -4,6 +4,11 @@ import * as Yup from "yup";
 import { handleLoginAdmin } from "../../services/userService";
 import './LoginPage.scss';
 import _ from "lodash";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { faLock } from "@fortawesome/free-solid-svg-icons";
+
+
 
 const LoginPage = () => {
 
@@ -37,26 +42,31 @@ const LoginPage = () => {
         <div className='login-background'>
             <div className='login-container'>
                 <div className='login-content row'>
-                    <div className='col-12 text-login'>Login</div>
+                    <div className='col-12 text-login'>Vui lòng điền thông tin admin</div>
                     <form onSubmit={formik.handleSubmit} className='col-12'>
                         <div className='form-group login-input'>
-                            <label>Username:</label>
-                            <input
-                                type='text'
-                                className='form-control'
-                                placeholder='Enter your username'
-                                name='userName'
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.userName}
-                            />
+                            <label>Tài khoản:</label><br />
+                            <span>
+                                <FontAwesomeIcon className="icon-user" icon={faUser} />
+                                <input
+                                    type='text'
+                                    className='form-control'
+                                    placeholder='Enter your username'
+                                    name='userName'
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    value={formik.values.userName}
+                                />
+                            </span>
                             {formik.touched.userName && formik.errors.userName && (
                                 <div className='error-message'>{formik.errors.userName}</div>
                             )}
                         </div>
                         <div className='form-group login-input'>
-                            <label>Password:</label>
+                            <label>Mật khẩu:</label>
                             <div className='custom-input-password'>
+                                <FontAwesomeIcon icon={faLock} />
+
                                 <input
                                     type={formik.values.showPassword ? 'text' : 'password'}
                                     className='form-control'
@@ -79,7 +89,7 @@ const LoginPage = () => {
                         </div>
                         <div className='col-12'>
                             <button type='submit' className='btn-login' disabled={formik.isSubmitting}>
-                                Login
+                                Đăng nhập
                             </button>
                         </div>
                     </form>

@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { emitter } from '../../utils/emitter'
 import { showSuccessToast, showErrorToast } from "../toast/toast";
 import { getAllBuildingId } from "../../services/userService";
+import axios from "axios";
 
 function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
+    const imageFile = useRef(null)
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -56,12 +58,37 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
         toggleFromParent();
     };
 
+   
+
     const handleOnChangeInput = (event, id) => {
+        if(id === 'image' && imageFile){
+            uploadCloudinary(imageFile.current?.files[0])
+        }
         setFormData({
             ...formData,
             [id]: event.target.value,
         });
     };
+
+    const uploadCloudinary = async (image) => {
+    const formDataImage = new FormData();
+    formDataImage.append('api_key', '665652388645534');
+    formDataImage.append('upload_preset','upload-image');
+    formDataImage.append('file', image);
+    try {
+      const response = await axios.post('https://api.cloudinary.com/v1_1/upload-image/image/upload',formDataImage);
+      setTimeout(()=> {
+        setFormData({
+            ...formData,
+            image: response.data.url
+        })
+      },500)
+      console.log('Upload cloudinary successfully', response);
+    } catch (error) {
+      console.log('Error upload cloudinary:', error);
+    }
+  };
+
 
     const checkValidateInput = () => {
         let isValid = true;
@@ -80,6 +107,7 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
         let isValid = checkValidateInput();
         if (isValid) {
             //call api create modal
+            console.log(formData);
             createNewUser(formData);
 
             setFormData({
@@ -136,9 +164,9 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
                     <div className="input-container">
                         <label>Image</label>
                         <input
-                            type="text"
+                            type="file"
+                            ref={imageFile}
                             onChange={(event) => handleOnChangeInput(event, 'image')}
-                            value={formData.image}
                         />
                     </div>
                     <div className="input-container">
@@ -205,5 +233,7 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
         </Modal>
     );
 }
+
+
 
 export default ModalMember;

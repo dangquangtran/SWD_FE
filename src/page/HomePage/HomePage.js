@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from '../../component/button/index';
 import './HomePage.scss'
-import Logo from '../../assets/logoHeader/logo.svg'
 
 function HomePage() {
     return (
@@ -10,10 +9,13 @@ function HomePage() {
             <h1>Welcome to Sports Club</h1>
             <div className='login-btn'>
                 <Button loginbtn to={"/login-admin"}>
-                    Login Admin
+                    Đăng nhập Admin
+                </Button>
+                <Button loginbtn to={"/login-staff"}>
+                    Đăng nhập Staff
                 </Button>
                 <Button loginbtn to={"/login-member"}>
-                    Login Member
+                    Đăng nhập Member
                 </Button>
             </div>
             <div className='wc-img'></div>

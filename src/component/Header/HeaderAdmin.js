@@ -18,7 +18,7 @@ function HeaderAdmin() {
     }
 
     const userInfo = localStorage.getItem('userInfo');
-    return ( 
+    return (
         <div className='containerr'>
             <div className="col-3 header-logo"></div>
             <div className="col-8 middle">
@@ -39,7 +39,7 @@ function HeaderAdmin() {
                 <button onClick={handleLogout}><i className="fa fa-sign-out" aria-hidden="true"></i></button>
             </div>
         </div>
-     );
+    );
 }
 
 export default HeaderAdmin;
