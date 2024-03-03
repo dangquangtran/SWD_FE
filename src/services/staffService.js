@@ -11,6 +11,8 @@ const handleLoginStaff = (userName, userPassword) => {
 const handleLogoutStaff = () => {
     return axios.get('api/logout');
 }
+
 export {
-    handleLoginStaff
+    handleLoginStaff,
+    handleLogoutStaff,
 }

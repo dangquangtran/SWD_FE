@@ -31,7 +31,8 @@
 }
 
 .content-middle {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     justify-content: center;
     gap: 80px;
     margin-top: 12px;
@@ -42,7 +43,8 @@
         height: 250px;
         border-radius: 50%;
         border: 1px solid #000;
-        box-shadow: 5px 5px 15px #000
+        box-shadow: 5px 5px 15px #000;
+        margin: 10px auto;
     }
 }
 
