@@ -42,10 +42,10 @@ const LoginPage = () => {
         <div className='login-background'>
             <div className='login-container'>
                 <div className='login-content row'>
-                    <div className='col-12 text-login'>Admin Login</div>
+                    <div className='col-12 text-login'>Vui lòng điền thông tin admin</div>
                     <form onSubmit={formik.handleSubmit} className='col-12'>
                         <div className='form-group login-input'>
-                            <label>Username:</label><br />
+                            <label>Tài khoản:</label><br />
                             <span>
                                 <FontAwesomeIcon className="icon-user" icon={faUser} />
                                 <input
@@ -63,7 +63,7 @@ const LoginPage = () => {
                             )}
                         </div>
                         <div className='form-group login-input'>
-                            <label>Password:</label>
+                            <label>Mật khẩu:</label>
                             <div className='custom-input-password'>
                                 <FontAwesomeIcon icon={faLock} />
 
@@ -89,7 +89,7 @@ const LoginPage = () => {
                         </div>
                         <div className='col-12'>
                             <button type='submit' className='btn-login' disabled={formik.isSubmitting}>
-                                Login
+                                Đăng nhập
                             </button>
                         </div>
                     </form>

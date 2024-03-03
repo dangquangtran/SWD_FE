@@ -12,10 +12,10 @@ const menuItems = [
   {
     name: "ADMIN",
     // icon: "settings",
-    items: ["MEMBERS", "STAFF", "CLUB", "SPORTS", "APPROVAL"],
+    items: ["Thành viên", "Nhân viên", "Câu lạc bộ", "Môn thể thao", "Phê duyệt"],
   },
   {
-    name: "LOGOUT",
+    name: "Đăng xuất",
     // icon: "favorite",
   },
 ];
