@@ -32,7 +32,8 @@ function ClubContent() {
   return (
     <div className="container-club1">
       <div className="line"></div>
-      <h1 className="club-title">Sport clubs</h1>
+      <h1 className="club-title">Các câu lạc bộ thể thao</h1>
+      <p className="sub-title">Hãy chọn câu lạc bộ mà bạn quan tâm nhé!</p>
       <div className="content-middle">
         {clubs &&
           clubs.map((item, index) => {
@@ -46,7 +47,7 @@ function ClubContent() {
                     src={item.image}
                   />
                   <a className="club-name" onClick={() => handleClick(item.id)}>
-                    Club Name: {item.name}
+                    CLB: {item.name}
                   </a>
                 </div>
               );

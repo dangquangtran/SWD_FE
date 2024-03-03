@@ -34,27 +34,27 @@ function MainClubPage() {
             className={`tab-btn ${activeTab === "newFeed" ? "active" : ""}`}
             onClick={() => handleTabClick("newFeed")}
           >
-            <FontAwesomeIcon icon={faNewspaper} /> New feed
+            <FontAwesomeIcon icon={faNewspaper} /> Bảng tin
           </button>
 
           <button
             className={`tab-btn ${activeTab === "myPost" ? "active" : ""}`}
             onClick={() => handleTabClick("myPost")}
           >
-            <FontAwesomeIcon icon={faEnvelopesBulk} /> My posted
+            <FontAwesomeIcon icon={faEnvelopesBulk} /> Bài đăng của tôi
           </button>
 
           <button
             className={`tab-btn ${activeTab === "myJoinPost" ? "active" : ""}`}
             onClick={() => handleTabClick("myJoinPost")}
           >
-            <FontAwesomeIcon icon={faEnvelopesBulk} /> Posts joined
+            <FontAwesomeIcon icon={faEnvelopesBulk} /> Bài đăng đã tham gia
           </button>
           <button
             className={`tab-btn ${activeTab === "myHistory" ? "active" : ""}`}
             onClick={() => handleTabClick("myHistory")}
           >
-            <FontAwesomeIcon icon={faEnvelopesBulk} /> Wallet
+            <FontAwesomeIcon icon={faEnvelopesBulk} /> Ví
           </button>
         </div>
         {activeTab === "newFeed" && <NewFeed />}

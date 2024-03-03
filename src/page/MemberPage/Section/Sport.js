@@ -17,7 +17,7 @@ function SportSlide() {
         <div className='section-share section-hand-book'>
             <div className='section-container'>
                 <div className='section-header'>
-                    <h2 className='title-section'>Sport</h2>
+                    <h2 className='title-section'>Một số hình ảnh</h2>
                     {/* <button className='btn-section'><span className='btn-section-item'>Xem thêm</span></button> */}
                 </div>
                 <div className='section-body'>

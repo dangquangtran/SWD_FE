@@ -38,7 +38,7 @@ function HeaderMember() {
               onClick={() => handleTabClick("home")}
             >
               <div>
-                <b>Home</b>
+                <b>Trang chủ</b>
               </div>
             </div>
             <div
@@ -47,12 +47,12 @@ function HeaderMember() {
               onClick={() => handleTabClick("club")}
             >
               <div>
-                <b>Club</b>
+                <b>Câu lạc bộ</b>
               </div>
             </div>
             <div className="child-content">
               <div>
-                <b>Contact</b>
+                <b>Liên hệ</b>
               </div>
             </div>
             <i className="fa fa-bell-o" aria-hidden="true"></i>

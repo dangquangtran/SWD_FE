@@ -27,6 +27,7 @@ const LoginPage = () => {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('userInfo', JSON.stringify(data.user));
                     window.location.href = '/staff';
+
                 }
             } catch (error) {
                 console.error(error);

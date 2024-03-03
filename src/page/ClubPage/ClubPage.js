@@ -10,6 +10,8 @@ import {
 import "./ClubPage.scss";
 import image1 from "../../assets/Sport/badminton.jpg";
 import { showSuccessToast } from "../../component/toast/toast";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
 
 function ClubPage() {
   const navigate = useNavigate();
@@ -90,7 +92,7 @@ function ClubPage() {
       <div className="side-bar">
         <button className="  btn-back" onClick={() => navigate("/members")}>
           {" "}
-          Back
+          <FontAwesomeIcon icon={faHouse} />
         </button>
 
         <h2>
@@ -105,7 +107,7 @@ function ClubPage() {
             src={image1}
             alt="club-background"
           ></img>
-          <h2>Câu Lạc Bộ {clubDetail.name}</h2>
+          <h2> {clubDetail.name}</h2>
           <p>{clubDetail.countMember} thành viên</p>
           <div>
             {isJoined ? (

@@ -1,0 +1,26 @@
+.club-manage {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 100px;
+
+    img {
+        width: 300px;
+        height: 300px;
+    }
+
+    .club-staff {
+        text-align: center;
+        border-radius: 5px;
+        border: 1px dashed #ccc;
+        padding: 10px 0;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.9;
+        }
+
+        h4 {
+            padding: 10px 0;
+        }
+    }
+}
