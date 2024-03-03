@@ -36,7 +36,7 @@ function ClubContent() {
       <div className="content-middle">
         {clubs &&
           clubs.map((item, index) => {
-            if (item.status && item.status.data && item.status.data[0] === 1) {
+            if (item.status && item.status.data && item.status.data[0] === 1 && item.approveStatus === 1) {
               return (
                 <div className="club" key={index}>
                   <img
