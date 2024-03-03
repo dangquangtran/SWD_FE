@@ -270,7 +270,7 @@ function MyPost() {
                                           return (
                                             <button
                                               key={`${member.id}-confirm-no-joined`}
-                                              className="confirm-button"
+                                              className="cancel-button"
                                             >
                                               Không tham gia
                                             </button>
