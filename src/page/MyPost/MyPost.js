@@ -98,6 +98,19 @@ function MyPost() {
         inforWallet: inforWallet,
         memberId: memberId,
       });
+
+      const response3Promises = myPost.map(async (post) => {
+        const response = await getListMemberJoinPost(post.id);
+        return {
+          postId: post.id,
+          members: response.result,
+          status: response.IdClubMemberSlots,
+        };
+      });
+
+      const response3Results = await Promise.all(response3Promises);
+      setMemberJoinList(response3Results);
+
       showSuccessToast("Confirm successful!");
     } catch (error) {
       console.log(error);
@@ -107,6 +120,17 @@ function MyPost() {
   const handleCancelJoin = async (idClubMember, idSlot) => {
     try {
       await confirmNoJoining(idClubMember, idSlot);
+      const response3Promises = myPost.map(async (post) => {
+        const response = await getListMemberJoinPost(post.id);
+        return {
+          postId: post.id,
+          members: response.result,
+          status: response.IdClubMemberSlots,
+        };
+      });
+
+      const response3Results = await Promise.all(response3Promises);
+      setMemberJoinList(response3Results);
       showSuccessToast("Cancel successful!");
     } catch (error) {
       showErrorToast("Cancel failed!");
@@ -187,15 +211,16 @@ function MyPost() {
                       {memberJoinList
                         .filter((postItem) => postItem.postId === item.id)
                         .map((postItem) => (
-                          <div key={postItem.postId} className="member-join-list">
+                          <div
+                            key={postItem.postId}
+                            className="member-join-list"
+                          >
                             <h4>Danh sách người chơi đã tham gia:</h4>
+                            {/* <span> Người chơi muốn tham gia: </span> */}
                             {postItem.members.length > 0 ? (
                               postItem.members.map((member) => (
                                 <div key={member.id} className="member-item">
-                                  <span>
-                                    Người chơi muốn tham gia:{" "}
-                                    {member.memberName}
-                                  </span>{" "}
+                                  <span>{member.memberName}</span>{" "}
                                   <div>
                                     {postItem.status.map((status) => {
                                       if (status.clubMemberId === member.id) {
