@@ -55,7 +55,7 @@ function StaffPage() {
                             </div>
                         </div>
                     </div>
-                    <button onClick={handleLogout} className="btn-logout-staff"><FontAwesomeIcon className="logout-icon" icon={faArrowRightFromBracket} /></button>
+                    <button onClick={handleLogout} className="btn-logout-staff">Đăng xuất <FontAwesomeIcon className="logout-icon" icon={faArrowRightFromBracket} /></button>
                 </div>
 
                 {activeTab === "my-club" && <MyClub />}
