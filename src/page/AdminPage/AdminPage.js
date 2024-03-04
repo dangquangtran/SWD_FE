@@ -21,11 +21,11 @@ const menuItems = [
 ];
 
 const componentsMap = {
-  MEMBERS: <MemberManage />,
-  STAFF: <StaffManage />,
-  CLUB: <ClubManage />,
-  SPORTS: <SportManage />,
-  APPROVAL: <ApprovalManage />
+  "Thành viên": <MemberManage />,
+  "Nhân viên": <StaffManage />,
+  "Câu lạc bộ": <ClubManage />,
+  "Môn thể thao": <SportManage />,
+  "Phê duyệt": <ApprovalManage />
 };
 
 const Icon = ({ icon }) => (
