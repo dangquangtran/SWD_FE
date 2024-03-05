@@ -21,26 +21,14 @@ import {
 import "./MyPost.scss";
 import CountdownTimer from "../../component/countDownTime";
 
-function MyPost({ tranPoint, inforWallet }) {
+function MyPost({ tranPoint, inforWallet, yards }) {
   const { id } = useParams();
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   const [myPost, setMyPost] = useState([]);
   const [numberOfSlot, setNumberOfSlot] = useState({});
-  const [yardDetails, setYardDetails] = useState([]);
   const [memberJoinList, setMemberJoinList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const details = await Promise.all(
-        myPost.map((item) => getYardDetail(item.yardId))
-      );
-      setYardDetails(details);
-    };
-
-    fetchData();
-  }, [myPost]);
 
   useEffect(() => {
     async function fetchData() {
@@ -149,8 +137,10 @@ function MyPost({ tranPoint, inforWallet }) {
             const targetTime = new Date(time).getTime();
             const currentTime = new Date().getTime();
 
+            var isPassTime;
+
             if (targetTime < currentTime) {
-              return null;
+              isPassTime = true;
             }
 
             const date = new Date(item.dateTime);
@@ -161,6 +151,11 @@ function MyPost({ tranPoint, inforWallet }) {
             const hours = date.getHours(); // Lấy giờ trong ngày (0-23)
             const minutes = date.getMinutes(); // Lấy phút (0-59)
             const timePost = ` ${hours}:${minutes} ${year}-${month}-${day}`;
+
+            //get yard details
+            const yardDetails = yards.find((yard) => {
+              return yard.id === item.yardId;
+            });
             return (
               <div key={item.id} className="main-post-container">
                 <div className="poster-name">
@@ -181,12 +176,11 @@ function MyPost({ tranPoint, inforWallet }) {
                     <h3>Thông tin trận đấu</h3>
                     <div>
                       <div>
-                        <b>Khu: {yardDetails[index]?.result.areaName} </b>
+                        <b>Khu: {yardDetails?.areaName} </b>
                       </div>
                       <div>
                         <b>
-                          Sân: {yardDetails[index]?.result.sportName} -{" "}
-                          {item.yardName}
+                          Sân: {yardDetails?.sportName} - {item.yardName}
                         </b>
                       </div>
                       <div>

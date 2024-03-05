@@ -136,11 +136,15 @@ const getSlotJoinedByPostJoined = (clubMem) => {
   return axios.get(`api/slots/${clubMem}/getSlotJoined`);
 };
 
-const getSlotNotJoined = (clubMem) => {
-  return axios.get(`api/slots/${clubMem}/getSlotnotJoin`);
+const getSlotNotJoined = (clubMem, idClub) => {
+  return axios.get(`api/slots/${clubMem}/${idClub}/getSlotnotJoin`);
 };
 const getYardDetail = (yard) => {
   return axios.get(`api/yards/${yard}`);
+};
+
+const getYards = () => {
+  return axios.get(`api/yards`);
 };
 
 //approval
@@ -183,4 +187,5 @@ export {
   getSlotPostJoined,
   getYardDetail,
   getSlotNotJoined,
+  getYards,
 };

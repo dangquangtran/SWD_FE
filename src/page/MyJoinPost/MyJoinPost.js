@@ -12,14 +12,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import CountdownTimer from "../../component/countDownTime";
 
-function MyJoinPost() {
+function MyJoinPost({ yards }) {
   const { id } = useParams();
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   const [postIdJoined, setPostIdJoined] = useState([]);
   const [postJoined, setPostJoined] = useState([]);
   const [numberOfSlot, setNumberOfSlot] = useState({});
-  const [yardDetails, setYardDetails] = useState([]);
   const [isLoadingData, setIsLoadingData] = useState(true);
 
   async function fetchData() {
@@ -52,17 +51,6 @@ function MyJoinPost() {
       return;
     }
   }
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const details = await Promise.all(
-        postJoined.map((item) => getYardDetail(item.yardId))
-      );
-      setYardDetails(details);
-    };
-
-    fetchData();
-  }, [postJoined]);
 
   useEffect(() => {
     fetchData();
@@ -113,6 +101,11 @@ function MyJoinPost() {
           if (targetTime < currentTime) {
             return null;
           }
+
+          //get yard details
+          const yardDetails = yards.find((yard) => {
+            return yard.id === resultItem.yardId;
+          });
           return (
             <div key={index} className="main-post-container">
               <div className="poster-name">
@@ -127,12 +120,11 @@ function MyJoinPost() {
                   <h3>Thông tin trận đấu bạn tham gia</h3>
                   <div>
                     <div>
-                      <b>Khu: {yardDetails[index]?.result.areaName} </b>
+                      <b>Khu: {yardDetails?.areaName} </b>
                     </div>
                     <div>
                       <b>
-                        Sân: {yardDetails[index]?.result.sportName} -{" "}
-                        {resultItem.yardName}
+                        Sân: {yardDetails?.sportName} - {resultItem.yardName}
                       </b>
                     </div>
                     <div>

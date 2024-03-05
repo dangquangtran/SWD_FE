@@ -23,10 +23,7 @@ function HistoryPage() {
         const response2 = await getTransactionHistoryPoints(walletId);
         setTransactionHistoryPoints(response2.result);
         const lastTransaction = response2.result.find(
-          (item) =>
-            item.status &&
-            item.status.data &&
-            item.status.data[0] === 1
+          (item) => item.status && item.status.data && item.status.data[0] === 1
         );
         if (lastTransaction) {
           const resultPoint =
@@ -45,6 +42,8 @@ function HistoryPage() {
 
     fetchWalletInfo();
   }, []);
+
+  console.log(transactionHistoryPoints);
 
   return (
     <div className="history-page-container">
@@ -65,9 +64,11 @@ function HistoryPage() {
                   item.status.data &&
                   item.status.data[0] === 1
                 ) {
-                  const resultPoint =
-                    item.initialPoint + item.transactionPoint;
-                    const formattedTransactionPoint = item.transactionPoint > 0 ? `+${item.transactionPoint}` : item.transactionPoint;
+                  const resultPoint = item.initialPoint + item.transactionPoint;
+                  const formattedTransactionPoint =
+                    item.transactionPoint > 0
+                      ? `+${item.transactionPoint}`
+                      : item.transactionPoint;
                   return (
                     <tr key={index}>
                       <td>{item.initialPoint}</td>

@@ -21,7 +21,7 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CountdownTimer from "../../component/countDownTime";
 
-function NewFeed({ inforWallet, tranPoint }) {
+function NewFeed({ inforWallet, tranPoint, yards }) {
   const { id } = useParams();
   const { idclubmem } = useParams();
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -30,7 +30,6 @@ function NewFeed({ inforWallet, tranPoint }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [numberOfSlot, setNumberOfSlot] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [yardDetails, setYardDetails] = useState([]);
 
   // const [slotsInClub, setSlotsInClub] = useState([]);
   // const [slotJoined, setSlotJoined] = useState([]);
@@ -41,7 +40,7 @@ function NewFeed({ inforWallet, tranPoint }) {
         getDetailClub(id),
         // getPostInClub(id),
         // getSlotJoined(idclubmem),
-        getSlotNotJoined(idclubmem),
+        getSlotNotJoined(idclubmem, id),
       ]);
 
       setSlotNotJoined(slotNotJoinedRes.result);
@@ -70,17 +69,6 @@ function NewFeed({ inforWallet, tranPoint }) {
   useEffect(() => {
     fetchData();
   }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const details = await Promise.all(
-        slotNotJoined.map((item) => getYardDetail(item.yardId))
-      );
-      setYardDetails(details);
-    };
-
-    fetchData();
-  }, [slotNotJoined]);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -169,6 +157,11 @@ function NewFeed({ inforWallet, tranPoint }) {
           parseInt(item.requiredMember) - parseInt(numberOfSlot[item.id] || 0);
         const isFull = remainingSlots <= 0;
 
+        //get yard details
+        const yardDetails = yards.find((yard) => {
+          return yard.id === item.yardId;
+        });
+
         return (
           <div key={item.id} className="main-post-container">
             <div className="poster-name">
@@ -187,12 +180,11 @@ function NewFeed({ inforWallet, tranPoint }) {
                 <h3>Thông tin trận đấu</h3>
                 <div>
                   <div>
-                    <b>Khu: {yardDetails[index]?.result.areaName} </b>
+                    <b>Khu: {yardDetails?.areaName} </b>
                   </div>
                   <div>
                     <b>
-                      Sân: {yardDetails[index]?.result.sportName} -{" "}
-                      {item.yardName}
+                      Sân: {yardDetails?.sportName} - {item.yardName}
                     </b>
                   </div>
                   <div>
