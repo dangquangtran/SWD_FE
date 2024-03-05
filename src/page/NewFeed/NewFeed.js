@@ -178,9 +178,14 @@ function NewFeed() {
           return null;
         }
 
-        {
-          /* console.log(item.memberPostId, idclubmem); */
-        }
+        const date = new Date(item.dateTime);
+
+        const day = date.getDate(); // Lấy ngày trong tháng (1-31)
+        const month = date.getMonth() + 1; // Lấy tháng (0-11), cộng thêm 1 vì tháng bắt đầu từ 0
+        const year = date.getFullYear(); // Lấy năm
+        const hours = date.getHours(); // Lấy giờ trong ngày (0-23)
+        const minutes = date.getMinutes(); // Lấy phút (0-59)
+        const timePost = ` ${hours}:${minutes} ${year}-${month}-${day}`;
 
         // Kiểm tra xem slot có trong mảng slotJoined không
         const isJoined = slotJoined.some(
@@ -198,7 +203,7 @@ function NewFeed() {
           <div key={item.id} className="main-post-container">
             <div className="poster-name">
               <p>{item.memberPostName}</p>
-              <div>{item.dateTime}</div>
+              <div>{timePost}</div>
               <CountdownTimer targetTime={time} />
             </div>
             <div className="caption">{item.description}</div>

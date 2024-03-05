@@ -160,12 +160,21 @@ function MyPost() {
             if (targetTime < currentTime) {
               return null;
             }
+
+            const date = new Date(item.dateTime);
+
+            const day = date.getDate(); // Lấy ngày trong tháng (1-31)
+            const month = date.getMonth() + 1; // Lấy tháng (0-11), cộng thêm 1 vì tháng bắt đầu từ 0
+            const year = date.getFullYear(); // Lấy năm
+            const hours = date.getHours(); // Lấy giờ trong ngày (0-23)
+            const minutes = date.getMinutes(); // Lấy phút (0-59)
+            const timePost = ` ${hours}:${minutes} ${year}-${month}-${day}`;
             return (
               <div key={item.id} className="main-post-container">
                 <div className="poster-name">
                   <div>
                     <p>{item.memberPostName}</p>
-                    <div>{item.dateTime}</div>
+                    <div>{timePost}</div>
                   </div>
                   <div>
                     <CountdownTimer targetTime={time} />
