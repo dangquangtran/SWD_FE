@@ -189,9 +189,9 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
                             value={formData.gender}
                         >
                             <option value="" disabled>Select Gender</option>
-                            <option value="male">Nam</option>
-                            <option value="female">Nữ</option>
-                            <option value="other">Khác</option>
+                            <option value="Name">Nam</option>
+                            <option value="Nữ">Nữ</option>
+                            <option value="Khác">Khác</option>
                         </select>
                     </div>
                     <div className="input-container">
@@ -236,7 +236,5 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
         </Modal>
     );
 }
-
-
 
 export default ModalMember;

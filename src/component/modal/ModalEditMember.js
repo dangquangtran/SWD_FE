@@ -148,11 +148,6 @@ function ModalEditMember({ isOpen, toggleFromParent, currentUser, editUser }) {
                     </div>
                     <div className="input-container">
                         <label>Building Name</label>
-                        {/* <input
-                            type="text"
-                            onChange={(event) => handleOnChangeInput(event, 'buildingName')}
-                            value={formData.buildingName}
-                        /> */}
                         <select
                             onChange={(event) => handleOnChangeInput(event, 'buildingName')}
                             value={formData.buildingName}

@@ -20,9 +20,29 @@ const createClubStaff = (data) => {
     return axios.post("api/clubs", data);
 };
 
+const getAllStaffs = () => {
+    return axios.get("api/admin/staffs");
+}
+
+const createStaff = (data) => {
+    return axios.post("api/admin/staffs", data);
+}
+
+const editStaff = (staffId, data) => {
+    return axios.put(`api/admin/staffs/${staffId}`, data);
+}
+
+const deleteStaff = (staffId) => {
+    return axios.delete(`api/admin/staffs/${staffId}`);
+}
+
 export {
     handleLoginStaff,
     handleLogoutStaff,
     getAllClubStaff,
-    createClubStaff
+    createClubStaff,
+    getAllStaffs,
+    createStaff,
+    editStaff,
+    deleteStaff
 }
