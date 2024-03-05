@@ -136,10 +136,12 @@ const getSlotJoinedByPostJoined = (clubMem) => {
   return axios.get(`api/slots/${clubMem}/getSlotJoined`);
 };
 
+const getSlotNotJoined = (clubMem) => {
+  return axios.get(`api/slots/${clubMem}/getSlotnotJoin`);
+};
 const getYardDetail = (yard) => {
   return axios.get(`api/yards/${yard}`);
 };
-
 
 //approval
 const getAllClubAdded = () => {
@@ -180,4 +182,5 @@ export {
   getSlotJoinedByPostJoined,
   getSlotPostJoined,
   getYardDetail,
+  getSlotNotJoined,
 };

@@ -11,13 +11,30 @@ import { faNewspaper } from "@fortawesome/free-regular-svg-icons";
 import NewFeed from "../NewFeed/NewFeed";
 import MyPost from "../MyPost/MyPost";
 import MyJoinPost from "../MyJoinPost/MyJoinPost";
-import { getIdMemberCreatePost } from "../../services/userService";
 import HistoryPage from "../HistoryPage/HistoryPage";
+import { getTranPoint, getWalletByMemberId } from "../../services/userService";
 
 function MainClubPage() {
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const [activeTab, setActiveTab] = useState("newFeed");
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
+  const [inforWallet, setInforWallet] = useState();
+  const [tranPoint, setTranPoint] = useState(null);
+
+  useEffect(() => {
+    const fetchWalletData = async () => {
+      try {
+        const walletRes = await getWalletByMemberId(userInfo.id);
+        const tranPointRes = getTranPoint();
+        setInforWallet(walletRes.result);
+        setTranPoint(tranPointRes.result);
+      } catch (error) {
+        console.error("Error fetching wallet data:", error);
+      }
+    };
+
+    fetchWalletData();
+  }, []);
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
@@ -57,10 +74,14 @@ function MainClubPage() {
             <FontAwesomeIcon icon={faEnvelopesBulk} /> Ví
           </button>
         </div>
-        {activeTab === "newFeed" && <NewFeed />}
-        {activeTab === "myPost" && <MyPost />}
+        {activeTab === "newFeed" && (
+          <NewFeed inforWallet={inforWallet} tranPoint={tranPoint} />
+        )}
+        {activeTab === "myPost" && (
+          <MyPost tranPoint={tranPoint} inforWallet={inforWallet} />
+        )}
         {activeTab === "myJoinPost" && <MyJoinPost />}
-        {activeTab === "myHistory" && <HistoryPage />}
+        {activeTab === "myHistory" && <HistoryPage inforWallet={inforWallet} />}
       </div>
     </>
   );

@@ -21,7 +21,7 @@ import {
 import "./MyPost.scss";
 import CountdownTimer from "../../component/countDownTime";
 
-function MyPost() {
+function MyPost({ tranPoint, inforWallet }) {
   const { id } = useParams();
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
@@ -30,8 +30,6 @@ function MyPost() {
   const [yardDetails, setYardDetails] = useState([]);
   const [memberJoinList, setMemberJoinList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [tranPoint, setTranPoint] = useState(null);
-  const [inforWallet, setInforWallet] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,12 +73,6 @@ function MyPost() {
           numberOfSlotMap[result.itemId] = result.numberOfSlot;
         });
         setNumberOfSlot(numberOfSlotMap);
-
-        const walletRes = await getWalletByMemberId(userInfo.id);
-        setInforWallet(walletRes.result);
-
-        const tranPointRes = await getTranPoint();
-        setTranPoint(tranPointRes.result);
 
         setIsLoading(false);
       } catch (error) {
