@@ -19,6 +19,7 @@ import {
   confirmJoining,
 } from "../../services/memberService";
 import "./MyPost.scss";
+import CountdownTimer from "../../component/countDownTime";
 
 function MyPost() {
   const { id } = useParams();
@@ -152,13 +153,36 @@ function MyPost() {
       ) : (
         <>
           {myPost.map((item, index) => {
+            const time = item.date + "T" + item.startTime + ":00";
+            const targetTime = new Date(time).getTime();
+            const currentTime = new Date().getTime();
+
+            if (targetTime < currentTime) {
+              return null;
+            }
+
+            const date = new Date(item.dateTime);
+
+            const day = date.getDate(); // Lấy ngày trong tháng (1-31)
+            const month = date.getMonth() + 1; // Lấy tháng (0-11), cộng thêm 1 vì tháng bắt đầu từ 0
+            const year = date.getFullYear(); // Lấy năm
+            const hours = date.getHours(); // Lấy giờ trong ngày (0-23)
+            const minutes = date.getMinutes(); // Lấy phút (0-59)
+            const timePost = ` ${hours}:${minutes} ${year}-${month}-${day}`;
             return (
               <div key={item.id} className="main-post-container">
                 <div className="poster-name">
-                  <p>{item.memberPostName}</p>
-                  <div>{item.dateTime}</div>
+                  <div>
+                    <p>{item.memberPostName}</p>
+                    <div>{timePost}</div>
+                  </div>
+                  <div>
+                    <CountdownTimer targetTime={time} />
+                  </div>
                 </div>
+
                 <div className="caption">{item.description}</div>
+
                 <div className="post-content-container">
                   <img className="post-img" src={item.image} alt="avatar" />
                   <div className="post-infor">

@@ -46,7 +46,7 @@ function ClubManage() {
             console.log(error);
         }
     }
-    
+
 
     const doEditClub = async (editClubId, data) => {
         try {
@@ -109,7 +109,7 @@ function ClubManage() {
                         </tr>
                         {
                             clubs && clubs.map((item, index) => {
-                                if (item.status && item.status.data && item.status.data[0] === 1) {
+                                if (item.status && item.status.data && item.status.data[0] === 1 && item.approveStatus === 1) {
                                     return (
                                         <tr key={index}>
                                             <td>{item.name}</td>

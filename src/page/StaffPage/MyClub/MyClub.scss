@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     margin-top: 100px;
+    gap: 20px;
 
     img {
         width: 300px;
@@ -22,5 +23,15 @@
         h4 {
             padding: 10px 0;
         }
+    }
+
+    .approved {
+        color: #5dce51;
+        font-size: 1.2rem;
+    }
+
+    .waiting {
+        font-size: 1.2rem;
+
     }
 }

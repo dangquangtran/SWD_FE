@@ -16,8 +16,13 @@ const getAllClubStaff = (staffId) => {
     return axios.get(`api/staff/get-club/${staffId}`);
 }
 
+const createClubStaff = (data) => {
+    return axios.post("api/clubs", data);
+};
+
 export {
     handleLoginStaff,
     handleLogoutStaff,
-    getAllClubStaff
+    getAllClubStaff,
+    createClubStaff
 }

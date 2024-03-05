@@ -28,6 +28,7 @@ function ClubPage() {
     try {
       const response = await getDetailClub(id);
       setClubDetail(response.result);
+      console.log(clubDetail);
 
       const response2 = await checkMemberJoinClub(user.id, id);
       setIsJoined(response2.result == 1 ? true : false);
@@ -38,7 +39,6 @@ function ClubPage() {
           id
         );
         setMemberCreatePostId(memberCreatePostRes.result.id);
-        console.log(memberCreatePostRes);
       }
     } catch (error) {
       console.error("Error fetching club detail:", error);
@@ -104,7 +104,7 @@ function ClubPage() {
         <div className="club-header">
           <img
             className="img-background"
-            src={image1}
+            src={clubDetail.image}
             alt="club-background"
           ></img>
           <h2> {clubDetail.name}</h2>

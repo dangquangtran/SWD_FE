@@ -18,6 +18,7 @@ import { showErrorToast, showSuccessToast } from "../../component/toast/toast";
 
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CountdownTimer from "../../component/countDownTime";
 
 function NewFeed() {
   const { id } = useParams();
@@ -152,7 +153,9 @@ function NewFeed() {
       <div className="post-container">
         <img alt="avatar" src={userInfo.image} />
         <button className="write-btn" onClick={toggleModal}>
-          <span className="btn-post-title">{userInfo.name} ơi! Hãy rủ thêm đồng đội chơi thể thao cùng nhé!</span>
+          <span className="btn-post-title">
+            {userInfo.name} ơi! Hãy rủ thêm đồng đội chơi thể thao cùng nhé!
+          </span>
         </button>
       </div>
 
@@ -167,9 +170,22 @@ function NewFeed() {
           return null;
         }
 
-        {
-          /* console.log(item.memberPostId, idclubmem); */
+        const time = item.date + "T" + item.startTime + ":00";
+        const targetTime = new Date(time).getTime();
+        const currentTime = new Date().getTime();
+
+        if (targetTime < currentTime) {
+          return null;
         }
+
+        const date = new Date(item.dateTime);
+
+        const day = date.getDate(); // Lấy ngày trong tháng (1-31)
+        const month = date.getMonth() + 1; // Lấy tháng (0-11), cộng thêm 1 vì tháng bắt đầu từ 0
+        const year = date.getFullYear(); // Lấy năm
+        const hours = date.getHours(); // Lấy giờ trong ngày (0-23)
+        const minutes = date.getMinutes(); // Lấy phút (0-59)
+        const timePost = ` ${hours}:${minutes} ${year}-${month}-${day}`;
 
         // Kiểm tra xem slot có trong mảng slotJoined không
         const isJoined = slotJoined.some(
@@ -187,7 +203,8 @@ function NewFeed() {
           <div key={item.id} className="main-post-container">
             <div className="poster-name">
               <p>{item.memberPostName}</p>
-              <div>{item.dateTime}</div>
+              <div>{timePost}</div>
+              <CountdownTimer targetTime={time} />
             </div>
             <div className="caption">{item.description}</div>
             <div className="post-content-container">
