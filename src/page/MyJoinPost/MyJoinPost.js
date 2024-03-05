@@ -10,6 +10,7 @@ import {
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import CountdownTimer from "../../component/countDownTime";
 
 function MyJoinPost() {
   const { id } = useParams();
@@ -95,56 +96,66 @@ function MyJoinPost() {
           Bạn chưa hoạt động tham gia, hãy tích cực tham gia nào
         </div>
       ) : (
-        postJoined.map((resultItem, index) => (
-          <div key={index} className="main-post-container">
-            <div className="poster-name">
-              <p>{resultItem.memberPostName}</p>
-              <div>{resultItem.dateTime}</div>
-            </div>
-            <div className="caption">{resultItem.description}</div>
-            <div className="post-content-container">
-              <img className="post-img" src={resultItem.image} alt="avatar" />
-              <div className="post-infor">
-                <h3>Thông tin trận đấu bạn tham gia</h3>
-                <div>
-                  <div>
-                    <b>Khu: {yardDetails[index]?.result.areaName} </b>
-                  </div>
-                  <div>
-                    <b>
-                      Sân: {yardDetails[index]?.result.sportName} -{" "}
-                      {resultItem.yardName}
-                    </b>
-                  </div>
-                  <div>
-                    <b>
-                      Thời gian: {resultItem.startTime} - {resultItem.endTime}
-                    </b>
-                  </div>
-                  <div>
-                    <b>Date: {resultItem.date}</b>
-                  </div>
+        postJoined.map((resultItem, index) => {
+          const time = resultItem.date + "T" + resultItem.startTime + ":00";
+          const targetTime = new Date(time).getTime();
+          const currentTime = new Date().getTime();
+
+          if (targetTime < currentTime) {
+            return null;
+          }
+          return (
+            <div key={index} className="main-post-container">
+              <div className="poster-name">
+                <p>{resultItem.memberPostName}</p>
+                <div>{resultItem.dateTime}</div>
+                <CountdownTimer targetTime={time} />
+              </div>
+              <div className="caption">{resultItem.description}</div>
+              <div className="post-content-container">
+                <img className="post-img" src={resultItem.image} alt="avatar" />
+                <div className="post-infor">
+                  <h3>Thông tin trận đấu bạn tham gia</h3>
                   <div>
                     <div>
+                      <b>Khu: {yardDetails[index]?.result.areaName} </b>
+                    </div>
+                    <div>
                       <b>
-                        Tổng số người chơi:{" "}
-                        {parseInt(resultItem.requiredMember) +
-                          parseInt(resultItem.currentMember)}
+                        Sân: {yardDetails[index]?.result.sportName} -{" "}
+                        {resultItem.yardName}
                       </b>
                     </div>
                     <div>
                       <b>
-                        Còn:{" "}
-                        {resultItem.requiredMember -
-                          parseInt(numberOfSlot[resultItem.id]) || 0}
+                        Thời gian: {resultItem.startTime} - {resultItem.endTime}
                       </b>
+                    </div>
+                    <div>
+                      <b>Date: {resultItem.date}</b>
+                    </div>
+                    <div>
+                      <div>
+                        <b>
+                          Tổng số người chơi:{" "}
+                          {parseInt(resultItem.requiredMember) +
+                            parseInt(resultItem.currentMember)}
+                        </b>
+                      </div>
+                      <div>
+                        <b>
+                          Còn:{" "}
+                          {resultItem.requiredMember -
+                            parseInt(numberOfSlot[resultItem.id]) || 0}
+                        </b>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))
+          );
+        })
       )}
     </div>
   );

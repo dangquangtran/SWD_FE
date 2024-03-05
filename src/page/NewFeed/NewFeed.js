@@ -18,6 +18,7 @@ import { showErrorToast, showSuccessToast } from "../../component/toast/toast";
 
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CountdownTimer from "../../component/countDownTime";
 
 function NewFeed() {
   const { id } = useParams();
@@ -152,7 +153,9 @@ function NewFeed() {
       <div className="post-container">
         <img alt="avatar" src={userInfo.image} />
         <button className="write-btn" onClick={toggleModal}>
-          <span className="btn-post-title">{userInfo.name} ơi! Hãy rủ thêm đồng đội chơi thể thao cùng nhé!</span>
+          <span className="btn-post-title">
+            {userInfo.name} ơi! Hãy rủ thêm đồng đội chơi thể thao cùng nhé!
+          </span>
         </button>
       </div>
 
@@ -164,6 +167,14 @@ function NewFeed() {
 
       {slotsInClub.map((item, index) => {
         if (item.memberPostId == idclubmem) {
+          return null;
+        }
+
+        const time = item.date + "T" + item.startTime + ":00";
+        const targetTime = new Date(time).getTime();
+        const currentTime = new Date().getTime();
+
+        if (targetTime < currentTime) {
           return null;
         }
 
@@ -188,6 +199,7 @@ function NewFeed() {
             <div className="poster-name">
               <p>{item.memberPostName}</p>
               <div>{item.dateTime}</div>
+              <CountdownTimer targetTime={time} />
             </div>
             <div className="caption">{item.description}</div>
             <div className="post-content-container">

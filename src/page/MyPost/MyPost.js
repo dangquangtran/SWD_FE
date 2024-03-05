@@ -19,6 +19,7 @@ import {
   confirmJoining,
 } from "../../services/memberService";
 import "./MyPost.scss";
+import CountdownTimer from "../../component/countDownTime";
 
 function MyPost() {
   const { id } = useParams();
@@ -152,13 +153,27 @@ function MyPost() {
       ) : (
         <>
           {myPost.map((item, index) => {
+            const time = item.date + "T" + item.startTime + ":00";
+            const targetTime = new Date(time).getTime();
+            const currentTime = new Date().getTime();
+
+            if (targetTime < currentTime) {
+              return null;
+            }
             return (
               <div key={item.id} className="main-post-container">
                 <div className="poster-name">
-                  <p>{item.memberPostName}</p>
-                  <div>{item.dateTime}</div>
+                  <div>
+                    <p>{item.memberPostName}</p>
+                    <div>{item.dateTime}</div>
+                  </div>
+                  <div>
+                    <CountdownTimer targetTime={time} />
+                  </div>
                 </div>
+
                 <div className="caption">{item.description}</div>
+
                 <div className="post-content-container">
                   <img className="post-img" src={item.image} alt="avatar" />
                   <div className="post-infor">
