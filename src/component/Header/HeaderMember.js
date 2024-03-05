@@ -52,7 +52,7 @@ function HeaderMember() {
             </div>
             <div className="child-content">
               <div>
-                <b>Liên hệ</b>
+                <b>Hướng dẫn</b>
               </div>
             </div>
             <i className="fa fa-bell-o" aria-hidden="true"></i>

@@ -5,6 +5,7 @@ import {
 } from "../../services/memberService";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-regular-svg-icons";
 import "./HistoryPage.scss";
 
 function HistoryPage() {
@@ -67,7 +68,7 @@ function HistoryPage() {
                 ) {
                   const resultPoint =
                     item.initialPoint + item.transactionPoint;
-                    const formattedTransactionPoint = item.transactionPoint > 0 ? `+${item.transactionPoint}` : item.transactionPoint;
+                  const formattedTransactionPoint = item.transactionPoint > 0 ? `+${item.transactionPoint}` : item.transactionPoint;
                   return (
                     <tr key={index}>
                       <td>{item.initialPoint}</td>
@@ -83,8 +84,8 @@ function HistoryPage() {
         </div>
         <div className="wallet-detail-popup">
           <h3>Wallet Information</h3>
-          <p>Tên: {walletInfo.memberName}</p>
-          <p>Điểm bạn đang có: {walletInfo.point}</p>
+          <p><b>Tên:</b> {walletInfo.memberName}</p>
+          <p><b>Điểm bạn đang có:</b> {walletInfo.point} <FontAwesomeIcon icon={faStar} className="faStar" /></p>
         </div>
       </div>
       {loading && (
