@@ -125,6 +125,18 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
         }
     };
 
+    const handleBuildingNameChange = (event) => {
+        const selectedBuildingName = event.target.value;
+        const selectedBuilding = buildingIds.find(building => building.name === selectedBuildingName);
+        if (selectedBuilding) {
+            setFormData({
+                ...formData,
+                buildingName: selectedBuilding.name,
+                buildingId: selectedBuilding.id
+            });
+        }
+    };
+
     return (
         <Modal
             isOpen={isOpen}
@@ -171,37 +183,28 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
                     </div>
                     <div className="input-container">
                         <label>Gender</label>
-                        <input
-                            type="text"
+                        <select
+                            className="select"
                             onChange={(event) => handleOnChangeInput(event, 'gender')}
                             value={formData.gender}
-                        />
+                        >
+                            <option value="" disabled>Select Gender</option>
+                            <option value="male">Nam</option>
+                            <option value="female">Nữ</option>
+                            <option value="other">Khác</option>
+                        </select>
                     </div>
                     <div className="input-container">
                         <label>Building Name</label>
-                        <select className="select"
-                            onChange={(event) => handleOnChangeInput(event, 'buildingName')}
+                        <select
+                            className="select"
+                            onChange={handleBuildingNameChange}
                             value={formData.buildingName}
                         >
                             <option value="" disabled>Select Building Name</option>
                             {buildingIds.map((buildingId) => (
                                 <option key={buildingId.id} value={buildingId.name}>
                                     {buildingId.name}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    <div className="input-container">
-                        <label>Building Id</label>
-                        <select
-                            className="select"
-                            onChange={(event) => handleOnChangeInput(event, 'buildingId')}
-                            value={formData.buildingId}
-                        >
-                            <option value="" disabled>Select Building Id</option>
-                            {buildingIds.map((buildingId) => (
-                                <option key={buildingId.id} value={buildingId.id}>
-                                    {buildingId.id}
                                 </option>
                             ))}
                         </select>

@@ -180,14 +180,14 @@ function NewFeed() {
 
         const date = new Date(item.dateTime);
 
-        const day = date.getDate(); // Lấy ngày trong tháng (1-31)
-        const month = date.getMonth() + 1; // Lấy tháng (0-11), cộng thêm 1 vì tháng bắt đầu từ 0
-        const year = date.getFullYear(); // Lấy năm
-        const hours = date.getHours(); // Lấy giờ trong ngày (0-23)
-        const minutes = date.getMinutes(); // Lấy phút (0-59)
+        const day = date.getDate(); 
+        const month = date.getMonth() + 1; 
+        const year = date.getFullYear(); 
+        const hours = date.getHours(); 
+        const minutes = date.getMinutes(); 
         const timePost = ` ${hours}:${minutes} ${year}-${month}-${day}`;
 
-        // Kiểm tra xem slot có trong mảng slotJoined không
+        
         const isJoined = slotJoined.some(
           (joinedSlot) => joinedSlot.slotId === item.id
         );
