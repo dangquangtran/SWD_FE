@@ -44,7 +44,7 @@ const CountdownTimer = ({ targetTime }) => {
 
   return (
     <div style={{ display: 'flex' }}>
-      <h2 style={{fontSize: '24px', margin: '0' }}>{`${days.toString().padStart(2, "0")}:${hours
+      <h2 style={{fontSize: '22px', margin: '0' }}>{`${days.toString().padStart(2, "0")}:${hours
         .toString()
         .padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds
         .toString()

@@ -4,15 +4,19 @@
 
     .club-title-new-feed {
         margin-left: 60px;
-        height: 44px;
+        height: 51px;
         position: fixed;
-        background-color: #a4ce9f;
+        background-color: #e8eee7;
         padding: 5px 40px;
         border-radius: 0 0 5px 5px;
         width: 70%;
         color: #fff;
         font-weight: 700;
         font-size: 1.5rem;
+
+        span {
+            color: black;
+        }
     }
 
     .post-container {
@@ -81,9 +85,11 @@
         border: 1px solid #ccc;
 
         .poster-name {
+            display: flex;
+            justify-content: space-between;
             background-color: #fff;
             border-radius: 10px;
-            width: 30%;
+            width: 100%;
             padding: 10px;
             margin-bottom: 10px;
 
@@ -109,14 +115,14 @@
         }
 
         .post-img {
-            width: 40%;
+            max-width: 26%;
             border: 1px solid;
         }
 
         .post-infor {
-            width: 55%;
+            width: 1000px;
             text-align: center;
-            background-color: #f9f7ff;
+            background-color: white;
             margin-left: 20px;
             border: 1px dashed #000;
             padding-bottom: 10px;

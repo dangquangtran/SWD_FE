@@ -120,27 +120,6 @@ function NewFeed() {
       });
 
       window.location.reload();
-
-      // const slotJoinedRes = await getSlotJoined(idclubmem);
-      // setSlotJoined(slotJoinedRes.result);
-
-      // const promises = slotsInClub.map(async (item) => {
-      //   const response = await getNumberOfSlot(item.id);
-      //   return { itemId: item.id, numberOfSlot: response.result };
-      // });
-
-      // const results = await Promise.all(promises);
-      // const numberOfSlotMap = {};
-      // results.forEach((result) => {
-      //   numberOfSlotMap[result.itemId] = result.numberOfSlot;
-      // });
-      // setNumberOfSlot(numberOfSlotMap);
-
-      // console.log(slotJoinedRes.result);
-
-      // fetchData();
-      // showSuccessToast('Join slot successfully!');
-      // fetchData();
     } catch (error) {
       showErrorToast("Error joining slot!");
       console.error("Error joining slot:", error);
@@ -149,7 +128,9 @@ function NewFeed() {
 
   return (
     <div className="new-feed-container">
-      <div className="club-title-new-feed">{clubDetail.name}</div>
+      <div className="club-title-new-feed">
+        <span>{clubDetail.name}</span>
+      </div>
       <div className="post-container">
         <img alt="avatar" src={userInfo.image} />
         <button className="write-btn" onClick={toggleModal}>
@@ -202,9 +183,11 @@ function NewFeed() {
         return (
           <div key={item.id} className="main-post-container">
             <div className="poster-name">
-              <p>{item.memberPostName}</p>
-              <div>{timePost}</div>
-              <CountdownTimer targetTime={time} />
+              <div>
+                <p>{item.memberPostName}</p>
+                <div style={{ fontSize: '18px' }}>{timePost}</div>
+              </div>
+              <div><CountdownTimer targetTime={time} /></div>
             </div>
             <div className="caption">{item.description}</div>
             <div className="post-content-container">

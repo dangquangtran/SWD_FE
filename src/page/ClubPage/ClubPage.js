@@ -8,7 +8,6 @@ import {
   getIdMemberCreatePost,
 } from "../../services/userService";
 import "./ClubPage.scss";
-import image1 from "../../assets/Sport/badminton.jpg";
 import { showSuccessToast } from "../../component/toast/toast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
