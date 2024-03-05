@@ -101,6 +101,15 @@ function MyJoinPost() {
           const targetTime = new Date(time).getTime();
           const currentTime = new Date().getTime();
 
+          const date = new Date(resultItem.dateTime);
+
+          const day = date.getDate(); // Lấy ngày trong tháng (1-31)
+          const month = date.getMonth() + 1; // Lấy tháng (0-11), cộng thêm 1 vì tháng bắt đầu từ 0
+          const year = date.getFullYear(); // Lấy năm
+          const hours = date.getHours(); // Lấy giờ trong ngày (0-23)
+          const minutes = date.getMinutes(); // Lấy phút (0-59)
+          const timePost = ` ${hours}:${minutes} ${year}-${month}-${day}`;
+
           if (targetTime < currentTime) {
             return null;
           }
@@ -108,7 +117,7 @@ function MyJoinPost() {
             <div key={index} className="main-post-container">
               <div className="poster-name">
                 <p>{resultItem.memberPostName}</p>
-                <div>{resultItem.dateTime}</div>
+                <div>{timePost}</div>
                 <CountdownTimer targetTime={time} />
               </div>
               <div className="caption">{resultItem.description}</div>
