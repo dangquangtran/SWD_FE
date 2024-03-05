@@ -54,10 +54,6 @@ function MyJoinPost() {
   }
 
   useEffect(() => {
-    fetchData();
-  }, []);
-
-  useEffect(() => {
     const fetchData = async () => {
       const details = await Promise.all(
         postJoined.map((item) => getYardDetail(item.yardId))
@@ -67,6 +63,10 @@ function MyJoinPost() {
 
     fetchData();
   }, [postJoined]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   useEffect(() => {
     async function fetchPosts() {

@@ -59,7 +59,7 @@ function ClubPage() {
       countMember: prevClubDetail.countMember + 1,
     }));
 
-    window.location.reload();
+    // window.location.reload();
   };
 
   const handleLeaveClub = async () => {

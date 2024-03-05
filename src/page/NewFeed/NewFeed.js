@@ -11,6 +11,7 @@ import {
   getNumberOfSlot,
   getWalletByMemberId,
   getYardDetail,
+  getSlotNotJoined,
 } from "../../services/userService";
 import { useParams } from "react-router-dom";
 import ModalCreatePost from "../../component/modal/ModalCreatePost";
@@ -20,38 +21,35 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CountdownTimer from "../../component/countDownTime";
 
-function NewFeed() {
+function NewFeed({ inforWallet, tranPoint }) {
   const { id } = useParams();
   const { idclubmem } = useParams();
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   const [clubDetail, setClubDetail] = useState({});
-  const [slotsInClub, setSlotsInClub] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [tranPoint, setTranPoint] = useState(null);
   const [numberOfSlot, setNumberOfSlot] = useState({});
-  const [slotJoined, setSlotJoined] = useState([]);
-  const [inforWallet, setInforWallet] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [yardDetails, setYardDetails] = useState([]);
 
+  // const [slotsInClub, setSlotsInClub] = useState([]);
+  // const [slotJoined, setSlotJoined] = useState([]);
+  const [slotNotJoined, setSlotNotJoined] = useState([]);
   async function fetchData() {
     try {
-      const [clubDetailRes, slotsInClubRes, slotJoinedRes, tranPointRes] =
-        await Promise.all([
-          getDetailClub(id),
-          getPostInClub(id),
-          getSlotJoined(idclubmem),
-          getTranPoint(),
-        ]);
+      const [clubDetailRes, slotNotJoinedRes] = await Promise.all([
+        getDetailClub(id),
+        // getPostInClub(id),
+        // getSlotJoined(idclubmem),
+        getSlotNotJoined(idclubmem),
+      ]);
 
-      setTranPoint(tranPointRes.result);
+      setSlotNotJoined(slotNotJoinedRes.result);
       setClubDetail(clubDetailRes.result);
-      setSlotsInClub(slotsInClubRes.result);
-      console.log(slotsInClubRes.result);
-      setSlotJoined(slotJoinedRes.result);
+      // setSlotsInClub(slotsInClubRes.result);
+      // setSlotJoined(slotJoinedRes.result);
 
-      const promises = slotsInClubRes.result.map(async (item) => {
+      const promises = slotNotJoinedRes.result.map(async (item) => {
         const response = await getNumberOfSlot(item.id);
         return { itemId: item.id, numberOfSlot: response.result };
       });
@@ -62,9 +60,6 @@ function NewFeed() {
         numberOfSlotMap[result.itemId] = result.numberOfSlot;
       });
       setNumberOfSlot(numberOfSlotMap);
-
-      const walletRes = await getWalletByMemberId(userInfo.id);
-      setInforWallet(walletRes.result);
 
       setIsLoading(false);
     } catch (error) {
@@ -79,13 +74,13 @@ function NewFeed() {
   useEffect(() => {
     const fetchData = async () => {
       const details = await Promise.all(
-        slotsInClub.map((item) => getYardDetail(item.yardId))
+        slotNotJoined.map((item) => getYardDetail(item.yardId))
       );
       setYardDetails(details);
     };
 
     fetchData();
-  }, [slotsInClub]);
+  }, [slotNotJoined]);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -126,6 +121,8 @@ function NewFeed() {
     }
   }
 
+  console.log(slotNotJoined);
+
   return (
     <div className="new-feed-container">
       <div className="club-title-new-feed">
@@ -146,7 +143,7 @@ function NewFeed() {
         <FontAwesomeIcon icon={faSpinner} className="loading-icon" />
       )}
 
-      {slotsInClub.map((item, index) => {
+      {slotNotJoined.map((item, index) => {
         if (item.memberPostId == idclubmem) {
           return null;
         }
@@ -161,20 +158,12 @@ function NewFeed() {
 
         const date = new Date(item.dateTime);
 
-        const day = date.getDate(); 
-        const month = date.getMonth() + 1; 
-        const year = date.getFullYear(); 
-        const hours = date.getHours(); 
-        const minutes = date.getMinutes(); 
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
         const timePost = ` ${hours}:${minutes} ${year}-${month}-${day}`;
-
-        
-        const isJoined = slotJoined.some(
-          (joinedSlot) => joinedSlot.slotId === item.id
-        );
-        {
-          if (isJoined) return null;
-        }
 
         const remainingSlots =
           parseInt(item.requiredMember) - parseInt(numberOfSlot[item.id] || 0);
@@ -185,9 +174,11 @@ function NewFeed() {
             <div className="poster-name">
               <div>
                 <p>{item.memberPostName}</p>
-                <div style={{ fontSize: '18px' }}>{timePost}</div>
+                <div style={{ fontSize: "18px" }}>{timePost}</div>
               </div>
-              <div><CountdownTimer targetTime={time} /></div>
+              <div>
+                <CountdownTimer targetTime={time} />
+              </div>
             </div>
             <div className="caption">{item.description}</div>
             <div className="post-content-container">
@@ -234,10 +225,6 @@ function NewFeed() {
                     style={{ backgroundColor: "gray" }}
                   >
                     Full
-                  </button>
-                ) : isJoined ? (
-                  <button className="btn-join" disabled>
-                    Joined
                   </button>
                 ) : (
                   <button
