@@ -148,9 +148,14 @@ const getYards = () => {
 };
 
 //approval
-const getAllClubAdded = () => {
-  return axios.get("/api/members");
+const updateClubApproved = (clubid) => {
+  return axios.put(`api/admin/club/approve/${clubid}`)
 };
+
+const updateClubReject = (clubid) => {
+  return axios.put(`api/admin/club/reject/${clubid}`)
+};
+
 
 export {
   handleLoginAdmin,
@@ -188,4 +193,6 @@ export {
   getYardDetail,
   getSlotNotJoined,
   getYards,
+  updateClubApproved,
+  updateClubReject
 };
