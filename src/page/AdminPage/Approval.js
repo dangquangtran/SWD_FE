@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getAllClub } from '../../services/userService';
+import { getAllClub, updateClubApproved, updateClubReject } from '../../services/userService';
 import { getAllSports } from '../../services/userService';
 
 import "./Approval.scss"
@@ -15,7 +15,7 @@ function ApprovalManage() {
     const fetchApiClubs = async () => {
         try {
             let data = await getAllClub();
-            console.log(data.result[0]);
+            console.log(data.result);
             setClubs(data.result);
         } catch (error) {
             setClubs([]);
@@ -24,8 +24,21 @@ function ApprovalManage() {
     }
 
 
-    const handleApprove = () => {
-
+    const handleApprove = async (clubId) => {
+        try {
+            await updateClubApproved(clubId);
+            await fetchApiClubs()
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    const handleReject = async (clubId) => {
+        try {
+            await updateClubReject(clubId);
+            await fetchApiClubs()
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -48,8 +61,8 @@ function ApprovalManage() {
                                         return (
                                             <tr key={index}>
                                                 <td>{item.name}</td>
-                                                <td><button className="btn-approve" onClick={() => handleApprove(item)}>Approve</button></td>
-                                                <td><button className="btn-reject">Reject</button></td>
+                                                <td><button className="btn-approve" onClick={() => handleApprove(item.id)}>Approve</button></td>
+                                                <td><button className="btn-reject" onClick={() => handleReject(item.id)}>Reject</button></td>
                                                 <td>{item.description}</td>
                                             </tr>
                                         )
