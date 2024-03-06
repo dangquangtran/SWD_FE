@@ -4,7 +4,6 @@ import "./MemberPage.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Footer from "../../component/Footer/Footer";
-import CountdownTimer from "../../component/countDownTime";
 
 function MemberPage() {
   return (

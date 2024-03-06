@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import image1 from "../../assets/Sport/badminton.jpg";
 import { getAllClub } from "../../services/userService";
 import "./ClubContent.scss";
 
@@ -16,8 +15,6 @@ function ClubContent() {
   const fetchApiClubs = async () => {
     try {
       let data = await getAllClub();
-      // console.log(data.result[2].status.data);
-      console.log(data);
       setClubs(data.result);
     } catch (error) {
       setClubs([]);

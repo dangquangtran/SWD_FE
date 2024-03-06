@@ -61,8 +61,6 @@ function ClubPage() {
 
   };
 
-  console.log(clubDetail);
-
   const handleLeaveClub = async () => {
     const confirmLeave = window.confirm("Bạn có chắc chắn muốn rời club?");
     if (confirmLeave) {
@@ -87,7 +85,14 @@ function ClubPage() {
     return <div>Loading...</div>;
   }
 
+  const date = new Date(clubDetail.dateTime);
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const timePost = `  ${day}-${month}-${year}`;
+
   return (
+    
     <div className="container-club">
       <div className="side-bar">
         <button className="  btn-back" onClick={() => navigate("/members")}>
@@ -109,7 +114,9 @@ function ClubPage() {
           ></img>
           <h2> {clubDetail.name}</h2>
           <p>{clubDetail.countMember} thành viên</p>
-          <span>Ngày thành lập: {clubDetail.dateTime}</span>
+          <span>Ngày thành lập: {timePost}</span>
+          <br></br>
+          <span>Người quản lí: Staff1{clubDetail.staffName}</span>
           <div>
             {isJoined ? (
               <div>

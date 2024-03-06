@@ -3,14 +3,9 @@ import "./NewFeed.scss";
 
 import {
   getDetailClub,
-  getPostInClub,
   createPostInSlot,
   UserJointSlot,
-  getTranPoint,
-  getSlotJoined,
   getNumberOfSlot,
-  getWalletByMemberId,
-  getYardDetail,
   getSlotNotJoined,
 } from "../../services/userService";
 import { useParams } from "react-router-dom";
@@ -31,22 +26,16 @@ function NewFeed({ inforWallet, tranPoint, yards }) {
   const [numberOfSlot, setNumberOfSlot] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
-  // const [slotsInClub, setSlotsInClub] = useState([]);
-  // const [slotJoined, setSlotJoined] = useState([]);
   const [slotNotJoined, setSlotNotJoined] = useState([]);
   async function fetchData() {
     try {
       const [clubDetailRes, slotNotJoinedRes] = await Promise.all([
         getDetailClub(id),
-        // getPostInClub(id),
-        // getSlotJoined(idclubmem),
         getSlotNotJoined(idclubmem, id),
       ]);
 
       setSlotNotJoined(slotNotJoinedRes.result);
       setClubDetail(clubDetailRes.result);
-      // setSlotsInClub(slotsInClubRes.result);
-      // setSlotJoined(slotJoinedRes.result);
 
       const promises = slotNotJoinedRes.result.map(async (item) => {
         const response = await getNumberOfSlot(item.id);
@@ -111,8 +100,6 @@ function NewFeed({ inforWallet, tranPoint, yards }) {
     }
   }
 
-  console.log(tranPoint);
-
   return (
     <div className="new-feed-container">
       <div className="club-title-new-feed">
@@ -153,13 +140,12 @@ function NewFeed({ inforWallet, tranPoint, yards }) {
         const year = date.getFullYear();
         const hours = date.getHours();
         const minutes = date.getMinutes();
-        const timePost = ` ${hours}:${minutes} ${year}-${month}-${day}`;
+        const timePost = ` ${hours}:${minutes} ${day}-${month}-${year}`;
 
         const remainingSlots =
           parseInt(item.requiredMember) - parseInt(numberOfSlot[item.id] || 0);
         const isFull = remainingSlots <= 0;
 
-        //get yard details
         const yardDetails = yards.find((yard) => {
           return yard.id === item.yardId;
         });
