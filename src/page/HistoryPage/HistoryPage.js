@@ -24,10 +24,7 @@ function HistoryPage() {
         const response2 = await getTransactionHistoryPoints(walletId);
         setTransactionHistoryPoints(response2.result);
         const lastTransaction = response2.result.find(
-          (item) =>
-            item.status &&
-            item.status.data &&
-            item.status.data[0] === 1
+          (item) => item.status && item.status.data && item.status.data[0] === 1
         );
         if (lastTransaction) {
           const resultPoint =
@@ -46,6 +43,8 @@ function HistoryPage() {
 
     fetchWalletInfo();
   }, []);
+
+  console.log(transactionHistoryPoints);
 
   return (
     <div className="history-page-container">
@@ -66,9 +65,11 @@ function HistoryPage() {
                   item.status.data &&
                   item.status.data[0] === 1
                 ) {
-                  const resultPoint =
-                    item.initialPoint + item.transactionPoint;
-                  const formattedTransactionPoint = item.transactionPoint > 0 ? `+${item.transactionPoint}` : item.transactionPoint;
+                  const resultPoint = item.initialPoint + item.transactionPoint;
+                  const formattedTransactionPoint =
+                    item.transactionPoint > 0
+                      ? `+${item.transactionPoint}`
+                      : item.transactionPoint;
                   return (
                     <tr key={index}>
                       <td>{item.initialPoint}</td>
@@ -84,8 +85,13 @@ function HistoryPage() {
         </div>
         <div className="wallet-detail-popup">
           <h3>Wallet Information</h3>
-          <p><b>Tên:</b> {walletInfo.memberName}</p>
-          <p><b>Điểm bạn đang có:</b> {walletInfo.point} <FontAwesomeIcon icon={faStar} className="faStar" /></p>
+          <p>
+            <b>Tên:</b> {walletInfo.memberName}
+          </p>
+          <p>
+            <b>Điểm bạn đang có:</b> {walletInfo.point}{" "}
+            <FontAwesomeIcon icon={faStar} className="faStar" />
+          </p>
         </div>
       </div>
       {loading && (

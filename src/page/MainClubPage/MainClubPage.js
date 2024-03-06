@@ -12,22 +12,35 @@ import NewFeed from "../NewFeed/NewFeed";
 import MyPost from "../MyPost/MyPost";
 import MyJoinPost from "../MyJoinPost/MyJoinPost";
 import HistoryPage from "../HistoryPage/HistoryPage";
-import { getTranPoint, getWalletByMemberId } from "../../services/userService";
+import {
+  getTranPoint,
+  getWalletByMemberId,
+  getYard,
+  getYards,
+} from "../../services/userService";
 
 function MainClubPage() {
   const [activeTab, setActiveTab] = useState("newFeed");
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   const [inforWallet, setInforWallet] = useState();
-  const [tranPoint, setTranPoint] = useState(null);
+  const [tranPoint, setTranPoint] = useState({});
+  const [yards, setYards] = useState([]);
 
   useEffect(() => {
     const fetchWalletData = async () => {
       try {
-        const walletRes = await getWalletByMemberId(userInfo.id);
-        const tranPointRes = getTranPoint();
+        // Sử dụng Promise.all để gửi các yêu cầu cùng một lúc
+        const [walletRes, tranPointRes, yardsRes] = await Promise.all([
+          getWalletByMemberId(userInfo.id),
+          getTranPoint(),
+          getYards(),
+        ]);
+
+        // Đặt thông tin ví, điểm giao dịch và các khu vực vào trạng thái
         setInforWallet(walletRes.result);
         setTranPoint(tranPointRes.result);
+        setYards(yardsRes.result);
       } catch (error) {
         console.error("Error fetching wallet data:", error);
       }
@@ -35,6 +48,8 @@ function MainClubPage() {
 
     fetchWalletData();
   }, []);
+
+  console.log(tranPoint);
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
@@ -75,12 +90,20 @@ function MainClubPage() {
           </button>
         </div>
         {activeTab === "newFeed" && (
-          <NewFeed inforWallet={inforWallet} tranPoint={tranPoint} />
+          <NewFeed
+            inforWallet={inforWallet}
+            tranPoint={tranPoint}
+            yards={yards}
+          />
         )}
         {activeTab === "myPost" && (
-          <MyPost tranPoint={tranPoint} inforWallet={inforWallet} />
+          <MyPost
+            tranPoint={tranPoint}
+            inforWallet={inforWallet}
+            yards={yards}
+          />
         )}
-        {activeTab === "myJoinPost" && <MyJoinPost />}
+        {activeTab === "myJoinPost" && <MyJoinPost yards={yards} />}
         {activeTab === "myHistory" && <HistoryPage inforWallet={inforWallet} />}
       </div>
     </>

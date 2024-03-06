@@ -27,7 +27,7 @@ function ClubPage() {
     try {
       const response = await getDetailClub(id);
       setClubDetail(response.result);
-      console.log(clubDetail);
+      console.log(response.result);
 
       const response2 = await checkMemberJoinClub(user.id, id);
       setIsJoined(response2.result == 1 ? true : false);
