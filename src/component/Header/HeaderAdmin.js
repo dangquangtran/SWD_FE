@@ -25,7 +25,6 @@ function HeaderAdmin() {
                 <div className='content-middle'>
                     <input type="text" className="header-search" placeholder='Enter' />
                     <div className='header-icon'>
-                        <i className="fa fa-snowflake-o" aria-hidden="true"></i>
                         <i className="fa fa-bell-o" aria-hidden="true"></i>
                         <i className="fa fa-envelope-open-o" aria-hidden="true"></i>
                     </div>
