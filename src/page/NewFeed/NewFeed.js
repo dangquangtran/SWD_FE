@@ -182,33 +182,37 @@ function NewFeed({ inforWallet, tranPoint, yards }) {
                 <h3>Thông tin trận đấu</h3>
                 <div>
                   <div>
-                    <b>Khu: {yardDetails?.areaName} </b>
+                    <b>Khu: <span>{yardDetails?.areaName}</span> </b>
                   </div>
                   <div>
                     <b>
-                      Sân: {yardDetails?.sportName} - {item.yardName}
+                      Sân: <span>{yardDetails?.sportName} - {item.yardName}</span>
                     </b>
                   </div>
                   <div>
                     <b>
-                      Thời gian: {item.startTime} - {item.endTime}
+                      Thời gian: <span>{item.startTime} - {item.endTime}</span>
                     </b>
                   </div>
                   <div>
-                    <b>Date: {item.date}</b>
+                    <b>Date: <span>{item.date}</span></b>
                   </div>
                   <div>
                     <b>
                       Tổng số người chơi:{" "}
-                      {parseInt(item.requiredMember) +
-                        parseInt(item.currentMember)}
+                      <span>
+                        {parseInt(item.requiredMember) +
+                          parseInt(item.currentMember)}
+                      </span>
                     </b>
                   </div>
                   <div>
                     <b>
                       Còn:{" "}
-                      {parseInt(item.requiredMember) -
-                        parseInt(numberOfSlot[item.id] || 0)}
+                      <span>
+                        {parseInt(item.requiredMember) -
+                          parseInt(numberOfSlot[item.id] || 0)}
+                      </span>
                     </b>
                   </div>
                 </div>

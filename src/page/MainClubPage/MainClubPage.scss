@@ -4,11 +4,12 @@
 }
 
 .side-bar-main {
-    width: 20%;
+    width: 28%;
     background-color: #fff;
     text-align: center;
     height: inherit;
     border-right: 1px solid #ccc;
+    font-size: 26px;
 
     .tab-btn.active {
         background-color: #cad4c9;
@@ -17,16 +18,15 @@
 
 .btn-backHome {
     width: 100%;
-    padding: 10px 20px;
+    padding: 10px 40px;
     border-bottom: 1px solid #000;
     font-weight: bold;
-    text-align: center;
 }
 
 .tab-btn {
     background-color: transparent;
     width: 100%;
-    padding: 30px 20px;
+    padding: 30px 40px;
     font-weight: bold;
     border-bottom: 1px solid #e9e1e1;
 

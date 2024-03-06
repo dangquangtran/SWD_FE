@@ -59,8 +59,9 @@ function ClubPage() {
       countMember: prevClubDetail.countMember + 1,
     }));
 
-    // window.location.reload();
   };
+
+  console.log(clubDetail);
 
   const handleLeaveClub = async () => {
     const confirmLeave = window.confirm("Bạn có chắc chắn muốn rời club?");
@@ -108,6 +109,7 @@ function ClubPage() {
           ></img>
           <h2> {clubDetail.name}</h2>
           <p>{clubDetail.countMember} thành viên</p>
+          <span>Ngày thành lập: {clubDetail.dateTime}</span>
           <div>
             {isJoined ? (
               <div>

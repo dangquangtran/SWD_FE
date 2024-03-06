@@ -108,25 +108,27 @@
         .caption {
             font-size: 20px;
             margin-bottom: 20px;
+            margin-left: 30px;
         }
 
         .post-content-container {
+            margin-left: 30px;
             display: flex;
         }
 
         .post-img {
-            max-width: 26%;
+            max-width: 16%;
             border: 1px solid rgb(190, 186, 186);
         }
 
         .post-infor {
+            padding-left: 50px;
             width: 1000px;
-            text-align: center;
+            text-align: left;
             background-color: white;
             margin-left: 20px;
-            border: 1px solid rgb(190, 186, 186);
+            border: 1px solid #bebaba;
             padding-bottom: 10px;
-            justify-content: center;
             display: flex;
             flex-direction: column;
 
@@ -140,15 +142,15 @@
                 padding: 10px 50px;
                 background-color: #3b6d36;
                 color: #fff;
-                width: 30%;
-                margin: 0 auto;
+                width: 14%;
                 text-align: center;
                 border-radius: 5px;
+                margin-top: 20px;
             }
 
             b {
                 font-size: 1.5rem;
-                font-weight: 500;
+                font-weight: 400;
             }
         }
 

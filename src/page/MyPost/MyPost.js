@@ -170,7 +170,7 @@ function MyPost({ tranPoint, inforWallet, yards }) {
                     <h3>Thông tin trận đấu</h3>
                     <div>
                       <div>
-                        <b>Khu: {yardDetails?.areaName} </b>
+                        <b>Khu: <p style={{ fontWeight: '600' }}>{yardDetails?.areaName}</p> </b>
                       </div>
                       <div>
                         <b>
@@ -220,7 +220,6 @@ function MyPost({ tranPoint, inforWallet, yards }) {
                             className="member-join-list"
                           >
                             <h4>Danh sách người chơi đã tham gia:</h4>
-                            {/* <span> Người chơi muốn tham gia: </span> */}
                             {postItem.members.length > 0 ? (
                               postItem.members.map((member) => (
                                 <div key={member.id} className="member-item">
