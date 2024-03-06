@@ -44,8 +44,6 @@ function SportsManageStaff() {
         }
     }
 
-
-
     return (
         <div className='sports-table-staff mt-3 mx-2'>
             <table id="sportsTable-staff">

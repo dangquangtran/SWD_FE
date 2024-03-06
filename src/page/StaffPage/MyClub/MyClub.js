@@ -13,7 +13,6 @@ function MyClub() {
                 const userID = JSON.parse(localStorage.getItem('userInfo')).id;
                 const response = await getAllClubStaff(userID);
                 setClubs(response.message);
-                console.log(response.message)
             } catch (error) {
                 console.log(error);
             }
@@ -23,7 +22,7 @@ function MyClub() {
     }, []);
 
     const handleClick = (clubId) => {
-        navigate(`/member-sport/${clubId}`);
+        navigate(`/member-sport/staff/${clubId}`);
     };
 
     return (

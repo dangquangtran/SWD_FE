@@ -8,6 +8,7 @@ import LoginPage from "../page/LoginPage/LoginPage";
 import MemberPage from "../page/MemberPage/MemberPage";
 import MainClubPage from "../page/MainClubPage/MainClubPage";
 import LoginStaff from "../page/LoginPage/LoginStaff";
+import ClubPageStaff from "../page/StaffPage/ClubPageStaff/ClubPageStaff";
 
 export const routes = [
   {
@@ -50,4 +51,8 @@ export const routes = [
     path: "/main-club/:id/:idclubmem",
     page: MainClubPage,
   },
+  {
+    path: "member-sport/staff/:clubId",
+    page: ClubPageStaff
+  }
 ];

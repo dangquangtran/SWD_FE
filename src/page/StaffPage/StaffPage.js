@@ -7,12 +7,9 @@ import { faArrowRightFromBracket, faCircleNodes, faMedal } from "@fortawesome/fr
 import MyClub from "./MyClub/MyClub";
 import SportsManageStaff from "./Sports/SportsManage";
 
-
-
 function StaffPage() {
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState("my-club");
-
 
     const handleLogout = async () => {
         try {
