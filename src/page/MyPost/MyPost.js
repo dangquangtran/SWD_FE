@@ -1,5 +1,3 @@
-// MyPost.jsx
-
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,8 +7,6 @@ import {
   getIdMemberCreatePost,
   getMyPostInClub,
   getNumberOfSlot,
-  getTranPoint,
-  getWalletByMemberId,
   getYardDetail,
 } from "../../services/userService";
 import {
@@ -129,8 +125,6 @@ function MyPost({ tranPoint, inforWallet }) {
       showErrorToast("Cancel failed!");
     }
   };
-
-  console.log(memberJoinList);
 
   return (
     <div className="new-feed-container">
