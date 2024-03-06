@@ -2,7 +2,7 @@ import axios from "../axios";
 
 const handleLoginStaff = (userName, userPassword) => {
     return axios.post("api/login-staff", {
-        username: userName,
+        email: userName,
         password: userPassword,
     });
 };
@@ -16,8 +16,8 @@ const getAllClubStaff = (staffId) => {
     return axios.get(`api/staff/get-club/${staffId}`);
 }
 
-const createClubStaff = (data) => {
-    return axios.post("api/clubs", data);
+const createClubStaff = (staffId, data) => {
+    return axios.post(`api/clubs/${staffId}`, data);
 };
 
 const getAllStaffs = () => {

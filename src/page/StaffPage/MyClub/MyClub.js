@@ -30,7 +30,11 @@ function MyClub() {
         <div className="club-manage">
             {clubs && clubs.map(club => {
                 return (
-                    <div key={club.id} className="club-staff" onClick={() => handleClick(club.id)}>
+                    <div key={club.id} className="club-staff" onClick={() => {
+                        if (club.approveStatus === 1) {
+                            handleClick(club.id)
+                        }
+                    }}>
                         <img src={club.image} alt={`Club ${club.id}`} />
                         <h4>{club.name}</h4>
                         {club.approveStatus === 1 ? <div className="approved">approved</div> : <div className="waiting">waiting...</div>}

@@ -33,7 +33,8 @@ function SportsManageStaff() {
 
     const doCreateNewClub = async (data) => {
         try {
-            await createClubStaff(data);
+            const userID = JSON.parse(localStorage.getItem('userInfo')).id
+            await createClubStaff(userID, data);
             console.log(data)
             showSuccessToast('Club added successfully!');
             closeModal()
@@ -42,6 +43,8 @@ function SportsManageStaff() {
             console.log(error);
         }
     }
+
+
 
     return (
         <div className='sports-table-staff mt-3 mx-2'>

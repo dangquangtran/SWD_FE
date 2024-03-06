@@ -12,16 +12,16 @@ const LoginPage = () => {
 
     const formik = useFormik({
         initialValues: {
-            userName: '',
+            email: '',
             passWord: '',
         },
         validationSchema: Yup.object({
-            userName: Yup.string().required('Username is required'),
+            email: Yup.string().required('email is required'),
             passWord: Yup.string().required('Password is required'),
         }),
         onSubmit: async (values, { setSubmitting, setErrors }) => {
             try {
-                let data = await handleLoginStaff(values.userName, values.passWord);
+                let data = await handleLoginStaff(values.email, values.passWord);
                 console.log(data);
                 if (data && !_.isEmpty(data.token)) {
                     localStorage.setItem('token', data.token);
@@ -51,15 +51,15 @@ const LoginPage = () => {
                                 <input
                                     type='text'
                                     className='form-control'
-                                    placeholder='Enter your username'
-                                    name='userName'
+                                    placeholder='Enter your email'
+                                    name='email'
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
-                                    value={formik.values.userName}
+                                    value={formik.values.email}
                                 />
                             </span>
-                            {formik.touched.userName && formik.errors.userName && (
-                                <div className='error-message'>{formik.errors.userName}</div>
+                            {formik.touched.email && formik.errors.email && (
+                                <div className='error-message'>{formik.errors.email}</div>
                             )}
                         </div>
                         <div className='form-group login-input'>

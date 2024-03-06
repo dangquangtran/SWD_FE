@@ -32,7 +32,9 @@
 
             .child-content {
 
-                b {
+                width: max-content;
+
+                s b {
                     font-size: 25px;
                     cursor: pointer;
                 }
