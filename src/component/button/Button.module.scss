@@ -96,16 +96,11 @@
     margin: 0 5px;
     background-color: #E4AEC5;
     color: #000;
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: bold;
     border: 1px solid rgb(251, 95, 95);
     text-decoration: none;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.9);
 
-    &:hover {
-        color: #243D25;
-        transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg) scale(1.1);
-        background-color: #e78bb3;
 
-    }
 }
