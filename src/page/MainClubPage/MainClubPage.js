@@ -48,6 +48,8 @@ function MainClubPage() {
 
     fetchWalletData();
   }, []);
+
+  console.log(tranPoint);
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };

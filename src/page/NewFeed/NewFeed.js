@@ -102,6 +102,8 @@ function NewFeed({ inforWallet, tranPoint, yards }) {
         },
       });
 
+      console.log("join");
+
       window.location.reload();
     } catch (error) {
       showErrorToast("Error joining slot!");
@@ -109,7 +111,7 @@ function NewFeed({ inforWallet, tranPoint, yards }) {
     }
   }
 
-  console.log(slotNotJoined);
+  console.log(tranPoint);
 
   return (
     <div className="new-feed-container">

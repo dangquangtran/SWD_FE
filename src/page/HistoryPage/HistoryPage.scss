@@ -1,27 +1,55 @@
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
   }
-  
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .loading-icon {
-    animation: spin 1s linear infinite;
-    font-size: 50px;
+  animation: spin 1s linear infinite;
+  font-size: 50px;
 }
 
 .history-wrapper {
-  display: grid;
-  grid-template-columns: 1fr auto; 
+  display: flex;
+  flex-direction: column;
   grid-column-gap: 20px;
-  max-width: 100%; 
-  overflow-x: auto; 
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 .wallet-detail-popup {
   background-color: #f9f9f9;
-  border: 1px solid #ddd;
+  border: 2px solid #000;
   border-radius: 5px;
   padding: 15px;
   height: 200px;
+  margin-top: 30px;
+
+  p {
+    font-size: 1.5rem;
+  }
 }
 
+.history-page-container {
+  width: 70%;
+  height: 100vh;
+  padding: 10px 50px;
+}
 
+h2 {
+  margin: 0 auto;
+}
+
+h3 {
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+
+}
+
+.faStar {
+  color: #ff2810;
+}
