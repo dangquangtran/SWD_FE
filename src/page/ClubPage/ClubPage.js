@@ -116,7 +116,7 @@ function ClubPage() {
           <p>{clubDetail.countMember} thành viên</p>
           <span>Ngày thành lập: {timePost}</span>
           <br></br>
-          <span>Người quản lí: Staff1{clubDetail.staffName}</span>
+          <span>Người quản lí: {clubDetail.staffName}</span>
           <div>
             {isJoined ? (
               <div>

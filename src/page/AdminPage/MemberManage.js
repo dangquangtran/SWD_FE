@@ -80,7 +80,7 @@ function MemberManage() {
                         onClick={toggleModal}
                     >
                         <i className='fa fa-plus'></i>
-                        Add new user
+                        Thêm thành viên
                     </button>
                 </div>
                 <ModalMember 
@@ -98,21 +98,21 @@ function MemberManage() {
                     <table id="customers">
                         <tbody>
                             <tr>
+                                <th>Tên</th>
                                 <th>Email</th>
-                                <th>Name</th>
-                                <th>Gender</th>
-                                <th>Image</th>
-                                <th>Building name</th>
-                                <th>Phone number</th>
-                                <th>Action</th>
+                                <th>Giới tính</th>
+                                <th>Hình ảnh</th>
+                                <th>Tòa</th>
+                                <th>Số điện thoại</th>
+                                <th>Hoạt động</th>
                             </tr>
                             {
                                 memBers && memBers.map((item, index) => {
                                     if (item.status && item.status.data && item.status.data[0] === 1) {
                                         return (
                                             <tr key={index}>
-                                                <td>{item.email}</td>
                                                 <td>{item.name}</td>
+                                                <td>{item.email}</td>
                                                 <td>{item.gender}</td>
                                                 <td><img width={50} height={50} src={item.image}/></td>
                                                 <td>{item.buildingName}</td>

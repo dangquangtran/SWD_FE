@@ -60,8 +60,9 @@ const SubMenu = ({ item, activeItem, handleClick }) => {
       }}
     >
       <div ref={navRef} className="sub-nav-inner">
-        {item?.items.map((subItem) => (
+        {item?.items.map((subItem, index) => (
           <NavButton
+            key={index}
             onClick={handleClick}
             name={subItem}
             isActive={activeItem === subItem}

@@ -3,6 +3,7 @@ import { getAllClub, updateClubApproved, updateClubReject } from '../../services
 import { getAllSports } from '../../services/userService';
 
 import "./Approval.scss"
+import { showErrorToast, showSuccessToast } from "../../component/toast/toast";
 
 
 function ApprovalManage() {
@@ -27,16 +28,20 @@ function ApprovalManage() {
     const handleApprove = async (clubId) => {
         try {
             await updateClubApproved(clubId);
+            showSuccessToast('Chấp thuận thành công')
             await fetchApiClubs()
         } catch (error) {
+            showErrorToast('Chấp thuận thất bại')
             console.log(error);
         }
     }
     const handleReject = async (clubId) => {
         try {
             await updateClubReject(clubId);
+            showSuccessToast('Từ chối thành công');
             await fetchApiClubs()
         } catch (error) {
+            showSuccessToast('Từ chối thất bại')
             console.log(error);
         }
     }
@@ -44,15 +49,14 @@ function ApprovalManage() {
     return (
         <div className="approval-container">
             <div className="club-approve">
-                <h2>Club approval table</h2>
+                <h2>Bảng phê duyệt câu lạc bộ</h2>
                 <div className='sports-table mt-3 mx-2'>
                     <table id="sportsTable">
                         <tbody>
                             <tr>
-                                <th>Club Name</th>
-                                <th>Approve</th>
-                                <th>Reject</th>
-                                <th>Description</th>
+                                <th>Tên câu lạc bộ</th>
+                                <th>Xác nhận</th>
+                                <th>Giới thiệu</th>
                             </tr>
 
                             {
@@ -61,8 +65,16 @@ function ApprovalManage() {
                                         return (
                                             <tr key={index}>
                                                 <td>{item.name}</td>
-                                                <td><button className="btn-approve" onClick={() => handleApprove(item.id)}>Approve</button></td>
-                                                <td><button className="btn-reject" onClick={() => handleReject(item.id)}>Reject</button></td>
+                                                <td>
+                                                    <button 
+                                                        className="btn-approve" 
+                                                        onClick={() => handleApprove(item.id)}>Phê duyệt
+                                                    </button>
+                                                    <button 
+                                                        className="btn-reject" 
+                                                        onClick={() => handleReject(item.id)}>Từ chối
+                                                    </button>
+                                                </td>
                                                 <td>{item.description}</td>
                                             </tr>
                                         )

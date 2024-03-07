@@ -75,7 +75,7 @@ function StaffManage() {
       <div className="mx-1">
         <Button className="btn btn-primary px-3" onClick={toggleModal}>
           <i className="fa fa-plus"></i>
-          Add new staff
+          Thêm nhân viên
         </Button>
       </div>
       <ModalStaff isOpen={isModalOpen} toggleFromParent={toggleModal} createNewStaff={createNewStaff} />
@@ -84,8 +84,8 @@ function StaffManage() {
         <table id="customers">
           <tbody>
             <tr>
-              <th>Email</th>
               <th>Tên</th>
+              <th>Email</th>
               <th>Giới tính</th>
               <th>Hình ảnh</th>
               <th>Hành động</th>
@@ -94,8 +94,8 @@ function StaffManage() {
                 if(staff.status && staff.status === 1) {
                     return (
                       <tr key={index}>
-                        <td>{staff.email}</td>
                         <td>{staff.name}</td>
+                        <td>{staff.email}</td>
                         <td>{staff.gender}</td>
                         <td><img width={50} height={50} src={staff.image} alt={staff.name} /></td>
                         <td>
