@@ -50,6 +50,16 @@ function HistoryPage() {
     <div className="history-page-container">
       <h2>History Page</h2>
       <div className="history-wrapper">
+        <div className="wallet-detail-popup">
+          <h3>Wallet Information</h3>
+          <p>
+            <b>Tên:</b> {walletInfo.memberName}
+          </p>
+          <p>
+            <b>Điểm bạn đang có:</b> {walletInfo.point}{" "}
+            <FontAwesomeIcon icon={faStar} className="faStar" />
+          </p>
+        </div>
         <div className="users-table mt-3 mx-2">
           <table id="customers">
             <tbody>
@@ -83,16 +93,7 @@ function HistoryPage() {
             </tbody>
           </table>
         </div>
-        <div className="wallet-detail-popup">
-          <h3>Wallet Information</h3>
-          <p>
-            <b>Tên:</b> {walletInfo.memberName}
-          </p>
-          <p>
-            <b>Điểm bạn đang có:</b> {walletInfo.point}{" "}
-            <FontAwesomeIcon icon={faStar} className="faStar" />
-          </p>
-        </div>
+
       </div>
       {loading && (
         <div className="loading-spinner">

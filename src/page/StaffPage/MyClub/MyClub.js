@@ -29,14 +29,18 @@ function MyClub() {
         <div className="club-manage">
             {clubs && clubs.map(club => {
                 return (
-                    <div key={club.id} className="club-staff" onClick={() => {
-                        if (club.approveStatus === 1) {
-                            handleClick(club.id)
-                        }
-                    }}>
-                        <img src={club.image} alt={`Club ${club.id}`} />
-                        <h4>{club.name}</h4>
-                        {club.approveStatus === 1 ? <div className="approved">approved</div> : <div className="waiting">waiting...</div>}
+                    <div key={club.id} className="club-staff" >
+                        <div onClick={() => {
+                            if (club.approveStatus === 1) {
+                                handleClick(club.id)
+                            }
+                        }}> <img src={club.image} alt={`Club ${club.id}`} />
+                            <h4>{club.name}</h4></div>
+                        {club.approveStatus === 1 ? <div className="approved">approved</div> : club.approveStatus === 0 ? <div className="waiting">waiting...</div> : <div className="reject-club">Rejected</div>}
+                        <div>
+                            <button className="btn-myclub mem-list-btn">Thành viên</button>
+                            <button className="btn-myclub delete-club-staff">Xóa club</button>
+                        </div>
                     </div>
                 )
             })}
