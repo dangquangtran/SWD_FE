@@ -9,7 +9,7 @@ import {
   Label,
   Input,
 } from "reactstrap";
-import { getAllYards } from "../../services/userService";
+import { getYardsBySport } from "../../services/userService";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImages, faCalendarDays } from "@fortawesome/free-regular-svg-icons";
 import {
@@ -21,8 +21,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
-function ModalCreatePost({ isOpen, toggle, createPost }) {
-  const imageFile = useRef(null)
+function ModalCreatePost({
+  isOpen,
+  toggle,
+  createPost,
+  clubDetail,
+  setActiveTab,
+}) {
+  const imageFile = useRef(null);
   const [formData, setFormData] = useState({
     date: "",
     startTime: "",
@@ -33,7 +39,7 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
     yardName: "",
     clubId: "",
     description: "",
-    image: '',
+    image: "",
   });
 
   const [yards, setYards] = useState([]);
@@ -42,19 +48,19 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
   useEffect(() => {
     const fetchYards = async () => {
       try {
-        const yards = await getAllYards();
-        setYards(yards.result);
+        const yardsRes = await getYardsBySport(clubDetail.sportId);
+        setYards(yardsRes.result);
       } catch (error) {
         console.error("Error fetching yards:", error);
       }
     };
 
     fetchYards();
-  }, []);
+  }, [clubDetail]);
 
-  const handleOnChangeInput = (event, id) => {
-    if(id === 'image' && imageFile){
-      uploadCloudinary(imageFile.current?.files[0])
+  const handleOnChangeInput = async (event, id) => {
+    if (id === "image" && imageFile) {
+      await uploadCloudinary(imageFile.current?.files[0]);
     }
     setFormData({
       ...formData,
@@ -70,20 +76,21 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
 
   const uploadCloudinary = async (image) => {
     const formDataImage = new FormData();
-    formDataImage.append('api_key', '665652388645534');
-    formDataImage.append('upload_preset','upload-image');
-    formDataImage.append('file', image);
+    formDataImage.append("api_key", "665652388645534");
+    formDataImage.append("upload_preset", "upload-image");
+    formDataImage.append("file", image);
     try {
-      const response = await axios.post('https://api.cloudinary.com/v1_1/upload-image/image/upload',formDataImage);
-      setTimeout(()=> {
-        setFormData({
-            ...formData,
-            image: response.data.url
-        })
-      },500)
-      console.log('Upload cloudinary successfully', response);
+      const response = await axios.post(
+        "https://api.cloudinary.com/v1_1/upload-image/image/upload",
+        formDataImage
+      );
+      setFormData({
+        ...formData,
+        image: response.data.url,
+      });
+      console.log("Upload cloudinary successfully", response);
     } catch (error) {
-      console.log('Error upload cloudinary:', error);
+      console.log("Error upload cloudinary:", error);
     }
   };
 
@@ -93,6 +100,7 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
       yardId: yardId,
     };
     createPost(postData);
+    setActiveTab("myPost");
     toggle();
   };
 
@@ -203,7 +211,7 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
             <option value="">Select Yard Name</option>
             {yards.map((yard) => (
               <option key={yard.id} value={yard.name}>
-                {yard.name} - {yard.areaName} - {yard.sportName}
+                {yard.name} - {yard.areaName}
               </option>
             ))}
           </Input>
@@ -215,7 +223,7 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
             <input
               type="file"
               ref={imageFile}
-              onChange={(event) => handleOnChangeInput(event, 'image')}
+              onChange={(event) => handleOnChangeInput(event, "image")}
             />
           </div>
         </FormGroup>

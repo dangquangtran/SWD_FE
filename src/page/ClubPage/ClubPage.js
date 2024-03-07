@@ -58,7 +58,6 @@ function ClubPage() {
       ...prevClubDetail,
       countMember: prevClubDetail.countMember + 1,
     }));
-
   };
 
   const handleLeaveClub = async () => {
@@ -91,8 +90,9 @@ function ClubPage() {
   const year = date.getFullYear();
   const timePost = `  ${day}-${month}-${year}`;
 
+  console.log(clubDetail);
+
   return (
-    
     <div className="container-club">
       <div className="side-bar">
         <button className="  btn-back" onClick={() => navigate("/members")}>
@@ -113,10 +113,11 @@ function ClubPage() {
             alt="club-background"
           ></img>
           <h2> {clubDetail.name}</h2>
+          <p>Môn thể thao: {clubDetail.sportName}</p>
           <p>{clubDetail.countMember} thành viên</p>
-          <span>Ngày thành lập: {timePost}</span>
-          <br></br>
-          <span>Người quản lí: {clubDetail.staffName}</span>
+          <p>Mô tả: {clubDetail.description}</p>
+          <p>Ngày thành lập: {timePost}</p>
+          <p>Người quản lí: {clubDetail.staffName}</p>
           <div>
             {isJoined ? (
               <div>

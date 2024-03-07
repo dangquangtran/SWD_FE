@@ -16,7 +16,7 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CountdownTimer from "../../component/countDownTime";
 
-function NewFeed({ inforWallet, tranPoint, yards }) {
+function NewFeed({ inforWallet, tranPoint, yards, setActiveTab }) {
   const { id } = useParams();
   const { idclubmem } = useParams();
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -168,20 +168,30 @@ function NewFeed({ inforWallet, tranPoint, yards }) {
                 <h3>Thông tin trận đấu</h3>
                 <div>
                   <div>
-                    <b>Khu: <span>{yardDetails?.areaName}</span> </b>
-                  </div>
-                  <div>
                     <b>
-                      Sân: <span>{yardDetails?.sportName} - {item.yardName}</span>
+                      Khu: <span>{yardDetails?.areaName}</span>{" "}
                     </b>
                   </div>
                   <div>
                     <b>
-                      Thời gian: <span>{item.startTime} - {item.endTime}</span>
+                      Sân:{" "}
+                      <span>
+                        {yardDetails?.sportName} - {item.yardName}
+                      </span>
                     </b>
                   </div>
                   <div>
-                    <b>Date: <span>{item.date}</span></b>
+                    <b>
+                      Thời gian:{" "}
+                      <span>
+                        {item.startTime} - {item.endTime}
+                      </span>
+                    </b>
+                  </div>
+                  <div>
+                    <b>
+                      Ngày: <span>{item.date}</span>
+                    </b>
                   </div>
                   <div>
                     <b>
@@ -194,11 +204,12 @@ function NewFeed({ inforWallet, tranPoint, yards }) {
                   </div>
                   <div>
                     <b>
-                      Còn:{" "}
+                      Còn thiếu:{" "}
                       <span>
                         {parseInt(item.requiredMember) -
                           parseInt(numberOfSlot[item.id] || 0)}
-                      </span>
+                      </span>{" "}
+                      người
                     </b>
                   </div>
                 </div>
@@ -208,7 +219,7 @@ function NewFeed({ inforWallet, tranPoint, yards }) {
                     disabled
                     style={{ backgroundColor: "gray" }}
                   >
-                    Full
+                    Đã đủ người
                   </button>
                 ) : (
                   <button
@@ -217,7 +228,7 @@ function NewFeed({ inforWallet, tranPoint, yards }) {
                       handleJoinSlot(item.id);
                     }}
                   >
-                    Join
+                    Tham gia
                   </button>
                 )}
               </div>
@@ -226,9 +237,11 @@ function NewFeed({ inforWallet, tranPoint, yards }) {
         );
       })}
       <ModalCreatePost
+        clubDetail={clubDetail}
         isOpen={isModalOpen}
         toggle={toggleModal}
         createPost={handleCreatePost}
+        setActiveTab={setActiveTab}
       />
     </div>
   );
