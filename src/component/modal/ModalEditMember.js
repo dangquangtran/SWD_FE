@@ -21,17 +21,17 @@ function ModalEditMember({ isOpen, toggleFromParent, currentUser, editUser }) {
 
   useEffect(() => {
     const fetchBuildingIds = async () => {
-        try {
-            const response = await getAllBuildingId();
-            setBuildingIds(response.result); 
-            console.log(buildingIds);
-        } catch (error) {
-            console.error('Error fetching buildingIds', error);
-        }
+      try {
+        const response = await getAllBuildingId();
+        setBuildingIds(response.result);
+        console.log(buildingIds);
+      } catch (error) {
+        console.error('Error fetching buildingIds', error);
+      }
     };
 
     fetchBuildingIds();
-}, []);
+  }, []);
 
   useEffect(() => {
     let user = currentUser;
@@ -52,7 +52,7 @@ function ModalEditMember({ isOpen, toggleFromParent, currentUser, editUser }) {
   const toggle = () => {
     toggleFromParent();
   };
-  
+
   const handleOnChangeInput = (event, id) => {
     setFormData({
       ...formData,
@@ -78,7 +78,7 @@ function ModalEditMember({ isOpen, toggleFromParent, currentUser, editUser }) {
     }
   };
 
-  
+
 
   return (
     <Modal
@@ -88,87 +88,87 @@ function ModalEditMember({ isOpen, toggleFromParent, currentUser, editUser }) {
       size="lg"
     >
       <ModalHeader toggle={() => toggle()}>
-        Edit user
+        Chỉnh sửa thành viên
       </ModalHeader>
       <ModalBody>
-      <div className="modal-user-body">
-                <div className="input-container">
-                        <label>Name</label>
-                        <input
-                            type="text"
-                            onChange={(event) => handleOnChangeInput(event, 'name')}
-                            value={formData.name}
-                        />
-                    </div>
-                    <div className="input-container">
-                        <label>Email</label>
-                        <input
-                            type="text"
-                            onChange={(event) => handleOnChangeInput(event, 'email')}
-                            value={formData.email}
-                        />
-                    </div>
-                    <div className="input-container">
-                        <label>Password</label>
-                        <input
-                            type="password"
-                            onChange={(event) => handleOnChangeInput(event, 'password')}
-                            value={formData.password}
-                        />
-                    </div>
-                    <div className="input-container">
-                        <label>Image</label>
-                        <input
-                            type="text"
-                            onChange={(event) => handleOnChangeInput(event, 'image')}
-                            value={formData.image}
-                        />
-                    </div>
-                    <div className="input-container">
-                        <label>Gender</label>
-                        <input
-                            type="text"
-                            onChange={(event) => handleOnChangeInput(event, 'gender')}
-                            value={formData.gender}
-                        />
-                    </div>
-                    <div className="input-container">
-                        <label>Building Id</label>
-                        <select
-                            onChange={(event) => handleOnChangeInput(event, 'buildingId')}
-                            value={formData.buildingId}
-                        >
-                            <option value="" disabled>Select Building Id</option>
-                            {buildingIds.map((buildingId) => (
-                                <option key={buildingId.id} value={buildingId.id}>
-                                    {buildingId.id}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    <div className="input-container">
-                        <label>Building Name</label>
-                        <select
-                            onChange={(event) => handleOnChangeInput(event, 'buildingName')}
-                            value={formData.buildingName}
-                        >
-                            <option value="" disabled>Select Building Name</option>
-                            {buildingIds.map((buildingId) => (
-                                <option key={buildingId.id} value={buildingId.name}>
-                                    {buildingId.name}
-                                </option>
-                            ))} 
-                        </select>
-                    </div>
-                    <div className="input-container">
-                        <label>Phone number</label>
-                        <input
-                            type="text"
-                            onChange={(event) => handleOnChangeInput(event, 'phoneNumber')}
-                            value={formData.phoneNumber}
-                        />
-                    </div>
-                </div>
+        <div className="modal-user-body">
+          <div className="input-container">
+            <label>Tên</label>
+            <input
+              type="text"
+              onChange={(event) => handleOnChangeInput(event, 'name')}
+              value={formData.name}
+            />
+          </div>
+          <div className="input-container">
+            <label>Email</label>
+            <input
+              type="text"
+              onChange={(event) => handleOnChangeInput(event, 'email')}
+              value={formData.email}
+            />
+          </div>
+          <div className="input-container">
+            <label>Mật khẩu</label>
+            <input
+              type="password"
+              onChange={(event) => handleOnChangeInput(event, 'password')}
+              value={formData.password}
+            />
+          </div>
+          <div className="input-container">
+            <label>Hình ảnh</label>
+            <input
+              type="text"
+              onChange={(event) => handleOnChangeInput(event, 'image')}
+              value={formData.image}
+            />
+          </div>
+          <div className="input-container">
+            <label>Giới tính</label>
+            <input
+              type="text"
+              onChange={(event) => handleOnChangeInput(event, 'gender')}
+              value={formData.gender}
+            />
+          </div>
+          <div className="input-container">
+            <label>ID tòa nhà</label>
+            <select
+              onChange={(event) => handleOnChangeInput(event, 'buildingId')}
+              value={formData.buildingId}
+            >
+              <option value="" disabled>Chọn ID tòa nhà</option>
+              {buildingIds.map((buildingId) => (
+                <option key={buildingId.id} value={buildingId.id}>
+                  {buildingId.id}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="input-container">
+            <label>Tên tòa nhà</label>
+            <select
+              onChange={(event) => handleOnChangeInput(event, 'buildingName')}
+              value={formData.buildingName}
+            >
+              <option value="" disabled>Chọn tên chung cư</option>
+              {buildingIds.map((buildingId) => (
+                <option key={buildingId.id} value={buildingId.name}>
+                  {buildingId.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="input-container">
+            <label>Số điện thoại</label>
+            <input
+              type="text"
+              onChange={(event) => handleOnChangeInput(event, 'phoneNumber')}
+              value={formData.phoneNumber}
+            />
+          </div>
+        </div>
       </ModalBody>
       <ModalFooter>
         <Button
@@ -177,14 +177,14 @@ function ModalEditMember({ isOpen, toggleFromParent, currentUser, editUser }) {
           onClick={handleEditUser}
 
         >
-          Save change
+          Lưu thay đổi
         </Button>{" "}
         <Button
           color="secondary"
           className="px-3"
           onClick={toggle}
         >
-          Close
+          Đóng
         </Button>
       </ModalFooter>
     </Modal>

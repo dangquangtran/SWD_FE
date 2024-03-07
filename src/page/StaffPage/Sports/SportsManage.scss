@@ -23,17 +23,27 @@
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: #8d5b94;
+    background-color: #436850;
     color: white;
 }
 
 .sports-table-staff {
     height: 100%;
+    background-color: #EFF5F5;
+    padding: 80px 50px;
+    margin-top: 50px;
+
 }
 
 .btn-add-club-staff {
     padding: 8px 20px;
-    background-color: #04AA6D;
+    background-color: #A6CF98;
     color: #fff;
     border-radius: 5px;
+    border: 1px solid #000;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 50px;
 }

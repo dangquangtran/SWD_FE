@@ -58,10 +58,10 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
         toggleFromParent();
     };
 
-   
+
 
     const handleOnChangeInput = (event, id) => {
-        if(id === 'image' && imageFile){
+        if (id === 'image' && imageFile) {
             uploadCloudinary(imageFile.current?.files[0])
         }
         setFormData({
@@ -71,23 +71,23 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
     };
 
     const uploadCloudinary = async (image) => {
-    const formDataImage = new FormData();
-    formDataImage.append('api_key', '665652388645534');
-    formDataImage.append('upload_preset','upload-image');
-    formDataImage.append('file', image);
-    try {
-      const response = await axios.post('https://api.cloudinary.com/v1_1/upload-image/image/upload',formDataImage);
-      setTimeout(()=> {
-        setFormData({
-            ...formData,
-            image: response.data.url
-        })
-      },500)
-      console.log('Upload cloudinary successfully', response);
-    } catch (error) {
-      console.log('Error upload cloudinary:', error);
-    }
-  };
+        const formDataImage = new FormData();
+        formDataImage.append('api_key', '665652388645534');
+        formDataImage.append('upload_preset', 'upload-image');
+        formDataImage.append('file', image);
+        try {
+            const response = await axios.post('https://api.cloudinary.com/v1_1/upload-image/image/upload', formDataImage);
+            setTimeout(() => {
+                setFormData({
+                    ...formData,
+                    image: response.data.url
+                })
+            }, 500)
+            console.log('Upload cloudinary successfully', response);
+        } catch (error) {
+            console.log('Error upload cloudinary:', error);
+        }
+    };
 
 
     const checkValidateInput = () => {
@@ -145,12 +145,12 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
             size="lg"
         >
             <ModalHeader toggle={toggle}>
-                CREATE A NEW USER
+                Tạo mới USER
             </ModalHeader>
             <ModalBody>
                 <div className="modal-user-body">
                     <div className="input-container">
-                        <label>User Name</label>
+                        <label>Tên user</label>
                         <input
                             type="text"
                             onChange={(event) => handleOnChangeInput(event, 'name')}
@@ -166,7 +166,7 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
                         />
                     </div>
                     <div className="input-container">
-                        <label>Password</label>
+                        <label>Mật khẩu</label>
                         <input
                             type="password"
                             onChange={(event) => handleOnChangeInput(event, 'password')}
@@ -201,7 +201,7 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
                             onChange={handleBuildingNameChange}
                             value={formData.buildingName}
                         >
-                            <option value="" disabled>Select Building Name</option>
+                            <option value="" disabled>Chọn tên tòa nhà</option>
                             {buildingIds.map((buildingId) => (
                                 <option key={buildingId.id} value={buildingId.name}>
                                     {buildingId.name}
@@ -210,7 +210,7 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
                         </select>
                     </div>
                     <div className="input-container">
-                        <label>Phone number</label>
+                        <label>Số điện thoại</label>
                         <input
                             type="text"
                             onChange={(event) => handleOnChangeInput(event, 'phoneNumber')}
@@ -224,13 +224,13 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
                     className="add-btn"
                     onClick={handleAddNewUser}
                 >
-                    Add new
+                    Tạo mới
                 </Button>{" "}
                 <Button
                     className="close-btn"
                     onClick={toggle}
                 >
-                    Close
+                    Đóng
                 </Button>
             </ModalFooter>
         </Modal>

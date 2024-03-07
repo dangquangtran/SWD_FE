@@ -93,11 +93,11 @@ function ModalClub({ isOpen, toggleFromParent, createNewClub }) {
       className={"modal-user-container"}
       size="lg"
     >
-      <ModalHeader toggle={toggle}>CREATE A NEW CLUB</ModalHeader>
+      <ModalHeader toggle={toggle}>Tạo mới câu lạc bộ.</ModalHeader>
       <ModalBody>
         <div className="modal-user-body">
           <div className="input-container">
-            <label>Club Name</label>
+            <label>Tên câu lạc bộ</label>
             <input
               type="text"
               onChange={(event) => handleOnChangeInput(event, "name")}
@@ -105,7 +105,7 @@ function ModalClub({ isOpen, toggleFromParent, createNewClub }) {
             />
           </div>
           <div className="input-container">
-            <label>Description</label>
+            <label>Mô tả</label>
             <input
               type="text"
               onChange={(event) => handleOnChangeInput(event, "description")}
@@ -113,7 +113,7 @@ function ModalClub({ isOpen, toggleFromParent, createNewClub }) {
             />
           </div>
           <div className="input-container">
-            <label>Member Count</label>
+            <label>Số lượng thành viên</label>
             <input
               type="number"
               onChange={(event) => handleOnChangeInput(event, "countMember")}
@@ -121,14 +121,14 @@ function ModalClub({ isOpen, toggleFromParent, createNewClub }) {
             />
           </div>
           <div className="input-container">
-            <label>Sport Name</label>
+            <label>Tên môn thể thao</label>
             <select
               className="select"
               onChange={(event) => handleOnChangeInput(event, "sportName")}
               value={formData.sportName}
             >
               <option value="" disabled>
-                Select Sport Name
+                Chọn môn thể thao
               </option>
               {sport.map((sport) => (
                 <option key={sport.id} value={sport.name}>
@@ -138,14 +138,14 @@ function ModalClub({ isOpen, toggleFromParent, createNewClub }) {
             </select>
           </div>
           <div className="input-container">
-            <label>Sport Id</label>
+            <label>Sport ID</label>
             <select
               className="select"
               onChange={(event) => handleOnChangeInput(event, "sportId")}
               value={formData.sportId}
             >
               <option value="" disabled>
-                Select Sport Id
+                Chọn Sport ID
               </option>
               {sport.map((sport) => (
                 <option key={sport.id} value={sport.id}>
@@ -158,10 +158,10 @@ function ModalClub({ isOpen, toggleFromParent, createNewClub }) {
       </ModalBody>
       <ModalFooter>
         <Button className="add-btn" onClick={handleAddNewClub}>
-          Add new
+          Tạo mới
         </Button>{" "}
         <Button className="close-btn" onClick={toggle}>
-          Close
+          Đóng
         </Button>
       </ModalFooter>
     </Modal>

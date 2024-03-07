@@ -104,7 +104,7 @@ function ModalStaff({ isOpen, toggleFromParent, createNewStaff }) {
       className={"modal-user-container"}
       size="lg"
     >
-      <ModalHeader toggle={toggle}>Add new staff</ModalHeader>
+      <ModalHeader toggle={toggle}>Tạo mới staff</ModalHeader>
       <ModalBody>
         <div className="modal-user-body">
           <div className="input-container">

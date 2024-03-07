@@ -1,8 +1,10 @@
 .side-bar-staff {
     width: 10%;
-    border-right: 1px solid #ccc;
+    border-right: 0.5px solid #ccc;
     background-color: #fff;
     text-align: -webkit-center;
+    height: 100vh;
+    background-color: #EFF5F5;
 }
 
 .content-container {
@@ -11,6 +13,7 @@
     background-color: #fff;
     display: flex;
     flex-direction: column;
+    height: 100vh;
 }
 
 .App {
@@ -25,11 +28,12 @@
 }
 
 .header-staff {
-    background-color: #684569;
+    background-color: #fff;
     height: 70px;
     display: flex;
     position: relative;
     color: #fff;
+    box-shadow: 0 5px 10px #ccc;
 }
 
 .btn-logout-staff {
@@ -39,16 +43,15 @@
     position: absolute;
     top: 0;
     right: 0;
-    font-size: 1.7rem;
-    color: #fff;
+    font-size: 1.2rem;
 
     &:hover {
-        color: #000;
+        color: #e37575;
     }
 }
 
 .logout-icon {
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .child-content-staff {
@@ -56,6 +59,7 @@
     align-items: center;
     display: flex;
     padding: 0 50px;
+    color: #000;
 
     b {
         font-size: 25px;
@@ -63,15 +67,15 @@
     }
 
     &:hover {
-        color: #5cbb50;
+        color: #000;
         cursor: pointer;
-        background-color: #725073;
+        background-color: #92C7CF;
 
     }
 
     &.active {
-        color: #5cbb50;
-        background-color: #725073;
+        color: #fff;
+        background-color: #92C7CF;
     }
 }
 

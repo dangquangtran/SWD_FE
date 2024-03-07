@@ -16,8 +16,8 @@ const LoginPage = () => {
             passWord: '',
         },
         validationSchema: Yup.object({
-            email: Yup.string().required('email is required'),
-            passWord: Yup.string().required('Password is required'),
+            email: Yup.string().required('Yêu cầu email'),
+            passWord: Yup.string().required('Yêu cầu mật khẩu '),
         }),
         onSubmit: async (values, { setSubmitting, setErrors }) => {
             try {

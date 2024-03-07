@@ -68,12 +68,12 @@ function ModalSport({ isOpen, toggleFromParent, createNewSport }) {
       size="lg"
     >
       <ModalHeader toggle={toggle}>
-        CREATE A NEW SPORT
+        Tạo mới SPORT
       </ModalHeader>
       <ModalBody>
         <div className="modal-user-body">
           <div className="input-container">
-            <label>Sport Name</label>
+            <label>Tên môn thể thao</label>
             <input
               type="text"
               onChange={(event) => handleOnChangeInput(event, 'name')}
@@ -81,7 +81,7 @@ function ModalSport({ isOpen, toggleFromParent, createNewSport }) {
             />
           </div>
           <div className="input-container">
-            <label>Description</label>
+            <label>Mô tả</label>
             <input
               type="text"
               onChange={(event) => handleOnChangeInput(event, 'description')}
@@ -95,13 +95,13 @@ function ModalSport({ isOpen, toggleFromParent, createNewSport }) {
           className="add-btn"
           onClick={handleAddNewSport}
         >
-          Add new
+          Tạo mới
         </Button>{" "}
         <Button
           className="close-btn"
           onClick={toggle}
         >
-          Close
+          Đóng
         </Button>
       </ModalFooter>
     </Modal>

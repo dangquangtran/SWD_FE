@@ -66,12 +66,12 @@ function ModalEditClub({ isOpen, toggleFromParent, currentClub, editClub }) {
       size="lg"
     >
       <ModalHeader toggle={toggle}>
-        Edit club
+        Sửa club
       </ModalHeader>
       <ModalBody>
         <div className="modal-user-body">
           <div className="input-container">
-            <label>Club Name</label>
+            <label>Tên câu lạc bộ</label>
             <input
               type="text"
               onChange={(event) => handleOnChangeInput(event, 'name')}
@@ -79,7 +79,7 @@ function ModalEditClub({ isOpen, toggleFromParent, currentClub, editClub }) {
             />
           </div>
           <div className="input-container">
-            <label>Description</label>
+            <label>Mô tả</label>
             <input
               type="text"
               onChange={(event) => handleOnChangeInput(event, 'description')}
@@ -87,7 +87,7 @@ function ModalEditClub({ isOpen, toggleFromParent, currentClub, editClub }) {
             />
           </div>
           <div className="input-container">
-            <label>Member Count</label>
+            <label>Số lượng thành viên</label>
             <input
               type="number"
               onChange={(event) => handleOnChangeInput(event, 'countMember')}
@@ -102,14 +102,14 @@ function ModalEditClub({ isOpen, toggleFromParent, currentClub, editClub }) {
           className="px-3"
           onClick={handleEditClub}
         >
-          Save change
+          Lưu thay đổi
         </Button>{" "}
         <Button
           color="secondary"
           className="px-3"
           onClick={toggle}
         >
-          Close
+          Đóng
         </Button>
       </ModalFooter>
     </Modal>

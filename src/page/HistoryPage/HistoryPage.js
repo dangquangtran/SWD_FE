@@ -67,7 +67,7 @@ function HistoryPage() {
                 <th>Point</th>
                 <th>Transaction Point</th>
                 <th>Result Point</th>
-                <th>Description</th>
+                <th>Mô tả</th>
               </tr>
               {transactionHistoryPoints.map((item, index) => {
                 if (

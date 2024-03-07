@@ -53,7 +53,7 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
   }, []);
 
   const handleOnChangeInput = (event, id) => {
-    if(id === 'image' && imageFile){
+    if (id === 'image' && imageFile) {
       uploadCloudinary(imageFile.current?.files[0])
     }
     setFormData({
@@ -71,16 +71,16 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
   const uploadCloudinary = async (image) => {
     const formDataImage = new FormData();
     formDataImage.append('api_key', '665652388645534');
-    formDataImage.append('upload_preset','upload-image');
+    formDataImage.append('upload_preset', 'upload-image');
     formDataImage.append('file', image);
     try {
-      const response = await axios.post('https://api.cloudinary.com/v1_1/upload-image/image/upload',formDataImage);
-      setTimeout(()=> {
+      const response = await axios.post('https://api.cloudinary.com/v1_1/upload-image/image/upload', formDataImage);
+      setTimeout(() => {
         setFormData({
-            ...formData,
-            image: response.data.url
+          ...formData,
+          image: response.data.url
         })
-      },500)
+      }, 500)
       console.log('Upload cloudinary successfully', response);
     } catch (error) {
       console.log('Error upload cloudinary:', error);
@@ -105,12 +105,12 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
   return (
     <Modal isOpen={isOpen} toggle={toggle}>
       <ModalHeader toggle={toggle}>
-        <FontAwesomeIcon icon={faSignsPost} /> Create a New Post
+        <FontAwesomeIcon icon={faSignsPost} /> Tạo mới bài viết
       </ModalHeader>
       <ModalBody>
         <FormGroup>
           <Label for="description">
-            <FontAwesomeIcon icon={faPenToSquare} /> Description
+            <FontAwesomeIcon icon={faPenToSquare} /> Mô tả
           </Label>
           <Input
             type="textarea"
@@ -122,7 +122,7 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
         </FormGroup>
         <FormGroup>
           <Label for="date">
-            <FontAwesomeIcon icon={faCalendarDays} /> Date
+            <FontAwesomeIcon icon={faCalendarDays} /> Ngày
           </Label>
           <Input
             type="date"
@@ -133,7 +133,7 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
         </FormGroup>
         <FormGroup>
           <Label for="startTime">
-            <FontAwesomeIcon icon={faClock} /> Start Time
+            <FontAwesomeIcon icon={faClock} /> Thời gian bắt đầu
           </Label>
           <Input
             type="select"
@@ -141,7 +141,7 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
             onChange={(event) => handleOnChangeInput(event, "startTime")}
             value={formData.startTime}
           >
-            <option value="">Select Start Time</option>
+            <option value="">Chọn thời gian bắt đầu</option>
             {hours.map((hour, index) => (
               <option key={index} value={hour}>
                 {hour}
@@ -152,7 +152,7 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
         <FormGroup>
           <Label for="endTime">
             {" "}
-            <FontAwesomeIcon icon={faClock} /> End Time
+            <FontAwesomeIcon icon={faClock} /> Thời gian kết thúc
           </Label>
           <Input
             type="select"
@@ -160,7 +160,7 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
             onChange={(event) => handleOnChangeInput(event, "endTime")}
             value={formData.endTime}
           >
-            <option value="">Select End Time</option>
+            <option value="">Chọn thời gian kết thúc</option>
             {hours.map((hour, index) => (
               <option key={index} value={hour}>
                 {hour}
@@ -170,7 +170,7 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
         </FormGroup>
         <FormGroup>
           <Label for="currentMember">
-            <FontAwesomeIcon icon={faPerson} /> Current Member
+            <FontAwesomeIcon icon={faPerson} /> Thành viên hiện tại
           </Label>
           <Input
             type="number"
@@ -181,7 +181,7 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
         </FormGroup>
         <FormGroup>
           <Label for="requiredMember">
-            <FontAwesomeIcon icon={faPerson} /> Required Member
+            <FontAwesomeIcon icon={faPerson} /> Thành viên yêu cầu
           </Label>
           <Input
             type="number"
@@ -192,7 +192,7 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
         </FormGroup>
         <FormGroup>
           <Label for="yardName">
-            <FontAwesomeIcon icon={faPersonShelter} /> Yard Name
+            <FontAwesomeIcon icon={faPersonShelter} /> Tên sân
           </Label>
           <Input
             type="select"
@@ -200,7 +200,7 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
             onChange={(event) => handleOnChangeInput(event, "yardName")}
             value={formData.yardName}
           >
-            <option value="">Select Yard Name</option>
+            <option value="">Chọn tên sân</option>
             {yards.map((yard) => (
               <option key={yard.id} value={yard.name}>
                 {yard.name} - {yard.areaName} - {yard.sportName}
@@ -222,10 +222,10 @@ function ModalCreatePost({ isOpen, toggle, createPost }) {
       </ModalBody>
       <ModalFooter>
         <Button color="primary" onClick={handleAddNewPost}>
-          Add Post
+          Đăng bài
         </Button>
         <Button color="secondary" onClick={toggle}>
-          Cancel
+          Hủy
         </Button>
       </ModalFooter>
     </Modal>

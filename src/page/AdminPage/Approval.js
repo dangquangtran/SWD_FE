@@ -55,8 +55,9 @@ function ApprovalManage() {
                         <tbody>
                             <tr>
                                 <th>Tên câu lạc bộ</th>
-                                <th>Xác nhận</th>
                                 <th>Giới thiệu</th>
+                                <th>Xác nhận</th>
+
                             </tr>
 
                             {
@@ -65,17 +66,18 @@ function ApprovalManage() {
                                         return (
                                             <tr key={index}>
                                                 <td>{item.name}</td>
+
+                                                <td>{item.description}</td>
                                                 <td>
-                                                    <button 
-                                                        className="btn-approve" 
+                                                    <button
+                                                        className="btn-approve"
                                                         onClick={() => handleApprove(item.id)}>Phê duyệt
                                                     </button>
-                                                    <button 
-                                                        className="btn-reject" 
+                                                    <button
+                                                        className="btn-reject"
                                                         onClick={() => handleReject(item.id)}>Từ chối
                                                     </button>
                                                 </td>
-                                                <td>{item.description}</td>
                                             </tr>
                                         )
                                     }

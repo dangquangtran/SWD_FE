@@ -64,12 +64,12 @@ function ModalEditSport({ isOpen, toggleFromParent, currentSport, editSport }) {
       size="lg"
     >
       <ModalHeader toggle={toggle}>
-        Edit sport
+        Chỉnh sửa môn thể thao
       </ModalHeader>
       <ModalBody>
         <div className="modal-user-body">
           <div className="input-container">
-            <label>Sport Name</label>
+            <label>Tên môn thể thao</label>
             <input
               type="text"
               onChange={(event) => handleOnChangeInput(event, 'name')}
@@ -77,7 +77,7 @@ function ModalEditSport({ isOpen, toggleFromParent, currentSport, editSport }) {
             />
           </div>
           <div className="input-container">
-            <label>Description</label>
+            <label>Mô tả</label>
             <input
               type="text"
               onChange={(event) => handleOnChangeInput(event, 'description')}
@@ -92,14 +92,14 @@ function ModalEditSport({ isOpen, toggleFromParent, currentSport, editSport }) {
           className="px-3"
           onClick={handleEditSport}
         >
-          Save change
+          Lưu thay đổi
         </Button>{" "}
         <Button
           color="secondary"
           className="px-3"
           onClick={toggle}
         >
-          Close
+          Đóng
         </Button>
       </ModalFooter>
     </Modal>

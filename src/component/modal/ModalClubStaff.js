@@ -112,11 +112,11 @@ function ModalClubStaff({ isOpen, toggleFromParent, createNewClub, sportName, sp
             className={"modal-user-container"}
             size="lg"
         >
-            <ModalHeader toggle={toggle}>CREATE A NEW CLUB</ModalHeader>
+            <ModalHeader toggle={toggle}>Tạo mới CLUB</ModalHeader>
             <ModalBody>
                 <div className="modal-user-body">
                     <div className="input-container">
-                        <label>Club Name</label>
+                        <label>Tên câu lạc bộ</label>
                         <input
                             type="text"
                             onChange={(event) => handleOnChangeInput(event, "name")}
@@ -124,7 +124,7 @@ function ModalClubStaff({ isOpen, toggleFromParent, createNewClub, sportName, sp
                         />
                     </div>
                     <div className="input-container">
-                        <label>Description</label>
+                        <label>Mô tả</label>
                         <input
                             type="text"
                             onChange={(event) => handleOnChangeInput(event, "description")}
@@ -132,7 +132,7 @@ function ModalClubStaff({ isOpen, toggleFromParent, createNewClub, sportName, sp
                         />
                     </div>
                     <div className="input-container">
-                        <label>Sport Name</label>
+                        <label>Tên môn thể thao</label>
                         <input type="text" value={formData.sportName} readOnly />
 
                     </div>
@@ -150,10 +150,10 @@ function ModalClubStaff({ isOpen, toggleFromParent, createNewClub, sportName, sp
             </ModalBody>
             <ModalFooter>
                 <Button className="add-btn" onClick={handleAddNewClub}>
-                    Add new
+                    Tạo mới
                 </Button>{" "}
                 <Button className="close-btn" onClick={toggle}>
-                    Close
+                    Đóng
                 </Button>
             </ModalFooter>
         </Modal>

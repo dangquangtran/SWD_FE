@@ -46,52 +46,52 @@ function ModalEditStaff({ isOpen, toggleFromParent, currentStaff, editStaff }) {
     >
       <ModalHeader toggle={() => toggle()}>Edit staff</ModalHeader>
       <ModalBody>
-      <div className="modal-user-body">
-                <div className="input-container">
-                        <label>Tên</label>
-                        <input
-                            type="text"
-                            onChange={(event) => handleOnChangeInput(event, 'name')}
-                            value={formData.name}
-                        />
-                    </div>
-                    <div className="input-container">
-                        <label>Email</label>
-                        <input
-                            type="text"
-                            onChange={(event) => handleOnChangeInput(event, 'email')}
-                            value={formData.email}
-                        />
-                    </div>
-                    <div className="input-container">
-                        <label>Mật khẩu</label>
-                        <input
-                            type="password"
-                            onChange={(event) => handleOnChangeInput(event, 'password')}
-                            value={formData.password}
-                        />
-                    </div>
-                    <div className="input-container">
-                        <label>Hình ảnh</label>
-                        <input
-                            type="text"
-                            onChange={(event) => handleOnChangeInput(event, 'image')}
-                            value={formData.image}
-                        />
-                    </div>
-                    <div className="input-container">
-                        <label>Giới tính</label>
-                        <input
-                            type="text"
-                            onChange={(event) => handleOnChangeInput(event, 'gender')}
-                            value={formData.gender}
-                        />
-                    </div>
-                </div>
+        <div className="modal-user-body">
+          <div className="input-container">
+            <label>Tên</label>
+            <input
+              type="text"
+              onChange={(event) => handleOnChangeInput(event, 'name')}
+              value={formData.name}
+            />
+          </div>
+          <div className="input-container">
+            <label>Email</label>
+            <input
+              type="text"
+              onChange={(event) => handleOnChangeInput(event, 'email')}
+              value={formData.email}
+            />
+          </div>
+          <div className="input-container">
+            <label>Mật khẩu</label>
+            <input
+              type="password"
+              onChange={(event) => handleOnChangeInput(event, 'password')}
+              value={formData.password}
+            />
+          </div>
+          <div className="input-container">
+            <label>Hình ảnh</label>
+            <input
+              type="text"
+              onChange={(event) => handleOnChangeInput(event, 'image')}
+              value={formData.image}
+            />
+          </div>
+          <div className="input-container">
+            <label>Giới tính</label>
+            <input
+              type="text"
+              onChange={(event) => handleOnChangeInput(event, 'gender')}
+              value={formData.gender}
+            />
+          </div>
+        </div>
       </ModalBody>
       <ModalFooter>
-        <Button color="primary" onClick={handleEditStaff}>Save changes</Button>
-        <Button color="secondary" onClick={toggle}>Cancel</Button>
+        <Button color="primary" onClick={handleEditStaff}>Lưu thay đổi</Button>
+        <Button color="secondary" onClick={toggle}>Hủy</Button>
       </ModalFooter>
     </Modal>
   );
