@@ -38,7 +38,11 @@ function MyClub() {
                             <h4>{club.name}</h4></div>
                         {club.approveStatus === 1 ? <div className="approved">approved</div> : club.approveStatus === 0 ? <div className="waiting">waiting...</div> : <div className="reject-club">Rejected</div>}
                         <div>
-                            <button className="btn-myclub mem-list-btn">Thành viên</button>
+                            <button className="btn-myclub mem-list-btn" onClick={() => {
+                            if (club.approveStatus === 1) {
+                                handleClick(club.id)
+                                }
+                            }}>Thành viên</button>
                             <button className="btn-myclub delete-club-staff">Xóa club</button>
                         </div>
                     </div>
