@@ -100,6 +100,10 @@ const getAllYards = () => {
   return axios.get("api/yards");
 };
 
+const getYardsBySport = (sportId) => {
+  return axios.get(`api/yards/${sportId}/sport`);
+};
+
 const getIdMemberCreatePost = (idMember, idClub) => {
   return axios.get(`api/clubMembers/getByIdMemberClub/${idMember}/${idClub}`);
 };
@@ -149,13 +153,12 @@ const getYards = () => {
 
 //approval
 const updateClubApproved = (clubid) => {
-  return axios.put(`api/admin/club/approve/${clubid}`)
+  return axios.put(`api/admin/club/approve/${clubid}`);
 };
 
 const updateClubReject = (clubid) => {
-  return axios.put(`api/admin/club/reject/${clubid}`)
+  return axios.put(`api/admin/club/reject/${clubid}`);
 };
-
 
 export {
   handleLoginAdmin,
@@ -194,5 +197,6 @@ export {
   getSlotNotJoined,
   getYards,
   updateClubApproved,
-  updateClubReject
+  updateClubReject,
+  getYardsBySport,
 };

@@ -48,10 +48,10 @@ function HistoryPage() {
 
   return (
     <div className="history-page-container">
-      <h2>History Page</h2>
+      <h2>Chi tiết về ví của bạn</h2>
       <div className="history-wrapper">
         <div className="wallet-detail-popup">
-          <h3>Wallet Information</h3>
+          <h3>Ví của bạn</h3>
           <p>
             <b>Tên:</b> {walletInfo.memberName}
           </p>
@@ -64,10 +64,10 @@ function HistoryPage() {
           <table id="customers">
             <tbody>
               <tr>
-                <th>Point</th>
-                <th>Transaction Point</th>
-                <th>Result Point</th>
-                <th>Mô tả</th>
+                <th>Điểm ban đầu</th>
+                <th>Điểm giao dịch</th>
+                <th>Tổng kết</th>
+                <th>Ghi chú</th>
               </tr>
               {transactionHistoryPoints.map((item, index) => {
                 if (
@@ -93,7 +93,6 @@ function HistoryPage() {
             </tbody>
           </table>
         </div>
-
       </div>
       {loading && (
         <div className="loading-spinner">

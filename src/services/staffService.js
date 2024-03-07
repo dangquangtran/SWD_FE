@@ -12,6 +12,7 @@ const handleLogoutStaff = () => {
     return axios.get('api/logout');
 }
 
+
 const getAllClubStaff = (staffId) => {
     return axios.get(`api/staff/get-club/${staffId}`);
 }

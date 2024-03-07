@@ -94,6 +94,7 @@ function MainClubPage() {
             inforWallet={inforWallet}
             tranPoint={tranPoint}
             yards={yards}
+            setActiveTab={setActiveTab}
           />
         )}
         {activeTab === "myPost" && (
