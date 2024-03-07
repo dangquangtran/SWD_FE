@@ -36,6 +36,14 @@ const deleteStaff = (staffId) => {
     return axios.delete(`api/admin/staffs/${staffId}`);
 }
 
+const getMemberInClub = (clubId) => {
+    return axios.get(`api/staff/get-member-club/${clubId}`);
+}
+
+const memberById = (memberId) => {
+    return axios.get(`api/members/${memberId}`);
+}
+
 export {
     handleLoginStaff,
     handleLogoutStaff,
@@ -44,5 +52,7 @@ export {
     getAllStaffs,
     createStaff,
     editStaff,
-    deleteStaff
+    deleteStaff,
+    getMemberInClub,
+    memberById
 }
