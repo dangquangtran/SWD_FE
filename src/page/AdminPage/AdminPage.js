@@ -7,12 +7,14 @@ import "./AdminPage.scss";
 import HeaderAdmin from "../../component/Header/HeaderAdmin";
 import SportManage from "./SportManage";
 import ApprovalManage from "./Approval";
+import Yard from "./Yard/Yard";
+import Building from "./Building.js/Building";
 
 const menuItems = [
   {
     name: "ADMIN",
     // icon: "settings",
-    items: ["Thành viên", "Nhân viên", "Câu lạc bộ", "Môn thể thao", "Phê duyệt"],
+    items: ["Thành viên", "Nhân viên", "Câu lạc bộ", "Môn thể thao", "Sân", "Tòa nhà", "Phê duyệt"],
   },
   {
     name: "Đăng xuất",
@@ -25,7 +27,10 @@ const componentsMap = {
   "Nhân viên": <StaffManage />,
   "Câu lạc bộ": <ClubManage />,
   "Môn thể thao": <SportManage />,
-  "Phê duyệt": <ApprovalManage />
+
+  "Sân": <Yard />,
+  "Tòa nhà": <Building />,
+  "Phê duyệt": <ApprovalManage />,
 };
 
 const Icon = ({ icon }) => (

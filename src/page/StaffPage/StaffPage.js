@@ -28,7 +28,7 @@ function StaffPage() {
     return (
         <div className="staff-container">
             <div className="side-bar-staff">
-                <h2><FontAwesomeIcon icon={faGroupArrowsRotate} /> Staff page</h2>
+                <h2><FontAwesomeIcon icon={faGroupArrowsRotate} />Trang quản lí của Staff</h2>
                 {activeTab === "my-club" && (
                     <div>
 
@@ -47,7 +47,7 @@ function StaffPage() {
                             onClick={() => handleTabClick("my-club")}
                         >
                             <div>
-                                <b><FontAwesomeIcon icon={faCircleNodes} />My club</b>
+                                <b><FontAwesomeIcon icon={faCircleNodes} />Câu lạc bộ</b>
                             </div>
                         </div>
                         <div
@@ -56,7 +56,7 @@ function StaffPage() {
                             onClick={() => handleTabClick("sports")}
                         >
                             <div>
-                                <b><FontAwesomeIcon icon={faMedal} />Sport</b>
+                                <b><FontAwesomeIcon icon={faMedal} />Môn thể thao</b>
                             </div>
                         </div>
                     </div>

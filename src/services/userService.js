@@ -100,6 +100,19 @@ const getAllYards = () => {
   return axios.get("api/yards");
 };
 
+const createYard = (data) => {
+  return axios.post("api/yards", data);
+};
+
+const deleteYard = (YardId) => {
+  return axios.delete(`api/yards/${YardId}`);
+};
+
+const editYard = (yardId, data) => {
+  return axios.put(`api/yards/${yardId}`, data);
+};
+
+
 const getYardsBySport = (sportId) => {
   return axios.get(`api/yards/${sportId}/sport`);
 };
@@ -160,6 +173,17 @@ const updateClubReject = (clubid) => {
   return axios.put(`api/admin/club/reject/${clubid}`);
 };
 
+//building
+const getAllBuildings = () => {
+  return axios.get("api/buildings");
+};
+
+//area
+const getAllAreas = () => {
+  return axios.get("api/areas");
+};
+
+
 export {
   handleLoginAdmin,
   getAllMembers,
@@ -199,4 +223,9 @@ export {
   updateClubApproved,
   updateClubReject,
   getYardsBySport,
+  getAllBuildings,
+  getAllAreas,
+  createYard,
+  deleteYard,
+  editYard
 };
