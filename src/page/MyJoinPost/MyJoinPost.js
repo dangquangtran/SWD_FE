@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import CountdownTimer from "../../component/countDownTime";
 
-function MyJoinPost({ yards }) {
+function MyJoinPost({ yards, clubDetail }) {
   const { id } = useParams();
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
@@ -75,6 +75,9 @@ function MyJoinPost({ yards }) {
 
   return (
     <div className="new-feed-container">
+      <div className="club-title-new-feed">
+        <span>{clubDetail.name}</span>
+      </div>
       <h5>Bài viết của bạn đã tham gia</h5>
       {isLoadingData && (
         <FontAwesomeIcon icon={faSpinner} className="loading-icon" />

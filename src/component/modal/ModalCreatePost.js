@@ -59,9 +59,6 @@ function ModalCreatePost({
   }, [clubDetail]);
 
   const handleOnChangeInput = async (event, id) => {
-    if (id === "image" && imageFile) {
-      await uploadCloudinary(imageFile.current?.files[0]);
-    }
     setFormData({
       ...formData,
       [id]: event.target.value,
@@ -84,22 +81,32 @@ function ModalCreatePost({
         "https://api.cloudinary.com/v1_1/upload-image/image/upload",
         formDataImage
       );
+      console.log("Upload cloudinary successfully", response.data.url);
       setFormData({
         ...formData,
         image: response.data.url,
       });
-      console.log("Upload cloudinary successfully", response);
+      return response.data.url;
     } catch (error) {
       console.log("Error upload cloudinary:", error);
     }
   };
 
-  const handleAddNewPost = () => {
-    const postData = {
+  const handleAddNewPost = async () => {
+    var postData = {
       ...formData,
       yardId: yardId,
     };
-    createPost(postData);
+    if (imageFile) {
+      const response = await uploadCloudinary(imageFile.current?.files[0]);
+      console.log(response);
+      postData = {
+        ...postData,
+        image: response,
+      };
+    }
+
+    await createPost(postData);
     setActiveTab("myPost");
     toggle();
   };

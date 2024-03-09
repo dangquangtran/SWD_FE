@@ -8,7 +8,7 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import "./HistoryPage.scss";
 
-function HistoryPage() {
+function HistoryPage({ clubDetail }) {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   const [transactionHistoryPoints, setTransactionHistoryPoints] = useState([]);
@@ -48,6 +48,9 @@ function HistoryPage() {
 
   return (
     <div className="history-page-container">
+      <div className="club-title-new-feed">
+        <span>{clubDetail.name}</span>
+      </div>
       <h2>Chi tiết về ví của bạn</h2>
       <div className="history-wrapper">
         <div className="wallet-detail-popup">

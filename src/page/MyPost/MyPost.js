@@ -17,7 +17,7 @@ import {
 import "./MyPost.scss";
 import CountdownTimer from "../../component/countDownTime";
 
-function MyPost({ tranPoint, inforWallet, yards }) {
+function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
   const { id } = useParams();
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
@@ -116,6 +116,9 @@ function MyPost({ tranPoint, inforWallet, yards }) {
 
   return (
     <div className="new-feed-container">
+      <div className="club-title-new-feed">
+        <span>{clubDetail.name}</span>
+      </div>
       <h5>Bài viết của bạn</h5>
       {isLoading && (
         <FontAwesomeIcon icon={faSpinner} className="loading-icon" />
@@ -131,7 +134,7 @@ function MyPost({ tranPoint, inforWallet, yards }) {
             const targetTime = new Date(time).getTime();
             const currentTime = new Date().getTime();
 
-            var isPassTime;
+            var isPassTime = false;
 
             if (targetTime < currentTime) {
               isPassTime = true;
@@ -157,9 +160,11 @@ function MyPost({ tranPoint, inforWallet, yards }) {
                     <p>{item.memberPostName}</p>
                     <div>{timePost}</div>
                   </div>
-                  <div>
-                    <CountdownTimer targetTime={time} />
-                  </div>
+                  {!isPassTime && (
+                    <div>
+                      <CountdownTimer targetTime={time} />
+                    </div>
+                  )}
                 </div>
 
                 <div className="caption">{item.description}</div>
@@ -170,7 +175,12 @@ function MyPost({ tranPoint, inforWallet, yards }) {
                     <h3>Thông tin trận đấu</h3>
                     <div>
                       <div>
-                        <b>Khu: <p style={{ fontWeight: '600' }}>{yardDetails?.areaName}</p> </b>
+                        <b>
+                          Khu:{" "}
+                          <p style={{ fontWeight: "600" }}>
+                            {yardDetails?.areaName}
+                          </p>{" "}
+                        </b>
                       </div>
                       <div>
                         <b>

@@ -114,7 +114,7 @@ function ClubPage() {
           ></img>
           <h2> {clubDetail.name}</h2>
           <p>Môn thể thao: {clubDetail.sportName}</p>
-          <p>{clubDetail.countMember} thành viên</p>
+          <p>Số lượng thành viên: {clubDetail.countMember} thành viên</p>
           <p>Mô tả: {clubDetail.description}</p>
           <p>Ngày thành lập: {timePost}</p>
           <p>Người quản lí: {clubDetail.staffName}</p>

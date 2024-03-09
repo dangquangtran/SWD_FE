@@ -16,12 +16,11 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CountdownTimer from "../../component/countDownTime";
 
-function NewFeed({ inforWallet, tranPoint, yards, setActiveTab }) {
+function NewFeed({ inforWallet, tranPoint, yards, setActiveTab, clubDetail }) {
   const { id } = useParams();
   const { idclubmem } = useParams();
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
-  const [clubDetail, setClubDetail] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [numberOfSlot, setNumberOfSlot] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -29,13 +28,18 @@ function NewFeed({ inforWallet, tranPoint, yards, setActiveTab }) {
   const [slotNotJoined, setSlotNotJoined] = useState([]);
   async function fetchData() {
     try {
-      const [clubDetailRes, slotNotJoinedRes] = await Promise.all([
-        getDetailClub(id),
+      const [slotNotJoinedRes] = await Promise.all([
         getSlotNotJoined(idclubmem, id),
       ]);
 
-      setSlotNotJoined(slotNotJoinedRes.result);
-      setClubDetail(clubDetailRes.result);
+      const slotNotJoinFitler = slotNotJoinedRes.result.filter((item) => {
+        return (
+          item.memberPostId != idclubmem &&
+          !isPassTime(item.date, item.startTime)
+        );
+      });
+
+      setSlotNotJoined(slotNotJoinFitler);
 
       const promises = slotNotJoinedRes.result.map(async (item) => {
         const response = await getNumberOfSlot(item.id);
@@ -68,12 +72,14 @@ function NewFeed({ inforWallet, tranPoint, yards, setActiveTab }) {
     postData.clubId = id;
     postData.memberPostId = idclubmem;
     try {
+      console.log(postData);
       await createPostInSlot(postData);
       showSuccessToast("Create post successfully!");
       setIsModalOpen(false);
       setIsLoading(true);
       fetchData();
     } catch (error) {
+      console.log(error);
       showErrorToast("Create post error!");
       console.error("Error creating post:", error);
     }
@@ -100,6 +106,18 @@ function NewFeed({ inforWallet, tranPoint, yards, setActiveTab }) {
     }
   }
 
+  function isPassTime(date, hour) {
+    const time = date + "T" + hour + ":00";
+    const targetTime = new Date(time).getTime();
+    const currentTime = new Date().getTime();
+
+    if (targetTime < currentTime) {
+      return true;
+    } else {
+      false;
+    }
+  }
+
   return (
     <div className="new-feed-container">
       <div className="club-title-new-feed">
@@ -121,17 +139,7 @@ function NewFeed({ inforWallet, tranPoint, yards, setActiveTab }) {
       )}
 
       {slotNotJoined.map((item, index) => {
-        if (item.memberPostId == idclubmem) {
-          return null;
-        }
-
         const time = item.date + "T" + item.startTime + ":00";
-        const targetTime = new Date(time).getTime();
-        const currentTime = new Date().getTime();
-
-        if (targetTime < currentTime) {
-          return null;
-        }
 
         const date = new Date(item.dateTime);
 
