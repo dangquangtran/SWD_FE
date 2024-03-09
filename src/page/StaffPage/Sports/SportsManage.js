@@ -12,6 +12,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { faBorderStyle } from "@fortawesome/free-solid-svg-icons";
 
 function SportsManageStaff() {
     const [sports, setSports] = useState([]);

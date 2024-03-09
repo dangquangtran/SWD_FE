@@ -3,7 +3,7 @@
     border-right: 0.5px solid #ccc;
     background-color: #fff;
     text-align: -webkit-center;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #EFF5F5;
 }
 
@@ -13,7 +13,6 @@
     background-color: #fff;
     display: flex;
     flex-direction: column;
-    height: 100vh;
 }
 
 .App {

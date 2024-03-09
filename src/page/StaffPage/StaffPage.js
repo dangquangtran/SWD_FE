@@ -3,7 +3,7 @@ import "../StaffPage/StaffPage.scss";
 import { handleLogoutStaff } from "../../services/staffService"
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRightFromBracket, faCircleNodes, faMedal } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightFromBracket, faCircleNodes, faMedal, faGroupArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 import MyClub from "./MyClub/MyClub";
 import SportsManageStaff from "./Sports/SportsManage";
 
@@ -28,7 +28,15 @@ function StaffPage() {
     return (
         <div className="staff-container">
             <div className="side-bar-staff">
-                <h2>Staff page</h2>
+                <h2><FontAwesomeIcon icon={faGroupArrowsRotate} /> Staff page</h2>
+                {activeTab === "my-club" && (
+                    <div>
+
+                    </div>
+                )}
+                {activeTab === "sports" && (
+                    <div> aaaa</div>
+                )}
             </div>
             <div className="content-container">
                 <div className="header-staff">

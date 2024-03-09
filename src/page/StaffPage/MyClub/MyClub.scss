@@ -1,9 +1,10 @@
 .club-manage {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    padding: 100px 10px;
+    padding: 100px 50px;
     gap: 20px;
     background-color: #EFF5F5;
+    min-height: 100vh;
 
     img {
         width: 300px;
@@ -18,6 +19,7 @@
         border: 1px dashed #ccc;
         padding: 10px 0;
         background-color: #fff;
+        height: fit-content;
 
         &:hover {
             opacity: 0.9;

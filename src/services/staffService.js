@@ -47,7 +47,7 @@ const memberById = (memberId) => {
 
 const deleteClub = (clubId) => {
     return axios.delete(`api/clubs/${clubId}`);
-}
+};
 
 export {
     handleLoginStaff,
