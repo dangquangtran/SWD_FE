@@ -8,7 +8,7 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import "./HistoryPage.scss";
 
-function HistoryPage() {
+function HistoryPage({ clubDetail }) {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   const [transactionHistoryPoints, setTransactionHistoryPoints] = useState([]);
@@ -20,20 +20,21 @@ function HistoryPage() {
       try {
         const response = await getUserWallet(userInfo.id);
         setWalletInfo(response.result);
+        console.log(response.result);
         const walletId = response.result.id;
         const response2 = await getTransactionHistoryPoints(walletId);
         setTransactionHistoryPoints(response2.result);
         const lastTransaction = response2.result.find(
           (item) => item.status && item.status.data && item.status.data[0] === 1
         );
-        if (lastTransaction) {
-          const resultPoint =
-            lastTransaction.initialPoint + lastTransaction.transactionPoint;
-          setWalletInfo((prevWalletInfo) => ({
-            ...prevWalletInfo,
-            point: resultPoint,
-          }));
-        }
+        // if (lastTransaction) {
+        //   const resultPoint =
+        //     lastTransaction.initialPoint + lastTransaction.transactionPoint;
+        //   setWalletInfo((prevWalletInfo) => ({
+        //     ...prevWalletInfo,
+        //     point: resultPoint,
+        //   }));
+        // }
         setLoading(false);
       } catch (error) {
         console.error("Error fetching wallet info:", error);
@@ -48,6 +49,9 @@ function HistoryPage() {
 
   return (
     <div className="history-page-container">
+      <div className="club-title-new-feed">
+        <span>{clubDetail.name}</span>
+      </div>
       <h2>Chi tiết về ví của bạn</h2>
       <div className="history-wrapper">
         <div className="wallet-detail-popup">
