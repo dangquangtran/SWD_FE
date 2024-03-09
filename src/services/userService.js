@@ -178,6 +178,18 @@ const getAllBuildings = () => {
   return axios.get("api/buildings");
 };
 
+const createBuilding = (data) => {
+  return axios.post("api/buildings", data);
+};
+
+const editBuilding = (buildingId, data) => {
+  return axios.put(`api/buildings/${buildingId}`, data);
+};
+
+const deleteBuilding = (buildingId) => {
+  return axios.delete(`api/buildings/${buildingId}`);
+};
+
 //area
 const getAllAreas = () => {
   return axios.get("api/areas");
@@ -227,5 +239,8 @@ export {
   getAllAreas,
   createYard,
   deleteYard,
-  editYard
+  editYard,
+  editBuilding,
+  createBuilding,
+  deleteBuilding
 };

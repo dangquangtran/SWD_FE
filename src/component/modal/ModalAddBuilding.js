@@ -2,20 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { emitter } from '../../utils/emitter';
 import { showErrorToast } from "../toast/toast";
-import { getAllAreas, getAllSports } from "../../services/userService";
+import { getAllAreas } from "../../services/userService";
 
-function ModalYard({ isOpen, toggleFromParent, createNewArea }) {
+function ModalAddBuilding({ isOpen, toggleFromParent, createNewArea }) {
     const [areas, setAreas] = useState([])
-    const [sports, setSport] = useState([]);
 
 
 
     const [formData, setFormData] = useState({
         name: '',
         areaName: '',
-        sportName: '',
-        areaId: 0,
-        sportId: 0
+        areaId: 0
     });
 
     const toggle = () => {
@@ -23,14 +20,7 @@ function ModalYard({ isOpen, toggleFromParent, createNewArea }) {
     };
 
     const handleOnChangeInput = (event, id) => {
-        if (id === 'sportName') {
-            const selectedSport = sports.find(sport => sport.name === event.target.value);
-            setFormData({
-                ...formData,
-                sportId: selectedSport ? selectedSport.id : '',
-                [id]: event.target.value,
-            });
-        } else if (id === 'areaName') {
+        if (id === 'areaName') {
             const selectedArea = areas.find(area => area.name === event.target.value);
             setFormData({
                 ...formData,
@@ -51,26 +41,16 @@ function ModalYard({ isOpen, toggleFromParent, createNewArea }) {
         try {
             const response = await getAllAreas();
             setAreas(response.result);
-            console.log(response.result);
         } catch (error) {
             console.log(error);
         }
     }
 
-    const fetchSports = async () => {
-        try {
-            const response = await getAllSports();
-            setSport(response.result);
-            console.log(response.result)
-        } catch (error) {
-            console.log(error);
-        }
-    };
+
 
 
     useEffect(() => {
         fetchAreas()
-        fetchSports();
 
     }, [])
 
@@ -84,7 +64,7 @@ function ModalYard({ isOpen, toggleFromParent, createNewArea }) {
         return true;
     };
 
-    const handleAddNewYard = async () => {
+    const handleAddNewBuilding = async () => {
         console.log(formData)
         if (checkValidateInput()) {
             try {
@@ -92,9 +72,7 @@ function ModalYard({ isOpen, toggleFromParent, createNewArea }) {
                 setFormData({
                     name: '',
                     areaName: '',
-                    sportName: '',
                     areaId: 0,
-                    sportId: 0
                 });
                 toggle();
             } catch (error) {
@@ -109,9 +87,7 @@ function ModalYard({ isOpen, toggleFromParent, createNewArea }) {
             setFormData({
                 name: '',
                 areaName: '',
-                sportName: '',
                 areaId: 0,
-                sportId: 0
 
             });
         };
@@ -127,13 +103,13 @@ function ModalYard({ isOpen, toggleFromParent, createNewArea }) {
         <Modal isOpen={isOpen} toggle={toggle} className={"modal-user-container"}
             size="lg">
             <ModalHeader toggle={toggle}>
-                Tạo mới Sân
+                Tạo mới building
             </ModalHeader>
             <ModalBody>
                 <div className="modal-user-body">
 
                     <div className="input-container">
-                        <label>Tên sân</label>
+                        <label>Tên tòa nhà</label>
                         <input
                             type="text"
                             onChange={(event) => handleOnChangeInput(event, "name")}
@@ -158,29 +134,13 @@ function ModalYard({ isOpen, toggleFromParent, createNewArea }) {
                             ))}
                         </select>
                     </div>
-                    <div className="input-container">
-                        <label>Môn thể thao</label>
-                        <select
-                            className="select"
-                            onChange={(event) => handleOnChangeInput(event, "sportName")}
-                            value={formData.sportName}
-                        >
-                            <option value="" disabled>
-                                Chọn Môn thể thao
-                            </option>
-                            {sports.map((sport) => (
-                                <option key={sport.id} value={sport.name}>
-                                    {sport.name}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
+
                 </div>
             </ModalBody>
             <ModalFooter>
                 <Button
                     className="add-btn"
-                    onClick={handleAddNewYard}
+                    onClick={handleAddNewBuilding}
                 >
                     Tạo mới
                 </Button>{" "}
@@ -195,4 +155,4 @@ function ModalYard({ isOpen, toggleFromParent, createNewArea }) {
     )
 }
 
-export default ModalYard;
+export default ModalAddBuilding;

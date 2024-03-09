@@ -10,9 +10,9 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { createYard, deleteYard, editYard, getAllYards } from "../../../services/userService";
 import Button from '@mui/material/Button';
-import ModalYard from '../../../component/modal/ModalYard';
 import { showErrorToast, showSuccessToast } from "../../../component/toast/toast";
 import ModalEditYard from "../../../component/modal/ModalEditYard";
+import ModalYard from "../../../component/modal/ModalYard";
 
 
 function Yard() {
@@ -41,7 +41,7 @@ function Yard() {
         setIsModalOpen(!isModalOpen);
     };
 
-    const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    const StyledTableCell = styled(TableCell)(({ theme, index }) => ({
         [`&.${tableCellClasses.head}`]: {
             backgroundColor: '#04AA6D',
             color: theme.palette.common.white,
@@ -50,6 +50,8 @@ function Yard() {
         [`&.${tableCellClasses.body}`]: {
             fontSize: 14,
             border: '1px solid #dddddd',
+            backgroundColor: index % 2 === 0 ? '#f2f2f2' : 'white',
+
         },
     }));
 
@@ -115,7 +117,7 @@ function Yard() {
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">
                     <TableHead>
                         <TableRow>
-                            <StyledTableCell>Môn thể thao</StyledTableCell>
+                            <StyledTableCell >Môn thể thao</StyledTableCell>
                             <StyledTableCell align="center">Khu vực</StyledTableCell>
                             <StyledTableCell align="center">Sân</StyledTableCell>
                             <StyledTableCell align="center">Hoạt động</StyledTableCell>
@@ -127,12 +129,12 @@ function Yard() {
                             if (item.status.data[0] === 1) {
                                 return (
                                     <TableRow key={index}>
-                                        <StyledTableCell component="th" scope="row">
+                                        <StyledTableCell index={index} component="th" scope="row">
                                             {item.sportName}
                                         </StyledTableCell>
-                                        <StyledTableCell align="center">{item.areaName}</StyledTableCell>
-                                        <StyledTableCell align="center">{item.name}</StyledTableCell>
-                                        <StyledTableCell align="center">
+                                        <StyledTableCell index={index} align="center">{item.areaName}</StyledTableCell>
+                                        <StyledTableCell index={index} align="center">{item.name}</StyledTableCell>
+                                        <StyledTableCell index={index} align="center">
                                             <button className="btn-delete" onClick={() => { handleDeleteYard(item) }}><i className='fa fa-trash'></i></button>
                                             <button className="btn-edit" onClick={() => handleEditYard(item)}><i className='fa fa-pencil'></i></button>
                                         </StyledTableCell>
