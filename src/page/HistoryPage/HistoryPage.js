@@ -20,20 +20,21 @@ function HistoryPage({ clubDetail }) {
       try {
         const response = await getUserWallet(userInfo.id);
         setWalletInfo(response.result);
+        console.log(response.result);
         const walletId = response.result.id;
         const response2 = await getTransactionHistoryPoints(walletId);
         setTransactionHistoryPoints(response2.result);
         const lastTransaction = response2.result.find(
           (item) => item.status && item.status.data && item.status.data[0] === 1
         );
-        if (lastTransaction) {
-          const resultPoint =
-            lastTransaction.initialPoint + lastTransaction.transactionPoint;
-          setWalletInfo((prevWalletInfo) => ({
-            ...prevWalletInfo,
-            point: resultPoint,
-          }));
-        }
+        // if (lastTransaction) {
+        //   const resultPoint =
+        //     lastTransaction.initialPoint + lastTransaction.transactionPoint;
+        //   setWalletInfo((prevWalletInfo) => ({
+        //     ...prevWalletInfo,
+        //     point: resultPoint,
+        //   }));
+        // }
         setLoading(false);
       } catch (error) {
         console.error("Error fetching wallet info:", error);
