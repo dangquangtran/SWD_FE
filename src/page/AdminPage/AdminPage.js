@@ -12,12 +12,18 @@ const menuItems = [
   {
     name: "ADMIN",
     // icon: "settings",
-    items: ["Thành viên", "Nhân viên", "Câu lạc bộ", "Môn thể thao", "Phê duyệt"],
+    items: [
+      "Thành viên",
+      "Nhân viên",
+      "Câu lạc bộ",
+      "Môn thể thao",
+      "Phê duyệt",
+    ],
   },
-  {
-    name: "Đăng xuất",
-    // icon: "favorite",
-  },
+  // {
+  //   name: "Đăng xuất",
+  //   // icon: "favorite",
+  // },
 ];
 
 const componentsMap = {
@@ -25,7 +31,7 @@ const componentsMap = {
   "Nhân viên": <StaffManage />,
   "Câu lạc bộ": <ClubManage />,
   "Môn thể thao": <SportManage />,
-  "Phê duyệt": <ApprovalManage />
+  "Phê duyệt": <ApprovalManage />,
 };
 
 const Icon = ({ icon }) => (
@@ -79,23 +85,31 @@ function AdminPage() {
   const handleClick = async (item) => {
     console.log(item);
     try {
-      if (item && item === 'LOGOUT') {
+      if (item && item === "LOGOUT") {
         await handleLogOut();
-        localStorage.removeItem('token');
-        localStorage.removeItem('userInfo');
-        window.location.href = '/';
+        localStorage.removeItem("token");
+        localStorage.removeItem("userInfo");
+        window.location.href = "/";
       } else {
         setActiveItem(item !== activeItem ? item : "");
       }
     } catch (error) {
-      console.error('Đăng xuất thất bại', error);
+      console.error("Đăng xuất thất bại", error);
     }
   };
 
   return (
     <div>
       <HeaderAdmin />
-      <aside className="sidebar col-2" style={{ float: 'left', width: '300px', padding: '20px', marginTop: '70px' }}>
+      <aside
+        className="sidebar col-2"
+        style={{
+          float: "left",
+          width: "300px",
+          padding: "20px",
+          marginTop: "70px",
+        }}
+      >
         {menuItems.map((item) => (
           <div key={item.name}>
             {!item.items && (
@@ -126,9 +140,11 @@ function AdminPage() {
           </div>
         ))}
       </aside>
-      <div className="content" style={{ marginLeft: '300px', padding: '20px' }}>{componentsMap[activeItem]}</div>
+      <div className="content" style={{ marginLeft: "300px", padding: "20px" }}>
+        {componentsMap[activeItem]}
+      </div>
     </div>
   );
-};
+}
 
 export default AdminPage;
