@@ -76,7 +76,21 @@ function MyJoinPost({ yards, clubDetail }) {
   return (
     <div className="new-feed-container">
       <div className="club-title-new-feed">
-        <span>{clubDetail.name}</span>
+        <img
+          className="img-background"
+          src={clubDetail.image}
+          alt="club-background"
+          style={{
+            width: "28%",
+            "margin-right": "37px",
+            "border-radius": "44%",
+          }}
+        ></img>
+        <div>
+          <p>{clubDetail.name}</p>
+          <p>Số lượng thành viên {clubDetail.countMember}</p>
+          <p>Ngày thành lập: {clubDetail.dateTime}</p>
+        </div>
       </div>
       <h5>Bài viết của bạn đã tham gia</h5>
       {isLoadingData && (

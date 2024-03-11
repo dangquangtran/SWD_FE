@@ -95,6 +95,7 @@ function MainClubPage() {
             <FontAwesomeIcon icon={faEnvelopesBulk} /> Ví
           </button>
         </div>
+
         {activeTab === "newFeed" && (
           <NewFeed
             inforWallet={inforWallet}

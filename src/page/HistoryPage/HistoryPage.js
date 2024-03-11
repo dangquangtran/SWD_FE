@@ -27,14 +27,7 @@ function HistoryPage({ clubDetail }) {
         const lastTransaction = response2.result.find(
           (item) => item.status && item.status.data && item.status.data[0] === 1
         );
-        // if (lastTransaction) {
-        //   const resultPoint =
-        //     lastTransaction.initialPoint + lastTransaction.transactionPoint;
-        //   setWalletInfo((prevWalletInfo) => ({
-        //     ...prevWalletInfo,
-        //     point: resultPoint,
-        //   }));
-        // }
+
         setLoading(false);
       } catch (error) {
         console.error("Error fetching wallet info:", error);
@@ -45,12 +38,24 @@ function HistoryPage({ clubDetail }) {
     fetchWalletInfo();
   }, []);
 
-  console.log(transactionHistoryPoints);
-
   return (
     <div className="history-page-container">
       <div className="club-title-new-feed">
-        <span>{clubDetail.name}</span>
+        <img
+          className="img-background"
+          src={clubDetail.image}
+          alt="club-background"
+          style={{
+            width: "28%",
+            "margin-right": "37px",
+            "border-radius": "44%",
+          }}
+        ></img>
+        <div>
+          <p>{clubDetail.name}</p>
+          <p>Số lượng thành viên {clubDetail.countMember}</p>
+          <p>Ngày thành lập: {clubDetail.dateTime}</p>
+        </div>
       </div>
       <h2>Chi tiết về ví của bạn</h2>
       <div className="history-wrapper">

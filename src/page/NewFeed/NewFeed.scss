@@ -18,10 +18,11 @@
     }
 
     .club-title-new-feed {
+        position: relative;
+        display: flex;
         margin-left: 60px;
         height: 44px;
-        position: fixed;
-        background-color: #a4ce9f;
+        background-color: #fff;
         padding: 5px 40px;
         border-radius: 0 0 5px 5px;
         width: 70%;

@@ -121,7 +121,21 @@ function NewFeed({ inforWallet, tranPoint, yards, setActiveTab, clubDetail }) {
   return (
     <div className="new-feed-container">
       <div className="club-title-new-feed">
-        <span>{clubDetail.name}</span>
+        <img
+          className="img-background"
+          src={clubDetail.image}
+          alt="club-background"
+          style={{
+            width: "28%",
+            "margin-right": "37px",
+            "border-radius": "44%",
+          }}
+        ></img>
+        <div>
+          <p>{clubDetail.name}</p>
+          <p>Số lượng thành viên {clubDetail.countMember}</p>
+          <p>Ngày thành lập: {clubDetail.dateTime}</p>
+        </div>
       </div>
       <div className="post-container">
         <img alt="avatar" src={userInfo.image} />
