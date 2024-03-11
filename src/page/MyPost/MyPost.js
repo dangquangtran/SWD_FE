@@ -7,7 +7,6 @@ import {
   getIdMemberCreatePost,
   getMyPostInClub,
   getNumberOfSlot,
-  getYardDetail,
 } from "../../services/userService";
 import {
   getListMemberJoinPost,
@@ -114,6 +113,14 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
     }
   };
 
+
+  const date = new Date(clubDetail.dateTime);
+
+  const day = date.getDate(); 
+  const month = date.getMonth() + 1; 
+  const year = date.getFullYear(); 
+  const timePost = ` ${day}-${month}-${year}`;
+
   return (
     <div className="new-feed-container">
       <div className="club-title-new-feed">
@@ -123,14 +130,14 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
           alt="club-background"
           style={{
             width: "28%",
-            "margin-right": "37px",
-            "border-radius": "44%",
+            marginRight: "37px",
+            borderRadius: "44%",
           }}
         ></img>
         <div>
           <p>{clubDetail.name}</p>
           <p>Số lượng thành viên {clubDetail.countMember}</p>
-          <p>Ngày thành lập: {clubDetail.dateTime}</p>
+          <p>Ngày thành lập: {timePost}</p>
         </div>
       </div>
       <h5>Bài viết của bạn</h5>
