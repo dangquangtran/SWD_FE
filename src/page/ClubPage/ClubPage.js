@@ -52,6 +52,8 @@ function ClubPage() {
       clubName: clubDetail.name,
     });
 
+    fetchClubDetail();
+
     setIsJoined(true);
     showSuccessToast("Join Club Success");
     setClubDetail((prevClubDetail) => ({

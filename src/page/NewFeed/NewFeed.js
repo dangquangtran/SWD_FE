@@ -119,9 +119,9 @@ function NewFeed({ inforWallet, tranPoint, yards, setActiveTab, clubDetail }) {
 
   const date = new Date(clubDetail.dateTime);
 
-  const day = date.getDate(); 
-  const month = date.getMonth() + 1; 
-  const year = date.getFullYear(); 
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
   const timePost = ` ${day}-${month}-${year}`;
 
   return (
