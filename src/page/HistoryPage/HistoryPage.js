@@ -53,9 +53,10 @@ function HistoryPage({ clubDetail }) {
           src={clubDetail.image}
           alt="club-background"
           style={{
-            width: "28%",
-            "margin-right": "37px",
-            "border-radius": "44%",
+            width: "398px",
+            height: "250px",
+            marginRight: "37px",
+            borderRadius: "44%",
           }}
         ></img>
         <div>
