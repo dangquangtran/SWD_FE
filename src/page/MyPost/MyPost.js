@@ -180,10 +180,12 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
                     <p>{item.memberPostName}</p>
                     <div>{timePost}</div>
                   </div>
-                  {!isPassTime && (
+                  {!isPassTime ? (
                     <div>
                       <CountdownTimer targetTime={time}/>
                     </div>
+                  ): (
+                    <p>Kết thúc trận đấu</p>
                   )}
                 </div>
 
