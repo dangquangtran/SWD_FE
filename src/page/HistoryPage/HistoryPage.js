@@ -40,11 +40,10 @@ function HistoryPage({ clubDetail }) {
 
   const date = new Date(clubDetail.dateTime);
 
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
   const year = date.getFullYear();
-
-  const formattedDate = `${day}-${month}-${year}`;
+  const timePost = ` ${day}-${month}-${year}`;
 
   return (
     <div className="history-page-container">
@@ -61,8 +60,8 @@ function HistoryPage({ clubDetail }) {
         ></img>
         <div>
           <p>{clubDetail.name}</p>
-          <p>Số lượng thành viên: {clubDetail.countMember}</p>
-          <p>Ngày thành lập: {formattedDate}</p>
+          <p>Số lượng thành viên {clubDetail.countMember}</p>
+          <p>Ngày thành lập: {timePost}</p>
         </div>
       </div>
       <h2>Chi tiết về ví của bạn</h2>

@@ -127,11 +127,18 @@ function Building() {
                     </TableHead>
                     <TableBody>
                         {buildings.map((item, index) => {
+                            const date = new Date(item.dateTIme);
+                            const day = date.getDate();
+                            const month = date.getMonth() + 1;
+                            const year = date.getFullYear();
+                            const hour = date.getHours()
+                            const minute = date.getMinutes()
+                            const timePost = `  ${day}-${month}-${year} ${hour}h${minute}`;
                             if (item.status.data[0] === 1) {
                                 return (
                                     <TableRow key={index} >
                                         <StyledTableCell index={index} component="th" scope="row">
-                                            {item.dateTIme}
+                                            {timePost}
                                         </StyledTableCell>
                                         <StyledTableCell index={index} align="center">{item.areaName}</StyledTableCell>
                                         <StyledTableCell index={index} align="center">{item.name}</StyledTableCell>

@@ -9,12 +9,13 @@ import SportManage from "./SportManage";
 import ApprovalManage from "./Approval";
 import Yard from "./Yard/Yard";
 import Building from "./Building.js/Building";
+import Transpoint from "./Transpoint/Transpoint";
 
 const menuItems = [
   {
     name: "ADMIN",
     // icon: "settings",
-    items: ["Thành viên", "Nhân viên", "Câu lạc bộ", "Môn thể thao", "Sân", "Tòa nhà", "Phê duyệt"],
+    items: ["Thành viên", "Nhân viên", "Câu lạc bộ", "Môn thể thao", "Sân", "Tòa nhà", "Phê duyệt", "Điểm"],
   },
   {
     name: "Đăng xuất",
@@ -31,10 +32,10 @@ const componentsMap = {
   "Nhân viên": <StaffManage />,
   "Câu lạc bộ": <ClubManage />,
   "Môn thể thao": <SportManage />,
-
   "Sân": <Yard />,
   "Tòa nhà": <Building />,
   "Phê duyệt": <ApprovalManage />,
+  "Điểm": <Transpoint />
 };
 
 const Icon = ({ icon }) => (

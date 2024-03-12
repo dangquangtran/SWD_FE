@@ -34,14 +34,7 @@ function StaffPage() {
     <div className="staff-container">
       <div className="side-bar-staff">
         <h2><FontAwesomeIcon icon={faGroupArrowsRotate} />Trang quản lí của Staff</h2>
-        {activeTab === "my-club" && (
-          <div>
 
-          </div>
-        )}
-        {activeTab === "sports" && (
-          <div> aaaa</div>
-        )}
       </div>
       <div className="content-container">
         <div className="header-staff">

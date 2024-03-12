@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./NewFeed.scss";
 
 import {
-  getDetailClub,
   createPostInSlot,
   UserJointSlot,
   getNumberOfSlot,
@@ -32,14 +31,14 @@ function NewFeed({ inforWallet, tranPoint, yards, setActiveTab, clubDetail }) {
         getSlotNotJoined(idclubmem, id),
       ]);
 
-      const slotNotJoinFitler = slotNotJoinedRes.result.filter((item) => {
+      const slotNotJoinFilter = slotNotJoinedRes.result.filter((item) => {
         return (
           item.memberPostId != idclubmem &&
           !isPassTime(item.date, item.startTime)
         );
       });
 
-      setSlotNotJoined(slotNotJoinFitler);
+      setSlotNotJoined(slotNotJoinFilter);
 
       const promises = slotNotJoinedRes.result.map(async (item) => {
         const response = await getNumberOfSlot(item.id);
@@ -120,11 +119,10 @@ function NewFeed({ inforWallet, tranPoint, yards, setActiveTab, clubDetail }) {
 
   const date = new Date(clubDetail.dateTime);
 
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
   const year = date.getFullYear();
-
-  const formattedDate = `${day}-${month}-${year}`;
+  const timePost = ` ${day}-${month}-${year}`;
 
   return (
     <div className="new-feed-container">
@@ -135,14 +133,14 @@ function NewFeed({ inforWallet, tranPoint, yards, setActiveTab, clubDetail }) {
           alt="club-background"
           style={{
             width: "28%",
-            "margin-right": "37px",
-            "border-radius": "44%",
+            marginRight: "37px",
+            borderRadius: "44%",
           }}
         ></img>
         <div>
           <p>{clubDetail.name}</p>
-          <p>Số lượng thành viên: {clubDetail.countMember}</p>
-          <p>Ngày thành lập: {formattedDate}</p>
+          <p>Số lượng thành viên {clubDetail.countMember}</p>
+          <p>Ngày thành lập: {timePost}</p>
         </div>
       </div>
       <div className="post-container">

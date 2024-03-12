@@ -112,7 +112,6 @@ const editYard = (yardId, data) => {
   return axios.put(`api/yards/${yardId}`, data);
 };
 
-
 const getYardsBySport = (sportId) => {
   return axios.get(`api/yards/${sportId}/sport`);
 };
@@ -195,6 +194,15 @@ const getAllAreas = () => {
   return axios.get("api/areas");
 };
 
+//Transpoint
+const getTranspoint = () => {
+  return axios.get("api//tranpoints/new")
+}
+
+const createTranPoint = (data) => {
+  return axios.post("api/tranpoints", data);
+}
+
 
 export {
   handleLoginAdmin,
@@ -242,5 +250,7 @@ export {
   editYard,
   editBuilding,
   createBuilding,
-  deleteBuilding
+  deleteBuilding,
+  getTranspoint,
+  createTranPoint
 };
