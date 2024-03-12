@@ -114,6 +114,14 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
     }
   };
 
+  const date = new Date(clubDetail.dateTime);
+
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+
+  const formattedDate = `${day}-${month}-${year}`;
+
   return (
     <div className="new-feed-container">
       <div className="club-title-new-feed">
@@ -129,8 +137,8 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
         ></img>
         <div>
           <p>{clubDetail.name}</p>
-          <p>Số lượng thành viên {clubDetail.countMember}</p>
-          <p>Ngày thành lập: {clubDetail.dateTime}</p>
+          <p>Số lượng thành viên: {clubDetail.countMember}</p>
+          <p>Ngày thành lập: {formattedDate}</p>
         </div>
       </div>
       <h5>Bài viết của bạn</h5>

@@ -38,6 +38,14 @@ function HistoryPage({ clubDetail }) {
     fetchWalletInfo();
   }, []);
 
+  const date = new Date(clubDetail.dateTime);
+
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+
+  const formattedDate = `${day}-${month}-${year}`;
+
   return (
     <div className="history-page-container">
       <div className="club-title-new-feed">
@@ -53,8 +61,8 @@ function HistoryPage({ clubDetail }) {
         ></img>
         <div>
           <p>{clubDetail.name}</p>
-          <p>Số lượng thành viên {clubDetail.countMember}</p>
-          <p>Ngày thành lập: {clubDetail.dateTime}</p>
+          <p>Số lượng thành viên: {clubDetail.countMember}</p>
+          <p>Ngày thành lập: {formattedDate}</p>
         </div>
       </div>
       <h2>Chi tiết về ví của bạn</h2>
