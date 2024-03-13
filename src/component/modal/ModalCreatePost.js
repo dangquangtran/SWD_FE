@@ -20,6 +20,7 @@ import {
   faSignsPost,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { showErrorToast } from "../toast/toast";
 
 function ModalCreatePost({
   isOpen,
@@ -58,6 +59,16 @@ function ModalCreatePost({
     fetchYards();
   }, [clubDetail]);
 
+  const handleStartTimeChange = (event) => {
+    const startTime = event.target.value;
+    const updatedEndTime = hours.filter((hour) => hour > startTime);
+    setFormData({
+      ...formData,
+      startTime,
+      endTime: "",
+    });
+  };
+
   const handleOnChangeInput = async (event, id) => {
     setFormData({
       ...formData,
@@ -93,22 +104,28 @@ function ModalCreatePost({
   };
 
   const handleAddNewPost = async () => {
-    var postData = {
-      ...formData,
-      yardId: yardId,
-    };
-    if (imageFile) {
-      const response = await uploadCloudinary(imageFile.current?.files[0]);
-      console.log(response);
-      postData = {
-        ...postData,
-        image: response,
+    const currentTime = new Date();
+    const selectedDate = new Date(`${formData.date}T${formData.startTime}`);
+    
+    if (selectedDate > currentTime) {
+      var postData = {
+        ...formData,
+        yardId: yardId,
       };
+      if (imageFile) {
+        const response = await uploadCloudinary(imageFile.current?.files[0]);
+        postData = {
+          ...postData,
+          image: response,
+        };
+      }
+  
+      await createPost(postData);
+      setActiveTab("myPost");
+      toggle();
+    } else {
+      showErrorToast("Không thể đăng bài trước thời gian hiện tại.");
     }
-
-    await createPost(postData);
-    setActiveTab("myPost");
-    toggle();
   };
 
   const hours = [];
@@ -132,7 +149,7 @@ function ModalCreatePost({
             id="description"
             onChange={(event) => handleOnChangeInput(event, "description")}
             value={formData.description}
-            placeholder="Bạn viết gì đi...."
+            placeholder="Bạn hãy viết hoạt động nào ..."
           />
         </FormGroup>
         <FormGroup>
@@ -153,7 +170,7 @@ function ModalCreatePost({
           <Input
             type="select"
             id="startTime"
-            onChange={(event) => handleOnChangeInput(event, "startTime")}
+            onChange={handleStartTimeChange}
             value={formData.startTime}
           >
             <option value="">Chọn thời gian bắt đầu</option>
@@ -174,13 +191,18 @@ function ModalCreatePost({
             id="endTime"
             onChange={(event) => handleOnChangeInput(event, "endTime")}
             value={formData.endTime}
+            disabled={!formData.startTime}
           >
             <option value="">Chọn thời gian kết thúc</option>
-            {hours.map((hour, index) => (
-              <option key={index} value={hour}>
-                {hour}
-              </option>
-            ))}
+            {formData.startTime &&
+              hours.map(
+                (hour, index) =>
+                  hour > formData.startTime && (
+                    <option key={index} value={hour}>
+                      {hour}
+                    </option>
+                  )
+              )}
           </Input>
         </FormGroup>
         <FormGroup>
@@ -226,7 +248,10 @@ function ModalCreatePost({
 
         <FormGroup>
           <div>
-            <FontAwesomeIcon icon={faImages} style={{ fontSize: "30px", marginRight: "10px" }} />
+            <FontAwesomeIcon
+              icon={faImages}
+              style={{ fontSize: "30px", marginRight: "10px" }}
+            />
             <input
               type="file"
               ref={imageFile}

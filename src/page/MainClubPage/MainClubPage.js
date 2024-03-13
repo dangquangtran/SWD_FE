@@ -76,14 +76,14 @@ import MyPostDone from "../MyPost/MyPostDone/MyPostDone";
               className={`tab-btn ${activeTab === "newFeed" ? "active" : ""}`}
               onClick={() => handleTabClick("newFeed")}
             >
-              <FontAwesomeIcon icon={faNewspaper} /> Bảng tin
+              <FontAwesomeIcon icon={faNewspaper} /> Hoạt động mới
             </button>
 
             <button
               className={`tab-btn ${activeTab === "myPost"   ? "active" : ""}`}
               onClick={() => handleTabClick("myPost")}
             >
-              <FontAwesomeIcon icon={faEnvelopesBulk} /> Bài đăng của tôi
+              <FontAwesomeIcon icon={faEnvelopesBulk} /> Hoạt động của tôi
             </button>
             {activeTab === "myPost" && ( 
             <div className="tab-content">
@@ -106,13 +106,13 @@ import MyPostDone from "../MyPost/MyPostDone/MyPostDone";
               className={`tab-btn ${activeTab === "myJoinPost" ? "active" : ""}`}
               onClick={() => handleTabClick("myJoinPost")}
             >
-              <FontAwesomeIcon icon={faEnvelopesBulk} /> Bài đăng đã tham gia
+              <FontAwesomeIcon icon={faEnvelopesBulk} /> Hoạt động đã tham gia
             </button>
             <button
               className={`tab-btn ${activeTab === "myHistory" ? "active" : ""}`}
               onClick={() => handleTabClick("myHistory")}
             >
-              <FontAwesomeIcon icon={faEnvelopesBulk} /> Ví
+              <FontAwesomeIcon icon={faEnvelopesBulk} /> Ví của tôi
             </button>
           </div>
 
