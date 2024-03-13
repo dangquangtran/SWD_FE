@@ -10,10 +10,6 @@
     min-height: 100vh;
     border-right: 1px solid #ccc;
     font-size: 26px;
-
-    .tab-btn.active {
-        background-color: #cad4c9;
-    }
 }
 
 .btn-backHome {
@@ -29,17 +25,21 @@
     padding: 30px 40px;
     font-weight: bold;
     border-bottom: 1px solid #e9e1e1;
+    cursor: pointer;
+}
 
-    &:hover {
-        background-color: #cad4c9;
-    }
+.tab-btn:hover {
+    background-color: #cad4c9;
+}
+
+.tab-btn.active {
+    background-color: #cad4c9;
 }
 
 .sub-tab {
     background-color: transparent;
     width: 90%;
     padding: 30px 20px;
-
     font-weight: bold;
     text-align: center;
     border-bottom: 1px solid #e9e1e1;
@@ -47,7 +47,32 @@
     color: #766a6a;
 }
 
-.close {
-    font-size: 35px;
-    font-weight: 700;
+.tab-content {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgb(217, 213, 213);
+    display: grid;
+    // justify-content: space-between;
 }
+
+.not-finished,
+.finished {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.not-finished.active,
+.finished.active {
+    color: rgb(6, 185, 6);
+}
+
+.not-finished:hover,
+.finished:hover {
+    color: rgb(6, 185, 6);
+}
+
