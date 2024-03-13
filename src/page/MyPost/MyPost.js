@@ -177,14 +177,20 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
               <div key={item.id} className="main-post-container">
                 <div className="poster-name">
                   <div>
-                    <p>{item.memberPostName}</p>
+                    <p
+                      style={{
+                        fontSize: "31px",
+                      }}
+                    >
+                      {item.memberPostName}
+                    </p>
                     <div>{timePost}</div>
                   </div>
                   {!isPassTime ? (
                     <div>
-                      <CountdownTimer targetTime={time}/>
+                      <CountdownTimer targetTime={time} />
                     </div>
-                  ): (
+                  ) : (
                     <p>Kết thúc trận đấu</p>
                   )}
                 </div>
@@ -199,9 +205,9 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
                       <div>
                         <b>
                           Khu:{" "}
-                          <p style={{ fontWeight: "600" }}>
+                          <span style={{ fontWeight: "600" }}>
                             {yardDetails?.areaName}
-                          </p>{" "}
+                          </span>{" "}
                         </b>
                       </div>
                       <div>
@@ -257,7 +263,7 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
                                 <div key={member.id} className="member-item">
                                   <span>{member.memberName}</span>{" "}
                                   <div>
-                                    {isPassTime && ( 
+                                    {isPassTime &&
                                       postItem.status.map((status) => {
                                         if (status.clubMemberId === member.id) {
                                           if (status.joinStatus === "joined") {
@@ -289,7 +295,8 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
                                               </div>
                                             );
                                           } else if (
-                                            status.joinStatus === "confirm_joined"
+                                            status.joinStatus ===
+                                            "confirm_joined"
                                           ) {
                                             return (
                                               <button
@@ -314,8 +321,7 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
                                           }
                                         }
                                         return null;
-                                      })
-                                    )}
+                                      })}
                                   </div>
                                 </div>
                               ))

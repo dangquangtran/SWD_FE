@@ -182,7 +182,13 @@ function NewFeed({ inforWallet, tranPoint, yards, setActiveTab, clubDetail }) {
           <div key={item.id} className="main-post-container">
             <div className="poster-name">
               <div>
-                <p>{item.memberPostName}</p>
+                <p
+                  style={{
+                    fontSize: "31px",
+                  }}
+                >
+                  {item.memberPostName}
+                </p>
                 <div style={{ fontSize: "18px" }}>{timePost}</div>
               </div>
               <div>

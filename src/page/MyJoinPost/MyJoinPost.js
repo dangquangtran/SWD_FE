@@ -132,8 +132,16 @@ function MyJoinPost({ yards, clubDetail }) {
           return (
             <div key={index} className="main-post-container">
               <div className="poster-name">
-                <p>{resultItem.memberPostName}</p>
-                <div>{timePost}</div>
+                <div>
+                  <p
+                    style={{
+                      fontSize: "31px",
+                    }}
+                  >
+                    {resultItem.memberPostName}
+                  </p>
+                  <div>{timePost}</div>
+                </div>
                 <CountdownTimer targetTime={time} />
               </div>
               <div className="caption">{resultItem.description}</div>
