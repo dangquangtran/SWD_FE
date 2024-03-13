@@ -7,7 +7,7 @@
     width: 28%;
     background-color: #fff;
     text-align: center;
-    height: 100vh;
+    min-height: 100vh;
     border-right: 1px solid #ccc;
     font-size: 26px;
 
@@ -45,4 +45,9 @@
     border-bottom: 1px solid #e9e1e1;
     font-size: 12px;
     color: #766a6a;
+}
+
+.close {
+    font-size: 35px;
+    font-weight: 700;
 }

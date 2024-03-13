@@ -58,7 +58,7 @@ function Transpoint() {
             {editingPoint &&
                 <div className="change-point">
                     <label htmlFor="newPointValue"><b>Điểm mới:</b></label>
-                    <input id="newPointValue" type="text" value={newPointValue}
+                    <input placeholder="Nhập điểm mới" id="newPointValue" type="text" value={newPointValue}
                         onChange={(e) => setNewPointValue(e.target.value)} />
                     <Button variant="contained" className="btn-save-point" onClick={() => handleSaveClick(point.point)}>Lưu</Button>
                 </div>

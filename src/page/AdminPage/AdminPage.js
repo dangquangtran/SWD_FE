@@ -15,7 +15,7 @@ const menuItems = [
   {
     name: "ADMIN",
     // icon: "settings",
-    items: ["Thành viên", "Nhân viên", "Câu lạc bộ", "Môn thể thao", "Sân", "Tòa nhà", "Phê duyệt", "Điểm"],
+    items: ["Thành viên", "Nhân viên", "Câu lạc bộ", "Môn thể thao", "Sân", "Tòa nhà", "Phê duyệt", "Điểm giao dịch"],
   },
   {
     name: "Đăng xuất",
@@ -35,7 +35,7 @@ const componentsMap = {
   "Sân": <Yard />,
   "Tòa nhà": <Building />,
   "Phê duyệt": <ApprovalManage />,
-  "Điểm": <Transpoint />
+  "Điểm giao dịch": <Transpoint />
 };
 
 const Icon = ({ icon }) => (

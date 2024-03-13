@@ -226,7 +226,7 @@ function ModalCreatePost({
 
         <FormGroup>
           <div>
-            <FontAwesomeIcon icon={faImages} style={{ fontSize: "30px" }} />
+            <FontAwesomeIcon icon={faImages} style={{ fontSize: "30px", marginRight: "10px" }} />
             <input
               type="file"
               ref={imageFile}
