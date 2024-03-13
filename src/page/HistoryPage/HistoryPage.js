@@ -53,8 +53,8 @@ function HistoryPage({ clubDetail }) {
           src={clubDetail.image}
           alt="club-background"
           style={{
-            width: "398px",
-            height: "250px",
+            // width: "442px",
+            // height: "345px",
             marginRight: "37px",
             borderRadius: "44%",
           }}
@@ -65,60 +65,67 @@ function HistoryPage({ clubDetail }) {
           <p>Ngày thành lập: {timePost}</p>
         </div>
       </div>
-      <h2>Chi tiết về ví của bạn</h2>
-      <div className="history-wrapper">
-        <div className="wallet-detail-popup">
-          <h3>Ví của bạn</h3>
-          <p>
-            <b>Tên:</b> {walletInfo.memberName}
-          </p>
-          <p>
-            <b>Điểm bạn đang có:</b> {walletInfo.point}{" "}
-            <FontAwesomeIcon icon={faStar} className="faStar" />
-          </p>
+      <div
+        style={{
+          padding: "50px",
+        }}
+      >
+        <h2>Chi tiết về ví của bạn</h2>
+        <div className="history-wrapper">
+          <div className="wallet-detail-popup">
+            <h3>Ví của bạn</h3>
+            <p>
+              <b>Tên:</b> {walletInfo.memberName}
+            </p>
+            <p>
+              <b>Điểm bạn đang có:</b> {walletInfo.point}{" "}
+              <FontAwesomeIcon icon={faStar} className="faStar" />
+            </p>
+          </div>
+          <div className="users-table mt-3 mx-2">
+            <table id="customers">
+              <tbody>
+                <tr>
+                  <th>Điểm ban đầu</th>
+                  <th>Điểm giao dịch</th>
+                  <th>Tổng kết</th>
+                  <th>Ghi chú</th>
+                </tr>
+                {transactionHistoryPoints.map((item, index) => {
+                  if (
+                    item.status &&
+                    item.status.data &&
+                    item.status.data[0] === 1
+                  ) {
+                    const resultPoint =
+                      item.initialPoint + item.transactionPoint;
+                    const formattedTransactionPoint =
+                      item.transactionPoint > 0
+                        ? `+${item.transactionPoint}`
+                        : item.transactionPoint;
+                    return (
+                      <tr key={index}>
+                        <td>{item.initialPoint}</td>
+                        <td>{formattedTransactionPoint}</td>
+                        <td>{resultPoint}</td>
+                        <td>{item.desciption}</td>
+                      </tr>
+                    );
+                  }
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div className="users-table mt-3 mx-2">
-          <table id="customers">
-            <tbody>
-              <tr>
-                <th>Điểm ban đầu</th>
-                <th>Điểm giao dịch</th>
-                <th>Tổng kết</th>
-                <th>Ghi chú</th>
-              </tr>
-              {transactionHistoryPoints.map((item, index) => {
-                if (
-                  item.status &&
-                  item.status.data &&
-                  item.status.data[0] === 1
-                ) {
-                  const resultPoint = item.initialPoint + item.transactionPoint;
-                  const formattedTransactionPoint =
-                    item.transactionPoint > 0
-                      ? `+${item.transactionPoint}`
-                      : item.transactionPoint;
-                  return (
-                    <tr key={index}>
-                      <td>{item.initialPoint}</td>
-                      <td>{formattedTransactionPoint}</td>
-                      <td>{resultPoint}</td>
-                      <td>{item.desciption}</td>
-                    </tr>
-                  );
-                }
-              })}
-            </tbody>
-          </table>
-        </div>
+        {loading && (
+          <div className="loading-spinner">
+            <FontAwesomeIcon icon={faSpinner} spin />
+          </div>
+        )}
+        {transactionHistoryPoints.length === 0 && !loading && (
+          <div className="no-posts-message">Bạn chưa có ví</div>
+        )}
       </div>
-      {loading && (
-        <div className="loading-spinner">
-          <FontAwesomeIcon icon={faSpinner} spin />
-        </div>
-      )}
-      {transactionHistoryPoints.length === 0 && !loading && (
-        <div className="no-posts-message">Bạn chưa có ví</div>
-      )}
     </div>
   );
 }

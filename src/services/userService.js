@@ -196,7 +196,7 @@ const getAllAreas = () => {
 
 //Transpoint
 const getTranspoint = () => {
-  return axios.get("api//tranpoints/new")
+  return axios.get("api/tranpoints/new")
 }
 
 const createTranPoint = (data) => {
