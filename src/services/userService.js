@@ -112,7 +112,6 @@ const editYard = (yardId, data) => {
   return axios.put(`api/yards/${yardId}`, data);
 };
 
-
 const getYardsBySport = (sportId) => {
   return axios.get(`api/yards/${sportId}/sport`);
 };

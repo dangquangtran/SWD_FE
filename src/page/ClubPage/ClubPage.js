@@ -52,6 +52,8 @@ function ClubPage() {
       clubName: clubDetail.name,
     });
 
+    fetchClubDetail();
+
     setIsJoined(true);
     showSuccessToast("Join Club Success");
     setClubDetail((prevClubDetail) => ({
@@ -88,9 +90,7 @@ function ClubPage() {
   const day = date.getDate();
   const month = date.getMonth() + 1;
   const year = date.getFullYear();
-  const timePost = `  ${day}-${month}-${year}`;
-
-  console.log(clubDetail);
+  const timePost = `${day}-${month}-${year}`;
 
   return (
     <div className="container-club">

@@ -52,3 +52,22 @@ h3 {
 .faStar {
   color: #ff2810;
 }
+
+.club-title-new-feed {
+  display: flex;
+
+  span {
+    color: black;
+}
+
+p {
+  font-size: 22px;
+  color: black;
+  font-weight: 400;
+}
+
+p:first-child {
+  font-weight: 700;
+  font-size: 30px;
+}
+}

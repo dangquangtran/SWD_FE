@@ -1,3 +1,4 @@
+// Bổ sung import useState
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,7 +8,6 @@ import {
   getIdMemberCreatePost,
   getMyPostInClub,
   getNumberOfSlot,
-  getYardDetail,
 } from "../../services/userService";
 import {
   getListMemberJoinPost,
@@ -94,6 +94,7 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
       showErrorToast("Confirm failed!");
     }
   };
+
   const handleCancelJoin = async (idClubMember, idSlot) => {
     try {
       await confirmNoJoining(idClubMember, idSlot);
@@ -114,6 +115,12 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
     }
   };
 
+  const date = new Date(clubDetail.dateTime);
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const timePost = ` ${day}-${month}-${year}`;
+
   return (
     <div className="new-feed-container">
       <div className="club-title-new-feed">
@@ -123,14 +130,14 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
           alt="club-background"
           style={{
             width: "28%",
-            "margin-right": "37px",
-            "border-radius": "44%",
+            marginRight: "37px",
+            borderRadius: "44%",
           }}
         ></img>
         <div>
           <p>{clubDetail.name}</p>
           <p>Số lượng thành viên {clubDetail.countMember}</p>
-          <p>Ngày thành lập: {clubDetail.dateTime}</p>
+          <p>Ngày thành lập: {timePost}</p>
         </div>
       </div>
       <h5>Bài viết của bạn</h5>
@@ -155,12 +162,11 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
             }
 
             const date = new Date(item.dateTime);
-
-            const day = date.getDate(); // Lấy ngày trong tháng (1-31)
-            const month = date.getMonth() + 1; // Lấy tháng (0-11), cộng thêm 1 vì tháng bắt đầu từ 0
-            const year = date.getFullYear(); // Lấy năm
-            const hours = date.getHours(); // Lấy giờ trong ngày (0-23)
-            const minutes = date.getMinutes(); // Lấy phút (0-59)
+            const day = date.getDate();
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
+            const hours = date.getHours();
+            const minutes = date.getMinutes();
             const timePost = ` ${hours}:${minutes} ${year}-${month}-${day}`;
 
             //get yard details
@@ -174,10 +180,12 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
                     <p>{item.memberPostName}</p>
                     <div>{timePost}</div>
                   </div>
-                  {!isPassTime && (
+                  {!isPassTime ? (
                     <div>
-                      <CountdownTimer targetTime={time} />
+                      <CountdownTimer targetTime={time}/>
                     </div>
+                  ): (
+                    <p>Kết thúc trận đấu</p>
                   )}
                 </div>
 
@@ -249,63 +257,65 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
                                 <div key={member.id} className="member-item">
                                   <span>{member.memberName}</span>{" "}
                                   <div>
-                                    {postItem.status.map((status) => {
-                                      if (status.clubMemberId === member.id) {
-                                        if (status.joinStatus === "joined") {
-                                          return (
-                                            <div key={`${member.id}-joined`}>
+                                    {isPassTime && ( 
+                                      postItem.status.map((status) => {
+                                        if (status.clubMemberId === member.id) {
+                                          if (status.joinStatus === "joined") {
+                                            return (
+                                              <div key={`${member.id}-joined`}>
+                                                <button
+                                                  className="confirm-button"
+                                                  onClick={() =>
+                                                    handleConfirmJoin(
+                                                      member.id,
+                                                      item.id,
+                                                      member.memberId
+                                                    )
+                                                  }
+                                                >
+                                                  Xác nhận đã tham gia
+                                                </button>
+                                                <button
+                                                  className="cancel-button"
+                                                  onClick={() =>
+                                                    handleCancelJoin(
+                                                      member.id,
+                                                      item.id
+                                                    )
+                                                  }
+                                                >
+                                                  Xác nhận không tham gia
+                                                </button>
+                                              </div>
+                                            );
+                                          } else if (
+                                            status.joinStatus === "confirm_joined"
+                                          ) {
+                                            return (
                                               <button
+                                                key={`${member.id}-confirm-joined`}
                                                 className="confirm-button"
-                                                onClick={() =>
-                                                  handleConfirmJoin(
-                                                    member.id,
-                                                    item.id,
-                                                    member.memberId
-                                                  )
-                                                }
                                               >
-                                                Xác nhận đã tham gia
+                                                Đã tham gia
                                               </button>
+                                            );
+                                          } else if (
+                                            status.joinStatus ===
+                                            "confirm_no_joined"
+                                          ) {
+                                            return (
                                               <button
+                                                key={`${member.id}-confirm-no-joined`}
                                                 className="cancel-button"
-                                                onClick={() =>
-                                                  handleCancelJoin(
-                                                    member.id,
-                                                    item.id
-                                                  )
-                                                }
                                               >
-                                                Xác nhận không tham gia
+                                                Không tham gia
                                               </button>
-                                            </div>
-                                          );
-                                        } else if (
-                                          status.joinStatus === "confirm_joined"
-                                        ) {
-                                          return (
-                                            <button
-                                              key={`${member.id}-confirm-joined`}
-                                              className="confirm-button"
-                                            >
-                                              Đã tham gia
-                                            </button>
-                                          );
-                                        } else if (
-                                          status.joinStatus ===
-                                          "confirm_no_joined"
-                                        ) {
-                                          return (
-                                            <button
-                                              key={`${member.id}-confirm-no-joined`}
-                                              className="cancel-button"
-                                            >
-                                              Không tham gia
-                                            </button>
-                                          );
+                                            );
+                                          }
                                         }
-                                      }
-                                      return null;
-                                    })}
+                                        return null;
+                                      })
+                                    )}
                                   </div>
                                 </div>
                               ))

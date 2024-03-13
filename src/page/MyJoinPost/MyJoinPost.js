@@ -5,7 +5,6 @@ import {
   getNumberOfSlot,
   getSlotJoined,
   getSlotPostJoined,
-  getYardDetail,
 } from "../../services/userService";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -73,6 +72,13 @@ function MyJoinPost({ yards, clubDetail }) {
     fetchPosts();
   }, [postIdJoined]);
 
+  const date = new Date(clubDetail.dateTime);
+
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const timePost = ` ${day}-${month}-${year}`;
+
   return (
     <div className="new-feed-container">
       <div className="club-title-new-feed">
@@ -82,14 +88,14 @@ function MyJoinPost({ yards, clubDetail }) {
           alt="club-background"
           style={{
             width: "28%",
-            "margin-right": "37px",
-            "border-radius": "44%",
+            marginRight: "37px",
+            borderRadius: "44%",
           }}
         ></img>
         <div>
           <p>{clubDetail.name}</p>
           <p>Số lượng thành viên {clubDetail.countMember}</p>
-          <p>Ngày thành lập: {clubDetail.dateTime}</p>
+          <p>Ngày thành lập: {timePost}</p>
         </div>
       </div>
       <h5>Bài viết của bạn đã tham gia</h5>

@@ -32,7 +32,6 @@ function MainClubPage() {
   useEffect(() => {
     const fetchWalletData = async () => {
       try {
-        // Sử dụng Promise.all để gửi các yêu cầu cùng một lúc
         const [walletRes, tranPointRes, yardsRes, clubDetailRes] =
           await Promise.all([
             getWalletByMemberId(userInfo.id),
@@ -41,11 +40,9 @@ function MainClubPage() {
             getDetailClub(id),
           ]);
 
-        // Đặt thông tin ví, điểm giao dịch và các khu vực vào trạng thái
         setInforWallet(walletRes.result);
         setTranPoint(tranPointRes.result);
         setYards(yardsRes.result);
-        console.log(clubDetailRes);
         setClubDetail(clubDetailRes.result);
       } catch (error) {
         console.error("Error fetching wallet data:", error);
