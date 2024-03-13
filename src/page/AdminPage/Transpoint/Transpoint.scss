@@ -6,26 +6,52 @@
 }
 
 h1 {
-    font-size: 2.2rem;
+    font-size: 2 rem;
     font-weight: 800;
 }
 
 .change-point {
-    margin-top: 10px;
+    margin-top: 20px;
+    display: flex;
+    background-color: #55c4a4;
+    padding: 20px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    justify-content: center;
 }
 
-.content {
-    padding: 0 !important;
-}
 
 .button-edit-point {
     padding: 8px 20px;
     background-color: #ff5a5a;
     border-radius: 5px;
     font-size: 1.2rem;
-    margin-top: 20px;
+    margin-top: 30px;
+    margin-bottom: 5px;
 }
 
 input {
-    margin-left: 5px;
+    margin-right: 10px !important;
+}
+
+b {
+    margin-right: 10px;
+}
+
+
+
+.current-point {
+    padding: 10px 20px;
+    background-color: #55c4a4;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #000;
+    width: fit-content;
+}
+
+.point {
+    padding: 5px 10px;
+    border-radius: 30px;
+    background-color: #ffff;
+    border: 1px solid #000;
 }
