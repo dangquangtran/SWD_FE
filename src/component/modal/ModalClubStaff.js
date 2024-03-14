@@ -1,18 +1,21 @@
 // ModalClubStaff.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { emitter } from "../../utils/emitter";
 import { showErrorToast } from "../toast/toast";
 import { getAllSports } from "../../services/userService";
+import axios from "axios";
+
 
 function ModalClubStaff({ isOpen, toggleFromParent, createNewClub, sportName, sportId }) {
+    const imageFile = useRef(null);
+
     const [formData, setFormData] = useState({
         name: "",
         description: "",
-        countMember: 0,
         sportName: sportName,
+        image: "",
     });
-    const [sport, setSport] = useState([]);
 
 
 
@@ -21,8 +24,8 @@ function ModalClubStaff({ isOpen, toggleFromParent, createNewClub, sportName, sp
             setFormData({
                 name: "",
                 description: "",
-                countMember: 0,
                 sportName: sportName,
+                image: "",
             });
         };
 
@@ -37,12 +40,6 @@ function ModalClubStaff({ isOpen, toggleFromParent, createNewClub, sportName, sp
         toggleFromParent();
     };
 
-    const handleOnChangeInput = (event, id) => {
-        setFormData({
-            ...formData,
-            [id]: event.target.value,
-        });
-    };
 
     const checkValidateInput = () => {
         for (const key in formData) {
@@ -64,14 +61,47 @@ function ModalClubStaff({ isOpen, toggleFromParent, createNewClub, sportName, sp
                 setFormData({
                     name: "",
                     description: "",
-                    countMember: 0,
                     sportName: sportName,
+                    image: "",
                 });
                 toggle();
             } catch (error) {
                 showErrorToast("Club added error!");
                 console.log(error);
             }
+        }
+    };
+
+    const handleOnChangeInput = (event, id) => {
+        if (id === "image" && imageFile) {
+            uploadCloudinary(imageFile.current?.files[0]);
+        }
+        setFormData({
+            ...formData,
+            [id]: event.target.value,
+        });
+
+    };
+
+    const uploadCloudinary = async (image) => {
+        const formDataImage = new FormData();
+        formDataImage.append("api_key", "665652388645534");
+        formDataImage.append("upload_preset", "upload-image");
+        formDataImage.append("file", image);
+        try {
+            const response = await axios.post(
+                "https://api.cloudinary.com/v1_1/upload-image/image/upload",
+                formDataImage
+            );
+            setTimeout(() => {
+                setFormData({
+                    ...formData,
+                    image: response.data.url,
+                });
+            }, 500);
+            console.log("Upload cloudinary successfully", response);
+        } catch (error) {
+            console.log("Error upload cloudinary:", error);
         }
     };
 
@@ -82,11 +112,11 @@ function ModalClubStaff({ isOpen, toggleFromParent, createNewClub, sportName, sp
             className={"modal-user-container"}
             size="lg"
         >
-            <ModalHeader toggle={toggle}>CREATE A NEW CLUB</ModalHeader>
+            <ModalHeader toggle={toggle}>Tạo mới CLUB</ModalHeader>
             <ModalBody>
                 <div className="modal-user-body">
                     <div className="input-container">
-                        <label>Club Name</label>
+                        <label>Tên câu lạc bộ</label>
                         <input
                             type="text"
                             onChange={(event) => handleOnChangeInput(event, "name")}
@@ -94,7 +124,7 @@ function ModalClubStaff({ isOpen, toggleFromParent, createNewClub, sportName, sp
                         />
                     </div>
                     <div className="input-container">
-                        <label>Description</label>
+                        <label>Mô tả</label>
                         <input
                             type="text"
                             onChange={(event) => handleOnChangeInput(event, "description")}
@@ -102,26 +132,28 @@ function ModalClubStaff({ isOpen, toggleFromParent, createNewClub, sportName, sp
                         />
                     </div>
                     <div className="input-container">
-                        <label>Member Count</label>
-                        <input
-                            type="number"
-                            onChange={(event) => handleOnChangeInput(event, "countMember")}
-                            value={formData.countMember}
-                        />
-                    </div>
-                    <div className="input-container">
-                        <label>Sport Name</label>
+                        <label>Tên môn thể thao</label>
                         <input type="text" value={formData.sportName} readOnly />
 
+                    </div>
+                    <div className="input-container">
+                        <label>Hình ảnh</label>
+                        <div>
+                            <input
+                                type="file"
+                                ref={imageFile}
+                                onChange={(event) => handleOnChangeInput(event, "image")}
+                            />
+                        </div>
                     </div>
                 </div>
             </ModalBody>
             <ModalFooter>
                 <Button className="add-btn" onClick={handleAddNewClub}>
-                    Add new
+                    Tạo mới
                 </Button>{" "}
                 <Button className="close-btn" onClick={toggle}>
-                    Close
+                    Đóng
                 </Button>
             </ModalFooter>
         </Modal>

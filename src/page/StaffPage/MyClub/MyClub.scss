@@ -1,12 +1,16 @@
 .club-manage {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    margin-top: 100px;
+    padding: 100px 50px;
     gap: 20px;
+    background-color: #EFF5F5;
+    min-height: 100vh;
 
     img {
         width: 300px;
         height: 300px;
+        cursor: pointer;
+
     }
 
     .club-staff {
@@ -14,7 +18,8 @@
         border-radius: 5px;
         border: 1px dashed #ccc;
         padding: 10px 0;
-        cursor: pointer;
+        background-color: #fff;
+        height: fit-content;
 
         &:hover {
             opacity: 0.9;
@@ -22,6 +27,8 @@
 
         h4 {
             padding: 10px 0;
+            cursor: pointer;
+
         }
     }
 
@@ -33,5 +40,25 @@
     .waiting {
         font-size: 1.2rem;
 
+    }
+
+    .reject-club {
+        font-size: 1.2rem;
+        color: red;
+    }
+
+    .btn-myclub {
+        padding: 10px 20px;
+        margin: 10px 5px;
+        border-radius: 5px;
+        border: 0.5px solid #000;
+
+        &.mem-list-btn {
+            background-color: #e7f2e5;
+        }
+
+        &.delete-club-staff {
+            background-color: #f64c3d;
+        }
     }
 }

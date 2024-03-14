@@ -72,10 +72,6 @@ function MemberManage() {
         }
     }
 
-    const handleGetDetail = async (user) => {
-        console.log(user);
-    }
-
     return (
         <div className='users-container' style={{ marginTop: '70px' }}>
                 <div className='mx-1'>
@@ -84,7 +80,7 @@ function MemberManage() {
                         onClick={toggleModal}
                     >
                         <i className='fa fa-plus'></i>
-                        Add new user
+                        Thêm thành viên
                     </button>
                 </div>
                 <ModalMember 
@@ -102,21 +98,21 @@ function MemberManage() {
                     <table id="customers">
                         <tbody>
                             <tr>
+                                <th>Tên</th>
                                 <th>Email</th>
-                                <th>Name</th>
-                                <th>Gender</th>
-                                <th>Image</th>
-                                <th>Building name</th>
-                                <th>Phone number</th>
-                                <th>Action</th>
+                                <th>Giới tính</th>
+                                <th>Hình ảnh</th>
+                                <th>Tòa</th>
+                                <th>Số điện thoại</th>
+                                <th>Hoạt động</th>
                             </tr>
                             {
                                 memBers && memBers.map((item, index) => {
                                     if (item.status && item.status.data && item.status.data[0] === 1) {
                                         return (
                                             <tr key={index}>
-                                                <td>{item.email}</td>
                                                 <td>{item.name}</td>
+                                                <td>{item.email}</td>
                                                 <td>{item.gender}</td>
                                                 <td><img width={50} height={50} src={item.image}/></td>
                                                 <td>{item.buildingName}</td>
@@ -124,7 +120,6 @@ function MemberManage() {
                                                 <td>
                                                     <button className='btn-edit' onClick={() => handleEdit(item)}><i className='fa fa-pencil'></i></button>
                                                     <button className='btn-delete' onClick={() => handleDeleteUser(item)}><i className='fa fa-trash'></i></button>
-                                                    <button className='btn-detail' onClick={() => handleGetDetail(item)}><i className="fa fa-user-o"></i></button>
                                                 </td>
                                             </tr>
                                         )
@@ -134,7 +129,7 @@ function MemberManage() {
                         </tbody>
                     </table>
                 </div>
-            </div>
+        </div>
      );
 }
 

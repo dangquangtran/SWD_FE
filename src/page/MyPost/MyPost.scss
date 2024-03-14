@@ -3,16 +3,34 @@
     background-color: #fff;
 
     .club-title-new-feed {
+        position: relative;
+        display: flex;
         margin-left: 60px;
-        height: 44px;
-        position: fixed;
-        background-color: #a4ce9f;
+        height: 360px;
+        background-color: #efefef;
         padding: 5px 40px;
         border-radius: 0 0 5px 5px;
-        width: 70%;
-        color: #fff;
+        width: 100%;
         font-weight: 700;
         font-size: 1.5rem;
+        margin-bottom: 10px;
+        margin-left: 0px;
+        padding-bottom: 10px;
+        span {
+            color: black;
+        }
+
+        p {
+            color: black;
+            font-weight: 400;
+            margin-left: 10px;
+        }
+
+        p:first-child {
+            font-weight: 700;
+            font-size: 53px;
+            margin: 0;
+        }
     }
 
     .post-container {
@@ -81,9 +99,11 @@
         border: 1px solid #ccc;
 
         .poster-name {
+            display: flex;
+            justify-content: space-between;
             background-color: #fff;
             border-radius: 10px;
-            width: 30%;
+            width: 100%;
             padding: 10px;
             margin-bottom: 10px;
 
@@ -102,25 +122,28 @@
         .caption {
             font-size: 20px;
             margin-bottom: 20px;
+            margin-left: 30px;
         }
 
         .post-content-container {
+            margin-left: 30px;
             display: flex;
         }
 
         .post-img {
-            width: 40%;
-            border: 1px solid;
+            object-fit: cover;
+            max-width: 16%;
+            border: 1px solid rgb(190, 186, 186);
         }
 
         .post-infor {
-            width: 55%;
-            text-align: center;
-            background-color: #f9f7ff;
+            padding-left: 50px;
+            width: 1000px;
+            text-align: left;
+            background-color: white;
             margin-left: 20px;
-            border: 1px dashed #000;
+            border: 1px solid #bebaba;
             padding-bottom: 10px;
-            justify-content: center;
             display: flex;
             flex-direction: column;
 
@@ -134,15 +157,15 @@
                 padding: 10px 50px;
                 background-color: #3b6d36;
                 color: #fff;
-                width: 30%;
-                margin: 0 auto;
+                width: 22%;
                 text-align: center;
                 border-radius: 5px;
+                margin-top: 20px;
             }
 
             b {
                 font-size: 1.5rem;
-                font-weight: 500;
+                font-weight: 400;
             }
         }
 

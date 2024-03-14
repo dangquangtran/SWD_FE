@@ -100,6 +100,22 @@ const getAllYards = () => {
   return axios.get("api/yards");
 };
 
+const createYard = (data) => {
+  return axios.post("api/yards", data);
+};
+
+const deleteYard = (YardId) => {
+  return axios.delete(`api/yards/${YardId}`);
+};
+
+const editYard = (yardId, data) => {
+  return axios.put(`api/yards/${yardId}`, data);
+};
+
+const getYardsBySport = (sportId) => {
+  return axios.get(`api/yards/${sportId}/sport`);
+};
+
 const getIdMemberCreatePost = (idMember, idClub) => {
   return axios.get(`api/clubMembers/getByIdMemberClub/${idMember}/${idClub}`);
 };
@@ -136,15 +152,57 @@ const getSlotJoinedByPostJoined = (clubMem) => {
   return axios.get(`api/slots/${clubMem}/getSlotJoined`);
 };
 
+const getSlotNotJoined = (clubMem, idClub) => {
+  return axios.get(`api/slots/${clubMem}/${idClub}/getSlotnotJoin`);
+};
 const getYardDetail = (yard) => {
   return axios.get(`api/yards/${yard}`);
 };
 
+const getYards = () => {
+  return axios.get(`api/yards`);
+};
 
 //approval
-const getAllClubAdded = () => {
-  return axios.get("/api/members");
+const updateClubApproved = (clubid) => {
+  return axios.put(`api/admin/club/approve/${clubid}`);
 };
+
+const updateClubReject = (clubid) => {
+  return axios.put(`api/admin/club/reject/${clubid}`);
+};
+
+//building
+const getAllBuildings = () => {
+  return axios.get("api/buildings");
+};
+
+const createBuilding = (data) => {
+  return axios.post("api/buildings", data);
+};
+
+const editBuilding = (buildingId, data) => {
+  return axios.put(`api/buildings/${buildingId}`, data);
+};
+
+const deleteBuilding = (buildingId) => {
+  return axios.delete(`api/buildings/${buildingId}`);
+};
+
+//area
+const getAllAreas = () => {
+  return axios.get("api/areas");
+};
+
+//Transpoint
+const getTranspoint = () => {
+  return axios.get("api/tranpoints/new")
+}
+
+const createTranPoint = (data) => {
+  return axios.post("api/tranpoints", data);
+}
+
 
 export {
   handleLoginAdmin,
@@ -180,4 +238,19 @@ export {
   getSlotJoinedByPostJoined,
   getSlotPostJoined,
   getYardDetail,
+  getSlotNotJoined,
+  getYards,
+  updateClubApproved,
+  updateClubReject,
+  getYardsBySport,
+  getAllBuildings,
+  getAllAreas,
+  createYard,
+  deleteYard,
+  editYard,
+  editBuilding,
+  createBuilding,
+  deleteBuilding,
+  getTranspoint,
+  createTranPoint
 };

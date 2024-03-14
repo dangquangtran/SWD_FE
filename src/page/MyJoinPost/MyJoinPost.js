@@ -5,21 +5,19 @@ import {
   getNumberOfSlot,
   getSlotJoined,
   getSlotPostJoined,
-  getYardDetail,
 } from "../../services/userService";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import CountdownTimer from "../../component/countDownTime";
 
-function MyJoinPost() {
+function MyJoinPost({ yards, clubDetail }) {
   const { id } = useParams();
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   const [postIdJoined, setPostIdJoined] = useState([]);
   const [postJoined, setPostJoined] = useState([]);
   const [numberOfSlot, setNumberOfSlot] = useState({});
-  const [yardDetails, setYardDetails] = useState([]);
   const [isLoadingData, setIsLoadingData] = useState(true);
 
   async function fetchData() {
@@ -58,17 +56,6 @@ function MyJoinPost() {
   }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const details = await Promise.all(
-        postJoined.map((item) => getYardDetail(item.yardId))
-      );
-      setYardDetails(details);
-    };
-
-    fetchData();
-  }, [postJoined]);
-
-  useEffect(() => {
     async function fetchPosts() {
       if (postIdJoined.length === 0) return;
 
@@ -85,8 +72,32 @@ function MyJoinPost() {
     fetchPosts();
   }, [postIdJoined]);
 
+  const date = new Date(clubDetail.dateTime);
+
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const timePost = ` ${day}-${month}-${year}`;
+
   return (
     <div className="new-feed-container">
+      <div className="club-title-new-feed">
+        <img
+          className="img-background"
+          src={clubDetail.image}
+          alt="club-background"
+          style={{
+            width: "28%",
+            marginRight: "37px",
+            borderRadius: "44%",
+          }}
+        ></img>
+        <div>
+          <p>{clubDetail.name}</p>
+          <p>Số lượng thành viên {clubDetail.countMember}</p>
+          <p>Ngày thành lập: {timePost}</p>
+        </div>
+      </div>
       <h5>Bài viết của bạn đã tham gia</h5>
       {isLoadingData && (
         <FontAwesomeIcon icon={faSpinner} className="loading-icon" />
@@ -113,11 +124,24 @@ function MyJoinPost() {
           if (targetTime < currentTime) {
             return null;
           }
+
+          //get yard details
+          const yardDetails = yards.find((yard) => {
+            return yard.id === resultItem.yardId;
+          });
           return (
             <div key={index} className="main-post-container">
               <div className="poster-name">
-                <p>{resultItem.memberPostName}</p>
-                <div>{timePost}</div>
+                <div>
+                  <p
+                    style={{
+                      fontSize: "31px",
+                    }}
+                  >
+                    {resultItem.memberPostName}
+                  </p>
+                  <div>{timePost}</div>
+                </div>
                 <CountdownTimer targetTime={time} />
               </div>
               <div className="caption">{resultItem.description}</div>
@@ -127,12 +151,11 @@ function MyJoinPost() {
                   <h3>Thông tin trận đấu bạn tham gia</h3>
                   <div>
                     <div>
-                      <b>Khu: {yardDetails[index]?.result.areaName} </b>
+                      <b>Khu: {yardDetails?.areaName} </b>
                     </div>
                     <div>
                       <b>
-                        Sân: {yardDetails[index]?.result.sportName} -{" "}
-                        {resultItem.yardName}
+                        Sân: {yardDetails?.sportName} - {resultItem.yardName}
                       </b>
                     </div>
                     <div>

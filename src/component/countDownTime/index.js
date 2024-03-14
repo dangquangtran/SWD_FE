@@ -40,11 +40,11 @@ const CountdownTimer = ({ targetTime }) => {
     return () => clearTimeout(timer);
   });
 
-  const { days, hours, minutes, seconds } = timeLeft; // Thêm days vào đây
+  const { days, hours, minutes, seconds } = timeLeft; 
 
   return (
-    <div>
-      <h2>{`${days.toString().padStart(2, "0")}:${hours
+    <div style={{ display: 'flex' }}>
+      <h2 style={{fontSize: '22px', margin: '0' }}>{`${days.toString().padStart(2, "0")}:${hours
         .toString()
         .padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds
         .toString()

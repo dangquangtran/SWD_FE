@@ -58,10 +58,8 @@ function ModalRegisterMember({ isOpen, toggleFromParent, createNewUser }) {
         toggleFromParent();
     };
 
-   
-
     const handleOnChangeInput = (event, id) => {
-        if(id === 'image' && imageFile){
+        if (id === 'image' && imageFile) {
             uploadCloudinary(imageFile.current?.files[0])
         }
         setFormData({
@@ -71,24 +69,23 @@ function ModalRegisterMember({ isOpen, toggleFromParent, createNewUser }) {
     };
 
     const uploadCloudinary = async (image) => {
-    const formDataImage = new FormData();
-    formDataImage.append('api_key', '665652388645534');
-    formDataImage.append('upload_preset','upload-image');
-    formDataImage.append('file', image);
-    try {
-      const response = await axios.post('https://api.cloudinary.com/v1_1/upload-image/image/upload',formDataImage);
-      setTimeout(()=> {
-        setFormData({
-            ...formData,
-            image: response.data.url
-        })
-      },500)
-      console.log('Upload cloudinary successfully', response);
-    } catch (error) {
-      console.log('Error upload cloudinary:', error);
-    }
-  };
-
+        const formDataImage = new FormData();
+        formDataImage.append('api_key', '665652388645534');
+        formDataImage.append('upload_preset', 'upload-image');
+        formDataImage.append('file', image);
+        try {
+            const response = await axios.post('https://api.cloudinary.com/v1_1/upload-image/image/upload', formDataImage);
+            setTimeout(() => {
+                setFormData({
+                    ...formData,
+                    image: response.data.url
+                })
+            }, 500)
+            console.log('Upload cloudinary successfully', response);
+        } catch (error) {
+            console.log('Error upload cloudinary:', error);
+        }
+    };
 
     const checkValidateInput = () => {
         let isValid = true;
@@ -125,6 +122,18 @@ function ModalRegisterMember({ isOpen, toggleFromParent, createNewUser }) {
         }
     };
 
+    const handleBuildingNameChange = (event) => {
+        const selectedBuildingName = event.target.value;
+        const selectedBuilding = buildingIds.find(building => building.name === selectedBuildingName);
+        if (selectedBuilding) {
+            setFormData({
+                ...formData,
+                buildingName: selectedBuilding.name,
+                buildingId: selectedBuilding.id
+            });
+        }
+    };
+
     return (
         <Modal
             isOpen={isOpen}
@@ -133,12 +142,12 @@ function ModalRegisterMember({ isOpen, toggleFromParent, createNewUser }) {
             size="lg"
         >
             <ModalHeader toggle={toggle}>
-                CREATE NEW ACCOUNT
+                Tạo mới tài khoản
             </ModalHeader>
             <ModalBody>
                 <div className="modal-user-body">
                     <div className="input-container">
-                        <label>User Name</label>
+                        <label>Tên user</label>
                         <input
                             type="text"
                             onChange={(event) => handleOnChangeInput(event, 'name')}
@@ -154,7 +163,7 @@ function ModalRegisterMember({ isOpen, toggleFromParent, createNewUser }) {
                         />
                     </div>
                     <div className="input-container">
-                        <label>Password</label>
+                        <label>Mật khẩu</label>
                         <input
                             type="password"
                             onChange={(event) => handleOnChangeInput(event, 'password')}
@@ -167,24 +176,30 @@ function ModalRegisterMember({ isOpen, toggleFromParent, createNewUser }) {
                             type="file"
                             ref={imageFile}
                             onChange={(event) => handleOnChangeInput(event, 'image')}
-                           
+
                         />
                     </div>
                     <div className="input-container">
-                        <label>Gender</label>
-                        <input
-                            type="text"
+                        <label>Giới tính</label>
+                        <select
+                            className="select"
                             onChange={(event) => handleOnChangeInput(event, 'gender')}
                             value={formData.gender}
-                        />
+                        >
+                            <option value="" disabled>Chọn giới tính</option>
+                            <option value="male">Nam</option>
+                            <option value="female">Nữ</option>
+                            <option value="other">Khác</option>
+                        </select>
                     </div>
                     <div className="input-container">
-                        <label>Building Name</label>
-                        <select className="select"
-                            onChange={(event) => handleOnChangeInput(event, 'buildingName')}
+                        <label>Tên tòa nhà</label>
+                        <select
+                            className="select"
+                            onChange={handleBuildingNameChange}
                             value={formData.buildingName}
                         >
-                            <option value="" disabled>Select Building Name</option>
+                            <option value="" disabled>Chọn tên tòa nhà</option>
                             {buildingIds.map((buildingId) => (
                                 <option key={buildingId.id} value={buildingId.name}>
                                     {buildingId.name}
@@ -193,22 +208,7 @@ function ModalRegisterMember({ isOpen, toggleFromParent, createNewUser }) {
                         </select>
                     </div>
                     <div className="input-container">
-                        <label>Building Id</label>
-                        <select
-                            className="select"
-                            onChange={(event) => handleOnChangeInput(event, 'buildingId')}
-                            value={formData.buildingId}
-                        >
-                            <option value="" disabled>Select Building Id</option>
-                            {buildingIds.map((buildingId) => (
-                                <option key={buildingId.id} value={buildingId.id}>
-                                    {buildingId.id}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    <div className="input-container">
-                        <label>Phone number</label>
+                        <label>Số điện thoại</label>
                         <input
                             type="text"
                             onChange={(event) => handleOnChangeInput(event, 'phoneNumber')}
@@ -222,19 +222,17 @@ function ModalRegisterMember({ isOpen, toggleFromParent, createNewUser }) {
                     className="add-btn"
                     onClick={handleAddNewUser}
                 >
-                    Add new
+                    Tạo mới
                 </Button>{" "}
                 <Button
                     className="close-btn"
                     onClick={toggle}
                 >
-                    Close
+                    Đóng
                 </Button>
             </ModalFooter>
         </Modal>
     );
 }
-
-
 
 export default ModalRegisterMember;

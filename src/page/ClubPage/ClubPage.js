@@ -8,7 +8,6 @@ import {
   getIdMemberCreatePost,
 } from "../../services/userService";
 import "./ClubPage.scss";
-import image1 from "../../assets/Sport/badminton.jpg";
 import { showSuccessToast } from "../../component/toast/toast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
@@ -28,7 +27,7 @@ function ClubPage() {
     try {
       const response = await getDetailClub(id);
       setClubDetail(response.result);
-      console.log(clubDetail);
+      console.log(response.result);
 
       const response2 = await checkMemberJoinClub(user.id, id);
       setIsJoined(response2.result == 1 ? true : false);
@@ -53,14 +52,14 @@ function ClubPage() {
       clubName: clubDetail.name,
     });
 
+    fetchClubDetail();
+
     setIsJoined(true);
     showSuccessToast("Join Club Success");
     setClubDetail((prevClubDetail) => ({
       ...prevClubDetail,
       countMember: prevClubDetail.countMember + 1,
     }));
-
-    window.location.reload();
   };
 
   const handleLeaveClub = async () => {
@@ -87,6 +86,12 @@ function ClubPage() {
     return <div>Loading...</div>;
   }
 
+  const date = new Date(clubDetail.dateTime);
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const timePost = `${day}-${month}-${year}`;
+
   return (
     <div className="container-club">
       <div className="side-bar">
@@ -108,7 +113,11 @@ function ClubPage() {
             alt="club-background"
           ></img>
           <h2> {clubDetail.name}</h2>
-          <p>{clubDetail.countMember} thành viên</p>
+          <p>Môn thể thao: {clubDetail.sportName}</p>
+          <p>Số lượng thành viên: {clubDetail.countMember} thành viên</p>
+          <p>Mô tả: {clubDetail.description}</p>
+          <p>Ngày thành lập: {timePost}</p>
+          <p>Người quản lí: {clubDetail.staffName}</p>
           <div>
             {isJoined ? (
               <div>

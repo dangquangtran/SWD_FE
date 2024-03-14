@@ -75,9 +75,9 @@ function SportManage() {
         }
     }
 
-    const handleGetDetail = async (sport) => {
-        console.log(sport);
-    }
+    // const handleGetDetail = async (sport) => {
+    //     console.log(sport);
+    // }
 
     return (
         <div className='sports-container' style={{ marginTop: '70px' }}>
@@ -87,7 +87,7 @@ function SportManage() {
                     onClick={toggleModal}
                 >
                     <i className='fa fa-plus'></i>
-                    Add new sport
+                    Thêm môn thể thao
                 </button>
             </div>
             <ModalSport
@@ -105,9 +105,9 @@ function SportManage() {
                 <table id="sportsTable">
                     <tbody>
                         <tr>
-                            <th>Sport Name</th>
-                            <th>Description</th>
-                            <th>Action</th>
+                            <th>Tên thể thao</th>
+                            <th>Giới thiệu</th>
+                            <th>Hoạt động</th>
                         </tr>
                         {
                             sports && sports.map((item, index) => {
@@ -118,7 +118,7 @@ function SportManage() {
                                         <td>
                                             <button className='btn-edit' onClick={() => handleEdit(item)}><i className='fa fa-pencil'></i></button>
                                             <button className='btn-delete' onClick={() => handleDeleteSport(item)}><i className='fa fa-trash'></i></button>
-                                            <button className='btn-detail' onClick={() => handleGetDetail(item)}><i className="fa fa-info-circle"></i></button>
+                                            {/* <button className='btn-detail' onClick={() => handleGetDetail(item)}><i className="fa fa-info-circle"></i></button> */}
                                         </td>
                                     </tr>
                                 )

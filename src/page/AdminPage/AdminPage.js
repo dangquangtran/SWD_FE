@@ -7,17 +7,24 @@ import "./AdminPage.scss";
 import HeaderAdmin from "../../component/Header/HeaderAdmin";
 import SportManage from "./SportManage";
 import ApprovalManage from "./Approval";
+import Yard from "./Yard/Yard";
+import Building from "./Building.js/Building";
+import Transpoint from "./Transpoint/Transpoint";
 
 const menuItems = [
   {
     name: "ADMIN",
     // icon: "settings",
-    items: ["Thành viên", "Nhân viên", "Câu lạc bộ", "Môn thể thao", "Phê duyệt"],
+    items: ["Thành viên", "Nhân viên", "Câu lạc bộ", "Môn thể thao", "Sân", "Tòa nhà", "Phê duyệt", "Điểm giao dịch"],
   },
   {
     name: "Đăng xuất",
     // icon: "favorite",
   },
+  // {
+  //   name: "Đăng xuất",
+  //   // icon: "favorite",
+  // },
 ];
 
 const componentsMap = {
@@ -25,7 +32,10 @@ const componentsMap = {
   "Nhân viên": <StaffManage />,
   "Câu lạc bộ": <ClubManage />,
   "Môn thể thao": <SportManage />,
-  "Phê duyệt": <ApprovalManage />
+  "Sân": <Yard />,
+  "Tòa nhà": <Building />,
+  "Phê duyệt": <ApprovalManage />,
+  "Điểm giao dịch": <Transpoint />
 };
 
 const Icon = ({ icon }) => (
@@ -60,8 +70,9 @@ const SubMenu = ({ item, activeItem, handleClick }) => {
       }}
     >
       <div ref={navRef} className="sub-nav-inner">
-        {item?.items.map((subItem) => (
+        {item?.items.map((subItem, index) => (
           <NavButton
+            key={index}
             onClick={handleClick}
             name={subItem}
             isActive={activeItem === subItem}
@@ -78,23 +89,31 @@ function AdminPage() {
   const handleClick = async (item) => {
     console.log(item);
     try {
-      if (item && item === 'LOGOUT') {
+      if (item && item === "LOGOUT") {
         await handleLogOut();
-        localStorage.removeItem('token');
-        localStorage.removeItem('userInfo');
-        window.location.href = '/';
+        localStorage.removeItem("token");
+        localStorage.removeItem("userInfo");
+        window.location.href = "/";
       } else {
         setActiveItem(item !== activeItem ? item : "");
       }
     } catch (error) {
-      console.error('Đăng xuất thất bại', error);
+      console.error("Đăng xuất thất bại", error);
     }
   };
 
   return (
     <div>
       <HeaderAdmin />
-      <aside className="sidebar col-2" style={{ float: 'left', width: '300px', padding: '20px', marginTop: '70px' }}>
+      <aside
+        className="sidebar col-2"
+        style={{
+          float: "left",
+          width: "300px",
+          padding: "20px",
+          marginTop: "70px",
+        }}
+      >
         {menuItems.map((item) => (
           <div key={item.name}>
             {!item.items && (
@@ -125,9 +144,11 @@ function AdminPage() {
           </div>
         ))}
       </aside>
-      <div className="content" style={{ marginLeft: '300px', padding: '20px' }}>{componentsMap[activeItem]}</div>
+      <div className="content" style={{ marginLeft: "300px", padding: "20px" }}>
+        {componentsMap[activeItem]}
+      </div>
     </div>
   );
-};
+}
 
 export default AdminPage;

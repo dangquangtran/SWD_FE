@@ -1,41 +1,72 @@
 import React, { useEffect, useState } from "react";
-import { getAllClubStaff } from "../../../services/staffService";
+import { deleteClub, getAllClubStaff } from "../../../services/staffService";
 import { useNavigate } from "react-router-dom";
 import "./MyClub.scss"
+import { showErrorToast, showSuccessToast } from "../../../component/toast/toast";
 
 function MyClub() {
     const [clubs, setClubs] = useState(null);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchSports = async () => {
-            try {
-                const userID = JSON.parse(localStorage.getItem('userInfo')).id;
-                const response = await getAllClubStaff(userID);
-                setClubs(response.message);
-                console.log(response.message)
-            } catch (error) {
-                console.log(error);
-            }
-        };
 
-        fetchSports();
+
+    const fetchClubs = async () => {
+        try {
+            const userID = JSON.parse(localStorage.getItem('userInfo')).id;
+            const response = await getAllClubStaff(userID);
+            setClubs(response.message);
+            console.log(response)
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    useEffect(() => {
+        fetchClubs();
     }, []);
 
     const handleClick = (clubId) => {
-        navigate(`/member-sport/${clubId}`);
+        navigate(`/member-sport/staff/${clubId}`);
     };
+
+    const handleDeleteClub = async (club) => {
+        try {
+            if (club && club.id) {
+                await deleteClub(club.id);
+                showSuccessToast('Club deleted successfully!');
+                console.log(club)
+                await fetchClubs();
+            }
+        } catch (error) {
+            showErrorToast('Club delete error!');
+            console.log(error);
+        }
+    }
+
 
     return (
         <div className="club-manage">
             {clubs && clubs.map(club => {
-                return (
-                    <div key={club.id} className="club-staff" onClick={() => handleClick(club.id)}>
-                        <img src={club.image} alt={`Club ${club.id}`} />
-                        <h4>{club.name}</h4>
-                        {club.approveStatus === 1 ? <div className="approved">approved</div> : <div className="waiting">waiting...</div>}
-                    </div>
-                )
+                if (club.status.data[0] === 1) {
+                    return (
+                        <div key={club.id} className="club-staff" >
+                            <div onClick={() => {
+                                if (club.approveStatus === 1) {
+                                    handleClick(club.id)
+                                }
+                            }}> <img src={club.image} alt={`Club ${club.id}`} />
+                                <h4>{club.name}</h4></div>
+                            {club.approveStatus === 1 ? <div className="approved">approved</div> : club.approveStatus === 0 ? <div className="waiting">waiting...</div> : <div className="reject-club">Rejected</div>}
+                            <div>
+                                <button className="btn-myclub mem-list-btn" onClick={() => {
+                                    if (club.approveStatus === 1) {
+                                        handleClick(club.id)
+                                    }
+                                }}>Thành viên</button>
+                                <button className="btn-myclub delete-club-staff" onClick={() => { handleDeleteClub(club) }}>Xóa club</button>
+                            </div>
+                        </div>
+                    )
+                }
             })}
         </div>
     )

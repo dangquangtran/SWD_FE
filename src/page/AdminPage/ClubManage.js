@@ -84,7 +84,7 @@ function ClubManage() {
                     onClick={toggleModal}
                 >
                     <i className='fa fa-plus'></i>
-                    Add new club
+                    Thêm câu lạc bộ
                 </button>
             </div>
             <ModalClub
@@ -102,10 +102,11 @@ function ClubManage() {
                 <table id="clubsTable">
                     <tbody>
                         <tr>
-                            <th>Club Name</th>
-                            <th>Description</th>
-                            <th>Member Count</th>
-                            <th>Action</th>
+                            <th>Tên câu lạc bộ</th>
+                            <th>Giới thiệu</th>
+                            <th>Số thành viên</th>
+                            <th>Người quản lí</th>
+                            <th>Hoạt động</th>
                         </tr>
                         {
                             clubs && clubs.map((item, index) => {
@@ -115,6 +116,7 @@ function ClubManage() {
                                             <td>{item.name}</td>
                                             <td>{item.description}</td>
                                             <td>{item.countMember}</td>
+                                            <td>{item.staffName}</td>
                                             <td>
                                                 <button className='btn-edit' onClick={() => handleEdit(item)}><i className='fa fa-pencil'></i></button>
                                                 <button className='btn-delete' onClick={() => handleDeleteClub(item)}><i className='fa fa-trash'></i></button>
