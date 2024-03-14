@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import "./HistoryPage.scss";
+import ComponentHeader from "../../component/Header/ComponentHeader";
 
 function HistoryPage({ clubDetail }) {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -46,87 +47,91 @@ function HistoryPage({ clubDetail }) {
   const timePost = ` ${day}-${month}-${year}`;
 
   return (
-    <div className="history-page-container">
-      <div className="club-title-new-feed">
-        <img
-          className="img-background"
-          src={clubDetail.image}
-          alt="club-background"
+    <>
+    <ComponentHeader />
+      <div className="history-page-container">
+        {/* <div className="club-title-new-feed">
+          <img
+            className="img-background"
+            src={clubDetail.image}
+            alt="club-background"
+            style={{
+              // width: "442px",
+              // height: "345px",
+              marginRight: "37px",
+              borderRadius: "44%",
+            }}
+          ></img>
+          <div>
+            <p>{clubDetail.name}</p>
+            <p>Số lượng thành viên {clubDetail.countMember}</p>
+            <p>Ngày thành lập: {timePost}</p>
+          </div>
+        </div> */}
+        <div
           style={{
-            // width: "442px",
-            // height: "345px",
-            marginRight: "37px",
-            borderRadius: "44%",
+            marginTop: '60px',
+            padding: "50px",
           }}
-        ></img>
-        <div>
-          <p>{clubDetail.name}</p>
-          <p>Số lượng thành viên {clubDetail.countMember}</p>
-          <p>Ngày thành lập: {timePost}</p>
+        >
+          <h2>Chi tiết về ví của bạn</h2>
+          <div className="history-wrapper">
+            <div className="wallet-detail-popup">
+              <h3>Ví của bạn</h3>
+              <p>
+                <b>Tên:</b> {walletInfo.memberName}
+              </p>
+              <p>
+                <b>Điểm bạn đang có:</b> {walletInfo.point}{" "}
+                <FontAwesomeIcon icon={faStar} className="faStar" />
+              </p>
+            </div>
+            <div className="users-table mt-3 mx-2">
+              <table id="customers">
+                <tbody>
+                  <tr>
+                    <th>Điểm ban đầu</th>
+                    <th>Điểm giao dịch</th>
+                    <th>Tổng kết</th>
+                    <th>Ghi chú</th>
+                  </tr>
+                  {transactionHistoryPoints.map((item, index) => {
+                    if (
+                      item.status &&
+                      item.status.data &&
+                      item.status.data[0] === 1
+                    ) {
+                      const resultPoint =
+                        item.initialPoint + item.transactionPoint;
+                      const formattedTransactionPoint =
+                        item.transactionPoint > 0
+                          ? `+${item.transactionPoint}`
+                          : item.transactionPoint;
+                      return (
+                        <tr key={index}>
+                          <td>{item.initialPoint}</td>
+                          <td>{formattedTransactionPoint}</td>
+                          <td>{resultPoint}</td>
+                          <td>{item.desciption}</td>
+                        </tr>
+                      );
+                    }
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          {loading && (
+            <div className="loading-spinner">
+              <FontAwesomeIcon icon={faSpinner} spin />
+            </div>
+          )}
+          {transactionHistoryPoints.length === 0 && !loading && (
+            <div className="no-posts-message">Bạn chưa có ví</div>
+          )}
         </div>
       </div>
-      <div
-        style={{
-          padding: "50px",
-        }}
-      >
-        <h2>Chi tiết về ví của bạn</h2>
-        <div className="history-wrapper">
-          <div className="wallet-detail-popup">
-            <h3>Ví của bạn</h3>
-            <p>
-              <b>Tên:</b> {walletInfo.memberName}
-            </p>
-            <p>
-              <b>Điểm bạn đang có:</b> {walletInfo.point}{" "}
-              <FontAwesomeIcon icon={faStar} className="faStar" />
-            </p>
-          </div>
-          <div className="users-table mt-3 mx-2">
-            <table id="customers">
-              <tbody>
-                <tr>
-                  <th>Điểm ban đầu</th>
-                  <th>Điểm giao dịch</th>
-                  <th>Tổng kết</th>
-                  <th>Ghi chú</th>
-                </tr>
-                {transactionHistoryPoints.map((item, index) => {
-                  if (
-                    item.status &&
-                    item.status.data &&
-                    item.status.data[0] === 1
-                  ) {
-                    const resultPoint =
-                      item.initialPoint + item.transactionPoint;
-                    const formattedTransactionPoint =
-                      item.transactionPoint > 0
-                        ? `+${item.transactionPoint}`
-                        : item.transactionPoint;
-                    return (
-                      <tr key={index}>
-                        <td>{item.initialPoint}</td>
-                        <td>{formattedTransactionPoint}</td>
-                        <td>{resultPoint}</td>
-                        <td>{item.desciption}</td>
-                      </tr>
-                    );
-                  }
-                })}
-              </tbody>
-            </table>
-          </div>
-        </div>
-        {loading && (
-          <div className="loading-spinner">
-            <FontAwesomeIcon icon={faSpinner} spin />
-          </div>
-        )}
-        {transactionHistoryPoints.length === 0 && !loading && (
-          <div className="no-posts-message">Bạn chưa có ví</div>
-        )}
-      </div>
-    </div>
+    </>
   );
 }
 

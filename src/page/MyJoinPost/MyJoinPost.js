@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import CountdownTimer from "../../component/countDownTime";
+import ComponentHeader from "../../component/Header/ComponentHeader";
 
 function MyJoinPost({ yards, clubDetail }) {
   const { id } = useParams();
@@ -80,116 +81,119 @@ function MyJoinPost({ yards, clubDetail }) {
   const timePost = ` ${day}-${month}-${year}`;
 
   return (
-    <div className="new-feed-container">
-      <div className="club-title-new-feed">
-        <img
-          className="img-background"
-          src={clubDetail.image}
-          alt="club-background"
-          style={{
-            width: "28%",
-            marginRight: "37px",
-            borderRadius: "44%",
-          }}
-        ></img>
-        <div>
-          <p>{clubDetail.name}</p>
-          <p>Số lượng thành viên {clubDetail.countMember}</p>
-          <p>Ngày thành lập: {timePost}</p>
-        </div>
-      </div>
-      <h5>Bài viết của bạn đã tham gia</h5>
-      {isLoadingData && (
-        <FontAwesomeIcon icon={faSpinner} className="loading-icon" />
-      )}
-      {postJoined.length === 0 ? (
-        <div className="no-posts-message">
-          Bạn chưa hoạt động tham gia, hãy tích cực tham gia nào
-        </div>
-      ) : (
-        postJoined.map((resultItem, index) => {
-          const time = resultItem.date + "T" + resultItem.startTime + ":00";
-          const targetTime = new Date(time).getTime();
-          const currentTime = new Date().getTime();
-
-          const date = new Date(resultItem.dateTime);
-
-          const day = date.getDate(); // Lấy ngày trong tháng (1-31)
-          const month = date.getMonth() + 1; // Lấy tháng (0-11), cộng thêm 1 vì tháng bắt đầu từ 0
-          const year = date.getFullYear(); // Lấy năm
-          const hours = date.getHours(); // Lấy giờ trong ngày (0-23)
-          const minutes = date.getMinutes(); // Lấy phút (0-59)
-          const timePost = ` ${hours}:${minutes} ${year}-${month}-${day}`;
-
-          if (targetTime < currentTime) {
-            return null;
-          }
-
-          //get yard details
-          const yardDetails = yards.find((yard) => {
-            return yard.id === resultItem.yardId;
-          });
-          return (
-            <div key={index} className="main-post-container">
-              <div className="poster-name">
-                <div>
-                  <p
-                    style={{
-                      fontSize: "31px",
-                    }}
-                  >
-                    {resultItem.memberPostName}
-                  </p>
-                  <div>{timePost}</div>
-                </div>
-                <CountdownTimer targetTime={time} />
-              </div>
-              <div className="caption">{resultItem.description}</div>
-              <div className="post-content-container">
-                <img className="post-img" src={resultItem.image} alt="avatar" />
-                <div className="post-infor">
-                  <h3>Thông tin trận đấu bạn tham gia</h3>
+    <>
+    <ComponentHeader />
+      <div className="new-feed-container">
+        {/* <div className="club-title-new-feed">
+          <img
+            className="img-background"
+            src={clubDetail.image}
+            alt="club-background"
+            style={{
+              width: "28%",
+              marginRight: "37px",
+              borderRadius: "44%",
+            }}
+          ></img>
+          <div>
+            <p>{clubDetail.name}</p>
+            <p>Số lượng thành viên {clubDetail.countMember}</p>
+            <p>Ngày thành lập: {timePost}</p>
+          </div>
+        </div> */}
+        <h5 style={{ marginTop: '100px' }}>Bài viết của bạn đã tham gia</h5>
+        {isLoadingData && (
+          <FontAwesomeIcon icon={faSpinner} className="loading-icon" style={{ marginTop: '50px' }}/>
+        )}
+        {postJoined.length === 0 ? (
+          <div className="no-posts-message">
+            Bạn chưa hoạt động tham gia, hãy tích cực tham gia nào
+          </div>
+        ) : (
+          postJoined.map((resultItem, index) => {
+            const time = resultItem.date + "T" + resultItem.startTime + ":00";
+            const targetTime = new Date(time).getTime();
+            const currentTime = new Date().getTime();
+  
+            const date = new Date(resultItem.dateTime);
+  
+            const day = date.getDate(); // Lấy ngày trong tháng (1-31)
+            const month = date.getMonth() + 1; // Lấy tháng (0-11), cộng thêm 1 vì tháng bắt đầu từ 0
+            const year = date.getFullYear(); // Lấy năm
+            const hours = date.getHours(); // Lấy giờ trong ngày (0-23)
+            const minutes = date.getMinutes(); // Lấy phút (0-59)
+            const timePost = ` ${hours}:${minutes} ${year}-${month}-${day}`;
+  
+            if (targetTime < currentTime) {
+              return null;
+            }
+  
+            //get yard details
+            const yardDetails = yards.find((yard) => {
+              return yard.id === resultItem.yardId;
+            });
+            return (
+              <div key={index} className="main-post-container">
+                <div className="poster-name">
                   <div>
-                    <div>
-                      <b>Khu: {yardDetails?.areaName} </b>
-                    </div>
-                    <div>
-                      <b>
-                        Sân: {yardDetails?.sportName} - {resultItem.yardName}
-                      </b>
-                    </div>
-                    <div>
-                      <b>
-                        Thời gian: {resultItem.startTime} - {resultItem.endTime}
-                      </b>
-                    </div>
-                    <div>
-                      <b>Date: {resultItem.date}</b>
-                    </div>
+                    <p
+                      style={{
+                        fontSize: "31px",
+                      }}
+                    >
+                      {resultItem.memberPostName}
+                    </p>
+                    <div>{timePost}</div>
+                  </div>
+                  <CountdownTimer targetTime={time} />
+                </div>
+                <div className="caption">{resultItem.description}</div>
+                <div className="post-content-container">
+                  <img className="post-img" src={resultItem.image} alt="avatar" />
+                  <div className="post-infor">
+                    <h3>Thông tin trận đấu bạn tham gia</h3>
                     <div>
                       <div>
+                        <b>Khu: {yardDetails?.areaName} </b>
+                      </div>
+                      <div>
                         <b>
-                          Tổng số người chơi:{" "}
-                          {parseInt(resultItem.requiredMember) +
-                            parseInt(resultItem.currentMember)}
+                          Sân: {yardDetails?.sportName} - {resultItem.yardName}
                         </b>
                       </div>
                       <div>
                         <b>
-                          Còn:{" "}
-                          {resultItem.requiredMember -
-                            parseInt(numberOfSlot[resultItem.id]) || 0}
+                          Thời gian: {resultItem.startTime} - {resultItem.endTime}
                         </b>
+                      </div>
+                      <div>
+                        <b>Date: {resultItem.date}</b>
+                      </div>
+                      <div>
+                        <div>
+                          <b>
+                            Tổng số người chơi:{" "}
+                            {parseInt(resultItem.requiredMember) +
+                              parseInt(resultItem.currentMember)}
+                          </b>
+                        </div>
+                        <div>
+                          <b>
+                            Còn:{" "}
+                            {resultItem.requiredMember -
+                              parseInt(numberOfSlot[resultItem.id]) || 0}
+                          </b>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })
-      )}
-    </div>
+            );
+          })
+        )}
+      </div>
+    </>
   );
 }
 

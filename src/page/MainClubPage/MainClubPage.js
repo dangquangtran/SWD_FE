@@ -69,9 +69,9 @@ import MyPostDone from "../MyPost/MyPostDone/MyPostDone";
       <>
         <div className="main-club-container">
           <div className="side-bar-main">
-            <button className="btn-backHome" onClick={() => navigate("/members")}>
+            {/* <button className="btn-backHome" onClick={() => navigate("/members")}>
               <FontAwesomeIcon icon={faHouseUser} /> Trang chủ
-            </button>
+            </button> */}
             <button
               className={`tab-btn ${activeTab === "newFeed" ? "active" : ""}`}
               onClick={() => handleTabClick("newFeed")}
