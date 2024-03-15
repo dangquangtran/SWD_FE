@@ -13,29 +13,49 @@ import Button from '@mui/material/Button';
 import { showErrorToast, showSuccessToast } from "../../../component/toast/toast";
 import ModalEditYard from "../../../component/modal/ModalEditYard";
 import ModalYard from "../../../component/modal/ModalYard";
-
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 function Yard() {
     const [yards, setYards] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalEdit, setIsModalEdit] = useState(false);
     const [yardEdit, setYardEdit] = useState("");
-
-    const fetchYards = async () => {
-        try {
-            const response = await getAllYards();
-            setYards(response.result);
-            console.log(response.result);
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    const [filter, setFilter] = useState({ sportName: "" });
 
     useEffect(() => {
-
-
         fetchYards();
     }, []);
+
+    useEffect(() => {
+        fetchYards(filter);
+    }, [filter]);
+
+    const fetchYards = async (filter = {}) => {
+        try {
+            let data;
+            let applyFilter = false;
+    
+            for (const key in filter) {
+                if (filter[key]) {
+                  applyFilter = true;
+                  break;
+                }
+            }
+    
+            if (!applyFilter) {
+                data = await getAllYards();
+                console.log('1',data);
+            } else {
+                data = await getAllYards(filter);
+                console.log(data);
+            }
+    
+            setYards(data.result);
+        } catch (error) {
+            setYards([]);
+            console.error(error);
+        }
+    };
 
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen);
@@ -58,11 +78,11 @@ function Yard() {
     const doCreateNewClub = async (data) => {
         try {
             await createYard(data);
-            showSuccessToast('Yard added successfully!');
+            showSuccessToast('Thêm sân thành công');
             setIsModalOpen(false);
             fetchYards();
         } catch (error) {
-            showErrorToast('Yard added error!');
+            showErrorToast('Thêm sân thất bại');
             console.log(error);
         }
     }
@@ -71,12 +91,12 @@ function Yard() {
         try {
             if (yard && yard.id) {
                 await deleteYard(yard.id);
-                showSuccessToast('yard deleted successfully!');
+                showSuccessToast('Xóa sân thành công');
                 console.log(yard)
                 await fetchYards();
             }
         } catch (error) {
-            showErrorToast('Yard delete error!');
+            showErrorToast('Xóa sân thất bại');
             console.log(error);
         }
     }
@@ -94,9 +114,14 @@ function Yard() {
             await editYard(editYardId, data);
             await fetchYards();
         } catch (error) {
-            showErrorToast('Club edit error!')
+            showErrorToast('Chỉnh sửa thất bại')
             console.log(error);
         }
+    };
+
+    const handleFilterChange = (e) => {
+        const { name, value } = e.target;
+        setFilter({ ...filter, [name]: value }); 
     };
 
     return (
@@ -117,7 +142,25 @@ function Yard() {
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">
                     <TableHead>
                         <TableRow>
-                            <StyledTableCell >Môn thể thao</StyledTableCell>
+                            <StyledTableCell style={{ display: "flex", alignItems: "center" }}>
+                                <div style={{ marginLeft: "auto", marginRight: "auto", display: "flex", alignItems: "center", gap: '10px' }}>Môn thể thao
+                                <FormControl variant="standard" sx={{ minWidth: 0 }} >
+                                <InputLabel id="sport-filter-label"></InputLabel>
+                                <Select
+                                    labelId="sport-filter-label"
+                                    id="sport-filter"
+                                    name="sportName"
+                                    value={filter.sportName || ""}
+                                    onChange={handleFilterChange}
+                                    label="Môn thể thao"
+                                >
+                                    <MenuItem value="">Tất cả</MenuItem>
+                                    <MenuItem value="Bóng đá">Bóng đá</MenuItem>
+                                    <MenuItem value="Cầu lông">Cầu Lông</MenuItem>
+                                    <MenuItem value="Tennis">Tennis</MenuItem>
+                                </Select>
+                            </FormControl></div>
+                            </StyledTableCell>
                             <StyledTableCell align="center">Khu vực</StyledTableCell>
                             <StyledTableCell align="center">Sân</StyledTableCell>
                             <StyledTableCell align="center">Hoạt động</StyledTableCell>
@@ -126,7 +169,7 @@ function Yard() {
                     </TableHead>
                     <TableBody>
                         {yards.map((item, index) => {
-                            if (item.status.data[0] === 1) {
+                            if (item.status.data[0] === 1 && item.sportName === filter.sportName || filter.sportName === "") {
                                 return (
                                     <TableRow key={index}>
                                         <StyledTableCell index={index} component="th" scope="row">
