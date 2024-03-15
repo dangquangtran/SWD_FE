@@ -49,6 +49,10 @@ const deleteClub = (clubId) => {
     return axios.delete(`api/clubs/${clubId}`);
 };
 
+const updateClub = (clubid) => {
+    return axios.put(`api/clubs/${clubid}`);
+};
+
 export {
     handleLoginStaff,
     handleLogoutStaff,
@@ -60,5 +64,6 @@ export {
     deleteStaff,
     getMemberInClub,
     memberById,
-    deleteClub
+    deleteClub,
+    updateClub
 }

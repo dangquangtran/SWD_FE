@@ -3,9 +3,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import "./MainClubPage.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faHouseUser,
+  faAngleRight,
   faEnvelopesBulk,
+  faAngleDown
 } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCalendarCheck,
+  faCalendarXmark
+} from "@fortawesome/free-regular-svg-icons";
 import { faNewspaper } from "@fortawesome/free-regular-svg-icons";
 
 import NewFeed from "../NewFeed/NewFeed";
@@ -81,10 +86,10 @@ function MainClubPage() {
           </button>
 
           <button
-            className={`tab-btn ${activeTab === "myPost" ? "active" : ""}`}
+            className={`myAction tab-btn ${activeTab === "myPost" ? "active" : ""}`}
             onClick={() => handleTabClick("myPost")}
           >
-            <FontAwesomeIcon icon={faEnvelopesBulk} /> Hoạt động của tôi
+            <FontAwesomeIcon icon={faEnvelopesBulk} /> Hoạt động của tôi {activeTab === "myPost" ? <FontAwesomeIcon className="icon-myaction" icon={faAngleDown} /> : <FontAwesomeIcon className="icon-myaction" icon={faAngleRight} />}
           </button>
           {activeTab === "myPost" && (
             <div
@@ -94,20 +99,18 @@ function MainClubPage() {
               }}
             >
               <button
-                className={`finished ${
-                  activeTabPost === "done" ? "active" : ""
-                }`}
+                className={`finished ${activeTabPost === "done" ? "active" : ""
+                  }`}
                 onClick={() => handleTabClickPost("done")}
               >
-                Hoạt động kết thúc
+                <FontAwesomeIcon icon={faCalendarCheck} /> Hoạt động kết thúc
               </button>
               <button
-                className={`not-finished ${
-                  activeTabPost === "notDone" ? "active" : ""
-                }`}
+                className={`not-finished ${activeTabPost === "notDone" ? "active" : ""
+                  }`}
                 onClick={() => handleTabClickPost("notDone")}
               >
-                Hoạt động chưa kết thúc
+                <FontAwesomeIcon icon={faCalendarXmark} /> Hoạt động chưa kết thúc
               </button>
             </div>
           )}

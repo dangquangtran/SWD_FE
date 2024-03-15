@@ -65,6 +65,8 @@
     background-color: transparent;
     cursor: pointer;
     transition: color 0.3s ease;
+    padding: 25px 20px;
+    font-size: 25px;
 }
 
 .not-finished.active,
@@ -77,3 +79,12 @@
     color: rgb(6, 185, 6);
 }
 
+.myAction {
+    display: flex;
+    align-items: center;
+}
+
+.icon-myaction {
+    margin-left: 150px;
+
+}

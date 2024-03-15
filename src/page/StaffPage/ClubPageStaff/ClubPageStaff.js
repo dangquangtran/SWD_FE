@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getMemberInClub } from "../../../services/staffService";
+import { getMemberInClub, handleLogoutStaff } from "../../../services/staffService";
 import { deleteMember } from "../../../services/userService";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBackward } from "@fortawesome/free-solid-svg-icons";
+import { faBackward, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { showErrorToast, showSuccessToast } from "../../../component/toast/toast";
 import './ClubPageStaff.scss'
 import { styled } from '@mui/material/styles';
@@ -15,10 +15,15 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import { useNavigate } from "react-router-dom";
+
+
 
 function ClubPageStaff() {
     const { clubId } = useParams();
     const [members, setMembers] = useState([]);
+    const navigate = useNavigate();
+
 
     const fetchMembers = async () => {
         try {
@@ -59,9 +64,33 @@ function ClubPageStaff() {
         }
     }
 
+    const handleLogout = async () => {
+        try {
+            await handleLogoutStaff();
+            localStorage.removeItem("token");
+            localStorage.removeItem("userInfo");
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <div className='member-list-container-staff' style={{ marginTop: '70px' }}>
-            <Button onClick={handleBack} className="btn-back-staff" variant="contained"><FontAwesomeIcon icon={faBackward} /> Quay lại</Button>
+            <div className="content-container">
+                <div className="header-staff">
+                    <Button onClick={handleBack} className="btn-back-staff" variant="contained"><FontAwesomeIcon icon={faBackward} /> Quay lại</Button>
+
+                    <button onClick={handleLogout} className="btn-logout-staff">
+                        Đăng xuất{" "}
+                        <FontAwesomeIcon
+                            className="logout-icon"
+                            icon={faArrowRightFromBracket}
+                        />
+                    </button>
+                </div>
+
+            </div>
             <div className="table-container">
                 <h1>Danh sách các thành viên trong câu lạc bộ</h1>
                 <TableContainer component={Paper}>

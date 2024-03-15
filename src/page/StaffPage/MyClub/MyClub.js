@@ -3,12 +3,20 @@ import { deleteClub, getAllClubStaff } from "../../../services/staffService";
 import { useNavigate } from "react-router-dom";
 import "./MyClub.scss"
 import { showErrorToast, showSuccessToast } from "../../../component/toast/toast";
+import ModalClubInfo from "../../../component/modal/ModalClubInfo";
 
 function MyClub() {
     const [clubs, setClubs] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedClub, setSelectedClub] = useState(null)
+
     const navigate = useNavigate();
 
-
+    const toggleModal = (clubId) => {
+        setIsModalOpen(!isModalOpen);
+        const selectedClub = clubs.find(club => club.id === clubId);
+        setSelectedClub(selectedClub);
+    };
 
     const fetchClubs = async () => {
         try {
@@ -49,19 +57,22 @@ function MyClub() {
                 if (club.status.data[0] === 1) {
                     return (
                         <div key={club.id} className="club-staff" >
-                            <div onClick={() => {
-                                if (club.approveStatus === 1) {
-                                    handleClick(club.id)
-                                }
-                            }}> <img src={club.image} alt={`Club ${club.id}`} />
+                            <div onClick={() => toggleModal(club.id)}
+                            > <img src={club.image} alt={`Club ${club.id}`} />
                                 <h4>{club.name}</h4></div>
                             {club.approveStatus === 1 ? <div className="approved">approved</div> : club.approveStatus === 0 ? <div className="waiting">waiting...</div> : <div className="reject-club">Rejected</div>}
+                            <ModalClubInfo
+                                isOpen={isModalOpen}
+                                toggleFromParent={() => toggleModal(selectedClub.id)}
+                                data={selectedClub}
+                            />
                             <div>
                                 <button className="btn-myclub mem-list-btn" onClick={() => {
                                     if (club.approveStatus === 1) {
                                         handleClick(club.id)
                                     }
                                 }}>Thành viên</button>
+                                <button className="btn-myclub btn-post-club-staff">Bài viết</button>
                                 <button className="btn-myclub delete-club-staff" onClick={() => { handleDeleteClub(club) }}>Xóa club</button>
                             </div>
                         </div>
