@@ -148,12 +148,12 @@ function MyPostNotDone({ yards, clubDetail, myPostInClub }) {
                       <h3>Thông tin trận đấu</h3>
                       <div>
                         <div>
-                          <b>
+                          <p>
                             Khu:{" "}
                             <span style={{ fontWeight: "600" }}>
                               {yardDetails?.areaName}
                             </span>{" "}
-                          </b>
+                          </p>
                         </div>
                         <div>
                           <b>
