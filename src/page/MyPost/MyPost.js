@@ -17,11 +17,17 @@ import "./MyPost.scss";
 import CountdownTimer from "../../component/countDownTime";
 import ComponentHeader from "../../component/Header/ComponentHeader";
 
-function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
+function MyPost({
+  tranPoint,
+  inforWallet,
+  yards,
+  clubDetail,
+  setMyPostInClub,
+  myPostInClub,
+}) {
   const { id } = useParams();
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
-  const [myPost, setMyPost] = useState([]);
   const [numberOfSlot, setNumberOfSlot] = useState({});
   const [memberJoinList, setMemberJoinList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -33,7 +39,7 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
         const memberCreatePostId = response1.result.id;
 
         const response2 = await getMyPostInClub(memberCreatePostId);
-        setMyPost(response2.result);
+        setMyPostInClub(response2.result);
 
         const response3Promises = response2.result.map(async (post) => {
           const response = await getListMemberJoinPost(post.id);
@@ -76,7 +82,7 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
         memberId: memberId,
       });
 
-      const response3Promises = myPost.map(async (post) => {
+      const response3Promises = myPostInClub.map(async (post) => {
         const response = await getListMemberJoinPost(post.id);
         return {
           postId: post.id,
@@ -98,7 +104,7 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
   const handleCancelJoin = async (idClubMember, idSlot) => {
     try {
       await confirmNoJoining(idClubMember, idSlot);
-      const response3Promises = myPost.map(async (post) => {
+      const response3Promises = myPostInClub.map(async (post) => {
         const response = await getListMemberJoinPost(post.id);
         return {
           postId: post.id,
@@ -123,7 +129,7 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
 
   return (
     <>
-    <ComponentHeader />
+      <ComponentHeader />
       <div className="new-feed-container">
         {/* <div className="club-title-new-feed">
           <img
@@ -142,27 +148,31 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
             <p>Ngày thành lập: {timePost}</p>
           </div>
         </div> */}
-        <h5 style={{ marginTop: '100px' }}>Bài viết của bạn</h5>
+        <h5 style={{ marginTop: "100px" }}>Bài viết của bạn</h5>
         {isLoading && (
-          <FontAwesomeIcon icon={faSpinner} className="loading-icon" style={{ marginTop: '50px' }}/>
+          <FontAwesomeIcon
+            icon={faSpinner}
+            className="loading-icon"
+            style={{ marginTop: "50px" }}
+          />
         )}
-        {myPost.length === 0 ? (
+        {myPostInClub.length === 0 ? (
           <div className="no-posts-message">
             Bạn chưa đăng bài, hãy cùng kiếm đồng đội nhé
           </div>
         ) : (
           <>
-            {myPost.map((item, index) => {
+            {myPostInClub.map((item, index) => {
               const time = item.date + "T" + item.startTime + ":00";
               const targetTime = new Date(time).getTime();
               const currentTime = new Date().getTime();
-  
+
               var isPassTime = false;
-  
+
               if (targetTime < currentTime) {
                 isPassTime = true;
               }
-  
+
               const date = new Date(item.dateTime);
               const day = date.getDate();
               const month = date.getMonth() + 1;
@@ -170,7 +180,7 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
               const hours = date.getHours();
               const minutes = date.getMinutes();
               const timePost = ` ${hours}:${minutes} ${year}-${month}-${day}`;
-  
+
               //get yard details
               const yardDetails = yards.find((yard) => {
                 return yard.id === item.yardId;
@@ -196,9 +206,9 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
                       <p>Kết thúc trận đấu</p>
                     )}
                   </div>
-  
+
                   <div className="caption">{item.description}</div>
-  
+
                   <div className="post-content-container">
                     <img className="post-img" src={item.image} alt="avatar" />
                     <div className="post-infor">
@@ -267,10 +277,16 @@ function MyPost({ tranPoint, inforWallet, yards, clubDetail }) {
                                     <div>
                                       {isPassTime &&
                                         postItem.status.map((status) => {
-                                          if (status.clubMemberId === member.id) {
-                                            if (status.joinStatus === "joined") {
+                                          if (
+                                            status.clubMemberId === member.id
+                                          ) {
+                                            if (
+                                              status.joinStatus === "joined"
+                                            ) {
                                               return (
-                                                <div key={`${member.id}-joined`}>
+                                                <div
+                                                  key={`${member.id}-joined`}
+                                                >
                                                   <button
                                                     className="confirm-button"
                                                     onClick={() =>
