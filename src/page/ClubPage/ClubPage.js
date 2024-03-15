@@ -11,6 +11,7 @@ import "./ClubPage.scss";
 import { showSuccessToast } from "../../component/toast/toast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import ComponentHeader from "../../component/Header/ComponentHeader";
 
 function ClubPage() {
   const navigate = useNavigate();
@@ -55,7 +56,7 @@ function ClubPage() {
     fetchClubDetail();
 
     setIsJoined(true);
-    showSuccessToast("Join Club Success");
+    showSuccessToast("Tham gia câu lạc bộ thành công");
     setClubDetail((prevClubDetail) => ({
       ...prevClubDetail,
       countMember: prevClubDetail.countMember + 1,
@@ -93,57 +94,60 @@ function ClubPage() {
   const timePost = `${day}-${month}-${year}`;
 
   return (
-    <div className="container-club">
-      <div className="side-bar">
-        <button className="  btn-back" onClick={() => navigate("/members")}>
-          {" "}
-          <FontAwesomeIcon icon={faHouse} />
-        </button>
-
-        <h2>
-          Câu lạc bộ <br />
-          {clubDetail.name}
-        </h2>
-      </div>
-      <div className="main-club">
-        <div className="club-header">
-          <img
-            className="img-background"
-            src={clubDetail.image}
-            alt="club-background"
-          ></img>
-          <h2> {clubDetail.name}</h2>
-          <p>Môn thể thao: {clubDetail.sportName}</p>
-          <p>Số lượng thành viên: {clubDetail.countMember} thành viên</p>
-          <p>Mô tả: {clubDetail.description}</p>
-          <p>Ngày thành lập: {timePost}</p>
-          <p>Người quản lí: {clubDetail.staffName}</p>
-          <div>
-            {isJoined ? (
-              <div>
-                <button
-                  className="btn view-btn"
-                  onClick={() =>
-                    navigate(
-                      `/main-club/${clubDetail.id}/${memberCreatePostId}`
-                    )
-                  }
-                >
-                  Tham quan
+    <>
+      <ComponentHeader />
+      <div className="container-club">
+        <div className="side-bar">
+          <button className="  btn-back" onClick={() => navigate("/members")}>
+            {" "}
+            <FontAwesomeIcon icon={faHouse} />
+          </button>
+  
+          <h2>
+            Câu lạc bộ <br />
+            {clubDetail.name}
+          </h2>
+        </div>
+        <div className="main-club">
+          <div className="club-header">
+            <img
+              className="img-background"
+              src={clubDetail.image}
+              alt="club-background"
+            ></img>
+            <h2> {clubDetail.name}</h2>
+            <p>Môn thể thao: {clubDetail.sportName}</p>
+            <p>Số lượng thành viên: {clubDetail.countMember} thành viên</p>
+            <p>Mô tả: {clubDetail.description}</p>
+            <p>Ngày thành lập: {timePost}</p>
+            <p>Người quản lí: {clubDetail.staffName}</p>
+            <div>
+              {isJoined ? (
+                <div>
+                  <button
+                    className="btn view-btn"
+                    onClick={() =>
+                      navigate(
+                        `/main-club/${clubDetail.id}/${memberCreatePostId}`
+                      )
+                    }
+                  >
+                    Tham quan
+                  </button>
+                  <button className="btn leave-btn" onClick={handleLeaveClub}>
+                    Muốn rời nhóm
+                  </button>
+                </div>
+              ) : (
+                <button className="btn join-btn" onClick={handleJoinClub}>
+                  Tham gia
                 </button>
-                <button className="btn leave-btn" onClick={handleLeaveClub}>
-                  Muốn rời nhóm
-                </button>
-              </div>
-            ) : (
-              <button className="btn join-btn" onClick={handleJoinClub}>
-                Tham gia
-              </button>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
