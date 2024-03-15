@@ -1,4 +1,5 @@
 import "./MemberManage.scss";
+import React, { useEffect, useState } from "react";
 import {
   getAllMembers,
   createMember,
@@ -6,10 +7,10 @@ import {
   deleteMember,
   getAllBuildings,
 } from "../../services/userService";
-import { useEffect, useState } from "react";
+import ModalEditMember from "../../component/modal/ModalEditMember";
 import ModalMember from "../../component/modal/ModalMember";
 import { showSuccessToast, showErrorToast } from "../../component/toast/toast";
-import ModalEditMember from "../../component/modal/ModalEditMember";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 function MemberManage() {
   const [members, setMembers] = useState([]);
@@ -25,15 +26,29 @@ function MemberManage() {
   }, []);
 
   useEffect(() => {
-    // Fetch members with filters whenever filters change
     fetchApiMembers(filter);
   }, [filter]);
 
   const fetchApiMembers = async (filter = {}) => {
     try {
-      const data = await getAllMembers(filter);
+      let data;
+      let applyFilter = false;
+  
+      for (const key in filter) {
+        if (filter[key]) {
+          applyFilter = true;
+          break;
+        }
+      }
+  
+      if (!applyFilter) {
+        data = await getAllMembers();
+      } else {
+        data = await getAllMembers(filter);
+        console.log(data);
+      }
+  
       setMembers(data.result);
-      console.log(data.result);
     } catch (error) {
       setMembers([]);
       console.error(error);
@@ -60,7 +75,7 @@ function MemberManage() {
   const doCreateNewUser = async (data) => {
     try {
       await createMember(data);
-      showSuccessToast("User added successfully!");
+      showSuccessToast("Thêm thành viên thành công");
       setIsModalOpen(false);
       fetchApiMembers();
     } catch (error) {
@@ -99,8 +114,6 @@ function MemberManage() {
     setFilter({ ...filter, [name]: value });
   };
 
-  console.log(filter);
-
   return (
     <div className="users-container" style={{ marginTop: "70px" }}>
       <div className="mx-1">
@@ -126,35 +139,46 @@ function MemberManage() {
             <tr>
               <th>Tên</th>
               <th>Email</th>
-              <th>
-                Giới tính{" "}
-                <select
-                  id="genderFilter"
-                  name="gender"
-                  value={filter.gender}
-                  onChange={handleFilterChange}
-                >
-                  <option value="">Tất cả</option>
-                  <option value="male">Nam</option>
-                  <option value="female">Nữ</option>
-                </select>
+              <th style={{ display: "flex", alignItems: "center" }}>
+                <div style={{ marginLeft: "auto", marginRight: "10px" }}>Giới tính</div>
+                <FormControl variant="standard" sx={{ minWidth: 0 }}>
+                  <InputLabel id="gender-filter-label"></InputLabel>
+                  <Select
+                    labelId="gender-filter-label"
+                    id="gender-filter"
+                    name="gender"
+                    value={filter.gender || ""}
+                    onChange={handleFilterChange}
+                    label="Giới tính"
+                  >
+                    <MenuItem value="">Tất cả</MenuItem>
+                    <MenuItem value="male">Nam</MenuItem>
+                    <MenuItem value="female">Nữ</MenuItem>
+                    <MenuItem value="other">Khác</MenuItem>
+                  </Select>
+                </FormControl>
               </th>
               <th>Hình ảnh</th>
-              <th>
-                Tòa{" "}
-                <select
-                  id="buildingFilter"
-                  name="buildingId"
-                  value={filter.buildingId}
-                  onChange={handleFilterChange}
-                >
-                  <option value="">Tất cả</option>
-                  {buildings.map((building) => (
-                    <option key={building.id} value={building.id}>
-                      {building.name}
-                    </option>
-                  ))}
-                </select>
+              <th style={{ display: "flex", alignItems: "center" }}>
+                <div style={{ marginLeft: "auto", marginRight: "10px" }}>Tòa nhà</div>
+                <FormControl variant="standard" sx={{ minWidth: 0 }}>
+                  <InputLabel id="building-filter-label"></InputLabel>
+                  <Select
+                    labelId="building-filter-label"
+                    id="building-filter"
+                    name="buildingId"
+                    value={filter.buildingId || ""}
+                    onChange={handleFilterChange}
+                    label="Tòa"
+                  >
+                    <MenuItem value="">Tất cả</MenuItem>
+                    {buildings.map((building) => (
+                      <MenuItem key={building.id} value={building.id}>
+                        {building.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
               </th>
               <th>Số điện thoại</th>
               <th>Hoạt động</th>
@@ -165,7 +189,12 @@ function MemberManage() {
                 <td>{item.email}</td>
                 <td>{item.gender}</td>
                 <td>
-                  <img width={50} height={50} src={item.image} />
+                  <img
+                    width={50}
+                    height={50}
+                    src={item.image}
+                    alt={item.name}
+                  />
                 </td>
                 <td>{item.buildingName}</td>
                 <td>{item.phoneNumber}</td>
