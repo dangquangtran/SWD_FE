@@ -1,6 +1,6 @@
 .body {
     display: flex;
-    height: 70px;
+    height: 80px;
     position: fixed;
     top: 0;
     left: 0;
@@ -8,11 +8,12 @@
     z-index: 1000;
     background-color: #fff;
     align-items: center;
+    border-bottom: 1px solid black;
 
     .header-logo {
         background: url('../../assets/logoHeader/logo.png') center center no-repeat;
         height: 90%;
-        width: 280px;
+        width: 350px;
         cursor: pointer;
         background-size: cover;
     }

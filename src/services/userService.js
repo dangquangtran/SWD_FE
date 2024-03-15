@@ -12,8 +12,8 @@ const handleLogOut = () => {
 };
 
 //members
-const getAllMembers = () => {
-  return axios.get("/api/members");
+const getAllMembers = (filter) => {
+  return axios.get("/api/members?" + new URLSearchParams(filter).toString());
 };
 
 const createMember = (data) => {
@@ -196,13 +196,12 @@ const getAllAreas = () => {
 
 //Transpoint
 const getTranspoint = () => {
-  return axios.get("api/tranpoints/new")
-}
+  return axios.get("api/tranpoints/new");
+};
 
 const createTranPoint = (data) => {
   return axios.post("api/tranpoints", data);
-}
-
+};
 
 export {
   handleLoginAdmin,
@@ -252,5 +251,5 @@ export {
   createBuilding,
   deleteBuilding,
   getTranspoint,
-  createTranPoint
+  createTranPoint,
 };
