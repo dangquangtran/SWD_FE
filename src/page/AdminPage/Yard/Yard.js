@@ -78,11 +78,11 @@ function Yard() {
     const doCreateNewClub = async (data) => {
         try {
             await createYard(data);
-            showSuccessToast('Yard added successfully!');
+            showSuccessToast('Thêm sân thành công');
             setIsModalOpen(false);
             fetchYards();
         } catch (error) {
-            showErrorToast('Yard added error!');
+            showErrorToast('Thêm sân thất bại');
             console.log(error);
         }
     }
@@ -91,12 +91,12 @@ function Yard() {
         try {
             if (yard && yard.id) {
                 await deleteYard(yard.id);
-                showSuccessToast('yard deleted successfully!');
+                showSuccessToast('Xóa sân thành công');
                 console.log(yard)
                 await fetchYards();
             }
         } catch (error) {
-            showErrorToast('Yard delete error!');
+            showErrorToast('Xóa sân thất bại');
             console.log(error);
         }
     }

@@ -11,6 +11,7 @@ import ModalEditMember from "../../component/modal/ModalEditMember";
 import ModalMember from "../../component/modal/ModalMember";
 import { showSuccessToast, showErrorToast } from "../../component/toast/toast";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import Button from '@mui/material/Button';
 
 function MemberManage() {
   const [members, setMembers] = useState([]);
@@ -101,10 +102,11 @@ function MemberManage() {
     try {
       if (user && user.id) {
         await deleteMember(user.id);
-        showSuccessToast("Member deleted successfully!");
+        showSuccessToast("Xóa thành viên thành công!");
         await fetchApiMembers();
       }
     } catch (error) {
+      showErrorToast("Xóa thành viên không thành công!")
       console.error(error);
     }
   };
@@ -117,10 +119,7 @@ function MemberManage() {
   return (
     <div className="users-container" style={{ marginTop: "70px" }}>
       <div className="mx-1">
-        <button className="btn btn-primary px-3" onClick={toggleModal}>
-          <i className="fa fa-plus"></i>
-          Thêm thành viên
-        </button>
+        <Button className="add-Member" variant="outlined" onClick={toggleModal}><i className='fa fa-plus'></i> Thêm thành viên</Button>
       </div>
       <ModalMember
         isOpen={isModalOpen}

@@ -28,12 +28,12 @@ function Transpoint() {
     const handleSaveClick = async (data) => {
         try {
             await createTranPoint({ point: parseFloat(newPointValue) });
-            showSuccessToast('Your point updated successfully!');
+            showSuccessToast('Cập nhập thành công');
             setEditingPoint(false);
             fetchTranspoint();
             console.log(data)
         } catch (error) {
-            showErrorToast('Your point updated error!');
+            showErrorToast('Cập nhập thất bại');
             console.log(error);
         }
     };
