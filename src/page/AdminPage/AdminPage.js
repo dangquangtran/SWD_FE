@@ -15,12 +15,18 @@ const menuItems = [
   {
     name: "ADMIN",
     // icon: "settings",
-    items: ["Thành viên", "Nhân viên", "Câu lạc bộ", "Môn thể thao", "Sân", "Tòa nhà", "Phê duyệt", "Điểm giao dịch"],
+    items: [
+      "Thành viên",
+      "Nhân viên",
+      "Câu lạc bộ",
+      "Môn thể thao",
+      "Sân",
+      "Tòa nhà",
+      "Phê duyệt",
+      "Điểm giao dịch",
+    ],
   },
-  {
-    name: "Đăng xuất",
-    // icon: "favorite",
-  },
+
   // {
   //   name: "Đăng xuất",
   //   // icon: "favorite",
@@ -32,10 +38,10 @@ const componentsMap = {
   "Nhân viên": <StaffManage />,
   "Câu lạc bộ": <ClubManage />,
   "Môn thể thao": <SportManage />,
-  "Sân": <Yard />,
+  Sân: <Yard />,
   "Tòa nhà": <Building />,
   "Phê duyệt": <ApprovalManage />,
-  "Điểm giao dịch": <Transpoint />
+  "Điểm giao dịch": <Transpoint />,
 };
 
 const Icon = ({ icon }) => (
