@@ -97,9 +97,7 @@ function NewFeed({ inforWallet, tranPoint, yards, setActiveTab, clubDetail }) {
         },
       });
 
-      console.log("join");
-
-      window.location.reload();
+      setActiveTab(myJoinPost);
     } catch (error) {
       showErrorToast("Error joining slot!");
       console.error("Error joining slot:", error);
@@ -127,7 +125,7 @@ function NewFeed({ inforWallet, tranPoint, yards, setActiveTab, clubDetail }) {
 
   return (
     <>
-    <ComponentHeader />
+      <ComponentHeader />
       <div className="new-feed-container">
         {/* <div className="club-title-new-feed">
           <img
@@ -154,33 +152,34 @@ function NewFeed({ inforWallet, tranPoint, yards, setActiveTab, clubDetail }) {
             </span>
           </button>
         </div>
-  
+
         <h5>Bài viết mới nhất</h5>
-  
+
         {isLoading && (
           <FontAwesomeIcon icon={faSpinner} className="loading-icon" />
         )}
-  
+
         {slotNotJoined.map((item, index) => {
           const time = item.date + "T" + item.startTime + ":00";
-  
+
           const date = new Date(item.dateTime);
-  
+
           const day = date.getDate();
           const month = date.getMonth() + 1;
           const year = date.getFullYear();
           const hours = date.getHours();
           const minutes = date.getMinutes();
           const timePost = ` ${hours}:${minutes} ${day}-${month}-${year}`;
-  
+
           const remainingSlots =
-            parseInt(item.requiredMember) - parseInt(numberOfSlot[item.id] || 0);
+            parseInt(item.requiredMember) -
+            parseInt(numberOfSlot[item.id] || 0);
           const isFull = remainingSlots <= 0;
-  
+
           const yardDetails = yards.find((yard) => {
             return yard.id === item.yardId;
           });
-  
+
           return (
             <div key={item.id} className="main-post-container">
               <div className="poster-name">
