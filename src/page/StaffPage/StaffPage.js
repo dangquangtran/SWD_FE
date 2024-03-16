@@ -38,7 +38,10 @@ function StaffPage() {
       </div>
       <div className="content-container">
         <div className="header-staff">
+          <div className="col-6 header-logo"></div>
+
           <div className="header-title-staff">
+
             <div
               className={`child-content-staff ${activeTab === "my-club" ? "active" : ""
                 }`}

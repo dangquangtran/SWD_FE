@@ -81,7 +81,14 @@
 }
 
 .header-title-staff {
-    margin: 0 auto;
     height: 100%;
     display: flex;
+}
+
+.header-logo {
+    background: url('../../assets/logoHeader/logo.png') center center no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 15% !important;
+    cursor: pointer;
 }
