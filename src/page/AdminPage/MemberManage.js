@@ -11,7 +11,7 @@ import ModalEditMember from "../../component/modal/ModalEditMember";
 import ModalMember from "../../component/modal/ModalMember";
 import { showSuccessToast, showErrorToast } from "../../component/toast/toast";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 
 function MemberManage() {
   const [members, setMembers] = useState([]);
@@ -34,21 +34,21 @@ function MemberManage() {
     try {
       let data;
       let applyFilter = false;
-  
+
       for (const key in filter) {
         if (filter[key]) {
           applyFilter = true;
           break;
         }
       }
-  
+
       if (!applyFilter) {
         data = await getAllMembers();
       } else {
         data = await getAllMembers(filter);
         console.log(data);
       }
-  
+
       setMembers(data.result);
     } catch (error) {
       setMembers([]);
@@ -106,7 +106,7 @@ function MemberManage() {
         await fetchApiMembers();
       }
     } catch (error) {
-      showErrorToast("Xóa thành viên không thành công!")
+      showErrorToast("Xóa thành viên không thành công!");
       console.error(error);
     }
   };
@@ -119,7 +119,9 @@ function MemberManage() {
   return (
     <div className="users-container" style={{ marginTop: "70px" }}>
       <div className="mx-1">
-        <Button className="add-Member" variant="outlined" onClick={toggleModal}><i className='fa fa-plus'></i> Thêm thành viên</Button>
+        <Button className="add-Member" variant="outlined" onClick={toggleModal}>
+          <i className="fa fa-plus"></i> Thêm thành viên
+        </Button>
       </div>
       <ModalMember
         isOpen={isModalOpen}
@@ -139,7 +141,9 @@ function MemberManage() {
               <th>Tên</th>
               <th>Email</th>
               <th style={{ display: "flex", alignItems: "center" }}>
-                <div style={{ marginLeft: "auto", marginRight: "10px" }}>Giới tính</div>
+                <div style={{ marginLeft: "auto", marginRight: "10px" }}>
+                  Giới tính
+                </div>
                 <FormControl variant="standard" sx={{ minWidth: 0 }}>
                   <InputLabel id="gender-filter-label"></InputLabel>
                   <Select
@@ -159,7 +163,9 @@ function MemberManage() {
               </th>
               <th>Hình ảnh</th>
               <th style={{ display: "flex", alignItems: "center" }}>
-                <div style={{ marginLeft: "auto", marginRight: "10px" }}>Tòa nhà</div>
+                <div style={{ marginLeft: "auto", marginRight: "10px" }}>
+                  Tòa nhà
+                </div>
                 <FormControl variant="standard" sx={{ minWidth: 0 }}>
                   <InputLabel id="building-filter-label"></InputLabel>
                   <Select
