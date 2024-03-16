@@ -31,24 +31,33 @@
 
     .post-content-container-staff {
         display: flex;
-        width: 90%;
+        width: 60%;
         margin: 20px auto;
-        padding: 10px;
+        padding: 30px 20px;
         border: 1px solid #000;
+        border-radius: 10px;
         margin-top: 10px;
         justify-content: space-around;
+        box-shadow: 10px 10px 10px #ccc;
 
         .post-img {
-            width: 30%;
+            width: 20%;
             object-fit: cover;
             border: 1px solid;
         }
 
         .post-infor {
             width: 60%;
-            text-align: center;
             background-color: #fef2f2;
             margin-left: 20px;
+            padding-left: 50px;
+            text-align: left;
+            border: 1px solid #bebaba;
+            padding-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            border-radius: 10px;
+
 
             h3 {
                 margin-top: 20px;
