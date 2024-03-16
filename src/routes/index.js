@@ -9,6 +9,7 @@ import MemberPage from "../page/MemberPage/MemberPage";
 import MainClubPage from "../page/MainClubPage/MainClubPage";
 import LoginStaff from "../page/LoginPage/LoginStaff";
 import ClubPageStaff from "../page/StaffPage/ClubPageStaff/ClubPageStaff";
+import NewFeedStaff from "../page/StaffPage/NewFeedStaff/NewFeedStaff";
 
 export const routes = [
   {
@@ -54,5 +55,9 @@ export const routes = [
   {
     path: "member-sport/staff/:clubId",
     page: ClubPageStaff
+  },
+  {
+    path: "newfeed-staff/:clubId",
+    page: NewFeedStaff
   }
 ];

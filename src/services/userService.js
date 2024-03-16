@@ -204,7 +204,7 @@ const createTranPoint = (data) => {
 };
 
 const getSlotByIdClub = (idclub) => {
-  return axios.post(`api/slots/${idclub}/id_club`);
+  return axios.get(`api/slots/${idclub}/id_club`);
 };
 
 export {

@@ -70,7 +70,6 @@ function MainClubPage() {
     setActiveTabPost(tab);
   };
 
-  const navigate = useNavigate();
   return (
     <>
       <div className="main-club-container">

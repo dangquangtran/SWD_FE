@@ -50,6 +50,9 @@ function MyClub() {
         }
     }
 
+    const handleGoToClubPage = (clubId) => {
+        navigate(`/newfeed-staff/${clubId}`);
+    }
 
     return (
         <div className="club-manage">
@@ -72,7 +75,7 @@ function MyClub() {
                                         handleClick(club.id)
                                     }
                                 }}>Thành viên</button>
-                                <button className="btn-myclub btn-post-club-staff">Bài viết</button>
+                                <button className="btn-myclub btn-post-club-staff" onClick={() => { handleGoToClubPage(club.id) }}>Bài viết</button>
                                 <button className="btn-myclub delete-club-staff" onClick={() => { handleDeleteClub(club) }}>Xóa club</button>
                             </div>
                         </div>

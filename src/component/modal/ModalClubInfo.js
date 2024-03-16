@@ -72,7 +72,6 @@ function ModalClubInfo({ isOpen, toggleFromParent, data }) {
             status: club.status,
             countMember: club.countMember,
             approveStatus: club.approveStatus,
-            dateTime: club.dateTime,
             staffName: club.staffName
 
         };

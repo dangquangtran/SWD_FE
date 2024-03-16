@@ -28,7 +28,7 @@ function HeaderMember() {
     };
 
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    
+
     return (
         <>
             <div className="body">
@@ -50,7 +50,6 @@ function HeaderMember() {
                                 <b style={{ cursor: 'pointer', fontSize: '28px' }}>Hướng dẫn</b>
                             </div>
                         </div>
-                        <i className="fa fa-bell-o" aria-hidden="true"></i>
                     </div>
                 </div>
                 <div className="col-5 content-right">

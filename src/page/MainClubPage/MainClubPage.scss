@@ -5,7 +5,7 @@
 
 .side-bar-main {
     margin-top: 81px;
-    width: 28%;
+    width: 20%;
     background-color: #fff;
     text-align: center;
     min-height: 100vh;
@@ -24,7 +24,6 @@
     background-color: transparent;
     width: 100%;
     padding: 30px 40px;
-    font-weight: bold;
     border-bottom: 1px solid #e9e1e1;
     cursor: pointer;
 }
@@ -59,7 +58,6 @@
 .not-finished,
 .finished {
     font-size: 20px;
-    font-weight: bold;
     padding: 10px 20px;
     border: none;
     background-color: transparent;

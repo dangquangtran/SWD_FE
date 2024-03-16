@@ -21,7 +21,7 @@ function ComponentHeader() {
         }
     };
 
-    return ( 
+    return (
         <div className="body">
             <div className="col-6 header-logo"></div>
             <div className="col-8 middle">
@@ -37,7 +37,6 @@ function ComponentHeader() {
                             <b style={{ cursor: 'pointer', fontSize: '28px' }}>Hướng dẫn</b>
                         </div>
                     </div>
-                    <i className="fa fa-bell-o" aria-hidden="true"></i>
                 </div>
             </div>
             <div className="col-5 content-right">
