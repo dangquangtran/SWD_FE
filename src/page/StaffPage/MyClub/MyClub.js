@@ -16,6 +16,7 @@ function MyClub() {
         setIsModalOpen(!isModalOpen);
         const selectedClub = clubs.find(club => club.id === clubId);
         setSelectedClub(selectedClub);
+        fetchClubs()
     };
 
     const fetchClubs = async () => {

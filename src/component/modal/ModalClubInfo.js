@@ -21,7 +21,7 @@ function ModalClubInfo({ isOpen, toggleFromParent, data }) {
     const [sports, setSport] = useState([]);
 
     const [formData, setFormData] = useState({
-        id: 0,
+
         name: '',
         sportName: '',
         description: '',
@@ -31,7 +31,6 @@ function ModalClubInfo({ isOpen, toggleFromParent, data }) {
         if (data) {
             setClub(data);
             setFormData({
-                id: data.id,
                 name: data.name,
                 sportName: data.sportName,
                 description: data.description,
@@ -49,7 +48,6 @@ function ModalClubInfo({ isOpen, toggleFromParent, data }) {
         toggleFromParent();
         setIsEditing(false);
         setFormData({
-            id: 0,
             name: '',
             sportName: '',
             description: '',
@@ -61,15 +59,14 @@ function ModalClubInfo({ isOpen, toggleFromParent, data }) {
     }
 
     const handleSaveClick = async () => {
-        console.log(formData)
 
         setIsEditing(false);
         const updatedFormData = {
-            ...formData, id: club.id,
+            ...formData,
             image: club.image,
             sportId: club.sportId,
             staffId: club.staffId,
-            status: club.status,
+            status: 1,
             countMember: club.countMember,
             approveStatus: club.approveStatus,
             staffName: club.staffName
@@ -79,9 +76,12 @@ function ModalClubInfo({ isOpen, toggleFromParent, data }) {
 
         try {
             // Call API to edit the club
-            await updateClub(club.id, updatedFormData);
-            showSuccessToast('Club updated successfully!');
-            toggle();
+            if (club && club.id) {
+                await updateClub(club.id, updatedFormData);
+                showSuccessToast('Club updated successfully!');
+                toggle();
+                setClub(data);
+            }
         } catch (error) {
             showErrorToast('Club update error')
             console.log(error);

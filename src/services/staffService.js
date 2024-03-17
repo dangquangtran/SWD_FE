@@ -49,8 +49,8 @@ const deleteClub = (clubId) => {
     return axios.delete(`api/clubs/${clubId}`);
 };
 
-const updateClub = (clubid) => {
-    return axios.put(`api/clubs/${clubid}`);
+const updateClub = (clubId, formData) => {
+    return axios.put(`api/clubs/${clubId}`, formData);
 };
 
 export {
