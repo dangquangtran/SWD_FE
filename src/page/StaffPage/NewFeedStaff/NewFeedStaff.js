@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import './NewFeedStaff.scss'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBackward, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import { faSquareMinus } from "@fortawesome/free-regular-svg-icons";
+import { faSquareMinus, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 
 import Button from '@mui/material/Button';
 import { useNavigate, } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { getSlotByIdClub, getYards } from "../../../services/userService";
+import { deleteSlotByIdSlot, getSlotByIdClub, getYards } from "../../../services/userService";
+import { showErrorToast, showSuccessToast } from "../../../component/toast/toast";
 
 
 function NewFeedStaff() {
@@ -104,6 +105,20 @@ function NewFeedStaff() {
 
     }, [])
 
+    const handleDeletePost = async (slot) => {
+        try {
+            if (slot && slot.id) {
+                console.log(slot)
+                await deleteSlotByIdSlot(slot.id);
+                showSuccessToast("Xóa slot thành công!");
+                await fetchApiSlot()
+            }
+        } catch (error) {
+            showErrorToast("Xóa slot không thành công!");
+            console.error(error);
+        }
+    }
+
     return (
         <div className="newfeed-staff">
 
@@ -195,13 +210,14 @@ function NewFeedStaff() {
                                     </div>
                                 </div>
                             </div>
+                            <div className="remove-post" onClick={() => { handleDeletePost(item) }}><FontAwesomeIcon className="icon-trash" icon={faTrashCan} /></div>
                         </div>
                     )
                 })}
 
 
             </div>
-            <span><FontAwesomeIcon icon={faSquareMinus} /></span>
+            <button ><FontAwesomeIcon icon={faSquareMinus} /></button>
 
         </div>
     )
