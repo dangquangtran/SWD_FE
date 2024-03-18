@@ -9,6 +9,7 @@ import { useNavigate, } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { deleteSlotByIdSlot, getSlotByIdClub, getYards } from "../../../services/userService";
 import { showErrorToast, showSuccessToast } from "../../../component/toast/toast";
+import { handleLogoutStaff } from "../../../services/staffService";
 
 
 function NewFeedStaff() {
