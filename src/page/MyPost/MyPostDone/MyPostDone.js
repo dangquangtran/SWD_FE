@@ -204,38 +204,41 @@ function MyPostDone({
                     <div className="post-infor">
                       <h3>Thông tin trận đấu</h3>
                       <div>
-                        <div>
+                        <div className="item-infor">
                           <p>
                             Khu:{" "}
                             <span style={{ fontWeight: "600" }}>
-                              {yardDetails?.areaName}
+                              <b>
+
+                                {yardDetails?.areaName}
+                              </b>
                             </span>{" "}
                           </p>
                         </div>
-                        <div>
-                          <b>
-                            Sân: {yardDetails?.sportName} - {item.yardName}
+                        <div className="item-infor">
+
+                          Sân: <b>{yardDetails?.sportName} - {item.yardName}
                           </b>
                         </div>
-                        <div>
-                          <b>
-                            Thời gian: {item.startTime} - {item.endTime}
+                        <div className="item-infor">
+
+                          Thời gian: <b>{item.startTime} - {item.endTime}
                           </b>
                         </div>
-                        <div>
-                          <b>Date: {item.date}</b>
+                        <div className="item-infor">
+                          Date: <b>{item.date}</b>
                         </div>
                         <div>
-                          <div>
-                            <b>
-                              Tổng số người chơi:{" "}
+                          <div className="item-infor">
+
+                            Tổng số người chơi:{" "}<b>
                               {parseInt(item.requiredMember) +
                                 parseInt(item.currentMember)}
                             </b>
                           </div>
-                          <div>
-                            <b>
-                              Còn:{" "}
+                          <div className="item-infor">
+
+                            Còn:{" "}<b>
                               {parseInt(item.requiredMember) -
                                 parseInt(numberOfSlot[item.id] || 0)}
                             </b>

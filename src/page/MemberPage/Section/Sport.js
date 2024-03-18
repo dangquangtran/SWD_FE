@@ -27,12 +27,16 @@ function SportSlide() {
                             <div>Sân bóng rổ</div>
                         </div>
                         <div className='section-customize'>
-                            <div className='bg-image section-hand-book'></div>
+                            <div className='bg-image soccer-img'></div>
                             <div>Sân bóng đá</div>
                         </div>
                         <div className='section-customize'>
                             <div className='bg-image badminton-img'></div>
                             <div>Sân cầu lông</div>
+                        </div>
+                        <div className='section-customize'>
+                            <div className='bg-image tennis-img'></div>
+                            <div>Sân tennis</div>
                         </div>
                     </Slider>
                 </div>

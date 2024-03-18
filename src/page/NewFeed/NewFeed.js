@@ -203,50 +203,49 @@ function NewFeed({ inforWallet, tranPoint, yards, setActiveTab, clubDetail }) {
                 <div className="post-infor">
                   <h3>Thông tin trận đấu</h3>
                   <div>
-                    <div>
-                      <b>
-                        Khu: <span>{yardDetails?.areaName}</span>{" "}
-                      </b>
+                    <div className="item-infor">
+
+                      Khu: <span>{yardDetails?.areaName}</span>{" "}
+
                     </div>
-                    <div>
-                      <b>
-                        Sân:{" "}
-                        <span>
-                          {yardDetails?.sportName} - {item.yardName}
-                        </span>
-                      </b>
+                    <div className="item-infor">
+
+                      Sân:{" "}
+                      <span>
+                        {yardDetails?.sportName} - {item.yardName}
+                      </span>
+
                     </div>
-                    <div>
-                      <b>
-                        Thời gian:{" "}
-                        <span>
-                          {item.startTime} - {item.endTime}
-                        </span>
-                      </b>
+                    <div className="item-infor">
+
+                      Thời gian:{" "}
+                      <span>
+                        {item.startTime} - {item.endTime}
+                      </span>
+
                     </div>
-                    <div>
-                      <b>
-                        Ngày: <span>{item.date}</span>
-                      </b>
+                    <div className="item-infor">
+
+                      Ngày: <span>{item.date}</span>
+
                     </div>
-                    <div>
-                      <b>
-                        Tổng số người chơi:{" "}
-                        <span>
-                          {parseInt(item.requiredMember) +
-                            parseInt(item.currentMember)}
-                        </span>
-                      </b>
+                    <div className="item-infor">
+
+                      Tổng số người chơi:{" "}
+                      <span>
+                        {parseInt(item.requiredMember) +
+                          parseInt(item.currentMember)}
+                      </span>
+
                     </div>
-                    <div>
-                      <b>
-                        Còn thiếu:{" "}
-                        <span>
-                          {parseInt(item.requiredMember) -
-                            parseInt(numberOfSlot[item.id] || 0)}
-                        </span>{" "}
-                        người
-                      </b>
+                    <div className="item-infor">
+
+                      Còn thiếu:{" "}
+                      <span>
+                        {parseInt(item.requiredMember) -
+                          parseInt(numberOfSlot[item.id] || 0)}
+                      </span>{" "}
+                      người
                     </div>
                   </div>
                   {isFull ? (

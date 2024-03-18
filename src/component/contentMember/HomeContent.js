@@ -4,6 +4,8 @@ import image from '../../assets/LogoHeaderMember/logo.jpg'
 import image1 from '../../assets/Sport/badminton.jpg'
 import image2 from '../../assets/Sport/football.jpg'
 import image3 from '../../assets/Sport/ball.jpg'
+import image4 from '../../assets/Sport/tennis.jpg'
+
 
 function HomeContent() {
     return (
@@ -27,6 +29,8 @@ function HomeContent() {
                     <img src={image1} />
                     <img src={image2} />
                     <img src={image3} />
+                    <img src={image4} />
+
                 </div>
             </div>
         </div>

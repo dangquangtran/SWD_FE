@@ -169,44 +169,47 @@ function NewFeedStaff() {
                             <div className="post-infor">
                                 <h3>Thông tin trận đấu</h3>
                                 <div className="infor-slot">
-                                    <div>
+                                    <div className="item-infor">
+                                        Khu:{" "}
                                         <b>
-                                            Khu:{" "}
+                                            {yardDetails?.areaName}
                                         </b>
-                                        {yardDetails?.areaName}
                                         {" "}
                                     </div>
-                                    <div>
+                                    <div className="item-infor">
+                                        Sân: {" "}
                                         <b>
-                                            Sân:
+                                            {yardDetails?.sportName} -  {item.yardName}
                                         </b>
-                                        {yardDetails?.sportName} -  {item.yardName}
                                     </div>
-                                    <div>
+                                    <div className="item-infor">
+                                        Thời gian:{" "}
                                         <b>
-                                            Thời gian:
+                                            {item.startTime} - {item.endTime}
                                         </b>
-                                        {item.startTime} - {item.endTime}
                                     </div>
-                                    <div>
-                                        <b>Ngày: </b> {item.date}
+                                    <div className="item-infor">
+                                        Ngày:{" "}
+                                        <b>
+                                            {item.date}
+                                        </b>
                                     </div>
-                                    <div>
-                                        <div>
+                                    <div >
+                                        <div className="item-infor">
+                                            Tổng số người chơi:{" "}
                                             <b>
-                                                Tổng số người chơi:{" "}
 
+                                                {parseInt(item.requiredMember) +
+                                                    parseInt(item.currentMember)}
                                             </b>
-                                            {parseInt(item.requiredMember) +
-                                                parseInt(item.currentMember)}
                                         </div>
-                                        <div>
+                                        <div className="item-infor">
+                                            Còn:{" "}
                                             <b>
-                                                Còn:{" "}
 
+                                                {parseInt(item.requiredMember) -
+                                                    parseInt(numberOfSlot[item.id] || 0)}
                                             </b>
-                                            {parseInt(item.requiredMember) -
-                                                parseInt(numberOfSlot[item.id] || 0)}
                                         </div>
                                     </div>
                                 </div>
