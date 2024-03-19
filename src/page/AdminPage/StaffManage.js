@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from 'reactstrap';
+import Button from '@mui/material/Button';
 import { getAllStaffs, createStaff, editStaff, deleteStaff } from '../../services/staffService';
 import ModalStaff from '../../component/modal/ModalStaff';
 import ModalEditStaff from '../../component/modal/ModalEditStaff';
 import { showErrorToast, showSuccessToast } from '../../component/toast/toast';
+import './Staff.scss'
 
 function StaffManage() {
   const [staffList, setStaffList] = useState([]);
@@ -73,10 +74,7 @@ function StaffManage() {
   return (
     <div className="users-container" style={{ marginTop: '70px' }}>
       <div className="mx-1">
-        <Button className="btn btn-primary px-3" onClick={toggleModal}>
-          <i className="fa fa-plus"></i>
-          Thêm nhân viên
-        </Button>
+        <Button className="add-Staff" variant="outlined" onClick={toggleModal}><i className='fa fa-plus'></i> Thêm nhân viên</Button>
       </div>
       <ModalStaff isOpen={isModalOpen} toggleFromParent={toggleModal} createNewStaff={createNewStaff} />
       <ModalEditStaff isOpen={isModalEdit} toggleFromParent={toggleModalEdit} currentStaff={staffToEdit} editStaff={editStaffInfo} />

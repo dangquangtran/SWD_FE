@@ -82,28 +82,11 @@ function MyJoinPost({ yards, clubDetail }) {
 
   return (
     <>
-    <ComponentHeader />
+      <ComponentHeader />
       <div className="new-feed-container">
-        {/* <div className="club-title-new-feed">
-          <img
-            className="img-background"
-            src={clubDetail.image}
-            alt="club-background"
-            style={{
-              width: "28%",
-              marginRight: "37px",
-              borderRadius: "44%",
-            }}
-          ></img>
-          <div>
-            <p>{clubDetail.name}</p>
-            <p>Số lượng thành viên {clubDetail.countMember}</p>
-            <p>Ngày thành lập: {timePost}</p>
-          </div>
-        </div> */}
         <h5 style={{ marginTop: '100px' }}>Bài viết của bạn đã tham gia</h5>
         {isLoadingData && (
-          <FontAwesomeIcon icon={faSpinner} className="loading-icon" style={{ marginTop: '50px' }}/>
+          <FontAwesomeIcon icon={faSpinner} className="loading-icon" style={{ marginTop: '50px' }} />
         )}
         {postJoined.length === 0 ? (
           <div className="no-posts-message">
@@ -114,20 +97,20 @@ function MyJoinPost({ yards, clubDetail }) {
             const time = resultItem.date + "T" + resultItem.startTime + ":00";
             const targetTime = new Date(time).getTime();
             const currentTime = new Date().getTime();
-  
+
             const date = new Date(resultItem.dateTime);
-  
+
             const day = date.getDate(); // Lấy ngày trong tháng (1-31)
             const month = date.getMonth() + 1; // Lấy tháng (0-11), cộng thêm 1 vì tháng bắt đầu từ 0
             const year = date.getFullYear(); // Lấy năm
             const hours = date.getHours(); // Lấy giờ trong ngày (0-23)
             const minutes = date.getMinutes(); // Lấy phút (0-59)
             const timePost = ` ${hours}:${minutes} ${year}-${month}-${day}`;
-  
+
             if (targetTime < currentTime) {
               return null;
             }
-  
+
             //get yard details
             const yardDetails = yards.find((yard) => {
               return yard.id === resultItem.yardId;
@@ -145,7 +128,9 @@ function MyJoinPost({ yards, clubDetail }) {
                     </p>
                     <div>{timePost}</div>
                   </div>
-                  <CountdownTimer targetTime={time} />
+                  <div>
+                    <CountdownTimer targetTime={time} />
+                  </div>
                 </div>
                 <div className="caption">{resultItem.description}</div>
                 <div className="post-content-container">
@@ -153,32 +138,32 @@ function MyJoinPost({ yards, clubDetail }) {
                   <div className="post-infor">
                     <h3>Thông tin trận đấu bạn tham gia</h3>
                     <div>
-                      <div>
-                        <b>Khu: {yardDetails?.areaName} </b>
+                      <div className="item-infor">
+                        Khu: <b className="main-item-infor" style={{ fontWeight: '700' }}>{yardDetails?.areaName} </b>
                       </div>
-                      <div>
-                        <b>
-                          Sân: {yardDetails?.sportName} - {resultItem.yardName}
+                      <div className="item-infor">
+
+                        Sân: <b className="main-item-infor" style={{ fontWeight: '700' }}>{yardDetails?.sportName} - {resultItem.yardName}
                         </b>
                       </div>
-                      <div>
-                        <b>
-                          Thời gian: {resultItem.startTime} - {resultItem.endTime}
+                      <div className="item-infor">
+
+                        Thời gian:<b className="main-item-infor" style={{ fontWeight: '700' }}> {resultItem.startTime} - {resultItem.endTime}
                         </b>
                       </div>
-                      <div>
-                        <b>Date: {resultItem.date}</b>
+                      <div className="item-infor">
+                        Date: <b className="main-item-infor" style={{ fontWeight: '700' }}>{resultItem.date}</b>
                       </div>
-                      <div>
-                        <div>
-                          <b>
-                            Tổng số người chơi:{" "}
+                      <div className="item-infor">
+                        <div className="item-infor">
+
+                          Tổng số người chơi:{" "}<b className="main-item-infor" style={{ fontWeight: '700' }}>
                             {parseInt(resultItem.requiredMember) +
                               parseInt(resultItem.currentMember)}
                           </b>
                         </div>
-                        <div>
-                          <b>
+                        <div className="item-infor">
+                          <b className="main-item-infor" style={{ fontWeight: '700' }}>
                             Còn:{" "}
                             {resultItem.requiredMember -
                               parseInt(numberOfSlot[resultItem.id]) || 0}

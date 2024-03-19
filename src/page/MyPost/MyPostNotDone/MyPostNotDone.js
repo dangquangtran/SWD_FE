@@ -7,31 +7,37 @@ import {
   getMyPostInClub,
   getNumberOfSlot,
 } from "../../../services/userService";
-import {
-  getListMemberJoinPost,
-} from "../../../services/memberService";
+import { getListMemberJoinPost } from "../../../services/memberService";
 import CountdownTimer from "../../../component/countDownTime";
 import ComponentHeader from "../../../component/Header/ComponentHeader";
 
-function MyPostNotDone({ yards, clubDetail }) {
+function MyPostNotDone({ yards, clubDetail, myPostInClub }) {
   const { id } = useParams();
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
-  const [myPost, setMyPost] = useState([]);
   const [numberOfSlot, setNumberOfSlot] = useState({});
   const [memberJoinList, setMemberJoinList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [myPostInClubFilter, setMyPostInClubFilter] = useState(myPostInClub);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response1 = await getIdMemberCreatePost(userInfo.id, id);
-        const memberCreatePostId = response1.result.id;
+        // const response1 = await getIdMemberCreatePost(userInfo.id, id);
+        // const memberCreatePostId = response1.result.id;
+        setMyPostInClubFilter(
+          myPostInClub.filter((item, index) => {
+            const time = item.date + "T" + item.startTime + ":00";
+            const targetTime = new Date(time).getTime();
+            const currentTime = new Date().getTime();
 
-        const response2 = await getMyPostInClub(memberCreatePostId);
-        setMyPost(response2.result);
+            return targetTime > currentTime;
+          })
+        );
 
-        const response3Promises = response2.result.map(async (post) => {
+        console.log(myPostInClub);
+
+        const response3Promises = myPostInClub.map(async (post) => {
           const response = await getListMemberJoinPost(post.id);
           return {
             postId: post.id,
@@ -42,7 +48,7 @@ function MyPostNotDone({ yards, clubDetail }) {
         const response3Results = await Promise.all(response3Promises);
         setMemberJoinList(response3Results);
 
-        const promises = response2.result.map(async (item) => {
+        const promises = myPostInClubFilter.map(async (item) => {
           const response = await getNumberOfSlot(item.id);
           return { itemId: item.id, numberOfSlot: response.result };
         });
@@ -72,7 +78,7 @@ function MyPostNotDone({ yards, clubDetail }) {
 
   return (
     <>
-    <ComponentHeader />
+      <ComponentHeader />
       <div className="new-feed-container">
         {/* <div className="club-title-new-feed">
           <img
@@ -91,138 +97,128 @@ function MyPostNotDone({ yards, clubDetail }) {
             <p>Ngày thành lập: {timePost}</p>
           </div>
         </div> */}
-        <h5 style={{ marginTop: '100px' }}>Bài viết của bạn chưa kết thúc</h5>
+        <h5 style={{ marginTop: "100px" }}>Bài viết của bạn chưa kết thúc</h5>
         {isLoading && (
-          <FontAwesomeIcon icon={faSpinner} className="loading-icon" style={{ marginTop: '50px' }}/>
+          <FontAwesomeIcon
+            icon={faSpinner}
+            className="loading-icon"
+            style={{ marginTop: "50px" }}
+          />
         )}
-        {myPost.length === 0 ? (
+        {myPostInClubFilter.length === 0 ? (
           <div className="no-posts-message">
             Bạn chưa đăng bài, hãy cùng kiếm đồng đội nhé
           </div>
         ) : (
           <>
-            {myPost.map((item, index) => {
+            {myPostInClubFilter.map((item, index) => {
               const time = item.date + "T" + item.startTime + ":00";
-              const targetTime = new Date(time).getTime();
-              const currentTime = new Date().getTime();
-  
-              var isPassTime = false;
-  
-              if (targetTime < currentTime) {
-                isPassTime = true;
-              }
-  
-              if (!isPassTime) {
-                // Nếu thời gian chưa qua, hiển thị các thành phần bên dưới
-                const date = new Date(item.dateTime);
-                const day = date.getDate();
-                const month = date.getMonth() + 1;
-                const year = date.getFullYear();
-                const hours = date.getHours();
-                const minutes = date.getMinutes();
-                const timePost = ` ${hours}:${minutes} ${year}-${month}-${day}`;
-  
-                //get yard details
-                const yardDetails = yards.find((yard) => {
-                  return yard.id === item.yardId;
-                });
-                
-                return (
-                  <div key={item.id} className="main-post-container">
-                    <div className="poster-name">
-                      <div>
-                        <p>{item.memberPostName}</p>
-                        <div>{timePost}</div>
-                      </div>
-                      {!isPassTime && (
-                      <div>
-                        <CountdownTimer targetTime={time}/>
-                      </div>
-                    )}
-                    </div>
-  
-                    <div className="caption">{item.description}</div>
-  
-                    <div className="post-content-container">
-                      <img className="post-img" src={item.image} alt="avatar" />
-                      <div className="post-infor">
-                        <h3>Thông tin trận đấu</h3>
-                        <div>
-                          <div>
-                            <b>
-                              Khu:{" "}
-                              <p style={{ fontWeight: "600" }}>
-                                {yardDetails?.areaName}
-                              </p>{" "}
-                            </b>
-                          </div>
-                          <div>
-                            <b>
-                              Sân: {yardDetails?.sportName} - {item.yardName}
-                            </b>
-                          </div>
-                          <div>
-                            <b>
-                              Thời gian: {item.startTime} - {item.endTime}
-                            </b>
-                          </div>
-                          <div>
-                            <b>Date: {item.date}</b>
-                          </div>
-                          <div>
-                            <div>
-                              <b>
-                                Tổng số người chơi:{" "}
-                                {parseInt(item.requiredMember) +
-                                  parseInt(item.currentMember)}
-                              </b>
-                            </div>
-                            <div>
-                              <b>
-                                Còn:{" "}
-                                {parseInt(item.requiredMember) -
-                                  parseInt(numberOfSlot[item.id] || 0)}
-                              </b>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+
+              // Nếu thời gian chưa qua, hiển thị các thành phần bên dưới
+              const date = new Date(item.dateTime);
+              const day = date.getDate();
+              const month = date.getMonth() + 1;
+              const year = date.getFullYear();
+              const hours = date.getHours();
+              const minutes = date.getMinutes();
+              const timePost = ` ${hours}:${minutes} ${year}-${month}-${day}`;
+
+              //get yard details
+              const yardDetails = yards.find((yard) => {
+                return yard.id === item.yardId;
+              });
+
+              return (
+                <div key={item.id} className="main-post-container">
+                  <div className="poster-name">
+                    <div>
+                      <p>{item.memberPostName}</p>
+                      <div>{timePost}</div>
                     </div>
                     <div>
-                      {isLoading ? (
-                        <FontAwesomeIcon
-                          icon={faSpinner}
-                          className="loading-icon"
-                        />
-                      ) : (
-                        <div className="member-join">
-                          {memberJoinList
-                            .filter((postItem) => postItem.postId === item.id)
-                            .map((postItem) => (
-                              <div
-                                key={postItem.postId}
-                                className="member-join-list"
-                              >
-                                <h4>Danh sách người chơi đã tham gia:</h4>
-                                {postItem.members.length > 0 ? (
-                                  postItem.members.map((member) => (
-                                    <div key={member.id} className="member-item">
-                                      <span>{member.memberName}</span>{" "}
-                                    </div>
-                                  ))
-                                ) : (
-                                  <div>Chưa có người chơi nào tham gia.</div>
-                                )}
-                              </div>
-                            ))}
-                        </div>
-                      )}
+                      <CountdownTimer targetTime={time} />
                     </div>
                   </div>
-                );
-              } else {
-                return null;
-              }
+
+                  <div className="caption">{item.description}</div>
+
+                  <div className="post-content-container">
+                    <img className="post-img" src={item.image} alt="avatar" />
+                    <div className="post-infor">
+                      <h3>Thông tin trận đấu</h3>
+                      <div>
+                        <div className="item-infor">
+                          <p>
+                            Khu:{" "}
+                            <span style={{ fontWeight: "600" }}>
+                              <b> {yardDetails?.areaName}</b>
+                            </span>
+                          </p>
+                        </div>
+                        <div className="item-infor">
+
+                          Sân:<b> {yardDetails?.sportName} - {item.yardName}
+                          </b>
+                        </div>
+                        <div className="item-infor">
+
+                          Thời gian: <b>{item.startTime} - {item.endTime}
+                          </b>
+                        </div>
+                        <div className="item-infor">
+                          Date: <b>{item.date}</b>
+                        </div>
+                        <div>
+                          <div className="item-infor">
+
+                            Tổng số người chơi:{" "}<b>
+                              {parseInt(item.requiredMember) +
+                                parseInt(item.currentMember)}
+                            </b>
+                          </div>
+                          <div className="item-infor">
+
+                            Còn:{" "}<b>
+                              {parseInt(item.requiredMember) -
+                                parseInt(numberOfSlot[item.id] || 0)}
+                            </b>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    {isLoading ? (
+                      <FontAwesomeIcon
+                        icon={faSpinner}
+                        className="loading-icon"
+                      />
+                    ) : (
+                      <div className="member-join">
+                        {memberJoinList
+                          .filter((postItem) => postItem.postId === item.id)
+                          .map((postItem) => (
+                            <div
+                              key={postItem.postId}
+                              className="member-join-list"
+                            >
+                              <h4>Danh sách người chơi đã tham gia:</h4>
+                              {postItem.members.length > 0 ? (
+                                postItem.members.map((member) => (
+                                  <div key={member.id} className="member-item">
+                                    <span>{member.memberName}</span>{" "}
+                                  </div>
+                                ))
+                              ) : (
+                                <div>Chưa có người chơi nào tham gia.</div>
+                              )}
+                            </div>
+                          ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
             })}
           </>
         )}

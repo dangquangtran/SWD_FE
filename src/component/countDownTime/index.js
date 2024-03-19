@@ -40,15 +40,18 @@ const CountdownTimer = ({ targetTime }) => {
     return () => clearTimeout(timer);
   });
 
-  const { days, hours, minutes, seconds } = timeLeft; 
+  const { days, hours, minutes, seconds } = timeLeft;
 
   return (
-    <div style={{ display: 'flex' }}>
-      <h2 style={{fontSize: '22px', margin: '0' }}>{`${days.toString().padStart(2, "0")}:${hours
+    <div style={{ display: 'flex', backgroundColor: '#ff6868',color: 'white',
+              backgroundColor: 'rgb(188, 22, 22)',
+              borderRadius: '12px' }} 
+     >
+      <h2 style={{ fontSize: '22px', margin: '0' }}>{`${days.toString().padStart(2, "0")}:${hours
         .toString()
         .padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds
-        .toString()
-        .padStart(2, "0")}`}</h2>
+          .toString()
+          .padStart(2, "0")}`}</h2>
     </div>
   );
 };

@@ -203,6 +203,14 @@ const createTranPoint = (data) => {
   return axios.post("api/tranpoints", data);
 };
 
+const getSlotByIdClub = (idclub) => {
+  return axios.get(`api/slots/${idclub}/id_club`);
+};
+
+const deleteSlotByIdSlot = (idslot) => {
+  return axios.delete(`api/slots/${idslot}`)
+}
+
 export {
   handleLoginAdmin,
   getAllMembers,
@@ -252,4 +260,6 @@ export {
   deleteBuilding,
   getTranspoint,
   createTranPoint,
+  getSlotByIdClub,
+  deleteSlotByIdSlot
 };

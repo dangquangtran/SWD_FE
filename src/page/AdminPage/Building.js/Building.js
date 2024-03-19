@@ -31,9 +31,7 @@ function Building() {
         }
     };
 
-
     useEffect(() => {
-
         fetchBuildings();
     }, []);
 
@@ -57,12 +55,12 @@ function Building() {
     const doCreateNewBuilding = async (data) => {
         try {
             await createBuilding(data);
-            showSuccessToast('Building added successfully!');
+            showSuccessToast('Thêm mới tòa nhà thành công');
             setIsModalOpen(false);
             fetchBuildings();
             console.log(data)
         } catch (error) {
-            showErrorToast('Building added error!');
+            showErrorToast('Thêm mới tòa nhà thất bại!');
             console.log(error);
         }
     }
@@ -78,9 +76,10 @@ function Building() {
     const doEditBuilding = async (editBuildingId, data) => {
         try {
             await editBuilding(editBuildingId, data);
+            showSuccessToast("Cập nhập tòa nhà thành công")
             await fetchBuildings();
         } catch (error) {
-            showErrorToast('Club edit error!')
+            showErrorToast('Cập nhập tòa nhà thất bại')
             console.log(error);
         }
     };
@@ -89,12 +88,12 @@ function Building() {
         try {
             if (building && building.id) {
                 await deleteBuilding(building.id);
-                showSuccessToast('Building deleted successfully!');
+                showSuccessToast('Xóa tòa nhà thành công');
                 console.log(building)
                 await fetchBuildings();
             }
         } catch (error) {
-            showErrorToast('Building delete error!');
+            showErrorToast('Xóa tòa nhà không thành công');
             console.log(error);
         }
     }

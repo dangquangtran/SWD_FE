@@ -33,6 +33,8 @@
     position: relative;
     color: #fff;
     box-shadow: 0 5px 10px #ccc;
+    align-items: center;
+    padding-left: 10px;
 }
 
 .btn-logout-staff {
@@ -79,7 +81,14 @@
 }
 
 .header-title-staff {
-    margin: 0 auto;
     height: 100%;
     display: flex;
+}
+
+.header-logo {
+    background: url('../../assets/logoHeader/logo.png') center center no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 15% !important;
+    cursor: pointer;
 }

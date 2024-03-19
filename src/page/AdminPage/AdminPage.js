@@ -38,7 +38,7 @@ const componentsMap = {
   "Nhân viên": <StaffManage />,
   "Câu lạc bộ": <ClubManage />,
   "Môn thể thao": <SportManage />,
-  Sân: <Yard />,
+  "Sân": <Yard />,
   "Tòa nhà": <Building />,
   "Phê duyệt": <ApprovalManage />,
   "Điểm giao dịch": <Transpoint />,

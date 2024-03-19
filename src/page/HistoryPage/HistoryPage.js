@@ -25,6 +25,7 @@ function HistoryPage({ clubDetail }) {
         const walletId = response.result.id;
         const response2 = await getTransactionHistoryPoints(walletId);
         setTransactionHistoryPoints(response2.result);
+        console.log(response2.result)
         const lastTransaction = response2.result.find(
           (item) => item.status && item.status.data && item.status.data[0] === 1
         );
@@ -48,26 +49,8 @@ function HistoryPage({ clubDetail }) {
 
   return (
     <>
-    <ComponentHeader />
+      <ComponentHeader />
       <div className="history-page-container">
-        {/* <div className="club-title-new-feed">
-          <img
-            className="img-background"
-            src={clubDetail.image}
-            alt="club-background"
-            style={{
-              // width: "442px",
-              // height: "345px",
-              marginRight: "37px",
-              borderRadius: "44%",
-            }}
-          ></img>
-          <div>
-            <p>{clubDetail.name}</p>
-            <p>Số lượng thành viên {clubDetail.countMember}</p>
-            <p>Ngày thành lập: {timePost}</p>
-          </div>
-        </div> */}
         <div
           style={{
             marginTop: '60px',
@@ -112,7 +95,7 @@ function HistoryPage({ clubDetail }) {
                           <td>{item.initialPoint}</td>
                           <td>{formattedTransactionPoint}</td>
                           <td>{resultPoint}</td>
-                          <td>{item.desciption}</td>
+                          <td>{item.desciption === 'confirm_joined' ? 'Xác nhận tham gia vào hoạt động' : 'Đăng kí tham gia thành công'}</td>
                         </tr>
                       );
                     }
@@ -127,7 +110,7 @@ function HistoryPage({ clubDetail }) {
             </div>
           )}
           {transactionHistoryPoints.length === 0 && !loading && (
-            <div className="no-posts-message">Bạn chưa có ví</div>
+            <div className="no-posts-message">Bạn chưa có giao dịch</div>
           )}
         </div>
       </div>

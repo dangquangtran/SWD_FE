@@ -60,5 +60,46 @@
         &.delete-club-staff {
             background-color: #f64c3d;
         }
+
+        &.btn-post-club-staff {
+            background-color: #dfc36f;
+
+        }
     }
+
+
+}
+
+.body-info {
+    padding: 50px 20px !important;
+    font-size: 24px;
+    height: 800px;
+
+    .css-34nofg-MuiTableRow-root {
+        display: table-caption;
+    }
+
+    .MuiTableRow-root {
+        border: 1px solid #000;
+
+    }
+
+    td {
+        font-size: 24px;
+    }
+}
+
+.table-head {
+    border: 1px solid #000;
+    background-color: #368894;
+    color: #fff;
+
+    thead {
+        border: 1px solid #000;
+
+    }
+}
+
+.edit-club-staff {
+    color: #f64c3d;
 }

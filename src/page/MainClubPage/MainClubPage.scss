@@ -5,7 +5,7 @@
 
 .side-bar-main {
     margin-top: 81px;
-    width: 28%;
+    width: 26%;
     background-color: #fff;
     text-align: center;
     min-height: 100vh;
@@ -24,7 +24,6 @@
     background-color: transparent;
     width: 100%;
     padding: 30px 40px;
-    font-weight: bold;
     border-bottom: 1px solid #e9e1e1;
     cursor: pointer;
 }
@@ -59,12 +58,13 @@
 .not-finished,
 .finished {
     font-size: 20px;
-    font-weight: bold;
     padding: 10px 20px;
     border: none;
     background-color: transparent;
     cursor: pointer;
     transition: color 0.3s ease;
+    padding: 25px 20px;
+    font-size: 25px;
 }
 
 .not-finished.active,
@@ -77,3 +77,12 @@
     color: rgb(6, 185, 6);
 }
 
+.myAction {
+    display: flex;
+    align-items: center;
+}
+
+.icon-myaction {
+    margin-left: 150px;
+
+}

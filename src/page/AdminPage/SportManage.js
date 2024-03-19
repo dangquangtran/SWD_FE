@@ -1,10 +1,10 @@
-// SportManage.js
 import './SportManage.scss';
 import { getAllSports, createSport, editSport,deleteSport } from '../../services/userService';
 import { useEffect, useState } from 'react';
 import ModalSport from '../../component/modal/ModalSport'; 
 import { showSuccessToast, showErrorToast } from "../../component/toast/toast";
 import ModalEditSport from '../../component/modal/ModalEditSport'; 
+import Button from '@mui/material/Button';
 
 function SportManage() {
     const [sports, setSports] = useState([]);
@@ -38,11 +38,11 @@ function SportManage() {
     const doCreateNewSport = async (data) => {
         try {
             await createSport(data)
-            showSuccessToast('Sport added successfully!');
+            showSuccessToast('Thêm mới môn thể thao thành công');
             setIsModalOpen(false);
             fetchApiSports();
         } catch (error) {
-            showErrorToast('Sport added error!')
+            showErrorToast('Thêm mới môn thể thao thất bại')
             console.log(error);
         }
     }
@@ -50,9 +50,10 @@ function SportManage() {
     const doEditSport = async (editSportId, data) => {
         try {
             await editSport(editSportId, data);
+            showSuccessToast('Cập nhập môn thể thao thành công');
             await fetchApiSports();
         } catch (error) {
-            showErrorToast('Sport edit error!')
+            showErrorToast('Cập nhập môn thể thao không thành công')
             console.log(error);
         }
     };
@@ -66,29 +67,19 @@ function SportManage() {
         try {
             if (sport && sport.id) {
                 await deleteSport(sport.id);
-                showSuccessToast('Sport delete successfully!');
+                showSuccessToast('Xóa môn thể thao thành công');
                 await fetchApiSports();
             }
         } catch (error) {
-            showSuccessToast('Sport delete error!');
+            showSuccessToast('Xóa môn thể thao không thành công');
             console.log(error);
         }
     }
 
-    // const handleGetDetail = async (sport) => {
-    //     console.log(sport);
-    // }
-
     return (
         <div className='sports-container' style={{ marginTop: '70px' }}>
             <div className='mx-1'>
-                <button
-                    className='btn btn-primary px-3'
-                    onClick={toggleModal}
-                >
-                    <i className='fa fa-plus'></i>
-                    Thêm môn thể thao
-                </button>
+                <Button className="add-Sport" variant="outlined" onClick={toggleModal}><i className='fa fa-plus'></i> Thêm môn thể thao</Button>
             </div>
             <ModalSport
                 isOpen={isModalOpen}

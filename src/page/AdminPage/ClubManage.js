@@ -4,6 +4,7 @@ import { getAllClub, createClub, editClub, deleteClub } from '../../services/use
 import { showSuccessToast, showErrorToast } from "../../component/toast/toast";
 import ModalClub from '../../component/modal/ModalClub';
 import ModalEditClub from '../../component/modal/ModalEditClub';
+import Button from '@mui/material/Button';
 
 function ClubManage() {
     const [clubs, setClubs] = useState([]);
@@ -18,7 +19,6 @@ function ClubManage() {
     const fetchApiClubs = async () => {
         try {
             let data = await getAllClub();
-            // console.log(data.result[2].status.data);
             console.log(data);
             setClubs(data.result);
         } catch (error) {
@@ -38,11 +38,11 @@ function ClubManage() {
     const doCreateNewClub = async (data) => {
         try {
             await createClub(data);
-            showSuccessToast('Club added successfully!');
+            showSuccessToast('Thêm mới câu lạc bộ thành công!');
             setIsModalOpen(false);
             fetchApiClubs();
         } catch (error) {
-            showErrorToast('Club added error!');
+            showErrorToast('Thêm mới câu lạc bộ không thành công!');
             console.log(error);
         }
     }
@@ -51,9 +51,10 @@ function ClubManage() {
     const doEditClub = async (editClubId, data) => {
         try {
             await editClub(editClubId, data);
+            showSuccessToast*"Cập nhập câu lạc bộ thành công"
             await fetchApiClubs();
         } catch (error) {
-            showErrorToast('Club edit error!')
+            showErrorToast('Cập nhập câu lạc bộ không thành công')
             console.log(error);
         }
     };
@@ -67,11 +68,11 @@ function ClubManage() {
         try {
             if (club && club.id) {
                 await deleteClub(club.id);
-                showSuccessToast('Club deleted successfully!');
+                showSuccessToast('Xóa câu lạc bộ thành công');
                 await fetchApiClubs();
             }
         } catch (error) {
-            showErrorToast('Club delete error!');
+            showErrorToast('Xóa câu lạc bộ không thành công');
             console.log(error);
         }
     }
@@ -79,13 +80,7 @@ function ClubManage() {
     return (
         <div className='clubs-container' style={{ marginTop: '70px' }}>
             <div className='mx-1'>
-                <button
-                    className='btn btn-primary px-3'
-                    onClick={toggleModal}
-                >
-                    <i className='fa fa-plus'></i>
-                    Thêm câu lạc bộ
-                </button>
+                <Button className="add-Club" variant="outlined" onClick={toggleModal}><i className='fa fa-plus'></i> Thêm câu lạc bộ</Button>
             </div>
             <ModalClub
                 isOpen={isModalOpen}

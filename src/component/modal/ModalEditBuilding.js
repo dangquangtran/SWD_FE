@@ -69,6 +69,7 @@ function ModalEditBuilding({ isOpen, toggleFromParent, currentBuilding, editBuil
         }
     }
 
+
     useEffect(() => {
         fetchAreas()
 
