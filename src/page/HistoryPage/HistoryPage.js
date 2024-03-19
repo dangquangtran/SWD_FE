@@ -95,7 +95,7 @@ function HistoryPage({ clubDetail }) {
                           <td>{item.initialPoint}</td>
                           <td>{formattedTransactionPoint}</td>
                           <td>{resultPoint}</td>
-                          <td>{item.desciption === 'join slot' ? 'Đăng kí tham gia thành công' : 'Xác nhận tham gia vào hoạt động'}</td>
+                          <td>{item.desciption === 'confirm_joined' ? 'Xác nhận tham gia vào hoạt động' : 'Đăng kí tham gia thành công'}</td>
                         </tr>
                       );
                     }

@@ -5,11 +5,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleRight,
   faEnvelopesBulk,
-  faAngleDown
+  faAngleDown,
+  faPersonDotsFromLine,
+  faClockRotateLeft
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faCalendarCheck,
-  faCalendarXmark
+  faCalendarXmark,
+
 } from "@fortawesome/free-regular-svg-icons";
 import { faNewspaper } from "@fortawesome/free-regular-svg-icons";
 
@@ -62,7 +65,7 @@ function MainClubPage() {
   }, []);
 
   const handleTabClick = (tab) => {
-    setActiveTab(tab);
+    setActiveTab(activeTab === 'myPost' ? null : tab);
     setActiveTabPost(null);
   };
 
@@ -88,7 +91,7 @@ function MainClubPage() {
             className={`myAction tab-btn ${activeTab === "myPost" ? "active" : ""}`}
             onClick={() => handleTabClick("myPost")}
           >
-            <FontAwesomeIcon icon={faEnvelopesBulk} /> Hoạt động của tôi {activeTab === "myPost" ? <FontAwesomeIcon className="icon-myaction" icon={faAngleDown} /> : <FontAwesomeIcon className="icon-myaction" icon={faAngleRight} />}
+            <FontAwesomeIcon icon={faPersonDotsFromLine} />  Hoạt động của tôi {activeTab === "myPost" ? <FontAwesomeIcon className="icon-myaction" icon={faAngleDown} /> : <FontAwesomeIcon className="icon-myaction" icon={faAngleRight} />}
           </button>
           {activeTab === "myPost" && (
             <div
@@ -118,7 +121,7 @@ function MainClubPage() {
             className={`tab-btn ${activeTab === "myJoinPost" ? "active" : ""}`}
             onClick={() => handleTabClick("myJoinPost")}
           >
-            <FontAwesomeIcon icon={faEnvelopesBulk} /> Hoạt động đã tham gia
+            <FontAwesomeIcon icon={faClockRotateLeft} /> Hoạt động đã tham gia
           </button>
           <button
             className={`tab-btn ${activeTab === "myHistory" ? "active" : ""}`}
