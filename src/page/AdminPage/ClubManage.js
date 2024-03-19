@@ -51,7 +51,7 @@ function ClubManage() {
     const doEditClub = async (editClubId, data) => {
         try {
             await editClub(editClubId, data);
-            showSuccessToast*"Cập nhập câu lạc bộ thành công"
+            showSuccessToast("Cập nhập câu lạc bộ thành công");
             await fetchApiClubs();
         } catch (error) {
             showErrorToast('Cập nhập câu lạc bộ không thành công')

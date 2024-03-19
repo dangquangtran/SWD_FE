@@ -41,12 +41,12 @@ function MyClub() {
         try {
             if (club && club.id) {
                 await deleteClub(club.id);
-                showSuccessToast('Club deleted successfully!');
+                showSuccessToast('Xóa câu lạc bộ thành công');
                 console.log(club)
                 await fetchClubs();
             }
         } catch (error) {
-            showErrorToast('Club delete error!');
+            showErrorToast('Xóa câu lạc bộ thất bại');
             console.log(error);
         }
     }
