@@ -128,7 +128,9 @@ function MyJoinPost({ yards, clubDetail }) {
                     </p>
                     <div>{timePost}</div>
                   </div>
-                  <CountdownTimer targetTime={time} />
+                  <div>
+                    <CountdownTimer targetTime={time} />
+                  </div>
                 </div>
                 <div className="caption">{resultItem.description}</div>
                 <div className="post-content-container">
