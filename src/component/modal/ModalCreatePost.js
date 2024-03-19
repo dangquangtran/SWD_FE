@@ -106,7 +106,7 @@ function ModalCreatePost({
   const handleAddNewPost = async () => {
     const currentTime = new Date();
     const selectedDate = new Date(`${formData.date}T${formData.startTime}`);
-    
+
     if (selectedDate > currentTime) {
       var postData = {
         ...formData,
@@ -119,9 +119,9 @@ function ModalCreatePost({
           image: response,
         };
       }
-  
+
       await createPost(postData);
-      setActiveTab("myPost");
+      // setActiveTab("myPost");
       toggle();
     } else {
       showErrorToast("Không thể đăng bài trước thời gian hiện tại.");
