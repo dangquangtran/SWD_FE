@@ -40,6 +40,9 @@ function MainClubPage() {
   const [yards, setYards] = useState([]);
   const [clubDetail, setClubDetail] = useState({});
   const [myPostInClub, setMyPostInClub] = useState([]);
+  const [callWallet, setCallWallet] = useState(true);
+
+  
 
   useEffect(() => {
     const fetchWalletData = async () => {
@@ -133,7 +136,6 @@ function MainClubPage() {
 
         {activeTab === "newFeed" && (
           <NewFeed
-            inforWallet={inforWallet}
             tranPoint={tranPoint}
             yards={yards}
             setActiveTab={setActiveTab}
