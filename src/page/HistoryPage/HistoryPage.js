@@ -127,7 +127,7 @@ function HistoryPage({ clubDetail }) {
             </div>
           )}
           {transactionHistoryPoints.length === 0 && !loading && (
-            <div className="no-posts-message">Bạn chưa có ví</div>
+            <div className="no-posts-message">Bạn chưa có giao dịch</div>
           )}
         </div>
       </div>

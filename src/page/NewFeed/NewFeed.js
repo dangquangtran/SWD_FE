@@ -97,7 +97,8 @@ function NewFeed({ inforWallet, tranPoint, yards, setActiveTab, clubDetail }) {
         },
       });
 
-      setActiveTab(myJoinPost);
+      setActiveTab("myJoinPost");
+      showSuccessToast("Bạn đã đăng kí tham gia hoạt động thành công!");
     } catch (error) {
       showErrorToast("Error joining slot!");
       console.error("Error joining slot:", error);
