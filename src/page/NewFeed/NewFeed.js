@@ -6,6 +6,7 @@ import {
   UserJointSlot,
   getNumberOfSlot,
   getSlotNotJoined,
+  getWalletByMemberId
 } from "../../services/userService";
 import { useParams } from "react-router-dom";
 import ModalCreatePost from "../../component/modal/ModalCreatePost";
@@ -16,9 +17,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CountdownTimer from "../../component/countDownTime";
 import ComponentHeader from "../../component/Header/ComponentHeader";
 
-function NewFeed({ inforWallet, tranPoint, yards, setActiveTab, clubDetail }) {
+function NewFeed({  tranPoint, yards, setActiveTab, clubDetail }) {
   const { id } = useParams();
   const { idclubmem } = useParams();
+  
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -87,9 +89,10 @@ function NewFeed({ inforWallet, tranPoint, yards, setActiveTab, clubDetail }) {
 
   async function handleJoinSlot(slotId) {
     try {
+      const walletRes = await getWalletByMemberId(userInfo.id);
       await UserJointSlot({
         tranPoint: tranPoint,
-        inforWallet: inforWallet,
+        inforWallet: walletRes?.result,
         newClubMemSlot: {
           clubMemberId: idclubmem,
           slotId: slotId,
