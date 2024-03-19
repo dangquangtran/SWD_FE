@@ -47,6 +47,8 @@ function HistoryPage({ clubDetail }) {
   const year = date.getFullYear();
   const timePost = ` ${day}-${month}-${year}`;
 
+  console.log(transactionHistoryPoints);
+
   return (
     <>
       <ComponentHeader />
