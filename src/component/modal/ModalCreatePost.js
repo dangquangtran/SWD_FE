@@ -121,7 +121,7 @@ function ModalCreatePost({
       }
   
       await createPost(postData);
-      setActiveTab("myPost");
+      // setActiveTab("myPost");
       toggle();
     } else {
       showErrorToast("Không thể đăng bài trước thời gian hiện tại.");
