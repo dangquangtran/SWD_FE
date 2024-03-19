@@ -20,9 +20,6 @@ function NewFeedStaff() {
     const [numberOfSlot, setNumberOfSlot] = useState({});
     const [isLoading, setIsLoading] = useState(true);
 
-
-
-
     const handleBack = () => {
         window.history.back();
     }

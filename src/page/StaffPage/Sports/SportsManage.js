@@ -55,10 +55,10 @@ function SportsManageStaff() {
             const userID = JSON.parse(localStorage.getItem('userInfo')).id
             await createClubStaff(userID, data);
             console.log(data)
-            showSuccessToast('Club added successfully!');
+            showSuccessToast('Tạo câu lạc bộ thành công');
             closeModal()
         } catch (error) {
-            showErrorToast('Club added error!');
+            showErrorToast('Tạo câu lạc bộ thất bại');
             console.log(error);
         }
     }

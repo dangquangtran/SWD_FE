@@ -23,8 +23,6 @@ function MyPostNotDone({ yards, clubDetail, myPostInClub }) {
   useEffect(() => {
     async function fetchData() {
       try {
-        // const response1 = await getIdMemberCreatePost(userInfo.id, id);
-        // const memberCreatePostId = response1.result.id;
         setMyPostInClubFilter(
           myPostInClub.filter((item, index) => {
             const time = item.date + "T" + item.startTime + ":00";
@@ -80,23 +78,6 @@ function MyPostNotDone({ yards, clubDetail, myPostInClub }) {
     <>
       <ComponentHeader />
       <div className="new-feed-container">
-        {/* <div className="club-title-new-feed">
-          <img
-            className="img-background"
-            src={clubDetail.image}
-            alt="club-background"
-            style={{
-              width: "28%",
-              marginRight: "37px",
-              borderRadius: "44%",
-            }}
-          ></img>
-          <div>
-            <p>{clubDetail.name}</p>
-            <p>Số lượng thành viên {clubDetail.countMember}</p>
-            <p>Ngày thành lập: {timePost}</p>
-          </div>
-        </div> */}
         <h5 style={{ marginTop: "100px" }}>Bài viết của bạn chưa kết thúc</h5>
         {isLoading && (
           <FontAwesomeIcon
