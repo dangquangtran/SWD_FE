@@ -31,6 +31,7 @@
 
     .post-content-container-staff {
         display: flex;
+        flex-direction: column;
         width: 60%;
         margin: 20px auto;
         padding: 30px 20px;
@@ -95,4 +96,23 @@
 b {
     font-weight: bold !important;
     font-size: 1.5rem;
+}
+
+.header-post-staff {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.body-post-staff {
+    display: flex;
+}
+
+.member-name-post {
+    font-weight: bold;
+
+    p {
+        font-size: 1.2rem;
+    }
 }
