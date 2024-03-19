@@ -38,7 +38,7 @@ function StaffPage() {
       </div>
       <div className="content-container">
         <div className="header-staff">
-          <div className="col-6 header-logo"></div>
+          <div className="col-6 header-logo" style={{ width: '12%' }}></div>
 
           <div className="header-title-staff">
 
