@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import { deleteSlotByIdSlot, getSlotByIdClub, getYards } from "../../../services/userService";
 import { showErrorToast, showSuccessToast } from "../../../component/toast/toast";
 import { handleLogoutStaff } from "../../../services/staffService";
+import CountdownTimer from "../../../component/countDownTime";
 
 
 function NewFeedStaff() {
@@ -164,12 +165,23 @@ function NewFeedStaff() {
                         <div className="post-content-container-staff">
                             <div className="header-post-staff">
                                 <div className="member-name-post">
-                                    <p>
+                                    <p style={{ fontSize: '22px' }}>
                                         {item.memberPostName}
                                     </p>
-                                    <div>{timePost}</div>
+                                    <div style={{ fontSize: '22px' }}>
+                                        {timePost}
+                                    </div>
                                 </div>
-                                <div className="remove-post" onClick={() => { handleDeletePost(item) }}><FontAwesomeIcon className="icon-trash" icon={faTrashCan} /></div>
+                                <div className="remove-post" onClick={() => { handleDeletePost(item) }}>
+                                    <FontAwesomeIcon className="icon-trash" icon={faTrashCan} />
+                                    {!isPassTime ? (
+                                        <div>
+                                            <CountdownTimer targetTime={time} />
+                                        </div>
+                                        ) : (
+                                        <p style={{ fontSize: '22px', fontWeight: 700, color: 'black' }}>Trận đấu đã kết thúc</p>
+                                        )}
+                                </div>
 
                             </div>
                             <div className="body-post-staff">

@@ -190,7 +190,7 @@ function MyPost({
                         <CountdownTimer targetTime={time} />
                       </div>
                     ) : (
-                      <p>Kết thúc trận đấu</p>
+                      <p>Trận đấu đã kết thúc</p>
                     )}
                   </div>
 

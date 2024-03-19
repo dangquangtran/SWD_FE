@@ -194,7 +194,7 @@ function MyPostDone({
                       <div>{timePost}</div>
                     </div>
 
-                    <p>Kết thúc trận đấu</p>
+                    <p>Trận đấu đã kết thúc</p>
                   </div>
 
                   <div className="caption">{item.description}</div>

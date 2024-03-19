@@ -55,6 +55,8 @@ function MyClub() {
         navigate(`/newfeed-staff/${clubId}`);
     }
 
+    console.log(clubs);
+
     return (
         <div className="club-manage">
             {clubs && clubs.map(club => {
@@ -75,9 +77,9 @@ function MyClub() {
                                     if (club.approveStatus === 1) {
                                         handleClick(club.id)
                                     }
-                                }}>Thành viên</button>
-                                <button className="btn-myclub btn-post-club-staff" onClick={() => { handleGoToClubPage(club.id) }}>Bài viết</button>
-                                <button className="btn-myclub delete-club-staff" onClick={() => { handleDeleteClub(club) }}>Xóa club</button>
+                                }} disabled={club.approveStatus === 0}>Thành viên</button>
+                                <button className="btn-myclub btn-post-club-staff" onClick={() => { handleGoToClubPage(club.id) }} disabled={club.approveStatus === 0}>Bài viết</button>
+                                <button className="btn-myclub delete-club-staff" onClick={() => { handleDeleteClub(club) }}>Xóa câu lạc bộ</button>
                             </div>
                         </div>
                     )
