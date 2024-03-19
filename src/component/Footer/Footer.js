@@ -11,11 +11,11 @@ function Footer() {
             <h2 className="footer-title">Thông tin liên hệ</h2>
             <div className="infor-footer">
                 <div className="email">
-                    Email: racket@gmail.com
+                    Email: VHcourtbooking@gmail.com
                 </div>
                 <div className="phone"> Phone: 0123456789</div>
             </div>
-            <p className="copyright"><FontAwesomeIcon className="copy-icon" icon={faCopyright} />Copyright 2024 Racket.vn. Bản quyền thuộc về Racket</p>
+            <p className="copyright"><FontAwesomeIcon className="copy-icon" icon={faCopyright} />Copyright 2024 VHcourtbooking.vn. Bản quyền thuộc về Racket</p>
         </div>
     );
 }

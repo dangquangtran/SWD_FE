@@ -119,9 +119,9 @@ function MemberManage() {
   return (
     <div className="users-container" style={{ marginTop: "70px" }}>
       <div className="mx-1">
-        <Button className="add-Member" variant="outlined" onClick={toggleModal}>
+        {/* <Button className="add-Member" variant="outlined" onClick={toggleModal}>
           <i className="fa fa-plus"></i> Thêm thành viên
-        </Button>
+        </Button> */}
       </div>
       <ModalMember
         isOpen={isModalOpen}

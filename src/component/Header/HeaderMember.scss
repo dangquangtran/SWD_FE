@@ -12,10 +12,12 @@
 
     .header-logo {
         background: url('../../assets/logoHeader/logo.png') center center no-repeat;
-        height: 90%;
+        height: 95%;
         width: 350px;
         cursor: pointer;
         background-size: cover;
+        margin-left: 5px;
+        margin-right: 5px;
     }
 
     .middle {
