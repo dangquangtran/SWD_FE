@@ -65,7 +65,7 @@ function MainClubPage() {
   }, []);
 
   const handleTabClick = (tab) => {
-    setActiveTab(activeTab === 'myPost' ? null : tab);
+    setActiveTab(tab);
     setActiveTabPost(null);
   };
 
