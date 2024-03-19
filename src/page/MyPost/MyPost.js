@@ -133,7 +133,7 @@ function MyPost({
     <>
       <ComponentHeader />
       <div className="new-feed-container">
-        <h5 style={{ marginTop: "100px" }}>Bài viết của bạn</h5>
+        <h5 style={{ marginTop: "100px", fontSize: '28px' }}>Bài viết của bạn</h5>
         {isLoading && (
           <FontAwesomeIcon
             icon={faSpinner}

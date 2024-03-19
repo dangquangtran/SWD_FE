@@ -149,7 +149,7 @@ function MyPostDone({
             <p>Ngày thành lập: {timePost}</p>
           </div>
         </div> */}
-        <h5 style={{ marginTop: "100px" }}>Bài viết của bạn đã kết thúc</h5>
+        <h5 style={{ marginTop: "100px", fontSize: '28px' }}>Bài viết của bạn đã kết thúc</h5>
         {isLoading && (
           <FontAwesomeIcon
             icon={faSpinner}
