@@ -7,8 +7,6 @@ import { getAllAreas } from "../../services/userService";
 function ModalAddBuilding({ isOpen, toggleFromParent, createNewArea }) {
     const [areas, setAreas] = useState([])
 
-
-
     const [formData, setFormData] = useState({
         name: '',
         areaName: '',
@@ -33,8 +31,6 @@ function ModalAddBuilding({ isOpen, toggleFromParent, createNewArea }) {
                 [id]: event.target.value,
             });
         }
-
-
     };
 
     const fetchAreas = async () => {
@@ -46,9 +42,6 @@ function ModalAddBuilding({ isOpen, toggleFromParent, createNewArea }) {
         }
     }
 
-
-
-
     useEffect(() => {
         fetchAreas()
 
@@ -57,7 +50,7 @@ function ModalAddBuilding({ isOpen, toggleFromParent, createNewArea }) {
     const checkValidateInput = () => {
         for (const key in formData) {
             if (!formData[key]) {
-                showErrorToast(`Missing parameter: ${key}`);
+                showErrorToast(`Thiếu: ${key}`);
                 return false;
             }
         }

@@ -60,7 +60,7 @@ function ModalClub({ isOpen, toggleFromParent, createNewClub }) {
   const checkValidateInput = () => {
     for (const key in formData) {
       if (!formData[key]) {
-        showErrorToast(`Missing parameter: ${key}`);
+        showErrorToast(`Thiếu: ${key}`);
         return false;
       }
     }

@@ -50,7 +50,7 @@ const LoginMember = () => {
   const doCreateNewUser = async (data) => {
     try {
       await registerMember(data);
-      showSuccessToast("User added successfully!");
+      showSuccessToast("Tạo mới thành công");
       setIsModalOpen(false);
     } catch (error) {
       console.log(error);

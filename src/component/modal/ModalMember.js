@@ -105,7 +105,7 @@ function ModalMember({ isOpen, toggleFromParent, createNewUser }) {
     for (let i = 0; i < arrInput.length; i++) {
       if (!formData[arrInput[i]]) {
         isValid = false;
-        showErrorToast(`Missing parameter: ${arrInput[i]}`);
+        showErrorToast(`Thiếu: ${arrInput[i]}`);
         break;
       }
     }

@@ -95,10 +95,10 @@ function MyPostDone({
       const response3Results = await Promise.all(response3Promises);
       setMemberJoinList(response3Results);
 
-      showSuccessToast("Confirm successful!");
+      showSuccessToast("Xác nhận thành công");
     } catch (error) {
       console.log(error);
-      showErrorToast("Confirm failed!");
+      showErrorToast("Xác nhận thật bại!");
     }
   };
 

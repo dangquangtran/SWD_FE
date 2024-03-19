@@ -42,7 +42,7 @@ function ModalEditYard({ isOpen, toggleFromParent, currentYard, editYard }) {
     const checkValidateInput = () => {
         for (const key in formData) {
             if (!formData[key]) {
-                showErrorToast(`Missing parameter: ${key}`);
+                showErrorToast(`Thiếu: ${key}`);
                 return false;
             }
         }
