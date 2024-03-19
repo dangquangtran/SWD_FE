@@ -34,7 +34,7 @@
     color: #fff;
     box-shadow: 0 5px 10px #ccc;
     align-items: center;
-    padding-left: 10px;
+    margin-left: 5px;
 }
 
 .btn-logout-staff {
@@ -89,6 +89,6 @@
     background: url('../../assets/logoHeader/logo.png') center center no-repeat;
     background-size: cover;
     height: 100%;
-    width: 15% !important;
     cursor: pointer;
+    margin-right: 5px;
 }

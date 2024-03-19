@@ -78,7 +78,7 @@ function MyPostNotDone({ yards, clubDetail, myPostInClub }) {
     <>
       <ComponentHeader />
       <div className="new-feed-container">
-        <h5 style={{ marginTop: "100px" }}>Bài viết của bạn chưa kết thúc</h5>
+        <h5 style={{ marginTop: "100px", fontSize: '28px' }}>Bài viết của bạn chưa kết thúc</h5>
         {isLoading && (
           <FontAwesomeIcon
             icon={faSpinner}

@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import { deleteSlotByIdSlot, getSlotByIdClub, getYards } from "../../../services/userService";
 import { showErrorToast, showSuccessToast } from "../../../component/toast/toast";
 import { handleLogoutStaff } from "../../../services/staffService";
+import CountdownTimer from "../../../component/countDownTime";
 
 
 function NewFeedStaff() {
@@ -162,56 +163,78 @@ function NewFeedStaff() {
 
                     return (
                         <div className="post-content-container-staff">
-                            <img className="post-img" src={item.image} alt="avatar" />
-                            <div className="post-infor">
-                                <h3>Thông tin trận đấu</h3>
-                                <div className="infor-slot">
-                                    <div className="item-infor">
-                                        Khu:{" "}
-                                        <b>
-                                            {yardDetails?.areaName}
-                                        </b>
-                                        {" "}
+                            <div className="header-post-staff">
+                                <div className="member-name-post">
+                                    <p style={{ fontSize: '22px' }}>
+                                        {item.memberPostName}
+                                    </p>
+                                    <div style={{ fontSize: '22px' }}>
+                                        {timePost}
                                     </div>
-                                    <div className="item-infor">
-                                        Sân: {" "}
-                                        <b>
-                                            {yardDetails?.sportName} -  {item.yardName}
-                                        </b>
-                                    </div>
-                                    <div className="item-infor">
-                                        Thời gian:{" "}
-                                        <b>
-                                            {item.startTime} - {item.endTime}
-                                        </b>
-                                    </div>
-                                    <div className="item-infor">
-                                        Ngày:{" "}
-                                        <b>
-                                            {item.date}
-                                        </b>
-                                    </div>
-                                    <div >
-                                        <div className="item-infor">
-                                            Tổng số người chơi:{" "}
-                                            <b>
+                                </div>
+                                <div className="remove-post" onClick={() => { handleDeletePost(item) }}>
+                                    <FontAwesomeIcon className="icon-trash" icon={faTrashCan} />
+                                    {!isPassTime ? (
+                                        <div>
+                                            <CountdownTimer targetTime={time} />
+                                        </div>
+                                        ) : (
+                                        <p style={{ fontSize: '22px', fontWeight: 700, color: 'black' }}>Trận đấu đã kết thúc</p>
+                                        )}
+                                </div>
 
-                                                {parseInt(item.requiredMember) +
-                                                    parseInt(item.currentMember)}
+                            </div>
+                            <div className="body-post-staff">
+                                <img className="post-img" src={item.image} alt="avatar" />
+                                <div className="post-infor">
+                                    <h3>Thông tin trận đấu</h3>
+                                    <div className="infor-slot">
+                                        <div className="item-infor">
+                                            Khu:{" "}
+                                            <b>
+                                                {yardDetails?.areaName}
+                                            </b>
+                                            {" "}
+                                        </div>
+                                        <div className="item-infor">
+                                            Sân: {" "}
+                                            <b>
+                                                {yardDetails?.sportName} -  {item.yardName}
                                             </b>
                                         </div>
                                         <div className="item-infor">
-                                            Còn:{" "}
+                                            Thời gian:{" "}
                                             <b>
-
-                                                {parseInt(item.requiredMember) -
-                                                    parseInt(numberOfSlot[item.id] || 0)}
+                                                {item.startTime} - {item.endTime}
                                             </b>
+                                        </div>
+                                        <div className="item-infor">
+                                            Ngày:{" "}
+                                            <b>
+                                                {item.date}
+                                            </b>
+                                        </div>
+                                        <div >
+                                            <div className="item-infor">
+                                                Tổng số người chơi:{" "}
+                                                <b>
+
+                                                    {parseInt(item.requiredMember) +
+                                                        parseInt(item.currentMember)}
+                                                </b>
+                                            </div>
+                                            <div className="item-infor">
+                                                Còn:{" "}
+                                                <b>
+
+                                                    {parseInt(item.requiredMember) -
+                                                        parseInt(numberOfSlot[item.id] || 0)}
+                                                </b>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="remove-post" onClick={() => { handleDeletePost(item) }}><FontAwesomeIcon className="icon-trash" icon={faTrashCan} /></div>
                         </div>
                     )
                 })}

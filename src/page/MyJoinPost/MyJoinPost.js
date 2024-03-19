@@ -84,7 +84,7 @@ function MyJoinPost({ yards, clubDetail }) {
     <>
       <ComponentHeader />
       <div className="new-feed-container">
-        <h5 style={{ marginTop: '100px' }}>Bài viết của bạn đã tham gia</h5>
+        <h5 style={{ marginTop: '100px', fontSize: '28px' }}>Bài viết của bạn đã tham gia</h5>
         {isLoadingData && (
           <FontAwesomeIcon icon={faSpinner} className="loading-icon" style={{ marginTop: '50px' }} />
         )}

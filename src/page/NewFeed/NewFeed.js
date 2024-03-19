@@ -140,7 +140,7 @@ function NewFeed({  tranPoint, yards, setActiveTab, clubDetail }) {
           </button>
         </div>
 
-        <h5>Bài viết mới nhất</h5>
+        <h5 style={{ fontSize: '28px' }}>Bài viết mới nhất</h5>
 
         {isLoading && (
           <FontAwesomeIcon icon={faSpinner} className="loading-icon" />
