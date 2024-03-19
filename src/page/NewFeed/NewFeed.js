@@ -74,13 +74,13 @@ function NewFeed({ inforWallet, tranPoint, yards, setActiveTab, clubDetail }) {
     try {
       console.log(postData);
       await createPostInSlot(postData);
-      showSuccessToast("Create post successfully!");
+      showSuccessToast("Tạo bài đăng thành công");
       setIsModalOpen(false);
       setIsLoading(true);
       fetchData();
     } catch (error) {
       console.log(error);
-      showErrorToast("Create post error!");
+      showErrorToast("Tạo bài đăng thất bại");
       console.error("Error creating post:", error);
     }
   };
@@ -100,7 +100,7 @@ function NewFeed({ inforWallet, tranPoint, yards, setActiveTab, clubDetail }) {
       setActiveTab("myJoinPost");
       showSuccessToast("Bạn đã đăng kí tham gia hoạt động thành công!");
     } catch (error) {
-      showErrorToast("Error joining slot!");
+      showErrorToast("Tham gia thất bại");
       console.error("Error joining slot:", error);
     }
   }
@@ -128,23 +128,6 @@ function NewFeed({ inforWallet, tranPoint, yards, setActiveTab, clubDetail }) {
     <>
       <ComponentHeader />
       <div className="new-feed-container">
-        {/* <div className="club-title-new-feed">
-          <img
-            className="img-background"
-            src={clubDetail.image}
-            alt="club-background"
-            style={{
-              width: "28%",
-              marginRight: "37px",
-              borderRadius: "44%",
-            }}
-          ></img>
-          <div>
-            <p>{clubDetail.name}</p>
-            <p>Số lượng thành viên {clubDetail.countMember}</p>
-            <p>Ngày thành lập: {timePost}</p>
-          </div>
-        </div> */}
         <div className="post-container">
           <img alt="avatar" src={userInfo.image} />
           <button className="write-btn" onClick={toggleModal}>

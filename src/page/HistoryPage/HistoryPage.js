@@ -51,24 +51,6 @@ function HistoryPage({ clubDetail }) {
     <>
       <ComponentHeader />
       <div className="history-page-container">
-        {/* <div className="club-title-new-feed">
-          <img
-            className="img-background"
-            src={clubDetail.image}
-            alt="club-background"
-            style={{
-              // width: "442px",
-              // height: "345px",
-              marginRight: "37px",
-              borderRadius: "44%",
-            }}
-          ></img>
-          <div>
-            <p>{clubDetail.name}</p>
-            <p>Số lượng thành viên {clubDetail.countMember}</p>
-            <p>Ngày thành lập: {timePost}</p>
-          </div>
-        </div> */}
         <div
           style={{
             marginTop: '60px',

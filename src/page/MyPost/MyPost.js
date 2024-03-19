@@ -94,10 +94,10 @@ function MyPost({
       const response3Results = await Promise.all(response3Promises);
       setMemberJoinList(response3Results);
 
-      showSuccessToast("Confirm successful!");
+      showSuccessToast("Xác nhận tham gia thành công!");
     } catch (error) {
       console.log(error);
-      showErrorToast("Confirm failed!");
+      showErrorToast("Xác nhận tham gia thất bại");
     }
   };
 
@@ -115,9 +115,9 @@ function MyPost({
 
       const response3Results = await Promise.all(response3Promises);
       setMemberJoinList(response3Results);
-      showSuccessToast("Cancel successful!");
+      showSuccessToast("Xác nhận không tham gia thành công");
     } catch (error) {
-      showErrorToast("Cancel failed!");
+      showErrorToast("Xác nhận không tham gia thất bại");
     }
   };
 
@@ -127,27 +127,12 @@ function MyPost({
   const year = date.getFullYear();
   const timePost = ` ${day}-${month}-${year}`;
 
+  console.log(myPostInClub);
+
   return (
     <>
       <ComponentHeader />
       <div className="new-feed-container">
-        {/* <div className="club-title-new-feed">
-          <img
-            className="img-background"
-            src={clubDetail.image}
-            alt="club-background"
-            style={{
-              width: "28%",
-              marginRight: "37px",
-              borderRadius: "44%",
-            }}
-          ></img>
-          <div>
-            <p>{clubDetail.name}</p>
-            <p>Số lượng thành viên {clubDetail.countMember}</p>
-            <p>Ngày thành lập: {timePost}</p>
-          </div>
-        </div> */}
         <h5 style={{ marginTop: "100px" }}>Bài viết của bạn</h5>
         {isLoading && (
           <FontAwesomeIcon
@@ -183,8 +168,10 @@ function MyPost({
 
               //get yard details
               const yardDetails = yards.find((yard) => {
+                console.log(yard);
                 return yard.id === item.yardId;
               });
+
               return (
                 <div key={item.id} className="main-post-container">
                   <div className="poster-name">

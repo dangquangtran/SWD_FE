@@ -84,23 +84,6 @@ function MyJoinPost({ yards, clubDetail }) {
     <>
       <ComponentHeader />
       <div className="new-feed-container">
-        {/* <div className="club-title-new-feed">
-          <img
-            className="img-background"
-            src={clubDetail.image}
-            alt="club-background"
-            style={{
-              width: "28%",
-              marginRight: "37px",
-              borderRadius: "44%",
-            }}
-          ></img>
-          <div>
-            <p>{clubDetail.name}</p>
-            <p>Số lượng thành viên {clubDetail.countMember}</p>
-            <p>Ngày thành lập: {timePost}</p>
-          </div>
-        </div> */}
         <h5 style={{ marginTop: '100px' }}>Bài viết của bạn đã tham gia</h5>
         {isLoadingData && (
           <FontAwesomeIcon icon={faSpinner} className="loading-icon" style={{ marginTop: '50px' }} />
@@ -154,31 +137,31 @@ function MyJoinPost({ yards, clubDetail }) {
                     <h3>Thông tin trận đấu bạn tham gia</h3>
                     <div>
                       <div className="item-infor">
-                        Khu: <b className="main-item-infor">{yardDetails?.areaName} </b>
+                        Khu: <b className="main-item-infor" style={{ fontWeight: '700' }}>{yardDetails?.areaName} </b>
                       </div>
                       <div className="item-infor">
 
-                        Sân: <b className="main-item-infor">{yardDetails?.sportName} - {resultItem.yardName}
+                        Sân: <b className="main-item-infor" style={{ fontWeight: '700' }}>{yardDetails?.sportName} - {resultItem.yardName}
                         </b>
                       </div>
                       <div className="item-infor">
 
-                        Thời gian:<b className="main-item-infor"> {resultItem.startTime} - {resultItem.endTime}
+                        Thời gian:<b className="main-item-infor" style={{ fontWeight: '700' }}> {resultItem.startTime} - {resultItem.endTime}
                         </b>
                       </div>
                       <div className="item-infor">
-                        Date: <b className="main-item-infor">{resultItem.date}</b>
+                        Date: <b className="main-item-infor" style={{ fontWeight: '700' }}>{resultItem.date}</b>
                       </div>
                       <div className="item-infor">
                         <div className="item-infor">
 
-                          Tổng số người chơi:{" "}<b className="main-item-infor">
+                          Tổng số người chơi:{" "}<b className="main-item-infor" style={{ fontWeight: '700' }}>
                             {parseInt(resultItem.requiredMember) +
                               parseInt(resultItem.currentMember)}
                           </b>
                         </div>
                         <div className="item-infor">
-                          <b className="main-item-infor">
+                          <b className="main-item-infor" style={{ fontWeight: '700' }}>
                             Còn:{" "}
                             {resultItem.requiredMember -
                               parseInt(numberOfSlot[resultItem.id]) || 0}
