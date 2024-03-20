@@ -42,14 +42,21 @@
         box-shadow: 10px 10px 10px #ccc;
 
         .remove-post {
+            display: flex;
+            flex-direction: row-reverse;
             cursor: pointer;
             color: #ff0404;
+            justify-content: center;
+            align-items: center;
+
+            .h2 {
+            }
 
         }
 
         .icon-trash {
             font-size: 24px;
-            margin-bottom: 10px;
+            margin-left:10px ;
         }
 
         .post-img {
